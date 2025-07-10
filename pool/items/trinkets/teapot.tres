@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://b68dwxfh1hv4u"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://b68dwxfh1hv4u"]
 
-[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_53j55"]
+[ext_resource type="Script" uid="uid://bbkskbfv3nktm" path="res://scripts/items/trinkets/teapot.gd" id="1_bbq6f"]
 [ext_resource type="Texture2D" uid="uid://dhylb1lg3fk0t" path="res://images/items/teapot.png" id="2_53j55"]
 
 [resource]
-script = ExtResource("1_53j55")
+script = ExtResource("1_bbq6f")
 u_name = &"teapot"
-name = ""
-desc = ""
+name = "Чайник"
+desc = "ПРИ ПОТЕРЕ ХП, 2 ВРЕДА ОБИДЧИКУ"
 type = 2
+target = 0
+extra_hp = 0
 texture = ExtResource("2_53j55")
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

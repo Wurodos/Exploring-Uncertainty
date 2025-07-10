@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bkh12le6l0acx"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bkh12le6l0acx"]
 
-[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_mb00s"]
+[ext_resource type="Script" uid="uid://b7j3g5jwtk657" path="res://scripts/items/trinkets/pocket_watch.gd" id="1_lil7l"]
 [ext_resource type="Texture2D" uid="uid://bm0hs7cpm2sfy" path="res://images/items/pocket-watch.png" id="2_mb00s"]
 
 [resource]
-script = ExtResource("1_mb00s")
+script = ExtResource("1_lil7l")
 u_name = &"pocket_watch"
-name = ""
-desc = ""
+name = "Карманные Часы"
+desc = "КОНЕЦ 5 ХОДА: +5 МОЩИ, ЩИТ 3 ХОДА, ВОССТАНОВИТЬ 20% ХП"
 type = 2
+target = 0
+extra_hp = 0
 texture = ExtResource("2_mb00s")
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

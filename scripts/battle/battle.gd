@@ -38,8 +38,9 @@ func _ready() -> void:
 	CurrentRun.good_boys = [SlavePool.fetch("blob"), SlavePool.fetch("blob"), SlavePool.fetch("blob")]
 	CurrentRun.evil_boys = [SlavePool.fetch("cherv"), SlavePool.fetch("cherv")]
 	CurrentRun.good_boys[0].equip(ItemPool.fetch("crown"))
-	CurrentRun.good_boys[0].equip(ItemPool.fetch("bomb"))
+	CurrentRun.good_boys[0].equip(ItemPool.fetch("heart_lock"))
 	CurrentRun.good_boys[1].equip(ItemPool.fetch("pipe"))
+	CurrentRun.good_boys[1].equip(ItemPool.fetch("alcohol"))
 	SignalBus.start_battle.emit()
 
 func recalculate_speed():
@@ -109,6 +110,11 @@ func _on_new_turn() -> void:
 		SignalBus.new_round.emit()
 	queue_node.get_child(current_slave_position).toggle_select(true)
 	current_slave = speed_queue[current_slave_position]
+	
+	for slave_node in good_team.boys_nodes:
+		if slave_node.held == current_slave:
+			slave_node.start_turn()
+			break
 	
 	if current_slave is Enemy:
 		for slave_node in evil_team.boys_nodes:

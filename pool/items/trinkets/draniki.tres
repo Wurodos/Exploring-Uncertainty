@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cl1gv2aav7c52"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cl1gv2aav7c52"]
 
-[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_okbog"]
+[ext_resource type="Script" uid="uid://j8f34sx0bnq6" path="res://scripts/items/trinkets/draniki.gd" id="1_05lb1"]
 [ext_resource type="Texture2D" uid="uid://bia6fs2s1n3in" path="res://images/items/draniki.png" id="2_okbog"]
 
 [resource]
-script = ExtResource("1_okbog")
+script = ExtResource("1_05lb1")
 u_name = &"draniki"
-name = ""
-desc = ""
+name = "Драники"
+desc = "ЕСЛИ ХП МЕНЬШЕ 50%, ВОССТАНАВЛИВАЕТ ТРЕТЬ"
 type = 2
+target = 0
+extra_hp = 0
 texture = ExtResource("2_okbog")
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

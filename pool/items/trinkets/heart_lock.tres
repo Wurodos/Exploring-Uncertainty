@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cts1g16ioa6bp"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cts1g16ioa6bp"]
 
-[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_bs1fd"]
+[ext_resource type="Script" uid="uid://lg38t2jklyus" path="res://scripts/items/trinkets/heart_lock.gd" id="1_6nu6c"]
 [ext_resource type="Texture2D" uid="uid://braode065wy2j" path="res://images/items/lock.png" id="2_bs1fd"]
 
 [resource]
-script = ExtResource("1_bs1fd")
+script = ExtResource("1_6nu6c")
 u_name = &"heart_lock"
-name = ""
-desc = ""
+name = "Сердечный Замок"
+desc = "НАЧАЛО БОЯ: ЩИТ 1 ХОД"
 type = 2
+target = 0
+extra_hp = 0
 texture = ExtResource("2_bs1fd")
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"
