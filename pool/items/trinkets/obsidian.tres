@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cvpahuhyjqth6"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_ly2o0"]
+[ext_resource type="Texture2D" uid="uid://be0f7acpnpwfi" path="res://images/items/rock.png" id="2_ly2o0"]
+
+[resource]
+script = ExtResource("1_ly2o0")
+u_name = &"obsidian"
+name = ""
+desc = ""
+type = 2
+texture = ExtResource("2_ly2o0")
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

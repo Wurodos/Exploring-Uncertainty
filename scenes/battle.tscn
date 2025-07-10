@@ -1,0 +1,161 @@
+[gd_scene load_steps=10 format=3 uid="uid://bfx1ij738o32v"]
+
+[ext_resource type="Script" uid="uid://blaomclhrxsrs" path="res://scripts/slaves/team.gd" id="1_dn72j"]
+[ext_resource type="Script" uid="uid://cukwfw80fb48e" path="res://scripts/battle/battle.gd" id="1_th188"]
+[ext_resource type="Script" uid="uid://tyb7waldpp30" path="res://scripts/utils/input_manager.gd" id="2_p1qf1"]
+[ext_resource type="Script" uid="uid://ctoap32euag0p" path="res://scripts/battle/slave_info.gd" id="4_a12nh"]
+[ext_resource type="PackedScene" uid="uid://dj5w5iqx004t4" path="res://prefabs/battle/item_entry.tscn" id="5_lpir7"]
+[ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="6_6vh42"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpir7"]
+bg_color = Color(0.301961, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6vh42"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_4k1nj"]
+font = ExtResource("6_6vh42")
+font_size = 30
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Battle" type="Node2D"]
+script = ExtResource("1_th188")
+
+[node name="InputManager" type="Node" parent="."]
+script = ExtResource("2_p1qf1")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="GoodTeam" type="Node2D" parent="World"]
+script = ExtResource("1_dn72j")
+
+[node name="TopSlave" type="Node2D" parent="World/GoodTeam"]
+position = Vector2(-245, -151)
+
+[node name="MiddleSlave" type="Node2D" parent="World/GoodTeam"]
+position = Vector2(-410, 28)
+
+[node name="BottomSlave" type="Node2D" parent="World/GoodTeam"]
+position = Vector2(-245, 191)
+
+[node name="EvilTeam" type="Node2D" parent="World"]
+script = ExtResource("1_dn72j")
+is_evil = true
+
+[node name="TopSlave" type="Node2D" parent="World/EvilTeam"]
+position = Vector2(245, -165)
+
+[node name="MiddleSlave" type="Node2D" parent="World/EvilTeam"]
+position = Vector2(424, 26)
+
+[node name="BottomSlave" type="Node2D" parent="World/EvilTeam"]
+position = Vector2(200, 229)
+
+[node name="Line2D" type="Line2D" parent="World"]
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpeedQueue" type="HBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = -474.0
+offset_top = -280.0
+offset_right = 476.0
+offset_bottom = -198.0
+alignment = 1
+
+[node name="SlaveInfo" type="Control" parent="UI"]
+visible = false
+anchors_preset = 0
+offset_left = 81.0
+offset_top = -300.0
+offset_right = 121.0
+offset_bottom = -260.0
+script = ExtResource("4_a12nh")
+
+[node name="BGOutline" type="ColorRect" parent="UI/SlaveInfo"]
+layout_mode = 0
+offset_left = -26.0
+offset_top = -9.0
+offset_right = 474.0
+offset_bottom = 615.0
+color = Color(0.57205, 0.391678, 0.051943, 1)
+
+[node name="BG" type="ColorRect" parent="UI/SlaveInfo/BGOutline"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 9.0
+offset_right = 491.0
+offset_bottom = 611.0
+color = Color(0.974868, 0.699813, 0.238424, 1)
+
+[node name="Entries" type="VBoxContainer" parent="UI/SlaveInfo"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 99.0
+offset_right = 450.0
+offset_bottom = 692.0
+
+[node name="ItemEntry" parent="UI/SlaveInfo/Entries" instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry2" parent="UI/SlaveInfo/Entries" instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry3" parent="UI/SlaveInfo/Entries" instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry4" parent="UI/SlaveInfo/Entries" instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="HPBar" type="ProgressBar" parent="UI/SlaveInfo"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 38.0
+offset_right = 379.0
+offset_bottom = 71.0
+theme_override_styles/background = SubResource("StyleBoxFlat_lpir7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6vh42")
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="UI/SlaveInfo/HPBar"]
+layout_mode = 0
+offset_right = 308.0
+offset_bottom = 35.0
+label_settings = SubResource("LabelSettings_4k1nj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Debug" type="Control" parent="UI"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Newturn" type="Button" parent="UI/Debug"]
+layout_mode = 0
+offset_left = -138.0
+offset_top = 23.0
+offset_right = 109.0
+offset_bottom = 104.0
+text = "New turn"
+
+[connection signal="pressed" from="UI/Debug/Newturn" to="." method="_on_newturn_pressed"]

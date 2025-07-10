@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Slave" load_steps=3 format=3 uid="uid://cuk2mirqr6fhm"]
+
+[ext_resource type="Script" uid="uid://b3tnir3t1e6op" path="res://scripts/slaves/slave.gd" id="1_o3r7f"]
+[ext_resource type="Texture2D" uid="uid://bvt0n20v88f7o" path="res://images/slaves/blob.png" id="2_oe004"]
+
+[resource]
+script = ExtResource("1_o3r7f")
+u_name = &"blob"
+base_maxhp = 20
+base_speed = 5
+texture = ExtResource("2_oe004")
+metadata/_custom_type_script = "uid://b3tnir3t1e6op"

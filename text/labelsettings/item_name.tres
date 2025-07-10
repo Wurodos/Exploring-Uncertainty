@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://34c71nyrmk01"]
+
+[ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="1_ghk26"]
+
+[resource]
+font = ExtResource("1_ghk26")
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)

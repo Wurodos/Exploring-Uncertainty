@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c1vam5j7gbycv"]
+
+[ext_resource type="Script" uid="uid://c67owh4jw4kvi" path="res://scripts/items/weapons/pipe.gd" id="1_m2clk"]
+[ext_resource type="Texture2D" uid="uid://bm043kxoks57r" path="res://images/items/lead-pipe.png" id="2_kkg5u"]
+
+[resource]
+script = ExtResource("1_m2clk")
+u_name = &"pipe"
+name = "Труба"
+desc = "10 ВРЕДА, 1 ВРЕДА ЕСЛИ БЫЛО ИСПОЛЬЗОВАНО В ПРОШЛОМ ХОДУ"
+type = 0
+target = 0
+texture = ExtResource("2_kkg5u")
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

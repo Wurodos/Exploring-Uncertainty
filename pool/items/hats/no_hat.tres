@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bkp4m7qyva2cb"]
+
+[ext_resource type="Script" uid="uid://ca75gfahi7qln" path="res://scripts/items/hats/no_hat.gd" id="1_wv743"]
+
+[resource]
+script = ExtResource("1_wv743")
+u_name = &"no_hat"
+name = "Пустоголовие"
+desc = "+1 ИНИЦИАТИВЫ"
+type = 1
+target = 0
+extra_hp = 0
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

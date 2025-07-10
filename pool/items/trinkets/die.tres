@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cwvop3phsuv7"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_eaac4"]
+[ext_resource type="Texture2D" uid="uid://dkq2cddtos38" path="res://images/items/perspective-dice-six-faces-one.png" id="2_eaac4"]
+
+[resource]
+script = ExtResource("1_eaac4")
+u_name = &"die"
+name = ""
+desc = ""
+type = 2
+texture = ExtResource("2_eaac4")
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

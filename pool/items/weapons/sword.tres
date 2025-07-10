@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bacsivo610sgj"]
+
+[ext_resource type="Script" uid="uid://css8hwhj4km1g" path="res://scripts/items/weapons/sword.gd" id="1_1451n"]
+[ext_resource type="Texture2D" uid="uid://c102ib72qlv7l" path="res://images/items/sword.png" id="2_wbfc4"]
+
+[resource]
+script = ExtResource("1_1451n")
+u_name = &"sword"
+name = "Меч"
+desc = "5 ВРЕДА"
+type = 0
+texture = ExtResource("2_wbfc4")
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c46ueq53ctqdl"]
+
+[ext_resource type="Script" uid="uid://boi87gtv3r4vy" path="res://scripts/items/hats/jester_hat.gd" id="1_p3u7i"]
+[ext_resource type="Texture2D" uid="uid://ciesntudyd81s" path="res://images/items/jester-hat.png" id="2_5t8eq"]
+
+[resource]
+script = ExtResource("1_p3u7i")
+u_name = &"jester_hat"
+name = "Шляпа Шута"
+desc = "КОЩУНСТВО 3 ХОДА"
+type = 1
+target = 0
+extra_hp = 7
+texture = ExtResource("2_5t8eq")
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

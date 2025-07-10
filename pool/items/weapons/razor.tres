@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://drio41rrjpaob"]
+
+[ext_resource type="Script" uid="uid://kglrf65mt6ie" path="res://scripts/items/weapons/razor.gd" id="1_vvdgr"]
+[ext_resource type="Texture2D" uid="uid://brlvxqielu2xv" path="res://images/items/razor-blade.png" id="2_cbwy8"]
+
+[resource]
+script = ExtResource("1_vvdgr")
+u_name = &"razor"
+name = "Бритва"
+desc = "4 ВРЕДА, +1 МОЩЬ СЕБЕ"
+type = 0
+target = 0
+texture = ExtResource("2_cbwy8")
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

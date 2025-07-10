@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b5btplyr7g8ma"]
+
+[ext_resource type="Script" uid="uid://bvn0ggo5b6lr3" path="res://scripts/items/weapons/no_weapon.gd" id="1_uhxgv"]
+
+[resource]
+script = ExtResource("1_uhxgv")
+u_name = &"no_weapon"
+name = "Кулак"
+desc = "2 ВРЕДА"
+type = 0
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

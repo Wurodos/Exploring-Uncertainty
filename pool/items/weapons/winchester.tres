@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bb350nj3is2lk"]
+
+[ext_resource type="Script" uid="uid://dvn27lmo067lc" path="res://scripts/items/weapons/winchester.gd" id="1_ib7ck"]
+[ext_resource type="Texture2D" uid="uid://ccyc7bhfo8se2" path="res://images/items/winchester.png" id="2_yoghk"]
+
+[resource]
+script = ExtResource("1_ib7ck")
+u_name = &"winchester"
+name = "Винчестер"
+desc = "5 ВРЕДА, 3 ВРЕДА ДРУГОЙ СЛУЧАЙНОЙ ЦЕЛИ"
+type = 0
+target = 0
+texture = ExtResource("2_yoghk")
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

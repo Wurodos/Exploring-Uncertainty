@@ -1,0 +1,181 @@
+[gd_scene load_steps=16 format=3 uid="uid://ot7y20rg1fqo"]
+
+[ext_resource type="Texture2D" uid="uid://bvt0n20v88f7o" path="res://images/slaves/blob.png" id="1_fhcuj"]
+[ext_resource type="Script" uid="uid://de24o14tl4lyy" path="res://scripts/slaves/slave_battle_node.gd" id="1_kr451"]
+[ext_resource type="Texture2D" uid="uid://csw6m50jq853n" path="res://images/shapes/ellipse.png" id="3_m7i15"]
+[ext_resource type="Texture2D" uid="uid://cu8nq4toon8uj" path="res://images/buffs/shield.png" id="4_lpdx8"]
+[ext_resource type="Texture2D" uid="uid://18md1xgdubcr" path="res://images/buffs/blasphemy.png" id="5_gppif"]
+[ext_resource type="Texture2D" uid="uid://6225b313atq2" path="res://images/icons/top.png" id="5_lpdx8"]
+[ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="5_ttqg8"]
+[ext_resource type="Texture2D" uid="uid://dhmqbwahk027p" path="res://images/icons/middle.png" id="6_gppif"]
+[ext_resource type="Texture2D" uid="uid://orgdll7utn86" path="res://images/icons/bottom.png" id="7_8sljb"]
+
+[sub_resource type="Animation" id="Animation_lpdx8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_eb1g8"]
+resource_name = "jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -63), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lpdx8"]
+_data = {
+&"RESET": SubResource("Animation_lpdx8"),
+&"jump": SubResource("Animation_eb1g8")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7i15"]
+bg_color = Color(0.301961, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8fbhv"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_eb1g8"]
+font = ExtResource("5_ttqg8")
+font_size = 40
+
+[node name="Blob" type="Node2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_kr451")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lpdx8")
+}
+
+[node name="CircleSelect" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_m7i15")
+
+[node name="LineStart" type="Node2D" parent="CircleSelect"]
+position = Vector2(125, 78.3333)
+scale = Vector2(2.5, 2.5)
+
+[node name="LineEnd" type="Node2D" parent="CircleSelect"]
+position = Vector2(-125, 78.333)
+scale = Vector2(2.5, 2.5)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_fhcuj")
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="Weapon" type="Node2D" parent="Items"]
+position = Vector2(51, 3)
+scale = Vector2(0.15, 0.15)
+
+[node name="Hat" type="Node2D" parent="Items"]
+position = Vector2(0, -34)
+scale = Vector2(0.15, 0.15)
+
+[node name="Trinket2" type="Node2D" parent="Items"]
+position = Vector2(-44, 21)
+scale = Vector2(0.1, 0.1)
+
+[node name="Trinket1" type="Node2D" parent="Items"]
+position = Vector2(-31, 31)
+scale = Vector2(0.1, 0.1)
+
+[node name="ClickableArea" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -42.0
+offset_top = -28.0
+offset_right = 39.0
+offset_bottom = 43.0
+
+[node name="HPBar" type="ProgressBar" parent="."]
+offset_left = -46.6667
+offset_top = 50.0
+offset_right = 46.3333
+offset_bottom = 60.0
+theme_override_styles/background = SubResource("StyleBoxFlat_m7i15")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8fbhv")
+value = 100.0
+show_percentage = false
+
+[node name="Buffs" type="Node2D" parent="."]
+
+[node name="shield" type="Sprite2D" parent="Buffs"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.462745)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_lpdx8")
+
+[node name="blasphemy" type="Sprite2D" parent="Buffs"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.462745)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_gppif")
+
+[node name="Intention" type="Node2D" parent="."]
+position = Vector2(17.3333, -72.6667)
+
+[node name="Icon" type="Sprite2D" parent="Intention"]
+position = Vector2(-7.33333, 0)
+scale = Vector2(0.15, 0.15)
+
+[node name="TargetTop" type="Sprite2D" parent="Intention"]
+visible = false
+position = Vector2(-47.3333, 32)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_lpdx8")
+flip_h = true
+
+[node name="TargetMiddle" type="Sprite2D" parent="Intention"]
+visible = false
+position = Vector2(-47.3333, 32)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_gppif")
+flip_h = true
+
+[node name="TargetBottom" type="Sprite2D" parent="Intention"]
+visible = false
+position = Vector2(-47.3333, 32)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_8sljb")
+flip_h = true
+
+[node name="Label" type="Label" parent="Intention"]
+offset_left = -52.6667
+offset_top = -9.33333
+offset_right = 16.3333
+offset_bottom = 36.6667
+scale = Vector2(0.5, 0.5)
+label_settings = SubResource("LabelSettings_eb1g8")
+horizontal_alignment = 1
+
+[connection signal="button_down" from="ClickableArea" to="." method="_on_clickable_area_button_down"]
+[connection signal="mouse_entered" from="ClickableArea" to="." method="_on_clickable_area_mouse_entered"]
+[connection signal="mouse_exited" from="ClickableArea" to="." method="_on_clickable_area_mouse_exited"]

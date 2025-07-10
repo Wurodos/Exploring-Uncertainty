@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://do1vbb2820r22"]
+
+[ext_resource type="Script" uid="uid://dltjxlvvkegng" path="res://scripts/items/hats/wizard_hat.gd" id="1_jpp2n"]
+[ext_resource type="Texture2D" uid="uid://dcprd1kuvkwce" path="res://images/items/wizard_hat.png" id="2_pmg56"]
+
+[resource]
+script = ExtResource("1_jpp2n")
+u_name = &"wizard_hat"
+name = "Шляпа Колдуна"
+desc = "ВЫЛЕЧИТЬ 6 ЗДОРОВЬЯ"
+type = 1
+target = 0
+extra_hp = 8
+texture = ExtResource("2_pmg56")
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

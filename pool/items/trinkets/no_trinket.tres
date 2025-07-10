@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://c5ek47jsjtmff"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_tqv4v"]
+
+[resource]
+script = ExtResource("1_tqv4v")
+u_name = &"no_trinket"
+name = ""
+desc = ""
+type = 2
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

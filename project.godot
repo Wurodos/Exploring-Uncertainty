@@ -1,0 +1,30 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Exploring Uncertainty"
+run/main_scene="uid://cgylw3j3sk4da"
+config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+config/icon="res://icon.svg"
+
+[autoload]
+
+SignalBus="*res://scripts/utils/signal_bus.gd"
+CurrentRun="*res://scripts/run/current_run.gd"
+ItemPool="*res://scripts/items/item_pool.gd"
+SlavePool="*res://scripts/slaves/slave_pool.gd"
+Action="*res://scripts/battle/action.gd"
+Gallery="*res://scripts/utils/gallery.gd"
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
