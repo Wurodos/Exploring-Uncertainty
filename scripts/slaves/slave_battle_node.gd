@@ -11,8 +11,10 @@ signal attacked(victim: SlaveNode)
 @onready var line_start: Vector2 = $CircleSelect/LineStart.global_position
 @onready var line_end: Vector2 = $CircleSelect/LineEnd.global_position
 @onready var ellipse: Sprite2D = $CircleSelect
+@onready var stat_parent: Control = $Stats
 
 const item_prefab = preload("res://prefabs/items/item.tscn")
+const stat_entry_prefab = preload("res://prefabs/battle/stat_entry.tscn")
 
 var is_mouse_over: bool = false
 var held: Slave
@@ -82,18 +84,21 @@ func set_speed(new_val: int, is_delta: bool = true):
 	if is_delta:
 		held.speed += new_val
 	else: held.speed = new_val
-	
+	add_stat("speed", Gallery.icon_speed, held.speed)
 	#Battle.instance.recalculate_speed()
 
 func set_power(new_val: int, is_delta: bool = true):
 	if is_delta:
 		power += new_val
 	else: power = new_val
+	add_stat("power", Gallery.icon_power, power)
 
 func set_luck(new_val: int, is_delta: bool = true):
 	if is_delta:
 		luck += new_val
 	else: luck = new_val
+	
+	add_stat("luck", Gallery.icon_luck, luck)
 			
 func apply(slave: Slave, is_evil: bool = false) -> void:
 	held = slave
@@ -121,6 +126,16 @@ func apply(slave: Slave, is_evil: bool = false) -> void:
 	trinket2_node = item_prefab.instantiate()
 	$Items/Trinket2.add_child(trinket2_node)
 	trinket2_node.apply(held.trinket2, is_evil)
+
+func add_stat(stat_name: String, icon: Texture2D, value: int):
+	var stat_entry : StatEntry = stat_parent.find_child(stat_name, false, false)
+	if stat_entry == null:
+		stat_entry = stat_entry_prefab.instantiate()
+		stat_entry.texture = icon
+		stat_entry.name = stat_name
+		stat_entry.init()
+		stat_parent.add_child(stat_entry)
+	stat_entry.label.text = str(value)
 
 func start_battle() -> void:
 	for item : Item in [held.weapon, held.hat, held.trinket1, held.trinket2]:

@@ -1,3 +1,78 @@
-[gd_scene format=3 uid="uid://caaw5385eudd6"]
+[gd_scene load_steps=6 format=3 uid="uid://caaw5385eudd6"]
+
+[ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="1_4xfga"]
+[ext_resource type="Script" uid="uid://bth4nhqnvlgi4" path="res://scripts/map/team_window.gd" id="2_paxxb"]
+[ext_resource type="Texture2D" uid="uid://dm0w3jn5uyl80" path="res://images/backdrops/team.png" id="3_gldc4"]
+[ext_resource type="Texture2D" uid="uid://cxjgnget2f6pf" path="res://images/items/bomb.png" id="4_0cso3"]
+[ext_resource type="Script" uid="uid://cc8bvypcj1twk" path="res://scripts/common/grid.gd" id="4_2klcf"]
 
 [node name="Map" type="Node2D"]
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -569.0
+offset_top = -315.0
+offset_right = 561.0
+offset_bottom = 314.0
+
+[node name="ShowTeam" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 724.0
+offset_top = 485.0
+offset_right = 1086.0
+offset_bottom = 592.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_4xfga")
+theme_override_font_sizes/font_size = 48
+text = "Бригада"
+
+[node name="TeamWindow" type="Control" parent="UI"]
+anchors_preset = 0
+offset_left = 106.0
+offset_top = 57.0
+offset_right = 1006.0
+offset_bottom = 557.0
+script = ExtResource("2_paxxb")
+
+[node name="BG" type="TextureRect" parent="UI/TeamWindow"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_gldc4")
+
+[node name="ItemGrid" type="VBoxContainer" parent="UI/TeamWindow"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 15.0
+offset_right = 874.0
+offset_bottom = 179.0
+script = ExtResource("4_2klcf")
+row_capacity = 14
+
+[node name="Row1" type="HBoxContainer" parent="UI/TeamWindow/ItemGrid"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+alignment = 1
+
+[node name="ItemDraggable" type="TextureRect" parent="UI/TeamWindow/ItemGrid/Row1"]
+layout_mode = 2
+texture = ExtResource("4_0cso3")
+expand_mode = 2
+
+[node name="Row2" type="HBoxContainer" parent="UI/TeamWindow/ItemGrid"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+alignment = 1
+
+[node name="Row3" type="HBoxContainer" parent="UI/TeamWindow/ItemGrid"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+alignment = 1
+
+[connection signal="pressed" from="UI/ShowTeam" to="UI/TeamWindow" method="_on_show_team_pressed"]

@@ -11,6 +11,6 @@ info_3 = ""
 info_4 = ""
 u_name = &"cherv"
 base_maxhp = 10
-base_speed = 5
+base_speed = 0
 texture = ExtResource("2_lp2vr")
 metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

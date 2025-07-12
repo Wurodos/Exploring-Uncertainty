@@ -35,12 +35,6 @@ func _ready() -> void:
 	SignalBus.evil_won.connect(_on_evil_won)
 	SignalBus.good_won.connect(_on_good_won)
 	
-	CurrentRun.good_boys = [SlavePool.fetch("blob"), SlavePool.fetch("blob"), SlavePool.fetch("blob")]
-	CurrentRun.evil_boys = [SlavePool.fetch("cherv"), SlavePool.fetch("cherv")]
-	CurrentRun.good_boys[0].equip(ItemPool.fetch("crown"))
-	CurrentRun.good_boys[0].equip(ItemPool.fetch("heart_lock"))
-	CurrentRun.good_boys[1].equip(ItemPool.fetch("pipe"))
-	CurrentRun.good_boys[1].equip(ItemPool.fetch("alcohol"))
 	SignalBus.start_battle.emit()
 
 func recalculate_speed():
@@ -125,6 +119,8 @@ func _on_new_turn() -> void:
 func _on_slave_death(slave_node: SlaveNode) -> void:
 	for i in range(speed_queue.size()):
 		if speed_queue[i] == slave_node.held:
+			if i <= current_slave_position:
+				current_slave_position -= 1
 			queue_node.get_child(i).free()
 			speed_queue.remove_at(i)
 			break			

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckf74wkigssuj"]
+
+[ext_resource type="Script" uid="uid://dra1skre3u4mf" path="res://scripts/battle/stat_entry.gd" id="1_3si40"]
+[ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="2_0x2of"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8sljb"]
+font = ExtResource("2_0x2of")
+font_size = 32
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="StatEntry" type="TextureRect"]
+expand_mode = 2
+script = ExtResource("1_3si40")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 12.6667
+offset_top = 13.3333
+offset_right = 50.6667
+offset_bottom = 51.3333
+scale = Vector2(0.4, 0.4)
+label_settings = SubResource("LabelSettings_8sljb")

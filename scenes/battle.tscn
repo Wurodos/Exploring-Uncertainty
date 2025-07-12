@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bfx1ij738o32v"]
+[gd_scene load_steps=12 format=3 uid="uid://bfx1ij738o32v"]
 
 [ext_resource type="Script" uid="uid://blaomclhrxsrs" path="res://scripts/slaves/team.gd" id="1_dn72j"]
 [ext_resource type="Script" uid="uid://cukwfw80fb48e" path="res://scripts/battle/battle.gd" id="1_th188"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://ctoap32euag0p" path="res://scripts/battle/slave_info.gd" id="4_a12nh"]
 [ext_resource type="PackedScene" uid="uid://dj5w5iqx004t4" path="res://prefabs/battle/item_entry.tscn" id="5_lpir7"]
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="6_6vh42"]
+[ext_resource type="Texture2D" uid="uid://cfowi84shmwbh" path="res://images/icons/power.svg" id="7_4k1nj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpir7"]
 bg_color = Color(0.301961, 0, 0, 1)
@@ -23,7 +24,13 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_4k1nj"]
 font = ExtResource("6_6vh42")
-font_size = 30
+font_size = 18
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_f4pi3"]
+font = ExtResource("6_6vh42")
+font_size = 32
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
@@ -58,7 +65,7 @@ position = Vector2(245, -165)
 position = Vector2(424, 26)
 
 [node name="BottomSlave" type="Node2D" parent="World/EvilTeam"]
-position = Vector2(200, 229)
+position = Vector2(269, 189)
 
 [node name="Line2D" type="Line2D" parent="World"]
 joint_mode = 2
@@ -127,10 +134,10 @@ layout_mode = 2
 
 [node name="HPBar" type="ProgressBar" parent="UI/SlaveInfo"]
 layout_mode = 0
-offset_left = 72.0
+offset_left = 117.0
 offset_top = 38.0
-offset_right = 379.0
-offset_bottom = 71.0
+offset_right = 350.0
+offset_bottom = 63.0
 theme_override_styles/background = SubResource("StyleBoxFlat_lpir7")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6vh42")
 value = 100.0
@@ -138,9 +145,44 @@ show_percentage = false
 
 [node name="Label" type="Label" parent="UI/SlaveInfo/HPBar"]
 layout_mode = 0
-offset_right = 308.0
+offset_top = -12.0
+offset_right = 232.0
 offset_bottom = 35.0
 label_settings = SubResource("LabelSettings_4k1nj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buffs" type="VBoxContainer" parent="UI/SlaveInfo"]
+visible = false
+layout_mode = 0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 110.0
+offset_bottom = 91.0
+
+[node name="BuffEntry" type="ColorRect" parent="UI/SlaveInfo/Buffs"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+color = Color(0.410615, 0.178771, 0.0531023, 1)
+
+[node name="Icon" type="TextureRect" parent="UI/SlaveInfo/Buffs/BuffEntry"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 24.0
+offset_bottom = 23.0
+texture = ExtResource("7_4k1nj")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/SlaveInfo/Buffs/BuffEntry"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 3.0
+offset_right = 154.0
+offset_bottom = 41.0
+scale = Vector2(0.5, 0.5)
+text = "3"
+label_settings = SubResource("LabelSettings_f4pi3")
 horizontal_alignment = 1
 vertical_alignment = 1
 

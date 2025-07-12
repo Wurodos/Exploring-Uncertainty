@@ -176,6 +176,13 @@ scale = Vector2(0.5, 0.5)
 label_settings = SubResource("LabelSettings_eb1g8")
 horizontal_alignment = 1
 
+[node name="Stats" type="HBoxContainer" parent="."]
+offset_left = -82.6667
+offset_top = 63.3333
+offset_right = 84.3333
+offset_bottom = 81.3333
+alignment = 1
+
 [connection signal="button_down" from="ClickableArea" to="." method="_on_clickable_area_button_down"]
 [connection signal="mouse_entered" from="ClickableArea" to="." method="_on_clickable_area_mouse_entered"]
 [connection signal="mouse_exited" from="ClickableArea" to="." method="_on_clickable_area_mouse_exited"]

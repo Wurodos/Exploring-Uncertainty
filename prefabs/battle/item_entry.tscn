@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dj5w5iqx004t4"]
+[gd_scene load_steps=7 format=3 uid="uid://dj5w5iqx004t4"]
 
 [ext_resource type="LabelSettings" uid="uid://34c71nyrmk01" path="res://text/labelsettings/item_name.tres" id="1_7cevn"]
 [ext_resource type="Script" uid="uid://ja4i2h2jcl3k" path="res://scripts/battle/item_entry.gd" id="1_7r2q4"]
 [ext_resource type="LabelSettings" uid="uid://p7ibni12w0jy" path="res://text/labelsettings/item_desc.tres" id="2_7r2q4"]
+[ext_resource type="Texture2D" uid="uid://dhmqbwahk027p" path="res://images/icons/middle.png" id="4_6brbo"]
+[ext_resource type="Texture2D" uid="uid://bte8d08tb1j05" path="res://images/icons/all.png" id="5_2hvcx"]
+[ext_resource type="Texture2D" uid="uid://3jo6gkrdcpjj" path="res://images/icons/self.png" id="6_ikiu5"]
 
 [node name="ItemEntry" type="ColorRect"]
 custom_minimum_size = Vector2(0, 120)
@@ -29,3 +32,27 @@ offset_right = 433.0
 offset_bottom = 131.0
 label_settings = ExtResource("2_7r2q4")
 autowrap_mode = 3
+
+[node name="Single" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_6brbo")
+expand_mode = 1
+
+[node name="All" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_2hvcx")
+expand_mode = 1
+
+[node name="Self" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_ikiu5")
+expand_mode = 1
