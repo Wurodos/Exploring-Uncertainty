@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://8ckxbas4afyj"]
+
+[ext_resource type="Script" uid="uid://buvug0bvrw5e1" path="res://scripts/enemies/starry.gd" id="1_ry55x"]
+[ext_resource type="Texture2D" uid="uid://bmn1ru4ex8ri1" path="res://images/slaves/scarymotherfucker.png" id="2_a3iwr"]
+
+[resource]
+script = ExtResource("1_ry55x")
+info_1 = "ПОЛУЧАЕТ 1 МОЩИ И ЩИТ 2 ХОДА"
+info_2 = "ПРИЧИНЯЕТ 5-8 ВРЕДА"
+info_3 = ""
+info_4 = ""
+u_name = &"starry"
+base_maxhp = 20
+base_speed = 0
+texture = ExtResource("2_a3iwr")
+metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

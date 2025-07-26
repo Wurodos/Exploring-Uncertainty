@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://21s0nm12ysr7"]
+
+[ext_resource type="Script" uid="uid://c38khpsdryqs" path="res://scripts/enemies/quagmire.gd" id="1_6irpt"]
+[ext_resource type="Texture2D" uid="uid://c0s374bsgkkra" path="res://images/slaves/quagmire.png" id="2_gfinq"]
+
+[resource]
+script = ExtResource("1_6irpt")
+info_1 = "ЛЕЧИТ 5-10 ОЗ СОЮЗНИКУ"
+info_2 = "ЛЕЧИТ 2 ОЗ ВСЕМ СОЮЗНИКАМ, ЩИТ 1 ХОД"
+info_3 = "ДАЕТ 2 МОЩИ СОЮЗНИКУ"
+info_4 = "ЕСЛИ ОСТАЛСЯ ОДИН, СБЕГАЕТ."
+u_name = &"quagmire"
+base_maxhp = 15
+base_speed = 1
+texture = ExtResource("2_gfinq")
+metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

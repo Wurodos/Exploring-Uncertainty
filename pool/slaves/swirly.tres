@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dq1qufb3ny66s"]
+
+[ext_resource type="Script" uid="uid://b8opkj07sbgjm" path="res://scripts/enemies/swirly.gd" id="1_x217g"]
+[ext_resource type="Texture2D" uid="uid://k66qwp0f8sop" path="res://images/slaves/swirly.png" id="2_8mv2p"]
+
+[resource]
+script = ExtResource("1_x217g")
+info_1 = "ПРИЧИНЯЕТ 5 ВРЕДА"
+info_2 = ""
+info_3 = ""
+info_4 = ""
+u_name = &"swirly"
+base_maxhp = 10
+base_speed = 2
+texture = ExtResource("2_8mv2p")
+metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

@@ -1,0 +1,121 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7me7xco4pqg1"]
+
+[ext_resource type="Script" uid="uid://dmhhtjxo47pcy" path="res://scripts/map/slave_team_node.gd" id="1_6uie0"]
+[ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="5_furks"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nrvhk"]
+bg_color = Color(0.301961, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y6rnb"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_nrvhk"]
+font = ExtResource("5_furks")
+font_size = 32
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[node name="SlaveTeam" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 98.0
+offset_top = 276.0
+offset_right = 191.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6uie0")
+
+[node name="Body" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.5
+offset_top = -73.0
+offset_right = 66.5
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Weapon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 61.0
+offset_top = -2.0
+offset_right = 151.0
+offset_bottom = 88.0
+expand_mode = 1
+
+[node name="Hat" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = -77.0
+offset_right = 89.0
+offset_bottom = 9.0
+expand_mode = 1
+
+[node name="Trinket2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -33.0
+offset_top = 37.0
+offset_right = 16.0
+offset_bottom = 86.0
+expand_mode = 1
+
+[node name="Trinket1" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -9.0
+offset_top = 48.0
+offset_right = 40.0
+offset_bottom = 97.0
+expand_mode = 1
+
+[node name="Undress" type="Button" parent="."]
+layout_mode = 0
+offset_left = -12.0
+offset_top = 127.0
+offset_right = 115.0
+offset_bottom = 173.0
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_furks")
+theme_override_font_sizes/font_size = 32
+text = "Раздеть"
+
+[node name="HPBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_top = -63.0
+offset_right = 93.0
+offset_bottom = -38.0
+theme_override_styles/background = SubResource("StyleBoxFlat_nrvhk")
+theme_override_styles/fill = SubResource("StyleBoxFlat_y6rnb")
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="HPBar"]
+layout_mode = 0
+offset_right = 188.0
+offset_bottom = 48.0
+scale = Vector2(0.5, 0.5)
+label_settings = SubResource("LabelSettings_nrvhk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="Undress" to="." method="_on_undress_pressed"]

@@ -1,16 +1,51 @@
-[gd_scene load_steps=6 format=3 uid="uid://caaw5385eudd6"]
+[gd_scene load_steps=17 format=3 uid="uid://caaw5385eudd6"]
 
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="1_4xfga"]
+[ext_resource type="Script" uid="uid://bjl8be1ygje44" path="res://scripts/map/map.gd" id="1_blm8a"]
+[ext_resource type="Texture2D" uid="uid://k31b0vwcipcp" path="res://images/slaves/party.png" id="2_be0no"]
+[ext_resource type="Texture2D" uid="uid://w3ytklewie86" path="res://images/rooms/tile.png" id="2_p7tei"]
 [ext_resource type="Script" uid="uid://bth4nhqnvlgi4" path="res://scripts/map/team_window.gd" id="2_paxxb"]
+[ext_resource type="Script" uid="uid://conbrhhim1sin" path="res://scripts/map/movable_camera.gd" id="3_blm8a"]
+[ext_resource type="Texture2D" uid="uid://b6tvjrokp25kv" path="res://images/rooms/purged.png" id="3_c70he"]
 [ext_resource type="Texture2D" uid="uid://dm0w3jn5uyl80" path="res://images/backdrops/team.png" id="3_gldc4"]
-[ext_resource type="Texture2D" uid="uid://cxjgnget2f6pf" path="res://images/items/bomb.png" id="4_0cso3"]
 [ext_resource type="Script" uid="uid://cc8bvypcj1twk" path="res://scripts/common/grid.gd" id="4_2klcf"]
+[ext_resource type="PackedScene" uid="uid://c7me7xco4pqg1" path="res://prefabs/slaves/slave_team.tscn" id="4_2lpho"]
+[ext_resource type="Texture2D" uid="uid://efhfrf3upqg5" path="res://images/rooms/city.png" id="4_mo32q"]
+[ext_resource type="PackedScene" uid="uid://jj5vyo6gkyhv" path="res://prefabs/items/item_draggable.tscn" id="5_2klcf"]
+[ext_resource type="Texture2D" uid="uid://bu2piu8hicwxv" path="res://images/rooms/chervonozorz.png" id="5_6k6j1"]
+[ext_resource type="Texture2D" uid="uid://bnm1bapsll7sa" path="res://images/rooms/govnov.png" id="6_m335s"]
+[ext_resource type="PackedScene" uid="uid://dj5w5iqx004t4" path="res://prefabs/battle/item_entry.tscn" id="7_nakos"]
+[ext_resource type="Texture2D" uid="uid://bo8wxy1ul73tg" path="res://images/rooms/37.png" id="7_sq6bu"]
 
 [node name="Map" type="Node2D"]
+script = ExtResource("1_blm8a")
+size = 17
+branch_chance = 0.3
+city_rate = 0.05
+cherv_rate = 0.15
+govnov_rate = 0.05
+room_sprites = Dictionary[int, Texture2D]({
+0: ExtResource("2_p7tei"),
+1: ExtResource("3_c70he"),
+2: ExtResource("4_mo32q"),
+3: ExtResource("5_6k6j1"),
+4: ExtResource("6_m335s"),
+5: ExtResource("7_sq6bu")
+})
 
 [node name="World" type="Node2D" parent="."]
 
-[node name="UI" type="Control" parent="."]
+[node name="Rooms" type="Node2D" parent="World"]
+
+[node name="Player" type="Sprite2D" parent="World"]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_be0no")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("3_blm8a")
+speed = 600.0
+
+[node name="UI" type="Control" parent="Camera2D"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -569.0
@@ -18,7 +53,7 @@ offset_top = -315.0
 offset_right = 561.0
 offset_bottom = 314.0
 
-[node name="ShowTeam" type="Button" parent="UI"]
+[node name="ShowTeam" type="Button" parent="Camera2D/UI"]
 layout_mode = 0
 offset_left = 724.0
 offset_top = 485.0
@@ -29,7 +64,13 @@ theme_override_fonts/font = ExtResource("1_4xfga")
 theme_override_font_sizes/font_size = 48
 text = "Бригада"
 
-[node name="TeamWindow" type="Control" parent="UI"]
+[node name="CityWindow" type="Control" parent="Camera2D/UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TeamWindow" type="Control" parent="Camera2D/UI"]
+visible = false
 anchors_preset = 0
 offset_left = 106.0
 offset_top = 57.0
@@ -37,7 +78,15 @@ offset_right = 1006.0
 offset_bottom = 557.0
 script = ExtResource("2_paxxb")
 
-[node name="BG" type="TextureRect" parent="UI/TeamWindow"]
+[node name="ColorRect" type="ColorRect" parent="Camera2D/UI/TeamWindow"]
+layout_mode = 0
+offset_left = -193.0
+offset_top = -113.0
+offset_right = 1191.0
+offset_bottom = 636.0
+color = Color(0, 0, 0, 0.513726)
+
+[node name="BG" type="TextureRect" parent="Camera2D/UI/TeamWindow"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,33 +95,79 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_gldc4")
 
-[node name="ItemGrid" type="VBoxContainer" parent="UI/TeamWindow"]
+[node name="ItemGrid" type="VBoxContainer" parent="Camera2D/UI/TeamWindow"]
+z_index = 1
 layout_mode = 0
 offset_left = 27.0
 offset_top = 15.0
-offset_right = 874.0
+offset_right = 762.0
 offset_bottom = 179.0
+mouse_filter = 2
 script = ExtResource("4_2klcf")
-row_capacity = 14
+row_capacity = 12
 
-[node name="Row1" type="HBoxContainer" parent="UI/TeamWindow/ItemGrid"]
+[node name="Row1" type="HBoxContainer" parent="Camera2D/UI/TeamWindow/ItemGrid"]
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
-[node name="ItemDraggable" type="TextureRect" parent="UI/TeamWindow/ItemGrid/Row1"]
+[node name="ItemDraggable" parent="Camera2D/UI/TeamWindow/ItemGrid/Row1" instance=ExtResource("5_2klcf")]
 layout_mode = 2
-texture = ExtResource("4_0cso3")
-expand_mode = 2
 
-[node name="Row2" type="HBoxContainer" parent="UI/TeamWindow/ItemGrid"]
+[node name="Row2" type="HBoxContainer" parent="Camera2D/UI/TeamWindow/ItemGrid"]
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
-[node name="Row3" type="HBoxContainer" parent="UI/TeamWindow/ItemGrid"]
+[node name="Row3" type="HBoxContainer" parent="Camera2D/UI/TeamWindow/ItemGrid"]
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
+mouse_filter = 2
 alignment = 1
 
-[connection signal="pressed" from="UI/ShowTeam" to="UI/TeamWindow" method="_on_show_team_pressed"]
+[node name="Slaves" type="Control" parent="Camera2D/UI/TeamWindow"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Left" parent="Camera2D/UI/TeamWindow/Slaves" instance=ExtResource("4_2lpho")]
+layout_mode = 1
+
+[node name="Middle" parent="Camera2D/UI/TeamWindow/Slaves" instance=ExtResource("4_2lpho")]
+layout_mode = 1
+offset_left = 398.0
+offset_top = 166.0
+offset_right = 491.0
+offset_bottom = 250.0
+
+[node name="Right" parent="Camera2D/UI/TeamWindow/Slaves" instance=ExtResource("4_2lpho")]
+layout_mode = 1
+offset_left = 670.0
+offset_top = 289.0
+offset_right = 763.0
+offset_bottom = 373.0
+
+[node name="ItemEntry" parent="Camera2D/UI/TeamWindow" instance=ExtResource("7_nakos")]
+visible = false
+layout_mode = 0
+offset_left = 222.0
+offset_top = 334.0
+offset_right = 707.0
+offset_bottom = 454.0
+mouse_filter = 2
+
+[node name="Close" type="Button" parent="Camera2D/UI/TeamWindow"]
+layout_mode = 0
+offset_left = 785.0
+offset_top = 19.0
+offset_right = 885.0
+offset_bottom = 119.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_4xfga")
+theme_override_font_sizes/font_size = 64
+text = "X"
+
+[connection signal="pressed" from="Camera2D/UI/ShowTeam" to="Camera2D/UI/TeamWindow" method="_on_show_team_pressed"]
+[connection signal="pressed" from="Camera2D/UI/TeamWindow/Close" to="Camera2D/UI/TeamWindow" method="_on_close_pressed"]

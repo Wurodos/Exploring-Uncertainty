@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://jj5vyo6gkyhv"]
+
+[ext_resource type="Script" uid="uid://cwinh384e3nky" path="res://scripts/items/item_draggable.gd" id="1_3giyi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3giyi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ni7co"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3giyi"]
+bg_color = Color(1, 1, 0, 0.513726)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bxiyu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1l3qe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uateq"]
+
+[node name="ItemDraggable" type="TextureRect"]
+mouse_filter = 2
+expand_mode = 2
+script = ExtResource("1_3giyi")
+
+[node name="Clickable" type="Button" parent="."]
+layout_mode = 0
+offset_right = 52.0
+offset_bottom = 52.0
+focus_mode = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 7
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_3giyi")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_ni7co")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3giyi")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_bxiyu")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_1l3qe")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_uateq")
+keep_pressed_outside = true
+
+[connection signal="button_down" from="Clickable" to="." method="_on_clickable_button_down"]
+[connection signal="mouse_entered" from="Clickable" to="." method="_on_clickable_mouse_entered"]
+[connection signal="mouse_exited" from="Clickable" to="." method="_on_clickable_mouse_exited"]

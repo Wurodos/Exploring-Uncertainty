@@ -3,7 +3,7 @@ extends Resource
 class_name Item
 
 enum Type { Weapon, Hat, Trinket}
-enum Target { Single, AllTeam, Self}
+enum Target { Single, AllTeam, Self, None}
 
 @export var u_name: StringName
 @export var name: String
@@ -12,6 +12,10 @@ enum Target { Single, AllTeam, Self}
 @export var target: Target
 @export var extra_hp : int
 @export var texture: Texture2D
+
+func is_item() -> bool:
+	return u_name != "no_weapon" and u_name != "no_hat"\
+		and u_name != "no_trinket"
 
 func use_item(_sender: SlaveNode, _victim: SlaveNode):
 	pass

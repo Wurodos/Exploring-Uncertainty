@@ -8,6 +8,7 @@ static var instance: Battle
 @onready var evil_team: Team = $World/EvilTeam
 @onready var queue_node: Control = $UI/SpeedQueue
 @onready var line2d : Line2D = $World/Line2D
+@onready var loot_node: Loot = $UI/Loot
 
 const queue_element = preload("res://prefabs/battle/queue_element.tscn")
 
@@ -19,6 +20,7 @@ var selected_sender: SlaveNode
 var selected_victim: SlaveNode
 
 var is_line : bool = false
+var is_marauder : bool = false
 
 func _ready() -> void:
 	instance = self
@@ -31,6 +33,7 @@ func _ready() -> void:
 	SignalBus.slave_mouse_entered.connect(_on_slave_mouse_entered)
 	SignalBus.slave_mouse_exited.connect(_on_slave_mouse_exited)
 	SignalBus.slave_death.connect(_on_slave_death)
+	SignalBus.slave_ran.connect(func(slave): _on_slave_death(slave, false))
 	
 	SignalBus.evil_won.connect(_on_evil_won)
 	SignalBus.good_won.connect(_on_good_won)
@@ -86,6 +89,27 @@ func _on_new_round():
 	
 	speed_queue.sort_custom(_compare_speeds)
 	
+	# Randomize slaves that have the same speed
+	# in other words, speed brackets
+	
+	var bracket : Array[Slave] = []
+	var br_start : int = 0
+	for i in range(speed_queue.size()):
+		if speed_queue[i].speed != \
+				speed_queue[br_start].speed:
+			bracket.shuffle()
+			for j in range(bracket.size()):
+				speed_queue[br_start + j] = bracket[j]
+			br_start = i
+			bracket.clear()
+		bracket.append(speed_queue[i])
+	
+	bracket.shuffle()
+	for j in range(bracket.size()):
+		speed_queue[br_start + j] = bracket[j]
+	
+	
+	
 	for slave : Slave in speed_queue:
 		var new_element : QueueElement = queue_element.instantiate()
 		new_element.apply(slave)
@@ -101,7 +125,12 @@ func _on_new_turn() -> void:
 	current_slave_position += 1
 	
 	if current_slave_position >= queue_node.get_child_count():
+		for slave : SlaveNode in good_team.boys_nodes:
+			slave.ticker_down_buffs()
+		for slave : SlaveNode in evil_team.boys_nodes:
+			slave.ticker_down_buffs()
 		SignalBus.new_round.emit()
+	
 	queue_node.get_child(current_slave_position).toggle_select(true)
 	current_slave = speed_queue[current_slave_position]
 	
@@ -116,16 +145,31 @@ func _on_new_turn() -> void:
 				slave_node.execute_intention()
 				break
 
-func _on_slave_death(slave_node: SlaveNode) -> void:
+func _on_slave_death(slave_node: SlaveNode, is_loot: bool = true) -> void:
+	if is_loot:
+		for item : Item in slave_node.get_all_items():
+			if item.is_item():
+				loot_node.items.append(item)
+	
 	for i in range(speed_queue.size()):
 		if speed_queue[i] == slave_node.held:
 			if i <= current_slave_position:
 				current_slave_position -= 1
+			
 			queue_node.get_child(i).free()
 			speed_queue.remove_at(i)
-			break			
+			break
+	
+	if good_team.boys.is_empty():
+		SignalBus.evil_won.emit()
+	elif evil_team.boys.is_empty():
+		SignalBus.good_won.emit()
+	
+	if current_slave_position == speed_queue.size():
+		SignalBus.new_round.emit()			
 
 func _on_slave_selected(slave_node: SlaveNode) -> void:
+	if is_marauder: return
 	if slave_node.held == current_slave and not slave_node.team.is_evil:
 		slave_node.toggle_ellipse(true)
 		selected_sender = slave_node
@@ -182,9 +226,19 @@ func _on_slave_mouse_exited(slave_node: SlaveNode):
 
 func _on_good_won() -> void:
 	print("Good won!")
+	is_marauder = true
+	CurrentRun.good_boys = CurrentRun.good_boys.filter(func(slave: Slave): return slave.is_alive)
+	
+	for slave : Slave in CurrentRun.good_boys:
+		slave.speed = slave.base_speed
+	
+	loot_node.start_marauder()
+	loot_node.visible = true
+	
 
 func _on_evil_won() -> void:
 	print("Evil won!")
+	
 
 # ====================
 # Debug panel

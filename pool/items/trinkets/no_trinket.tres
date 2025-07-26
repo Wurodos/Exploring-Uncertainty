@@ -8,4 +8,6 @@ u_name = &"no_trinket"
 name = ""
 desc = ""
 type = 2
+target = 3
+extra_hp = 0
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

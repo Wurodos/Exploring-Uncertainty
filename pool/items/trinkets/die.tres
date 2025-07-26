@@ -7,9 +7,9 @@
 script = ExtResource("1_gyuj5")
 u_name = &"die"
 name = "Кубик"
-desc = "НАЧАЛО БОЯ: +3 УДАЧА"
+desc = "НАЧАЛО БОЯ: +5 УДАЧА"
 type = 2
-target = 0
+target = 2
 extra_hp = 0
 texture = ExtResource("2_eaac4")
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

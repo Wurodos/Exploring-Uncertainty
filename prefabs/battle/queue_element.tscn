@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://8lqnkm8c6ogh"]
+[gd_scene load_steps=2 format=3 uid="uid://8lqnkm8c6ogh"]
 
-[ext_resource type="Texture2D" uid="uid://brfycwyqi4ev8" path="res://images/slaves/communist.png" id="1_6obd6"]
 [ext_resource type="Script" uid="uid://buq64nk60vb40" path="res://scripts/battle/queue_element.gd" id="1_qnqr4"]
 
 [node name="QueueElement" type="ColorRect"]
@@ -8,9 +7,8 @@ custom_minimum_size = Vector2(82, 0)
 color = Color(0.835294, 0, 0, 1)
 script = ExtResource("1_qnqr4")
 
-[node name="SlaveTexture" type="TextureRect" parent="."]
-layout_mode = 2
-offset_right = 82.0
-offset_bottom = 82.0
-texture = ExtResource("1_6obd6")
+[node name="Body" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 87.0
+offset_bottom = 87.0
 expand_mode = 1

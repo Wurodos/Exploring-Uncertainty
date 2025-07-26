@@ -7,9 +7,9 @@
 script = ExtResource("1_oapy2")
 u_name = &"alcohol"
 name = "Алкоголь"
-desc = "+1 МОЩЬ, ПОТЕРЯ 2 ХП"
+desc = "НАЧАЛО ХОДА: +1 МОЩЬ, ПОТЕРЯ 2 ХП"
 type = 2
-target = 0
+target = 2
 extra_hp = 0
 texture = ExtResource("2_wquac")
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

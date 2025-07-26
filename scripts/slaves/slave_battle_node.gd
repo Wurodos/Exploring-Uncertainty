@@ -36,6 +36,7 @@ func _ready() -> void:
 	SignalBus.mouse_right_down.connect(_on_mouse_right_down)
 	if held is Enemy:
 		SignalBus.new_round.connect(_decide_intentions)
+	set_hp(0)
 
 func remove_item(u_name: StringName) -> void:
 	var i = 0
@@ -138,8 +139,14 @@ func add_stat(stat_name: String, icon: Texture2D, value: int):
 	stat_entry.label.text = str(value)
 
 func start_battle() -> void:
-	for item : Item in [held.weapon, held.hat, held.trinket1, held.trinket2]:
-		item.on_start_battle(self)
+	if team.is_evil:
+		pass
+	else:
+		for item : Item in [held.weapon, held.hat, held.trinket1, held.trinket2]:
+			item.on_start_battle(self)
+	if team.is_evil:
+		var enemy: Enemy = held
+		enemy.update_stats(self)
 	
 func get_all_items() -> Array[Item]:
 	return [held.weapon, held.hat, held.trinket1, held.trinket2]
@@ -173,25 +180,79 @@ func support(ally: SlaveNode):
 func start_turn() -> void:
 	turn_started.emit()
 
+func ticker_down_buffs() -> void:
+	var to_be_erased : Array[String] = []
+	
+	for key: String in buffs.keys():
+		buffs[key] -= 1
+		if buffs[key] == 0: to_be_erased.append(key)
+	
+	for key in to_be_erased:
+		var visual : Node2D = $Buffs.find_child(key)
+		if visual: visual.visible = false
+		
+		buffs.erase(key)
+
 func execute_intention():
 	var held_enemy : Enemy = held
 	await get_tree().create_timer(1).timeout
 	$AnimationPlayer.play("jump")
 	match(held_enemy.intention.type):
+		
+		
 		Enemy.Intention.Type.DamageSingular:
 			Action.deal_damage(self,\
 				Battle.instance.good_team.boys_nodes[held_enemy.intention.target],\
 				held_enemy.intention.amount)
+		
+		
+		
+		Enemy.Intention.Type.DamageMultiple:
+			for slave : SlaveNode in Battle.instance.good_team.boys_nodes:
+				Action.deal_damage(self, slave, held_enemy.intention.amount)
+		
+		
+		
+		Enemy.Intention.Type.HealSingle:
+			Action.heal(self,\
+				Battle.instance.evil_team.boys_nodes[held_enemy.intention.target],\
+				held_enemy.intention.amount)
+		
+		
+		
+		Enemy.Intention.Type.HealMultiple:
+			for slave : SlaveNode in Battle.instance.evil_team.boys_nodes:
+				Action.heal(self, slave, held_enemy.intention.amount)
+		
+		
+		
+		Enemy.Intention.Type.PowerUp:
+			Battle.instance.evil_team.boys_nodes[held_enemy.intention.target]\
+				.set_power(held_enemy.intention.amount)
+		
+		
+		
+		Enemy.Intention.Type.Run:
+			held.is_alive = false
+			sprite.texture = null
+			$HPBar.visible = false
+			$Items.visible = false
+			$Intention.visible = false
+			SignalBus.slave_ran.emit(self)
+		
+	
+	held_enemy.intention.extra_effect.call()
 			
 	_on_end_turn()
 	await get_tree().create_timer(1).timeout
+	$AnimationPlayer.play("idle")
+	$Intention.visible = false
 	SignalBus.new_turn.emit()
 
 func add_buff(buff_name: String, turns: int):
 	if buffs.has(buff_name):
 		buffs[buff_name] += turns
-	else: buffs.set(buff_name, turns+1)
-	# Why +1? To skip the current turn
+	else: buffs.set(buff_name, turns)
 	
 	var visual : Node2D = $Buffs.find_child(buff_name)
 	if visual:
@@ -219,32 +280,44 @@ func _on_clickable_area_button_down() -> void:
 
 
 func _on_end_turn() -> void:
-	var to_be_erased : Array[String] = []
-	
-	for key: String in buffs.keys():
-		buffs[key] -= 1
-		if buffs[key] == 0: to_be_erased.append(key)
-	
-	for key in to_be_erased:
-		var visual : Node2D = $Buffs.find_child(key)
-		if visual: visual.visible = false
-		
-		buffs.erase(key)
-		
 	turn_ended.emit()
 	
+	await $AnimationPlayer.animation_finished
+	$AnimationPlayer.play("idle")
+	
+
+
 
 # only if evil
 func _decide_intentions() -> void:
+	if not held.is_alive: return
+	
+	$Intention.visible = true
 	var held_enemy : Enemy = held
-	held_enemy.decide_intention()
-	$Intention/Label.text = str(held_enemy.intention.amount)
+	held_enemy.decide_intention(self)
+	
+	var total = held_enemy.intention.amount
+	if held_enemy.intention.type == Enemy.Intention.Type.DamageSingular\
+		or held_enemy.intention.type == Enemy.Intention.Type.DamageMultiple:
+		total += power
+	
+	$Intention/Label.text = str(total)
 	
 	var icon: Texture2D 
 	
 	match(held_enemy.intention.type):
 		Enemy.Intention.Type.DamageSingular: 
 			icon = Gallery.icon_harm_single
+		Enemy.Intention.Type.DamageMultiple:
+			icon = Gallery.icon_harm_multiple
+		Enemy.Intention.Type.HealSingle:
+			icon = Gallery.icon_heal_single
+		Enemy.Intention.Type.HealMultiple:
+			icon = Gallery.icon_heal_multiple
+		Enemy.Intention.Type.PowerUp:
+			icon = Gallery.icon_powerup
+		Enemy.Intention.Type.Run:
+			icon = Gallery.icon_run
 	
 	$Intention/TargetTop.visible = false
 	$Intention/TargetMiddle.visible = false
@@ -254,5 +327,10 @@ func _decide_intentions() -> void:
 		Enemy.Intention.Target.Up: $Intention/TargetTop.visible = true
 		Enemy.Intention.Target.Middle: $Intention/TargetMiddle.visible = true
 		Enemy.Intention.Target.Bottom: $Intention/TargetBottom.visible = true
+		Enemy.Intention.Target.All:
+			$Intention/TargetTop.visible = true
+			$Intention/TargetMiddle.visible = true
+			$Intention/TargetBottom.visible = true
+	
 	
 	$Intention/Icon.texture = icon

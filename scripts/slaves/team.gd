@@ -15,6 +15,7 @@ var boys_nodes: Array[SlaveNode] = []
 func _ready() -> void:
 	SignalBus.start_battle.connect(_on_start_battle)
 	SignalBus.slave_death.connect(_on_slave_death)
+	SignalBus.slave_ran.connect(_on_slave_death)
 
 func _on_start_battle() -> void:
 	if is_evil: boys.append_array(CurrentRun.evil_boys)
@@ -32,6 +33,3 @@ func _on_start_battle() -> void:
 
 func _on_slave_death(slave_node: SlaveNode) -> void:
 	boys.erase(slave_node.held)
-	if boys.is_empty():
-		if is_evil: SignalBus.good_won.emit()
-		else: SignalBus.evil_won.emit()

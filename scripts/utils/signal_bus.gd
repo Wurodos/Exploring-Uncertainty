@@ -31,10 +31,23 @@ signal slave_mouse_exited(slave: SlaveNode)
 signal slave_info(slave: SlaveNode)
 
 signal slave_death(slave: SlaveNode)
+signal slave_ran(slave: SlaveNode)
 
 signal evil_won
 signal good_won
 
+signal end_battle
+
 # ====================
-# Item actions
+# Team Window
 # ====================
+
+signal add_item(item: Item)
+signal show_item_info(item: Item)
+signal hide_item_info
+
+# ====================
+# Room encounters
+# ====================
+
+signal battle_encounter

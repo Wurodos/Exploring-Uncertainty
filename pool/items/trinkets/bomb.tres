@@ -11,6 +11,5 @@ desc = "8 ВРЕДА ПРИ ПЕРВОЙ АТАКЕ"
 type = 2
 target = 0
 extra_hp = 0
-one_time_use = true
 texture = ExtResource("2_sj7jo")
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"
