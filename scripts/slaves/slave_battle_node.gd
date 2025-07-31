@@ -136,11 +136,14 @@ func add_stat(stat_name: String, icon: Texture2D, value: int):
 		stat_entry.name = stat_name
 		stat_entry.init()
 		stat_parent.add_child(stat_entry)
+	
 	stat_entry.label.text = str(value)
+		
 
 func start_battle() -> void:
 	if team.is_evil:
-		pass
+		for item : Item in [held.weapon, held.hat, held.trinket1, held.trinket2]:
+			set_speed(item.extra_speed)
 	else:
 		for item : Item in [held.weapon, held.hat, held.trinket1, held.trinket2]:
 			item.on_start_battle(self)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://caaw5385eudd6"]
+[gd_scene load_steps=25 format=3 uid="uid://caaw5385eudd6"]
 
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="1_4xfga"]
 [ext_resource type="Script" uid="uid://bjl8be1ygje44" path="res://scripts/map/map.gd" id="1_blm8a"]
@@ -11,17 +11,33 @@
 [ext_resource type="Script" uid="uid://cc8bvypcj1twk" path="res://scripts/common/grid.gd" id="4_2klcf"]
 [ext_resource type="PackedScene" uid="uid://c7me7xco4pqg1" path="res://prefabs/slaves/slave_team.tscn" id="4_2lpho"]
 [ext_resource type="Texture2D" uid="uid://efhfrf3upqg5" path="res://images/rooms/city.png" id="4_mo32q"]
-[ext_resource type="PackedScene" uid="uid://jj5vyo6gkyhv" path="res://prefabs/items/item_draggable.tscn" id="5_2klcf"]
 [ext_resource type="Texture2D" uid="uid://bu2piu8hicwxv" path="res://images/rooms/chervonozorz.png" id="5_6k6j1"]
 [ext_resource type="Texture2D" uid="uid://bnm1bapsll7sa" path="res://images/rooms/govnov.png" id="6_m335s"]
 [ext_resource type="PackedScene" uid="uid://dj5w5iqx004t4" path="res://prefabs/battle/item_entry.tscn" id="7_nakos"]
 [ext_resource type="Texture2D" uid="uid://bo8wxy1ul73tg" path="res://images/rooms/37.png" id="7_sq6bu"]
+[ext_resource type="Texture2D" uid="uid://bdkbuhwojnmqq" path="res://images/rooms/fog.png" id="8_m335s"]
+[ext_resource type="Script" uid="uid://dvl21h34uashq" path="res://scripts/map/city_window.gd" id="11_c70he"]
+[ext_resource type="Script" uid="uid://ql10jr5klb8g" path="res://scripts/map/govnov_window.gd" id="12_4b7dj"]
+[ext_resource type="Texture2D" uid="uid://dhfpnnlwg86d" path="res://images/backdrops/city.png" id="12_mo32q"]
+[ext_resource type="Texture2D" uid="uid://jhgrrel3ox4a" path="res://images/backdrops/govnov.png" id="13_sq6bu"]
+[ext_resource type="Texture2D" uid="uid://bs1oxtclo4qgp" path="res://images/icons/coin.png" id="14_6k6j1"]
+[ext_resource type="LabelSettings" uid="uid://34c71nyrmk01" path="res://text/labelsettings/item_name.tres" id="15_m335s"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sq6bu"]
+texture = ExtResource("8_m335s")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_6k6j1"]
+resource_name = "fog"
+tile_size = Vector2i(128, 128)
+sources/0 = SubResource("TileSetAtlasSource_sq6bu")
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_blm8a")
 size = 17
 branch_chance = 0.3
-city_rate = 0.05
+city_rate = 0.08
 cherv_rate = 0.15
 govnov_rate = 0.05
 room_sprites = Dictionary[int, Texture2D]({
@@ -41,9 +57,18 @@ room_sprites = Dictionary[int, Texture2D]({
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_be0no")
 
+[node name="Fog" type="Node2D" parent="World"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="World/Fog"]
+position = Vector2(-64, -64)
+tile_set = SubResource("TileSet_6k6j1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World/Fog"]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_blm8a")
 speed = 600.0
+bound = 1100.0
 
 [node name="UI" type="Control" parent="Camera2D"]
 layout_mode = 3
@@ -64,10 +89,256 @@ theme_override_fonts/font = ExtResource("1_4xfga")
 theme_override_font_sizes/font_size = 48
 text = "Бригада"
 
-[node name="CityWindow" type="Control" parent="Camera2D/UI"]
+[node name="GovnovWindow" type="Control" parent="Camera2D/UI"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("12_4b7dj")
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/UI/GovnovWindow"]
+layout_mode = 0
+offset_left = -193.0
+offset_top = -113.0
+offset_right = 1191.0
+offset_bottom = 636.0
+color = Color(0, 0, 0, 0.513726)
+
+[node name="BG" type="TextureRect" parent="Camera2D/UI/GovnovWindow"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 117.0
+offset_top = 59.0
+offset_right = 977.0
+offset_bottom = 519.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_sq6bu")
+
+[node name="Close" type="Button" parent="Camera2D/UI/GovnovWindow"]
+layout_mode = 0
+offset_left = 138.0
+offset_top = 79.0
+offset_right = 238.0
+offset_bottom = 179.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_4xfga")
+theme_override_font_sizes/font_size = 64
+text = "X"
+
+[node name="Slaves" type="Control" parent="Camera2D/UI/GovnovWindow"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Left" parent="Camera2D/UI/GovnovWindow/Slaves" instance=ExtResource("4_2lpho")]
+layout_mode = 1
+offset_left = 401.0
+offset_top = 336.0
+offset_right = 494.0
+offset_bottom = 420.0
+
+[node name="Middle" parent="Camera2D/UI/GovnovWindow/Slaves" instance=ExtResource("4_2lpho")]
+layout_mode = 1
+offset_left = 272.0
+offset_top = 116.0
+offset_right = 365.0
+offset_bottom = 200.0
+
+[node name="Right" parent="Camera2D/UI/GovnovWindow/Slaves" instance=ExtResource("4_2lpho")]
+layout_mode = 1
+offset_left = 150.0
+offset_top = 340.0
+offset_right = 243.0
+offset_bottom = 424.0
+
+[node name="Counter" type="Control" parent="Camera2D/UI/GovnovWindow"]
+anchors_preset = 0
+offset_left = 459.0
+offset_top = 97.0
+offset_right = 499.0
+offset_bottom = 137.0
+
+[node name="Icon" type="TextureRect" parent="Camera2D/UI/GovnovWindow/Counter"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("14_6k6j1")
+
+[node name="Label" type="Label" parent="Camera2D/UI/GovnovWindow/Counter"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "0"
+label_settings = ExtResource("15_m335s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InventoryGrid" type="HBoxContainer" parent="Camera2D/UI/GovnovWindow"]
+layout_mode = 0
+offset_left = 583.0
+offset_top = 88.0
+offset_right = 747.0
+offset_bottom = 525.0
+script = ExtResource("4_2klcf")
+row_capacity = 8
+
+[node name="Column1" type="VBoxContainer" parent="Camera2D/UI/GovnovWindow/InventoryGrid"]
+custom_minimum_size = Vector2(52, 0)
+layout_mode = 2
+
+[node name="Column2" type="VBoxContainer" parent="Camera2D/UI/GovnovWindow/InventoryGrid"]
+custom_minimum_size = Vector2(52, 0)
+layout_mode = 2
+
+[node name="Column3" type="VBoxContainer" parent="Camera2D/UI/GovnovWindow/InventoryGrid"]
+custom_minimum_size = Vector2(52, 0)
+layout_mode = 2
+
+[node name="Shop" type="VBoxContainer" parent="Camera2D/UI/GovnovWindow"]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 0
+offset_left = 906.0
+offset_top = 70.0
+offset_right = 996.0
+offset_bottom = 586.0
+
+[node name="ItemEntry" parent="Camera2D/UI/GovnovWindow" instance=ExtResource("7_nakos")]
+visible = false
+layout_mode = 0
+offset_left = 41.0
+offset_top = 244.0
+offset_right = 526.0
+offset_bottom = 364.0
+mouse_filter = 2
+
+[node name="CityWindow" type="Control" parent="Camera2D/UI"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("11_c70he")
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/UI/CityWindow"]
+layout_mode = 0
+offset_left = -193.0
+offset_top = -113.0
+offset_right = 1191.0
+offset_bottom = 636.0
+color = Color(0, 0, 0, 0.513726)
+
+[node name="BG" type="TextureRect" parent="Camera2D/UI/CityWindow"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 117.0
+offset_top = 59.0
+offset_right = 977.0
+offset_bottom = 519.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_mo32q")
+
+[node name="Close" type="Button" parent="Camera2D/UI/CityWindow"]
+layout_mode = 0
+offset_left = 138.0
+offset_top = 79.0
+offset_right = 238.0
+offset_bottom = 179.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_4xfga")
+theme_override_font_sizes/font_size = 64
+text = "X"
+
+[node name="Slaves" type="Control" parent="Camera2D/UI/CityWindow"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Left" parent="Camera2D/UI/CityWindow/Slaves" instance=ExtResource("4_2lpho")]
+layout_mode = 1
+offset_left = 401.0
+offset_top = 336.0
+offset_right = 494.0
+offset_bottom = 420.0
+
+[node name="Middle" parent="Camera2D/UI/CityWindow/Slaves" instance=ExtResource("4_2lpho")]
+layout_mode = 1
+offset_left = 272.0
+offset_top = 116.0
+offset_right = 365.0
+offset_bottom = 200.0
+
+[node name="Right" parent="Camera2D/UI/CityWindow/Slaves" instance=ExtResource("4_2lpho")]
+layout_mode = 1
+offset_left = 150.0
+offset_top = 340.0
+offset_right = 243.0
+offset_bottom = 424.0
+
+[node name="Counter" type="Control" parent="Camera2D/UI/CityWindow"]
+anchors_preset = 0
+offset_left = 459.0
+offset_top = 97.0
+offset_right = 499.0
+offset_bottom = 137.0
+
+[node name="Icon" type="TextureRect" parent="Camera2D/UI/CityWindow/Counter"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+texture = ExtResource("14_6k6j1")
+
+[node name="Label" type="Label" parent="Camera2D/UI/CityWindow/Counter"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "0"
+label_settings = ExtResource("15_m335s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InventoryGrid" type="HBoxContainer" parent="Camera2D/UI/CityWindow"]
+layout_mode = 0
+offset_left = 583.0
+offset_top = 88.0
+offset_right = 747.0
+offset_bottom = 525.0
+script = ExtResource("4_2klcf")
+row_capacity = 8
+
+[node name="Column1" type="VBoxContainer" parent="Camera2D/UI/CityWindow/InventoryGrid"]
+custom_minimum_size = Vector2(52, 0)
+layout_mode = 2
+
+[node name="Column2" type="VBoxContainer" parent="Camera2D/UI/CityWindow/InventoryGrid"]
+custom_minimum_size = Vector2(52, 0)
+layout_mode = 2
+
+[node name="Column3" type="VBoxContainer" parent="Camera2D/UI/CityWindow/InventoryGrid"]
+custom_minimum_size = Vector2(52, 0)
+layout_mode = 2
+
+[node name="Shop" type="VBoxContainer" parent="Camera2D/UI/CityWindow"]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 0
+offset_left = 906.0
+offset_top = 70.0
+offset_right = 996.0
+offset_bottom = 586.0
+
+[node name="ItemEntry" parent="Camera2D/UI/CityWindow" instance=ExtResource("7_nakos")]
+visible = false
+layout_mode = 0
+offset_left = 41.0
+offset_top = 244.0
+offset_right = 526.0
+offset_bottom = 364.0
+mouse_filter = 2
 
 [node name="TeamWindow" type="Control" parent="Camera2D/UI"]
 visible = false
@@ -104,16 +375,13 @@ offset_right = 762.0
 offset_bottom = 179.0
 mouse_filter = 2
 script = ExtResource("4_2klcf")
-row_capacity = 12
+row_capacity = 8
 
 [node name="Row1" type="HBoxContainer" parent="Camera2D/UI/TeamWindow/ItemGrid"]
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
-
-[node name="ItemDraggable" parent="Camera2D/UI/TeamWindow/ItemGrid/Row1" instance=ExtResource("5_2klcf")]
-layout_mode = 2
 
 [node name="Row2" type="HBoxContainer" parent="Camera2D/UI/TeamWindow/ItemGrid"]
 custom_minimum_size = Vector2(0, 52)
@@ -170,4 +438,6 @@ theme_override_font_sizes/font_size = 64
 text = "X"
 
 [connection signal="pressed" from="Camera2D/UI/ShowTeam" to="Camera2D/UI/TeamWindow" method="_on_show_team_pressed"]
+[connection signal="pressed" from="Camera2D/UI/GovnovWindow/Close" to="Camera2D/UI/GovnovWindow" method="_on_close_pressed"]
+[connection signal="pressed" from="Camera2D/UI/CityWindow/Close" to="Camera2D/UI/CityWindow" method="_on_close_pressed"]
 [connection signal="pressed" from="Camera2D/UI/TeamWindow/Close" to="Camera2D/UI/TeamWindow" method="_on_close_pressed"]

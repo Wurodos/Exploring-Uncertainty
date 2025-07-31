@@ -7,9 +7,11 @@
 script = ExtResource("1_e7sfb")
 u_name = &"cowboy_hat"
 name = "Ковбойская Шляпа"
-desc = "ЩИТ 1 ХОД"
+desc = "ЩИТ 1 ХОД ВСЕМ"
 type = 1
 target = 1
-extra_hp = 4
+extra_hp = 5
+extra_speed = 2
 texture = ExtResource("2_t8vqi")
+cost = 3
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

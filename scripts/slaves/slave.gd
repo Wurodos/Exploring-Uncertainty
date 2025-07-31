@@ -39,6 +39,15 @@ func _init() -> void:
 	trinket1 = ItemPool.fetch("no_trinket")
 	trinket2 = ItemPool.fetch("no_trinket")
 
+func get_item(item_type: Item.Type, trinket_id: int = 1) -> Item:
+	match(item_type):
+		Item.Type.Weapon: return weapon
+		Item.Type.Hat: return hat
+		Item.Type.Trinket:
+			if trinket_id == 1: return trinket1
+			else: return trinket2
+	return weapon
+
 func equip(item: Item, trinket_id: int = 1) -> Item:
 	var old_item: Item
 	match(item.type):

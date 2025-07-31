@@ -122,3 +122,23 @@ func arrange_evil_team() -> void:
 		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket))
 		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket))
 		CurrentRun.evil_boys.append(enemy)
+
+func arrange_difficult() -> void:
+	CurrentRun.evil_boys = []
+	for i in range(3):
+		evil_deck.append(evil_archive.pop_back())
+		if evil_archive.is_empty():
+			_prepare_archive()
+	
+	for i in range(3):
+		var enemy = evil_deck.pop_back()
+		if enemy != null:
+			CurrentRun.evil_boys.append(enemy)
+	
+	if CurrentRun.evil_boys.is_empty():
+		var enemy = SlavePool.fetch("cherv")
+		enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
+		enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
+		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket))
+		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket))
+		CurrentRun.evil_boys.append(enemy)

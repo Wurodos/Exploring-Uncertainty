@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://dga0x3g1o5mo4"]
+
+[ext_resource type="Script" uid="uid://crhkds3xvvxxf" path="res://scripts/items/item_shop.gd" id="1_2aih4"]
+[ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="2_lixqi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lixqi"]
+bg_color = Color(0, 0, 0, 0.580392)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3giyi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ni7co"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3giyi"]
+bg_color = Color(1, 1, 0, 0.513726)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bxiyu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1l3qe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uateq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kbwyn"]
+font = ExtResource("2_lixqi")
+font_size = 48
+font_color = Color(1, 1, 0, 1)
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[node name="ItemShop" type="TextureRect"]
+mouse_filter = 2
+expand_mode = 4
+script = ExtResource("1_2aih4")
+
+[node name="Clickable" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+mouse_filter = 1
+mouse_default_cursor_shape = 7
+theme_override_styles/disabled = SubResource("StyleBoxFlat_lixqi")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_3giyi")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_ni7co")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3giyi")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_bxiyu")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_1l3qe")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_uateq")
+keep_pressed_outside = true
+
+[node name="Cost" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(0.5, 0.5)
+label_settings = SubResource("LabelSettings_kbwyn")
+
+[connection signal="mouse_entered" from="Clickable" to="." method="_on_clickable_mouse_entered"]
+[connection signal="mouse_exited" from="Clickable" to="." method="_on_clickable_mouse_exited"]
+[connection signal="pressed" from="Clickable" to="." method="_on_clickable_pressed"]

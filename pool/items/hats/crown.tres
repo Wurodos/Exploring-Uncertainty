@@ -7,9 +7,11 @@
 script = ExtResource("1_l8oqh")
 u_name = &"crown"
 name = "Корона"
-desc = "-3  ИНИЦИАТИВЫ"
+desc = "-1 ИНИЦИАТИВЫ"
 type = 1
 target = 0
 extra_hp = 20
+extra_speed = -1
 texture = ExtResource("2_g3t71")
+cost = 6
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

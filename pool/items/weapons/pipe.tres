@@ -10,5 +10,7 @@ name = "Труба"
 desc = "10 ВРЕДА, 1 ВРЕДА ЕСЛИ БЫЛО ИСПОЛЬЗОВАНО В ПРОШЛОМ ХОДУ"
 type = 0
 target = 0
+extra_hp = 0
 texture = ExtResource("2_kkg5u")
+cost = 5
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

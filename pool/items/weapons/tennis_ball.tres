@@ -10,5 +10,7 @@ name = "Теннисный Мяч"
 desc = "2 ВРЕДА, +2 ЗА КАЖДУЮ РАЗНИЦУ В ИНИЦИАТИВЕ"
 type = 0
 target = 0
+extra_hp = 0
 texture = ExtResource("2_7mwu7")
+cost = 6
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

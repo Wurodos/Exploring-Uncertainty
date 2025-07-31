@@ -5,6 +5,7 @@ extends Node
 # ====================
 
 signal start_battle
+signal end_encounter
 
 # ====================
 # Input
@@ -51,3 +52,7 @@ signal hide_item_info
 # ====================
 
 signal battle_encounter
+signal enter_city(city: Room)
+signal enter_govnov
+signal city_heal
+signal govnov_heal

@@ -50,7 +50,6 @@ var space_taken : Array[Array] = []
 var party_row: int
 var party_col: int
 var is_encountering: bool = false
-
 var since_last_battle : int = 0
 
 func _ready() -> void:
@@ -67,6 +66,8 @@ func _process(delta: float) -> void:
 		move_player(Direction.Left)
 	elif Input.is_action_just_pressed("party_right"):
 		move_player(Direction.Right)
+	elif Input.is_action_just_pressed("stay"):
+		encounter(room_at(party_row, party_col))
 
 func move_player(direction: Direction) -> void:
 	if is_encountering: return
@@ -79,9 +80,11 @@ func move_player(direction: Direction) -> void:
 	player_node.global_position = room.global_position
 	
 	is_encountering = true
+	_explore(party_row, party_col)
 	if room.type != Room.Type.Purged:
 		await get_tree().create_timer(0.3).timeout		
 	is_encountering = false
+	
 	encounter(room)
 	
 	if room.type != Room.Type.City:
@@ -91,10 +94,20 @@ func move_player(direction: Direction) -> void:
 func encounter(room: Room) -> void:
 	match(room.type):
 		Room.Type.Empty:
+			return
 			if since_last_battle >= randi_range(0,3):
+				CurrentRun.arrange_evil_team()
 				SignalBus.battle_encounter.emit()
 				since_last_battle = 0
 			since_last_battle = since_last_battle + 1
+		Room.Type.City:
+			SignalBus.enter_city.emit(room)
+		Room.Type.Govnov:
+			SignalBus.enter_govnov.emit()
+		Room.Type.Cherv:
+			since_last_battle = 0
+			CurrentRun.arrange_difficult()
+			SignalBus.battle_encounter.emit()
 
 func room_at(row: int, col: int) -> Room:
 	return room_parent.get_node_or_null(str(row) + "_" + str(col))
@@ -126,6 +139,8 @@ func generate_floor() -> void:
 		 	direction, randi_range(size/4, size/2))
 	
 	_add_structures()
+	_initialize_fog()
+	_explore(party_row, party_col)
 
 func add_room(row: int, col: int) -> Room:
 	var room_node : Room = room_prefab.instantiate()
@@ -141,7 +156,7 @@ func add_room(row: int, col: int) -> Room:
 	return room_node
 
 func _go_in_direction(row: int, col: int, direction : Direction, remain: int):
-	print(str(row) + "/" + str(col) + "/" + str(remain))
+	#print(str(row) + "/" + str(col) + "/" + str(remain))
 	if remain == 0 or space_taken[row][col] \
 	 	or row < 0 or col < 0 or row > size or col > size: return
 	
@@ -149,14 +164,14 @@ func _go_in_direction(row: int, col: int, direction : Direction, remain: int):
 	add_room(row, col)
 	
 	if randf() < current_branch_chance:
-		print("Branch!")
+		#print("Branch!")
 		current_branch_chance -= 0.02
 		var all_dir = [Direction.Up, Direction.Down, Direction.Right, Direction.Left]
 		all_dir.erase(direction)
 		all_dir.erase(opposite(direction))
 		
 		var new_dir = all_dir.pick_random()
-		print("Direction: " + str(new_dir))
+		#print("Direction: " + str(new_dir))
 		var branch_remain = randi_range(size/4, size/2)
 		
 		_go_in_direction(row + _drow[new_dir], col + _dcol[new_dir], \
@@ -192,6 +207,19 @@ func _is_adjacent_to(row: int, col: int, type: Room.Type) -> bool:
 			if room and room.type == type: return true
 	return false
 
+func _initialize_fog() -> void:
+	for x in range(-size/2-6, size/2+6):
+		for y in range(-size/2-4, size/2+4):
+			$World/Fog/TileMapLayer.set_cell(Vector2i(x,y), 0, Vector2i(0,0), 0)
 
-
+func _explore(row: int, col: int):
+	var x = col - size/2
+	var y = row - size/2
+	
+	for i in range(-2, 3):
+		for j in range(-2, 3):
+			if not (abs(i) == 2 and abs(j) == 2):
+				$World/Fog/TileMapLayer.set_cell(Vector2i(x+i,y+j))
+	
+	
 # end

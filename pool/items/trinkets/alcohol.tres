@@ -12,4 +12,5 @@ type = 2
 target = 2
 extra_hp = 0
 texture = ExtResource("2_wquac")
+cost = 4
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

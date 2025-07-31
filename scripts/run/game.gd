@@ -2,7 +2,7 @@ extends Node
 
 class_name Game
 
-enum State {Map, Battle}
+enum State {Map, Battle, Window}
 
 const battle_scene = preload("res://scenes/battle.tscn")
 const map_scene = preload("res://scenes/map.tscn")
@@ -22,6 +22,7 @@ func _ready() -> void:
 	CurrentRun.good_boys[1].equip(ItemPool.fetch("pipe"))
 	CurrentRun.good_boys[1].equip(ItemPool.fetch("alcohol"))
 	
+	
 	CurrentRun.inventory = [
 		ItemPool.fetch("die"),
 		ItemPool.fetch("die")
@@ -34,7 +35,6 @@ func _ready() -> void:
 
 func _on_battle_encounter() -> void:
 	CurrentRun.state = State.Battle
-	CurrentRun.arrange_evil_team()
 	
 	map_node.visible = false
 	$Camera2D.make_current()

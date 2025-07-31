@@ -10,5 +10,7 @@ name = "Бритва"
 desc = "4 ВРЕДА, +1 МОЩЬ СЕБЕ"
 type = 0
 target = 0
+extra_hp = 0
 texture = ExtResource("2_cbwy8")
+cost = 5
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

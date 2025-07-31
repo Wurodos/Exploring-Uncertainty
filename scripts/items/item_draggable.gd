@@ -10,10 +10,11 @@ var held: Item
 var start_pos: Vector2
 
 func _ready() -> void:
+	
 	start_pos = position
 	SignalBus.mouse_up.connect(_on_mouse_up)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_following_mouse:
 		global_position = get_global_mouse_position() - Vector2(26,26)
 

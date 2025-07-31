@@ -14,6 +14,7 @@ func _ready() -> void:
 	SignalBus.hide_item_info.connect(_on_hide_item_info)
 	SignalBus.mouse_up.connect(_on_mouse_up)
 	SignalBus.end_battle.connect(_on_battle_end)
+	SignalBus.end_encounter.connect(_refresh_slaves)
 	
 	
 	for child : Control in $Slaves.get_children():
@@ -23,7 +24,7 @@ func _ready() -> void:
 	for slave in CurrentRun.good_boys:
 		var slave_node : SlaveTeamNode = $Slaves.get_child(i)
 		slave_node.visible = true
-		slave_node.apply(slave)
+		slave_node.apply(slave, SlaveTeamNode.Type.Brigade)
 		i += 1
 
 func refresh_inventory() -> void:
@@ -33,7 +34,7 @@ func refresh_inventory() -> void:
 		item_draggable.apply(item)
 		item_grid.add_to_grid(item_draggable)
 
-func _on_battle_end() -> void:
+func _refresh_slaves() -> void:
 	for child : Control in $Slaves.get_children():
 		child.visible = false
 	
@@ -41,8 +42,11 @@ func _on_battle_end() -> void:
 	for slave in CurrentRun.good_boys:
 		var slave_node : SlaveTeamNode = $Slaves.get_child(i)
 		slave_node.visible = true
-		slave_node.apply(slave)
+		slave_node.apply(slave, SlaveTeamNode.Type.Brigade)
 		i += 1
+
+func _on_battle_end() -> void:
+	_refresh_slaves()
 
 func _on_mouse_up() -> void:
 	var item_node : ItemDraggable = ItemDraggable.selected
@@ -53,13 +57,18 @@ func _on_mouse_up() -> void:
 		if item_node.held.type == Item.Type.Trinket \
 			and slave_node.held.trinket1.is_item():
 				trinket_id = 2
-			
+		
+		# Don't allow equipping an item if it leads to <= 0 HP!
+		
+		if slave_node.held.hp - slave_node.held.get_item(item_node.held.type).extra_hp\
+			+ item_node.held.extra_hp <= 0: return
+		
 		var old_item : Item = slave_node.held.equip(item_node.held, trinket_id)
 		if old_item.is_item():
 			CurrentRun.inventory.append(old_item)
 			SignalBus.add_item.emit(old_item)
 		
-		slave_node.apply(slave_node.held)
+		slave_node.apply(slave_node.held, SlaveTeamNode.Type.Brigade)
 		
 		CurrentRun.inventory.erase(item_node.held)
 		item_node.queue_free()

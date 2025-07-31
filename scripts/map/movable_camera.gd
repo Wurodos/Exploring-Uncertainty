@@ -1,6 +1,8 @@
 extends Camera2D
 
 @export var speed : float
+@export var bound : float
+
 var current_speed : float
 
 func _process(delta: float) -> void:
@@ -9,10 +11,10 @@ func _process(delta: float) -> void:
 	else: current_speed = speed
 	
 	if Input.is_action_pressed("down"):
-		position.y += current_speed*delta
+		position.y = min(position.y + current_speed*delta, bound)
 	elif Input.is_action_pressed("up"):
-		position.y -= current_speed*delta
+		position.y = max(position.y - current_speed*delta, -bound)
 	if Input.is_action_pressed("right"):
-		position.x += current_speed*delta
+		position.x = min(position.x + current_speed*delta, bound)
 	elif Input.is_action_pressed("left"):
-		position.x -= current_speed*delta
+		position.x = max(position.x - current_speed*delta, -bound)
