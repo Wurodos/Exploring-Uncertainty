@@ -7,7 +7,7 @@ func use_item(sender: SlaveNode, ally: SlaveNode):
 	super.use_item(sender, ally)
 	total_received = 0
 	user = sender
-	sender.add_buff("anvil", 1)
+	sender.add_buff("anvil", 3)
 	sender.received_damage.connect(_on_received_damage)
 
 func _on_received_damage(_source: SlaveNode, dmg: int):

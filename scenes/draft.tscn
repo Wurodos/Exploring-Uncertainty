@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=3 uid="uid://c13wpflbknekq"]
+
+[ext_resource type="Script" uid="uid://p1j7xa0ecl76" path="res://scripts/run/draft.gd" id="1_ndt0q"]
+[ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="2_abqjp"]
+[ext_resource type="PackedScene" uid="uid://dj5w5iqx004t4" path="res://prefabs/battle/item_entry.tscn" id="3_700tk"]
+[ext_resource type="PackedScene" uid="uid://dga0x3g1o5mo4" path="res://prefabs/items/item_shop.tscn" id="4_qgxk2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_abqjp"]
+font = ExtResource("2_abqjp")
+font_size = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_700tk"]
+bg_color = Color(0.352941, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgxk2"]
+bg_color = Color(0.145098, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjfeh"]
+bg_color = Color(0.690196, 0, 0, 1)
+
+[node name="Draft" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ndt0q")
+
+[node name="ItemEntry" parent="." instance=ExtResource("3_700tk")]
+visible = false
+layout_mode = 0
+offset_left = 195.0
+offset_top = 453.0
+offset_right = 695.0
+offset_bottom = 593.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 311.0
+offset_top = 14.0
+offset_right = 827.0
+offset_bottom = 129.0
+text = "Выберите 1"
+label_settings = SubResource("LabelSettings_abqjp")
+
+[node name="ItemRow" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 106.0
+offset_top = 153.0
+offset_right = 1046.0
+offset_bottom = 344.0
+alignment = 1
+
+[node name="ItemShop" parent="ItemRow" instance=ExtResource("4_qgxk2")]
+layout_mode = 2
+expand_mode = 2
+
+[node name="ItemShop2" parent="ItemRow" instance=ExtResource("4_qgxk2")]
+layout_mode = 2
+expand_mode = 2
+
+[node name="ItemShop3" parent="ItemRow" instance=ExtResource("4_qgxk2")]
+layout_mode = 2
+expand_mode = 2
+
+[node name="Start" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 217.0
+offset_top = 321.0
+offset_right = 961.0
+offset_bottom = 565.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_abqjp")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/hover = SubResource("StyleBoxFlat_700tk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qgxk2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pjfeh")
+text = "Истребить"
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

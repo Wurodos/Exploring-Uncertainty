@@ -142,3 +142,7 @@ func arrange_difficult() -> void:
 		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket))
 		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket))
 		CurrentRun.evil_boys.append(enemy)
+
+func arrange_boss() -> void:
+	CurrentRun.evil_boys = [ReptilePool.fetch("roots_and_toots")]
+	# CurrentRun.evil_boys[0].hp = 1

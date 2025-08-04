@@ -146,6 +146,13 @@ func _on_new_turn() -> void:
 				break
 
 func _on_slave_death(slave_node: SlaveNode, is_loot: bool = true) -> void:
+	if slave_node.held is Enemy:
+		var dude : Enemy = slave_node.held
+		if dude.is_final_boss:
+			$AnimationPlayer.play("win")
+			SignalBus.new_turn.disconnect(_on_new_turn)
+			return
+	
 	if is_loot:
 		for item : Item in slave_node.get_all_items():
 			if item.is_item():
@@ -238,7 +245,8 @@ func _on_good_won() -> void:
 
 func _on_evil_won() -> void:
 	print("Evil won!")
-	
+	SignalBus.new_turn.disconnect(_on_new_turn)
+	$AnimationPlayer.play("fail")
 
 # ====================
 # Debug panel

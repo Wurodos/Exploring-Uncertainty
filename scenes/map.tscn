@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://caaw5385eudd6"]
+[gd_scene load_steps=26 format=3 uid="uid://caaw5385eudd6"]
 
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="1_4xfga"]
 [ext_resource type="Script" uid="uid://bjl8be1ygje44" path="res://scripts/map/map.gd" id="1_blm8a"]
@@ -33,6 +33,12 @@ resource_name = "fog"
 tile_size = Vector2i(128, 128)
 sources/0 = SubResource("TileSetAtlasSource_sq6bu")
 
+[sub_resource type="LabelSettings" id="LabelSettings_4b7dj"]
+font = ExtResource("1_4xfga")
+font_size = 64
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Map" type="Node2D"]
 script = ExtResource("1_blm8a")
 size = 17
@@ -40,6 +46,7 @@ branch_chance = 0.3
 city_rate = 0.08
 cherv_rate = 0.15
 govnov_rate = 0.05
+steps = 300
 room_sprites = Dictionary[int, Texture2D]({
 0: ExtResource("2_p7tei"),
 1: ExtResource("3_c70he"),
@@ -88,6 +95,16 @@ focus_mode = 0
 theme_override_fonts/font = ExtResource("1_4xfga")
 theme_override_font_sizes/font_size = 48
 text = "Бригада"
+
+[node name="Steps" type="Label" parent="Camera2D/UI"]
+layout_mode = 0
+offset_left = 436.0
+offset_right = 717.0
+offset_bottom = 101.0
+text = "200"
+label_settings = SubResource("LabelSettings_4b7dj")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="GovnovWindow" type="Control" parent="Camera2D/UI"]
 anchors_preset = 0

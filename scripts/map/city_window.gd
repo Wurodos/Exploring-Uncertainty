@@ -117,7 +117,7 @@ func _on_close_pressed() -> void:
 	SignalBus.end_encounter.emit()
 
 func _on_show_item_info(item: Item) -> void:
-	if CurrentRun.state != Game.State.Window: return
+	if CurrentRun.state != Game.State.Window or item == null: return
 	_hide_info = false
 	$ItemEntry.visible = true
 	$ItemEntry.apply(item)

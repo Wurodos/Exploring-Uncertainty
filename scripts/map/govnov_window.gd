@@ -21,18 +21,34 @@ func _ready() -> void:
 func _sell(item_node: ItemShop) -> void:
 	_change_value(item_node.cost)
 	CurrentRun.inventory.erase(item_node.held)
+	
 	item_node.queue_free()
 	_update_items()
 
 func _buy_slave(item_node: ItemShop) -> void:
-	# TODO buy slave
+	_change_value(-item_node.cost)
+	var slave_node : SlaveTeamNode = null
+	for slave: Control in $Slaves.get_children():
+		if not slave.visible: 
+			slave_node = slave
+			break
 	
+	slave_node.visible = true
+	slave_node.apply(item_node.held_slave, SlaveTeamNode.Type.Govnov)
+	slave_node.update_healing_cost(heal_multiplier, value)
+	
+	CurrentRun.good_boys.append(item_node.held_slave)
+	
+	item_node.queue_free()
 	_update_items()
 
 
-func _sell_slave(slave_ndoe: SlaveTeamNode) -> void:
-	# TODO sell slave
+func _sell_slave(slave_node: SlaveTeamNode) -> void:
+	print("sold slave with hat " + slave_node.held.hat.u_name)
+	_change_value(slave_node.held.get_cost())
 	
+	CurrentRun.good_boys.erase(slave_node.held)
+	slave_node.visible = false
 	_update_items()
 
 func _change_value(new_value: int) -> void:
@@ -40,10 +56,10 @@ func _change_value(new_value: int) -> void:
 	$Counter/Label.text = str(value)
 
 func _update_items() -> void:
-	#for item_node : ItemShop in $Shop.get_children():
-	#	if item_node.cost > value:
-	#		item_node.toggle(false)
-	#	else: item_node.toggle(true)
+	for item_node : ItemShop in $Shop.get_children():
+		if item_node.cost > value or CurrentRun.good_boys.size() == 3:
+			item_node.toggle(false)
+		else: item_node.toggle(true)
 	
 	for slave_node : SlaveTeamNode in $Slaves.get_children():
 		slave_node.update_healing_cost(heal_multiplier, value)
@@ -72,7 +88,8 @@ func _on_enter_govnov() -> void:
 	for slave in CurrentRun.good_boys:
 		var slave_node : SlaveTeamNode = $Slaves.get_child(i)
 		slave_node.visible = true
-		slave_node.apply(slave, SlaveTeamNode.Type.City)
+		slave_node.apply(slave, SlaveTeamNode.Type.Govnov)
+		slave_node.sell.connect(func(): _sell_slave(slave_node))
 		slave_node.update_healing_cost(heal_multiplier, value)
 		i += 1
 	for j in range(i,3): $Slaves.get_child(j).visible = false
@@ -88,7 +105,14 @@ func _on_enter_govnov() -> void:
 		item_node.sell.connect(_sell)
 		inventory_grid.add_to_grid(item_node)
 	
-	# TODO generate slaves
+	for k in range(3):
+		var slave = SlavePool.fetch("blob")
+		slave.hp = randi_range(1, slave.maxhp)
+		var item_node: ItemShop = item_shop_prefab.instantiate()
+		item_node.apply_slave(slave)
+		item_node.buy.connect(_buy_slave)
+		$Shop.add_child(item_node)
+	
 	
 	_update_items()
 	
@@ -99,12 +123,7 @@ func _on_close_pressed() -> void:
 	SignalBus.end_encounter.emit()
 
 func _on_show_item_info(item: Item) -> void:
-	if CurrentRun.state != Game.State.Window: return
-	_hide_info = false
-	$ItemEntry.visible = true
-	$ItemEntry.apply(item)
+	pass
 
 func _on_hide_item_info() -> void:
-	_hide_info = true
-	await get_tree().create_timer(0.1).timeout
-	if _hide_info: $ItemEntry.visible = false
+	pass

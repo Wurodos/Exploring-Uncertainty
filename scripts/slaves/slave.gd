@@ -48,6 +48,16 @@ func get_item(item_type: Item.Type, trinket_id: int = 1) -> Item:
 			else: return trinket2
 	return weapon
 
+# base_cost = 5 + base_hp/2
+# + costs of items
+# 70%-100% price depending on percentage of health
+
+func get_cost() -> int:
+	var total : int = 5 + base_maxhp / 2
+	for item: Item in [weapon, hat, trinket1, trinket2]:
+		total += item.cost	
+	return floor(total * lerp(0.7, 1.0, (hp / float(maxhp))))
+
 func equip(item: Item, trinket_id: int = 1) -> Item:
 	var old_item: Item
 	match(item.type):

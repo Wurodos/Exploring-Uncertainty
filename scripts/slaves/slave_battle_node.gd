@@ -208,7 +208,13 @@ func execute_intention():
 				Battle.instance.good_team.boys_nodes[held_enemy.intention.target],\
 				held_enemy.intention.amount)
 		
-		
+		Enemy.Intention.Type.DamageTwo:
+			Action.deal_damage(self,\
+				Battle.instance.good_team.boys_nodes[held_enemy.intention.target],\
+				held_enemy.intention.amount)
+			Action.deal_damage(self,\
+				Battle.instance.good_team.boys_nodes[held_enemy.intention.target_second],\
+				held_enemy.intention.amount)
 		
 		Enemy.Intention.Type.DamageMultiple:
 			for slave : SlaveNode in Battle.instance.good_team.boys_nodes:
@@ -243,6 +249,15 @@ func execute_intention():
 			$Intention.visible = false
 			SignalBus.slave_ran.emit(self)
 		
+		
+		Enemy.Intention.Type.SummonStars:
+			var star1 = SlavePool.fetch("starry")
+			var star2 = SlavePool.fetch("starry")
+			
+			team.cull_the_dead()
+			team.add_slave(star1)
+			team.add_slave(star2)
+			
 	
 	held_enemy.intention.extra_effect.call()
 			
@@ -304,13 +319,16 @@ func _decide_intentions() -> void:
 		or held_enemy.intention.type == Enemy.Intention.Type.DamageMultiple:
 		total += power
 	
-	$Intention/Label.text = str(total)
+	if total == 0: $Intention/Label.text = ""
+	else: $Intention/Label.text = str(total)
 	
 	var icon: Texture2D 
 	
 	match(held_enemy.intention.type):
 		Enemy.Intention.Type.DamageSingular: 
 			icon = Gallery.icon_harm_single
+		Enemy.Intention.Type.DamageTwo: 
+			icon = Gallery.icon_harm_two
 		Enemy.Intention.Type.DamageMultiple:
 			icon = Gallery.icon_harm_multiple
 		Enemy.Intention.Type.HealSingle:
@@ -321,19 +339,22 @@ func _decide_intentions() -> void:
 			icon = Gallery.icon_powerup
 		Enemy.Intention.Type.Run:
 			icon = Gallery.icon_run
+		Enemy.Intention.Type.SummonStars:
+			icon = Gallery.icon_summon_stars
 	
 	$Intention/TargetTop.visible = false
 	$Intention/TargetMiddle.visible = false
 	$Intention/TargetBottom.visible = false
 	
-	match(held_enemy.intention.target):
-		Enemy.Intention.Target.Up: $Intention/TargetTop.visible = true
-		Enemy.Intention.Target.Middle: $Intention/TargetMiddle.visible = true
-		Enemy.Intention.Target.Bottom: $Intention/TargetBottom.visible = true
-		Enemy.Intention.Target.All:
-			$Intention/TargetTop.visible = true
-			$Intention/TargetMiddle.visible = true
-			$Intention/TargetBottom.visible = true
+	for target in [held_enemy.intention.target, held_enemy.intention.target_second]:
+		match(target):
+			Enemy.Intention.Target.Up: $Intention/TargetTop.visible = true
+			Enemy.Intention.Target.Middle: $Intention/TargetMiddle.visible = true
+			Enemy.Intention.Target.Bottom: $Intention/TargetBottom.visible = true
+			Enemy.Intention.Target.All:
+				$Intention/TargetTop.visible = true
+				$Intention/TargetMiddle.visible = true
+				$Intention/TargetBottom.visible = true
 	
 	
 	$Intention/Icon.texture = icon

@@ -40,7 +40,6 @@ func decide_intention(node: SlaveNode) -> void:
 		return
 	
 	var r = randi_range(0, 2)
-	r = 1
 	match(r):
 		0:
 			intention = Intention.new(Intention.Type.HealSingle, randi_range(5,10))

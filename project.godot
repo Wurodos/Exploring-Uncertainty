@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Exploring Uncertainty"
-run/main_scene="uid://cgylw3j3sk4da"
+run/main_scene="uid://dyrtd13gpi41u"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://icon.svg"
@@ -24,6 +24,7 @@ ItemPool="*res://scripts/items/item_pool.gd"
 SlavePool="*res://scripts/slaves/slave_pool.gd"
 Action="*res://scripts/battle/action.gd"
 Gallery="*res://scripts/utils/gallery.gd"
+ReptilePool="*res://scripts/reptiles/reptile_pool.gd"
 
 [input]
 

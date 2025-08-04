@@ -2,11 +2,13 @@ extends Control
 
 class_name SlaveTeamNode
 
-enum Type {Brigade, City}
+enum Type {Brigade, City, Govnov}
 
 var held: Slave
 var type: Type
 static var selected: SlaveTeamNode
+
+signal sell
 
 func apply(slave: Slave, type: Type, show_hp: bool = true):
 	held = slave
@@ -26,6 +28,12 @@ func apply(slave: Slave, type: Type, show_hp: bool = true):
 			$Undress.text = "Лечить"
 			if not $Undress.is_connected("pressed", _on_heal_pressed):
 				$Undress.pressed.connect(_on_heal_pressed)
+		Type.Govnov:
+			$Sell.visible = true
+			$Sell.text = "Продать\n(%d)" % held.get_cost()
+			$Undress.text = "Лечить"
+			if not $Undress.is_connected("pressed", _on_govnov_heal_pressed):
+				$Undress.pressed.connect(_on_govnov_heal_pressed)
 	
 	if show_hp:
 		$HPBar.value = (slave.hp / float(slave.maxhp)) * 100
@@ -66,6 +74,12 @@ func _on_heal_pressed() -> void:
 	
 	SignalBus.city_heal.emit()
 
+func _on_govnov_heal_pressed() -> void:
+	held.hp = held.maxhp
+	$HPBar.value = (held.hp / float(held.maxhp)) * 100
+	$HPBar/Label.text = str(held.hp) + "/" + str(held.maxhp)
+	
+	SignalBus.govnov_heal.emit()
 
 func _on_mouse_entered() -> void:
 	selected = self
@@ -75,3 +89,7 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	selected = null
 	print("unselected")
+
+
+func _on_sell_pressed() -> void:
+	sell.emit()

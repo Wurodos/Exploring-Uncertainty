@@ -15,18 +15,13 @@ func _ready() -> void:
 	SignalBus.battle_encounter.connect(_on_battle_encounter)
 	SignalBus.end_battle.connect(_on_end_battle)
 	
-	CurrentRun.good_boys = [SlavePool.fetch("blob"), SlavePool.fetch("blob"), SlavePool.fetch("blob")]
-	CurrentRun.good_boys[0].equip(ItemPool.fetch("crown"))
-	CurrentRun.good_boys[0].equip(ItemPool.fetch("heart_lock"))
-	CurrentRun.good_boys[1].equip(ItemPool.fetch("die"), 2)
-	CurrentRun.good_boys[1].equip(ItemPool.fetch("pipe"))
-	CurrentRun.good_boys[1].equip(ItemPool.fetch("alcohol"))
-	
-	
-	CurrentRun.inventory = [
-		ItemPool.fetch("die"),
-		ItemPool.fetch("die")
+	CurrentRun.good_boys = [SlavePool.fetch("blob"), SlavePool.fetch("blob"),
+	  SlavePool.fetch("blob")
 	]
+	
+	#CurrentRun.good_boys[0].hp = 1
+	#CurrentRun.good_boys[1].hp = 1
+	#CurrentRun.good_boys[2].hp = 1
 	
 	map_node = map_scene.instantiate()
 	add_child(map_node)

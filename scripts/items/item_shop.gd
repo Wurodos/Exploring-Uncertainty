@@ -3,6 +3,8 @@ extends TextureRect
 class_name ItemShop
 
 var held: Item
+var held_slave: Slave
+
 var cost: int
 
 var is_sell: bool
@@ -18,6 +20,16 @@ func apply(item: Item, is_sell: bool) -> void:
 
 	$Cost.text = str(cost)
 	texture = held.texture
+
+func apply_slave(slave: Slave) -> void:
+	held_slave = slave
+	self.is_sell = false
+	self.cost = slave.get_cost()
+	
+	$Cost.text = "%d\n\n%d/%d" % [cost, slave.hp, slave.maxhp]
+	texture = slave.texture
+	
+	
 
 func toggle(active: bool) -> void:
 	$Clickable.disabled = not active 

@@ -40,6 +40,8 @@ const _dcol = [0,0,+1,-1]
 @export var city_rate: float
 @export var cherv_rate: float
 @export var govnov_rate: float
+@export var steps: int
+
 
 @export var room_sprites : Dictionary[Room.Type, Texture2D]
 
@@ -52,8 +54,10 @@ var party_col: int
 var is_encountering: bool = false
 var since_last_battle : int = 0
 
+
 func _ready() -> void:
 	$Camera2D.make_current()
+	$Camera2D/UI/Steps.text = str(steps)
 	
 func _process(delta: float) -> void:
 	if CurrentRun.state != Game.State.Map: return
@@ -81,9 +85,12 @@ func move_player(direction: Direction) -> void:
 	
 	is_encountering = true
 	_explore(party_row, party_col)
+	$Camera2D/UI/Steps.text = str(steps)
 	if room.type != Room.Type.Purged:
 		await get_tree().create_timer(0.3).timeout		
 	is_encountering = false
+	
+	steps -= 1
 	
 	encounter(room)
 	
@@ -94,7 +101,6 @@ func move_player(direction: Direction) -> void:
 func encounter(room: Room) -> void:
 	match(room.type):
 		Room.Type.Empty:
-			return
 			if since_last_battle >= randi_range(0,3):
 				CurrentRun.arrange_evil_team()
 				SignalBus.battle_encounter.emit()
@@ -107,6 +113,9 @@ func encounter(room: Room) -> void:
 		Room.Type.Cherv:
 			since_last_battle = 0
 			CurrentRun.arrange_difficult()
+			SignalBus.battle_encounter.emit()
+		Room.Type.Reptile:
+			CurrentRun.arrange_boss()
 			SignalBus.battle_encounter.emit()
 
 func room_at(row: int, col: int) -> Room:
@@ -139,6 +148,7 @@ func generate_floor() -> void:
 		 	direction, randi_range(size/4, size/2))
 	
 	_add_structures()
+	_add_boss()
 	_initialize_fog()
 	_explore(party_row, party_col)
 
@@ -198,13 +208,31 @@ func _add_structures() -> void:
 				room.type = Room.Type.Govnov
 		room.sprite.texture = room_sprites[room.type]
 
+
+
+func _add_boss() -> void:
+	var all_coords: Array[Vector2i] = []
+	for row in range(-1, size+2):
+		for col in range(-1, size+2):
+			if not room_at(row, col) and _is_adjacent_to(row, col, Room.Type.Any):
+				if max(abs(row - party_row), abs(col - party_col)) > 4:
+					all_coords.append(Vector2i(row, col))
+	
+	var coords : Vector2i = all_coords.pick_random()
+	#for coords in all_coords:
+	var room = add_room(coords.x, coords.y)
+	room.type = Room.Type.Reptile
+	room.sprite.texture = room_sprites[room.type]
+		
+
+		
 func _is_adjacent_to(row: int, col: int, type: Room.Type) -> bool:
 	for direction in [Direction.Up,
 					Direction.Down,
 					Direction.Right,
 					Direction.Left]:
 			var room = room_at(row + _drow[direction], col + _dcol[direction])
-			if room and room.type == type: return true
+			if room and (room.type == type or type == Room.Type.Any): return true
 	return false
 
 func _initialize_fog() -> void:

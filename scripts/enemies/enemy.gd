@@ -3,17 +3,20 @@ extends Slave
 class_name Enemy
 
 class Intention:
-	enum Type { DamageSingular, DamageMultiple,
-	 PowerUp, HealSingle, HealMultiple, Run }
-	enum Target { Middle, Bottom, Up, All }
+	enum Type { DamageSingular, DamageMultiple, DamageTwo,
+	 PowerUp, HealSingle, HealMultiple, Run, SummonStars }
+	enum Target { Middle, Bottom, Up, All, Two, None }
 		
 	var type: Type
 	var amount: int
 	var target: Target
+	var target_second: Target
 	var extra_effect: Callable
 	
-	func _init(type: Type, amount: int) -> void:
+	func _init(type: Type, amount: int = 0) -> void:
 		self.type = type
+		self.target = Target.None
+		self.target_second = Target.None
 		self.amount = amount
 		self.extra_effect = func() : return
 	
@@ -24,6 +27,7 @@ class Intention:
 @export_multiline var info_4 : String
 
 var intention: Intention
+var is_final_boss: bool = false
 
 func _init() -> void:
 	super._init()
@@ -48,6 +52,9 @@ func _get_random_good_target() -> int:
 			possible.append(i)
 		i += 1	
 	return possible.pick_random()
+
+func _get_good_target(score_func: Callable):
+	pass
 
 func _get_random_evil_target(is_self_included: bool = true) -> int:
 	var possible : Array[int] = []

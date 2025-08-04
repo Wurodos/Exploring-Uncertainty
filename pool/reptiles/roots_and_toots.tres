@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bqcuoqym5hlwm"]
+
+[ext_resource type="Script" uid="uid://cca7erkjq2uhc" path="res://scripts/reptiles/roots_and_toots.gd" id="1_53ir3"]
+[ext_resource type="Texture2D" uid="uid://cls0fcnjw5wj4" path="res://images/reptiles/roots_and_toots.png" id="2_rb82r"]
+
+[resource]
+script = ExtResource("1_53ir3")
+info_1 = "ВЕСЕЛОЕ ВРЕМЯ НАСТУПАЕТ С БРАТВОЙ ЗВЕЗДОНУТЫХ"
+info_2 = "ЗАВТРАК, УЖИН И ОБЕД МЕРТВЫМИ МУЖИЧКАМИ"
+info_3 = "ЛОВИТ В КАПКАН (ОДНОГО, ЗАМЕДЛЯЕТ)"
+info_4 = "ВЕРШКИ (ОДИН) и КОРЕШКИ (ДРУГОЙ)"
+u_name = &"roots_and_toots"
+base_maxhp = 150
+base_speed = 0
+texture = ExtResource("2_rb82r")
+metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

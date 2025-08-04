@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ot7y20rg1fqo"]
+[gd_scene load_steps=19 format=3 uid="uid://ot7y20rg1fqo"]
 
 [ext_resource type="Texture2D" uid="uid://bvt0n20v88f7o" path="res://images/slaves/blob.png" id="1_fhcuj"]
 [ext_resource type="Script" uid="uid://de24o14tl4lyy" path="res://scripts/slaves/slave_battle_node.gd" id="1_kr451"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://18md1xgdubcr" path="res://images/buffs/blasphemy.png" id="5_gppif"]
 [ext_resource type="Texture2D" uid="uid://6225b313atq2" path="res://images/icons/top.png" id="5_lpdx8"]
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="5_ttqg8"]
+[ext_resource type="Texture2D" uid="uid://dxa7wr6gumrrb" path="res://images/buffs/anvil.png" id="6_8sljb"]
 [ext_resource type="Texture2D" uid="uid://dhmqbwahk027p" path="res://images/icons/middle.png" id="6_gppif"]
 [ext_resource type="Texture2D" uid="uid://orgdll7utn86" path="res://images/icons/bottom.png" id="7_8sljb"]
 
@@ -117,9 +118,37 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(0, -63), Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_8sljb"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Items:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lpdx8"]
 _data = {
 &"RESET": SubResource("Animation_lpdx8"),
+&"hit": SubResource("Animation_8sljb"),
 &"idle": SubResource("Animation_gppif"),
 &"jump": SubResource("Animation_eb1g8")
 }
@@ -220,6 +249,12 @@ self_modulate = Color(1, 1, 1, 0.462745)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_gppif")
 
+[node name="anvil" type="Sprite2D" parent="Buffs"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.462745)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_8sljb")
+
 [node name="Intention" type="Node2D" parent="."]
 z_index = 1
 position = Vector2(17.3333, -72.6667)
@@ -264,6 +299,14 @@ offset_top = 63.3333
 offset_right = 84.3333
 offset_bottom = 81.3333
 alignment = 1
+
+[node name="AnimationSprites" type="Node" parent="."]
+
+[node name="Hit" type="Sprite2D" parent="AnimationSprites"]
+
+[node name="Heal" type="Sprite2D" parent="AnimationSprites"]
+
+[node name="Powerup" type="Sprite2D" parent="AnimationSprites"]
 
 [connection signal="button_down" from="ClickableArea" to="." method="_on_clickable_area_button_down"]
 [connection signal="mouse_entered" from="ClickableArea" to="." method="_on_clickable_area_mouse_entered"]

@@ -9,9 +9,13 @@ class_name ItemEntry
 @onready var all_targets: Control = $All
 @onready var self_target: Control = $Self
 
+
 func apply(item: Item) -> void:
 	item_name.text = item.name
 	item_desc.text = item.desc
+	
+	$ExtraHP.visible = false
+	$ExtraSpeed.visible = false
 	
 	single_target.visible = false
 	all_targets.visible = false
@@ -32,3 +36,11 @@ func apply(item: Item) -> void:
 			color = Color(0.459, 0.596, 1.0)
 		Item.Type.Trinket:
 			color = Color(0.459, 1.0, 0.51)
+	
+	if item.extra_hp != 0:
+		$ExtraHP.visible = true
+		$ExtraHP/Label.text = str(item.extra_hp)
+	
+	if item.extra_speed != 0:
+		$ExtraSpeed.visible = true
+		$ExtraSpeed/Label.text = str(item.extra_speed)
