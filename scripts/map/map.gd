@@ -85,14 +85,25 @@ func move_player(direction: Direction) -> void:
 	
 	is_encountering = true
 	_explore(party_row, party_col)
-	$Camera2D/UI/Steps.text = str(steps)
-	if room.type != Room.Type.Purged:
-		await get_tree().create_timer(0.3).timeout		
-	is_encountering = false
 	
-	steps -= 1
+	
+	if steps > 0: 
+		steps -= 1
+		$Camera2D/UI/Steps.text = str(steps)
+	else:
+		for slave: Slave in CurrentRun.good_boys:
+			slave.hp -= 1
+		CurrentRun.good_boys = CurrentRun.good_boys.filter(func(slave): return slave.hp > 0)
+		SignalBus.refresh.emit()
+		if CurrentRun.good_boys.size() == 0:
+			get_tree().quit()
+	
+	
 	
 	encounter(room)
+	if room.type != Room.Type.Purged:
+		await get_tree().create_timer(0.3).timeout	
+	is_encountering = false	
 	
 	if room.type != Room.Type.City:
 		room.type = Room.Type.Purged
@@ -103,6 +114,8 @@ func encounter(room: Room) -> void:
 		Room.Type.Empty:
 			if since_last_battle >= randi_range(0,3):
 				CurrentRun.arrange_evil_team()
+				$AnimationPlayer.play("battle_start")
+				await $AnimationPlayer.animation_finished
 				SignalBus.battle_encounter.emit()
 				since_last_battle = 0
 			since_last_battle = since_last_battle + 1
@@ -112,11 +125,17 @@ func encounter(room: Room) -> void:
 			SignalBus.enter_govnov.emit()
 		Room.Type.Cherv:
 			since_last_battle = 0
+			CurrentRun.discounts += 1
 			CurrentRun.arrange_difficult()
+			$AnimationPlayer.play("battle_start")
+			await $AnimationPlayer.animation_finished
 			SignalBus.battle_encounter.emit()
 		Room.Type.Reptile:
 			CurrentRun.arrange_boss()
+			$AnimationPlayer.play("battle_start")
+			await $AnimationPlayer.animation_finished
 			SignalBus.battle_encounter.emit()
+	$AnimationPlayer.play("RESET")
 
 func room_at(row: int, col: int) -> Room:
 	return room_parent.get_node_or_null(str(row) + "_" + str(col))

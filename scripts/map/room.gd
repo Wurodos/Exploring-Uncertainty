@@ -9,6 +9,8 @@ var col: int
 var visited: bool = false
 var type: Type
 
+var flag: bool = false
+
 @onready var sprite : Sprite2D = $Sprite
 
 # =======

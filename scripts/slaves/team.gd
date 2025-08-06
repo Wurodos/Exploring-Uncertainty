@@ -54,3 +54,4 @@ func add_slave(slave: Slave) -> void:
 
 func _on_slave_death(slave_node: SlaveNode) -> void:
 	boys.erase(slave_node.held)
+	

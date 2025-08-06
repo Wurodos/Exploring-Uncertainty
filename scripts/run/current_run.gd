@@ -4,6 +4,8 @@ var good_boys: Array[Slave] = []
 var evil_boys: Array[Slave] = []
 var inventory: Array[Item] = []
 
+var discounts : int = 0
+
 var state: Game.State = Game.State.Map
 
 # deck will consist of 'cards' = enemy slaves or empty slots
@@ -55,8 +57,8 @@ func _prepare_deck() -> void:
 		var enemy = SlavePool.fetch("cherv")
 		enemy.equip(weapons.pop_back())
 		enemy.equip(hats.pop_back())
-		enemy.equip(trinkets.pop_back())
-		enemy.equip(trinkets.pop_back())
+		enemy.equip(trinkets.pop_back(), 1)
+		enemy.equip(trinkets.pop_back(), 2)
 		
 		evil_deck.append(enemy)
 	for i in range(8):
@@ -95,8 +97,8 @@ func _prepare_archive() -> void:
 		
 		slave.equip(weapons.pop_back())
 		slave.equip(hats.pop_back())
-		slave.equip(trinkets.pop_back())
-		slave.equip(trinkets.pop_back())
+		slave.equip(trinkets.pop_back(), 1)
+		slave.equip(trinkets.pop_back(), 2)
 	
 	evil_archive.shuffle()
 

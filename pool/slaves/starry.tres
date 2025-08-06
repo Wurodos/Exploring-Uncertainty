@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_ry55x")
-info_1 = "ПОЛУЧАЕТ 1 МОЩИ И ЩИТ 2 ХОДА"
+info_1 = "ПОЛУЧАЕТ МОЩЬ И ЩИТ"
 info_2 = "ПРИЧИНЯЕТ 5-8 ВРЕДА"
 info_3 = ""
 info_4 = ""

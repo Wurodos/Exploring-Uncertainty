@@ -15,6 +15,7 @@ func _ready() -> void:
 	SignalBus.mouse_up.connect(_on_mouse_up)
 	SignalBus.end_battle.connect(_on_battle_end)
 	SignalBus.end_encounter.connect(_refresh_slaves)
+	SignalBus.refresh.connect(_refresh_slaves)
 	
 	
 	for child : Control in $Slaves.get_children():

@@ -7,6 +7,8 @@ extends Node
 signal start_battle
 signal end_encounter
 
+signal refresh
+
 # ====================
 # Input
 # ====================

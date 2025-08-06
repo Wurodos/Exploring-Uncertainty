@@ -4,6 +4,7 @@ class_name CityWindow
 
 var current_city: Room
 var value: int
+
 var _hide_info: bool = false
 
 const item_shop_prefab = preload("res://prefabs/items/item_shop.tscn")
@@ -50,16 +51,20 @@ func _update_items() -> void:
 		else: item_node.toggle(true)
 	
 	for slave_node : SlaveTeamNode in $Slaves.get_children():
-		slave_node.update_healing_cost(current_city.heal_used, value)
+		if current_city.flag:
+			slave_node.update_healing_cost(current_city.heal_used, value, 5)
+		else:
+			slave_node.update_healing_cost(current_city.heal_used, value, 10)
 
 
 func _on_heal() -> void:
 	
-	_change_value(-current_city.heal_used * 10)
+	if current_city.flag:
+		_change_value(-current_city.heal_used * 5)
+	else:
+		_change_value(-current_city.heal_used * 10)
 	
 	current_city.heal_used += 1
-	for slave_node: SlaveTeamNode in $Slaves.get_children():
-		slave_node.update_healing_cost(current_city.heal_used, value)
 	
 	_update_items()
 
@@ -71,15 +76,6 @@ func _on_enter_city(city: Room) -> void:
 	CurrentRun.state = Game.State.Window
 	visible = true
 	current_city = city
-	
-	var i = 0
-	for slave in CurrentRun.good_boys:
-		var slave_node : SlaveTeamNode = $Slaves.get_child(i)
-		slave_node.visible = true
-		slave_node.apply(slave, SlaveTeamNode.Type.City)
-		slave_node.update_healing_cost(city.heal_used, value)
-		i += 1
-	for j in range(i,3): $Slaves.get_child(j).visible = false
 	
 	while $Shop.get_child_count() > 0:
 		$Shop.get_child(0).free()
@@ -100,6 +96,12 @@ func _on_enter_city(city: Room) -> void:
 			item.cost = j * 4
 			city.items.append(item)
 	
+	if not current_city.flag and CurrentRun.discounts > 0:
+		CurrentRun.discounts -= 1
+		current_city.flag = true
+		for item in city.items: item.cost /= 2
+		
+	
 	var j = 0
 	for item in city.items:
 		var item_node: ItemShop = item_shop_prefab.instantiate()
@@ -107,6 +109,15 @@ func _on_enter_city(city: Room) -> void:
 		item_node.buy.connect(_buy)
 		$Shop.add_child(item_node)
 		j += 1
+	
+	var i = 0
+	for slave in CurrentRun.good_boys:
+		var slave_node : SlaveTeamNode = $Slaves.get_child(i)
+		slave_node.visible = true
+		slave_node.apply(slave, SlaveTeamNode.Type.City)
+		i += 1
+	for k in range(i,3): $Slaves.get_child(k).visible = false
+	
 	
 	_update_items()
 	

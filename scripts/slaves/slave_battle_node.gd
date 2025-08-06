@@ -12,6 +12,7 @@ signal attacked(victim: SlaveNode)
 @onready var line_end: Vector2 = $CircleSelect/LineEnd.global_position
 @onready var ellipse: Sprite2D = $CircleSelect
 @onready var stat_parent: Control = $Stats
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 const item_prefab = preload("res://prefabs/items/item.tscn")
 const stat_entry_prefab = preload("res://prefabs/battle/stat_entry.tscn")
@@ -37,6 +38,14 @@ func _ready() -> void:
 	if held is Enemy:
 		SignalBus.new_round.connect(_decide_intentions)
 	set_hp(0)
+
+func toggle_arrow(on: bool) -> void:
+	if on:
+		$Arrow.visible = true
+		$ArrowAnimation.play("bounce")
+	else:
+		$Arrow.visible = false
+		$ArrowAnimation.play("RESET")
 
 func remove_item(u_name: StringName) -> void:
 	var i = 0
@@ -93,6 +102,10 @@ func set_power(new_val: int, is_delta: bool = true):
 		power += new_val
 	else: power = new_val
 	add_stat("power", Gallery.icon_power, power)
+	
+	animation_player.play("power_up")
+	await animation_player.animation_finished
+	animation_player.play("idle")
 
 func set_luck(new_val: int, is_delta: bool = true):
 	if is_delta:
@@ -181,6 +194,7 @@ func support(ally: SlaveNode):
 	_on_end_turn()
 
 func start_turn() -> void:
+	toggle_arrow(true)
 	turn_started.emit()
 
 func ticker_down_buffs() -> void:
@@ -299,6 +313,7 @@ func _on_clickable_area_button_down() -> void:
 
 func _on_end_turn() -> void:
 	turn_ended.emit()
+	toggle_arrow(false)
 	
 	await $AnimationPlayer.animation_finished
 	$AnimationPlayer.play("idle")

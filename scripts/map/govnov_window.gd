@@ -5,12 +5,14 @@ class_name GovnovWindow
 var heal_multiplier: int = 1
 var value: int
 var _hide_info: bool = false
+var _transaction_made: bool = false
 
 const item_shop_prefab = preload("res://prefabs/items/item_shop.tscn")
 
 @onready var inventory_grid: Grid = $InventoryGrid
 
 func _ready() -> void:
+	$Close.text = "!"
 	visible = false
 	
 	SignalBus.enter_govnov.connect(_on_enter_govnov)
@@ -26,6 +28,9 @@ func _sell(item_node: ItemShop) -> void:
 	_update_items()
 
 func _buy_slave(item_node: ItemShop) -> void:
+	$Close.text = "X"
+	_transaction_made = true
+	
 	_change_value(-item_node.cost)
 	var slave_node : SlaveTeamNode = null
 	for slave: Control in $Slaves.get_children():
@@ -35,7 +40,7 @@ func _buy_slave(item_node: ItemShop) -> void:
 	
 	slave_node.visible = true
 	slave_node.apply(item_node.held_slave, SlaveTeamNode.Type.Govnov)
-	slave_node.update_healing_cost(heal_multiplier, value)
+	slave_node.update_healing_cost(heal_multiplier, value, 10)
 	
 	CurrentRun.good_boys.append(item_node.held_slave)
 	
@@ -62,16 +67,17 @@ func _update_items() -> void:
 		else: item_node.toggle(true)
 	
 	for slave_node : SlaveTeamNode in $Slaves.get_children():
-		slave_node.update_healing_cost(heal_multiplier, value)
+		slave_node.update_healing_cost(heal_multiplier, value, 10)
 
 
 func _on_heal() -> void:
-	
+	$Close.text = "X"
 	_change_value(-heal_multiplier * 10)
+	_transaction_made = true
 	
 	heal_multiplier += 1
 	for slave_node: SlaveTeamNode in $Slaves.get_children():
-		slave_node.update_healing_cost(heal_multiplier, value)
+		slave_node.update_healing_cost(heal_multiplier, value, 10)
 	
 	_update_items()
 
@@ -90,7 +96,7 @@ func _on_enter_govnov() -> void:
 		slave_node.visible = true
 		slave_node.apply(slave, SlaveTeamNode.Type.Govnov)
 		slave_node.sell.connect(func(): _sell_slave(slave_node))
-		slave_node.update_healing_cost(heal_multiplier, value)
+		slave_node.update_healing_cost(heal_multiplier, value, 10)
 		i += 1
 	for j in range(i,3): $Slaves.get_child(j).visible = false
 	
@@ -107,6 +113,9 @@ func _on_enter_govnov() -> void:
 	
 	for k in range(3):
 		var slave = SlavePool.fetch("blob")
+		slave.base_maxhp += randi_range(-10, 10) 
+		slave.maxhp = slave.base_maxhp
+		
 		slave.hp = randi_range(1, slave.maxhp)
 		var item_node: ItemShop = item_shop_prefab.instantiate()
 		item_node.apply_slave(slave)
@@ -119,7 +128,14 @@ func _on_enter_govnov() -> void:
 
 func _on_close_pressed() -> void:
 	visible = false
-	CurrentRun.state = Game.State.Map
+	
+	
+	if _transaction_made:
+		CurrentRun.state = Game.State.Map
+	else:
+		CurrentRun.arrange_difficult()
+		SignalBus.battle_encounter.emit()
+	
 	SignalBus.end_encounter.emit()
 
 func _on_show_item_info(item: Item) -> void:

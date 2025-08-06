@@ -10,3 +10,5 @@ script = ExtResource("1_uwrxv")
 
 [node name="InputManager" type="Node" parent="."]
 script = ExtResource("2_yqjtg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

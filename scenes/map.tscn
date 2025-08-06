@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://caaw5385eudd6"]
+[gd_scene load_steps=32 format=3 uid="uid://caaw5385eudd6"]
 
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="1_4xfga"]
 [ext_resource type="Script" uid="uid://bjl8be1ygje44" path="res://scripts/map/map.gd" id="1_blm8a"]
@@ -23,6 +23,43 @@
 [ext_resource type="Texture2D" uid="uid://bs1oxtclo4qgp" path="res://images/icons/coin.png" id="14_6k6j1"]
 [ext_resource type="LabelSettings" uid="uid://34c71nyrmk01" path="res://text/labelsettings/item_name.tres" id="15_m335s"]
 
+[sub_resource type="Animation" id="Animation_5u2yt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D/UI/Fade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_y2ir2"]
+resource_name = "battle_start"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D/UI/Fade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_30iet"]
+_data = {
+&"RESET": SubResource("Animation_5u2yt"),
+&"battle_start": SubResource("Animation_y2ir2")
+}
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sq6bu"]
 texture = ExtResource("8_m335s")
 texture_region_size = Vector2i(128, 128)
@@ -32,6 +69,44 @@ texture_region_size = Vector2i(128, 128)
 resource_name = "fog"
 tile_size = Vector2i(128, 128)
 sources/0 = SubResource("TileSetAtlasSource_sq6bu")
+
+[sub_resource type="Animation" id="Animation_2cfcp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4b7dj"]
+resource_name = "fog"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.650128, 0.650128, 0.650128, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y2ir2"]
+_data = {
+&"RESET": SubResource("Animation_2cfcp"),
+&"fog": SubResource("Animation_4b7dj")
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_4b7dj"]
 font = ExtResource("1_4xfga")
@@ -56,6 +131,11 @@ room_sprites = Dictionary[int, Texture2D]({
 5: ExtResource("7_sq6bu")
 })
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_30iet")
+}
+
 [node name="World" type="Node2D" parent="."]
 
 [node name="Rooms" type="Node2D" parent="World"]
@@ -71,6 +151,10 @@ position = Vector2(-64, -64)
 tile_set = SubResource("TileSet_6k6j1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="World/Fog"]
+libraries = {
+&"": SubResource("AnimationLibrary_y2ir2")
+}
+autoplay = "fog"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_blm8a")
@@ -453,6 +537,15 @@ focus_mode = 0
 theme_override_fonts/font = ExtResource("1_4xfga")
 theme_override_font_sizes/font_size = 64
 text = "X"
+
+[node name="Fade" type="ColorRect" parent="Camera2D/UI"]
+layout_mode = 0
+offset_left = -303.0
+offset_top = -165.0
+offset_right = 1472.0
+offset_bottom = 743.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
 
 [connection signal="pressed" from="Camera2D/UI/ShowTeam" to="Camera2D/UI/TeamWindow" method="_on_show_team_pressed"]
 [connection signal="pressed" from="Camera2D/UI/GovnovWindow/Close" to="Camera2D/UI/GovnovWindow" method="_on_close_pressed"]

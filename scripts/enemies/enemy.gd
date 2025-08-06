@@ -47,7 +47,7 @@ func decide_intention(node: SlaveNode) -> void:
 func _get_random_good_target() -> int:
 	var possible : Array[int] = []
 	var i = 0
-	for slave : Slave in Battle.instance.good_team.boys:
+	for slave : Slave in CurrentRun.good_boys:
 		if slave.is_alive:
 			possible.append(i)
 		i += 1	
@@ -59,7 +59,7 @@ func _get_good_target(score_func: Callable):
 func _get_random_evil_target(is_self_included: bool = true) -> int:
 	var possible : Array[int] = []
 	var i = 0
-	for slave : Slave in Battle.instance.evil_team.boys:
+	for slave : Slave in CurrentRun.evil_boys:
 		if is_self_included and slave == self:
 			i += 1
 			continue
@@ -70,7 +70,7 @@ func _get_random_evil_target(is_self_included: bool = true) -> int:
 
 func _get_self_target() -> int:
 	var i = 0
-	for slave : Slave in Battle.instance.evil_team.boys:
+	for slave : Slave in CurrentRun.evil_boys:
 		if slave == self:
 			return i
 		i += 1

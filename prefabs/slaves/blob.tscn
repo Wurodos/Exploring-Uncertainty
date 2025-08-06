@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ot7y20rg1fqo"]
+[gd_scene load_steps=30 format=3 uid="uid://ot7y20rg1fqo"]
 
 [ext_resource type="Texture2D" uid="uid://bvt0n20v88f7o" path="res://images/slaves/blob.png" id="1_fhcuj"]
 [ext_resource type="Script" uid="uid://de24o14tl4lyy" path="res://scripts/slaves/slave_battle_node.gd" id="1_kr451"]
@@ -10,6 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://dxa7wr6gumrrb" path="res://images/buffs/anvil.png" id="6_8sljb"]
 [ext_resource type="Texture2D" uid="uid://dhmqbwahk027p" path="res://images/icons/middle.png" id="6_gppif"]
 [ext_resource type="Texture2D" uid="uid://orgdll7utn86" path="res://images/icons/bottom.png" id="7_8sljb"]
+[ext_resource type="Texture2D" uid="uid://ctm4vajohb528" path="res://images/shapes/arrow.png" id="11_5t34c"]
+[ext_resource type="Texture2D" uid="uid://ds35lotmqbcya" path="res://images/icons/harm.png" id="11_7y33p"]
+[ext_resource type="Texture2D" uid="uid://bsxa2pqrugam1" path="res://images/icons/heal.png" id="12_82wb0"]
+[ext_resource type="Texture2D" uid="uid://hlcx8brhdh8g" path="res://images/icons/power_up.png" id="13_4thmk"]
 
 [sub_resource type="Animation" id="Animation_lpdx8"]
 length = 0.001
@@ -61,6 +65,146 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimationSprites/Hit:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AnimationSprites/Heal:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AnimationSprites/Heal:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AnimationSprites/Powerup:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AnimationSprites/Powerup:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(16, 16)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("AnimationSprites/Label:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_4thmk"]
+resource_name = "healed"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationSprites/Heal:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.35, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.3, 0.3), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationSprites/Heal:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_8sljb"]
+resource_name = "hit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-40, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Items:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-40, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationSprites/Hit:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.2, 0.2), Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_gppif"]
 resource_name = "idle"
@@ -105,6 +249,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_eb1g8"]
 resource_name = "jump"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -112,45 +257,127 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
+"times": PackedFloat32Array(0, 0.25, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -63), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_8sljb"]
-resource_name = "hit"
+[sub_resource type="Animation" id="Animation_82wb0"]
+resource_name = "power_up"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:position")
-tracks/0/interp = 1
+tracks/0/path = NodePath("AnimationSprites/Powerup:scale")
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": []
+"values": [Vector2(1e-05, 1e-05), Vector2(0.2, 0.2), Vector2(1e-05, 1e-05)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Items:position")
+tracks/1/path = NodePath("AnimationSprites/Powerup:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": []
+"values": [Vector2(16, 16), Vector2(-33.3333, -33.3333)]
+}
+
+[sub_resource type="Animation" id="Animation_5t34c"]
+resource_name = "crit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationSprites/Label:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(2, 2), Vector2(2, 2), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-40, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Items:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-40, 0), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lpdx8"]
 _data = {
 &"RESET": SubResource("Animation_lpdx8"),
+&"crit": SubResource("Animation_5t34c"),
+&"healed": SubResource("Animation_4thmk"),
 &"hit": SubResource("Animation_8sljb"),
 &"idle": SubResource("Animation_gppif"),
-&"jump": SubResource("Animation_eb1g8")
+&"jump": SubResource("Animation_eb1g8"),
+&"power_up": SubResource("Animation_82wb0")
+}
+
+[sub_resource type="Animation" id="Animation_erpc0"]
+resource_name = "bounce"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(102, -28.6667), Vector2(54.6667, -8)]
+}
+
+[sub_resource type="Animation" id="Animation_e010w"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(70.6667, -23.3333)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bl030"]
+_data = {
+&"RESET": SubResource("Animation_e010w"),
+&"bounce": SubResource("Animation_erpc0")
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7i15"]
@@ -173,6 +400,13 @@ font_size = 40
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_4thmk"]
+font = ExtResource("5_ttqg8")
+font_size = 32
+font_color = Color(1, 0, 0, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Blob" type="Node2D"]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_kr451")
@@ -182,6 +416,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_lpdx8")
 }
 autoplay = "idle"
+
+[node name="ArrowAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Arrow")
+libraries = {
+&"": SubResource("AnimationLibrary_bl030")
+}
 
 [node name="CircleSelect" type="Sprite2D" parent="."]
 visible = false
@@ -300,13 +540,47 @@ offset_right = 84.3333
 offset_bottom = 81.3333
 alignment = 1
 
-[node name="AnimationSprites" type="Node" parent="."]
+[node name="Arrow" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(70.6667, -23.3333)
+rotation = 1.16124
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("11_5t34c")
+
+[node name="AnimationSprites" type="Node2D" parent="."]
 
 [node name="Hit" type="Sprite2D" parent="AnimationSprites"]
+position = Vector2(18, 3)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("11_7y33p")
 
 [node name="Heal" type="Sprite2D" parent="AnimationSprites"]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("12_82wb0")
 
 [node name="Powerup" type="Sprite2D" parent="AnimationSprites"]
+position = Vector2(16, 16)
+rotation = -0.785398
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("13_4thmk")
+
+[node name="Label" type="Label" parent="AnimationSprites"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -19.0
+offset_right = 42.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(41, 18.333)
+size_flags_horizontal = 4
+text = "КРИТ!"
+label_settings = SubResource("LabelSettings_4thmk")
 
 [connection signal="button_down" from="ClickableArea" to="." method="_on_clickable_area_button_down"]
 [connection signal="mouse_entered" from="ClickableArea" to="." method="_on_clickable_area_mouse_entered"]

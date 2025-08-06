@@ -42,15 +42,15 @@ func apply(slave: Slave, type: Type, show_hp: bool = true):
 		$Undress.visible = false
 		$HPBar.visible = false
 
-func update_healing_cost(heals_used: int, value: int) -> void:
-	if value < heals_used * 10:
+func update_healing_cost(heals_used: int, value: int, heal_price: int) -> void:
+	if value < heals_used * heal_price:
 		$Undress.disabled = true
 	else: 
 		$Undress.disabled = false
 		
 	$Undress.text = "Лечить"
 	if heals_used > 0:
-		$Undress.text += "\n(" + str(heals_used*10) + ")"
+		$Undress.text += "\n(" + str(heals_used*heal_price) + ")"
 
 func _on_undress_pressed() -> void:
 	var old_items : Array[Item] = []
