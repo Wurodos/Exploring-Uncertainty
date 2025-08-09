@@ -5,10 +5,13 @@ class_name Slave
 @export var u_name: StringName
 @export var base_maxhp: int
 @export var base_speed: int
+@export var base_cost: int = 0
 @export var texture: Texture2D
 
 var hp : int
 var maxhp : int
+
+
 
 var speed : int
 
@@ -53,7 +56,7 @@ func get_item(item_type: Item.Type, trinket_id: int = 1) -> Item:
 # 70%-100% price depending on percentage of health
 
 func get_cost() -> int:
-	var total : int = 5 + base_maxhp / 2
+	var total : int = base_cost + 5 + base_maxhp / 2
 	for item: Item in [weapon, hat, trinket1, trinket2]:
 		total += item.cost	
 	return floor(total * lerp(0.7, 1.0, (hp / float(maxhp))))
@@ -79,3 +82,11 @@ func equip(item: Item, trinket_id: int = 1) -> Item:
 	item.on_equip(self)
 	
 	return old_item
+
+func debug() -> void:
+	print("-----")
+	print(u_name)
+	print(weapon.name)
+	print(hat.name)
+	print(trinket1.name)
+	print(trinket2.name)

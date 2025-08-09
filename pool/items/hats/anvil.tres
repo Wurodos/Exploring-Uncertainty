@@ -13,5 +13,5 @@ target = 2
 extra_hp = 10
 extra_speed = 0
 texture = ExtResource("2_i7h4p")
-cost = 3
+cost = 6
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

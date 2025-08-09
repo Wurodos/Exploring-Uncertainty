@@ -7,3 +7,4 @@ func use_item(sender: SlaveNode, victim: SlaveNode):
 	else:
 		Action.deal_damage(sender, victim, 10)
 	sender.buffs.set("pipe_used", 2)
+	

@@ -13,7 +13,7 @@ func _ready() -> void:
 		var files : PackedStringArray = dir_access.get_files()
 		
 		for file_name : String in files:
-			var loaded : Item = load("res://pool/items/" + subfolder + "/" + file_name)
+			var loaded : Item = load(("res://pool/items/" + subfolder + "/" + file_name).trim_suffix(".remap"))
 			_pool[loaded.u_name] = loaded
 			
 			if loaded.is_item():

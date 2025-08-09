@@ -7,10 +7,11 @@
 script = ExtResource("1_lil7l")
 u_name = &"pocket_watch"
 name = "Карманные Часы"
-desc = "КОНЕЦ 5 ХОДА: +5 МОЩИ, ЩИТ 3 ХОДА, ВОССТАНОВИТЬ 20% ХП"
+desc = "КОНЕЦ 4 ХОДА: +5 МОЩИ, ЩИТ 3 ХОДА, ВОССТАНОВИТЬ 20% ХП"
 type = 2
 target = 2
 extra_hp = 0
+extra_speed = 0
 texture = ExtResource("2_mb00s")
-cost = 4
+cost = 5
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

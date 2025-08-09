@@ -54,6 +54,8 @@ signal hide_item_info
 # ====================
 
 signal battle_encounter
+
+signal found_item
 signal enter_city(city: Room)
 signal enter_govnov
 signal city_heal

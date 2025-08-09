@@ -14,7 +14,7 @@ config/name="Exploring Uncertainty"
 run/main_scene="uid://dyrtd13gpi41u"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
-config/icon="res://icon.svg"
+config/icon="uid://bvt0n20v88f7o"
 
 [autoload]
 

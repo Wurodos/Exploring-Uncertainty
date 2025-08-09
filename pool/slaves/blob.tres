@@ -6,7 +6,8 @@
 [resource]
 script = ExtResource("1_o3r7f")
 u_name = &"blob"
-base_maxhp = 20
+base_maxhp = 30
 base_speed = 0
+base_cost = 0
 texture = ExtResource("2_oe004")
 metadata/_custom_type_script = "uid://b3tnir3t1e6op"

@@ -6,8 +6,10 @@
 script = ExtResource("1_wv743")
 u_name = &"no_hat"
 name = "Пустоголовие"
-desc = "+1 ИНИЦИАТИВЫ"
+desc = "+1 ИНИЦИАТИВЫ, ЛЕЧИТЬ 2 ЗДОРОВЬЯ"
 type = 1
 target = 0
 extra_hp = 0
+extra_speed = 0
+cost = 0
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

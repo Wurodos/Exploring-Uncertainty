@@ -16,10 +16,8 @@ func update_stats(node: SlaveNode) -> void:
 		node.add_buff(Action.SHIELD, 1)
 	if weapon.is_item(): _dmg_increase += 3
 	if trinket1.is_item():
-		node.set_hp(2)
 		_dmg_increase += 1
 	if trinket2.is_item():
-		node.set_hp(3)
 		_dmg_increase += 1
 
 # attacks one target, frail, but fast

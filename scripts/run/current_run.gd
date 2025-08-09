@@ -23,6 +23,7 @@ var state: Game.State = Game.State.Map
 
 var evil_deck: Array[Slave] = []
 var evil_archive: Array[Slave] = []
+var archive_level: int = 0
 
 func _ready() -> void:
 	randomize()
@@ -67,17 +68,19 @@ func _prepare_deck() -> void:
 	evil_deck.shuffle()
 
 func _prepare_archive() -> void:
+	archive_level += 1
+	
 	var weapons = []
 	var hats = []
 	var trinkets = []
 	
-	for i in range(4):
+	for i in range(min(1 + archive_level, 9)):
 		weapons.append(ItemPool.fetch_random(Item.Type.Weapon))
 		hats.append(ItemPool.fetch_random(Item.Type.Hat))
 		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
 		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
 	
-	for i in range(5):
+	for i in range(max(8 - archive_level, 0)):
 		weapons.append(ItemPool.fetch("no_weapon"))
 		hats.append(ItemPool.fetch("no_hat"))
 		trinkets.append(ItemPool.fetch("no_trinket"))
@@ -92,6 +95,10 @@ func _prepare_archive() -> void:
 		SlavePool.fetch("chomper")
 	])
 	
+	weapons.shuffle()
+	hats.shuffle()
+	trinkets.shuffle()
+	
 	for slave : Slave in evil_archive:
 		if slave == null: continue
 		
@@ -101,6 +108,12 @@ func _prepare_archive() -> void:
 		slave.equip(trinkets.pop_back(), 2)
 	
 	evil_archive.shuffle()
+	
+	#for slave : Slave in evil_archive:
+	#	if slave == null:
+	#		print("-------")
+	#		print("NO SLAVE")
+	#	else: slave.debug()
 
 func arrange_evil_team() -> void:
 	CurrentRun.evil_boys = []

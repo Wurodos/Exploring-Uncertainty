@@ -32,6 +32,8 @@ func _buy_slave(item_node: ItemShop) -> void:
 	_transaction_made = true
 	
 	_change_value(-item_node.cost)
+	item_node.held_slave.base_cost = 0
+	
 	var slave_node : SlaveTeamNode = null
 	for slave: Control in $Slaves.get_children():
 		if not slave.visible: 
@@ -86,6 +88,7 @@ func _on_enter_govnov() -> void:
 	value = 0
 	_change_value(0)
 	heal_multiplier = 1
+	_transaction_made = false
 	
 	CurrentRun.state = Game.State.Window
 	visible = true
@@ -113,6 +116,7 @@ func _on_enter_govnov() -> void:
 	
 	for k in range(3):
 		var slave = SlavePool.fetch("blob")
+	
 		slave.base_maxhp += randi_range(-10, 10) 
 		slave.maxhp = slave.base_maxhp
 		

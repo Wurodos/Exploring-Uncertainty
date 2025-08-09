@@ -32,15 +32,15 @@ func _present_choice() -> void:
 	left_item.snap()
 	extra_item.snap()
 	
-	if items.size() % 2 == 0:
+	if items.size() > 1:
 		right_item.apply(items.pop_back())
 		left_item.apply(items.pop_back())
 		extra_item.visible = false
-	elif items.size() != 1:
-		right_item.apply(items.pop_back())
-		left_item.apply(items.pop_back())
-		extra_item.apply(items.pop_back())
-		extra_item.visible = true
+	#elif items.size() != 1:
+	#	right_item.apply(items.pop_back())
+	#	left_item.apply(items.pop_back())
+	#	extra_item.apply(items.pop_back())
+	#	extra_item.visible = true
 	else:
 		right_item.apply(items.pop_back())
 		left_item.visible = false

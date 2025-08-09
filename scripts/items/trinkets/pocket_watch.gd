@@ -11,7 +11,7 @@ func on_start_battle(owner: SlaveNode):
 
 func _on_turn_ended():
 	_timer += 1
-	if _timer == 5:
+	if _timer == 4:
 		sender.set_power(+5)
 		sender.add_buff("shield", 3)
 		Action.heal(sender, sender, sender.held.maxhp / 5)		

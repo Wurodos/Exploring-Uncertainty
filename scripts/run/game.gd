@@ -19,8 +19,8 @@ func _ready() -> void:
 	  SlavePool.fetch("blob")
 	]
 	
-	CurrentRun.good_boys[0].hp = 1
-	CurrentRun.good_boys[1].hp = 1
+	#CurrentRun.good_boys[0].hp = 1
+	#CurrentRun.good_boys[1].hp = 1
 	#CurrentRun.good_boys[2].hp = 1
 	
 	map_node = map_scene.instantiate()

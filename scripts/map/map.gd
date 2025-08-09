@@ -53,6 +53,7 @@ var party_row: int
 var party_col: int
 var is_encountering: bool = false
 var since_last_battle : int = 0
+var since_last_item: int = 0
 
 
 func _ready() -> void:
@@ -102,7 +103,7 @@ func move_player(direction: Direction) -> void:
 	
 	encounter(room)
 	if room.type != Room.Type.Purged:
-		await get_tree().create_timer(0.3).timeout	
+		await get_tree().create_timer(0.6).timeout	
 	is_encountering = false	
 	
 	if room.type != Room.Type.City:
@@ -112,13 +113,18 @@ func move_player(direction: Direction) -> void:
 func encounter(room: Room) -> void:
 	match(room.type):
 		Room.Type.Empty:
-			if since_last_battle >= randi_range(0,3):
+			if since_last_battle >= randi_range(0,6):
 				CurrentRun.arrange_evil_team()
 				$AnimationPlayer.play("battle_start")
 				await $AnimationPlayer.animation_finished
 				SignalBus.battle_encounter.emit()
 				since_last_battle = 0
-			since_last_battle = since_last_battle + 1
+			else: 
+				since_last_battle += 1
+				if since_last_item >= randi_range(4, 8):
+					SignalBus.found_item.emit()
+					since_last_item = 0
+				else: since_last_item += 1
 		Room.Type.City:
 			SignalBus.enter_city.emit(room)
 		Room.Type.Govnov:
@@ -212,19 +218,27 @@ func _go_in_direction(row: int, col: int, direction : Direction, remain: int):
 # Same structures can't be adjacent
 
 func _add_structures() -> void:
-	for room : Room in room_parent.get_children():
+	var all_rooms = room_parent.get_children()
+	all_rooms.shuffle()
+	
+	var city_n = floor(all_rooms.size()*city_rate)
+	var cherv_n = floor(all_rooms.size()*cherv_rate)
+	var govnov_n = floor(all_rooms.size()*govnov_rate)
+	
+	
+	for room : Room in all_rooms:
 		if room.type != Room.Type.Empty: continue
 		
-		var r = randf()
-		if r < city_rate:
-			if not _is_adjacent_to(room.row, room.col, Room.Type.City):
-				room.type = Room.Type.City
-		elif r < cherv_rate + city_rate:
-			if not _is_adjacent_to(room.row, room.col, Room.Type.Cherv):
-				room.type = Room.Type.Cherv
-		elif r < govnov_rate + cherv_rate + city_rate:
-			if not _is_adjacent_to(room.row, room.col, Room.Type.Govnov):
-				room.type = Room.Type.Govnov
+		if city_n > 0 and not _is_adjacent_to(room.row, room.col, Room.Type.City):
+			room.type = Room.Type.City
+			city_n -= 1
+		elif cherv_n > 0 and not _is_adjacent_to(room.row, room.col, Room.Type.Cherv):
+			room.type = Room.Type.Cherv
+			cherv_n -= 1
+		elif govnov_n > 0 and not _is_adjacent_to(room.row, room.col, Room.Type.Govnov):
+			room.type = Room.Type.Govnov
+			govnov_n -= 1
+		
 		room.sprite.texture = room_sprites[room.type]
 
 

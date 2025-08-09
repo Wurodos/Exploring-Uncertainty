@@ -7,11 +7,11 @@
 script = ExtResource("1_jpp2n")
 u_name = &"wizard_hat"
 name = "Шляпа Колдуна"
-desc = "ВЫЛЕЧИТЬ 6 ЗДОРОВЬЯ"
+desc = "ВЫЛЕЧИТЬ 8 ЗДОРОВЬЯ"
 type = 1
 target = 0
 extra_hp = 8
 extra_speed = 1
 texture = ExtResource("2_pmg56")
-cost = 4
+cost = 8
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

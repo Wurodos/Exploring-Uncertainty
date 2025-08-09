@@ -38,25 +38,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6uie0")
 
-[node name="HPBar" type="ProgressBar" parent="."]
-layout_mode = 0
-offset_top = -66.0
-offset_right = 93.0
-offset_bottom = -41.0
-theme_override_styles/background = SubResource("StyleBoxFlat_nrvhk")
-theme_override_styles/fill = SubResource("StyleBoxFlat_y6rnb")
-value = 100.0
-show_percentage = false
-
-[node name="Label" type="Label" parent="HPBar"]
-layout_mode = 0
-offset_right = 188.0
-offset_bottom = 48.0
-scale = Vector2(0.5, 0.5)
-label_settings = SubResource("LabelSettings_nrvhk")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Body" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -103,6 +84,25 @@ offset_top = 48.0
 offset_right = 40.0
 offset_bottom = 97.0
 expand_mode = 1
+
+[node name="HPBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_top = -66.0
+offset_right = 93.0
+offset_bottom = -41.0
+theme_override_styles/background = SubResource("StyleBoxFlat_nrvhk")
+theme_override_styles/fill = SubResource("StyleBoxFlat_y6rnb")
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="HPBar"]
+layout_mode = 0
+offset_right = 188.0
+offset_bottom = 48.0
+scale = Vector2(0.5, 0.5)
+label_settings = SubResource("LabelSettings_nrvhk")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Undress" type="Button" parent="."]
 layout_mode = 0
