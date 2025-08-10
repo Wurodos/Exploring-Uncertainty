@@ -7,7 +7,9 @@ func _ready() -> void:
 		deck.append(ItemPool.fetch_random(Item.Type.Weapon))
 		deck.append(ItemPool.fetch_random(Item.Type.Hat))
 		
+	for i in range(3):
 		$ItemRow.get_child(i).buy.connect(_buy)
+	
 	for i in range(6):
 		deck.append(ItemPool.fetch_random(Item.Type.Trinket))
 	

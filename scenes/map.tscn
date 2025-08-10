@@ -203,6 +203,7 @@ anchors_preset = 0
 script = ExtResource("12_y2ir2")
 
 [node name="ColorRect" type="ColorRect" parent="Camera2D/UI/FoundItem"]
+layout_mode = 0
 offset_left = -193.0
 offset_top = -113.0
 offset_right = 1191.0
@@ -223,6 +224,7 @@ grow_vertical = 2
 texture = ExtResource("12_2cfcp")
 
 [node name="Close" type="Button" parent="Camera2D/UI/FoundItem"]
+layout_mode = 0
 offset_left = 301.0
 offset_top = 124.0
 offset_right = 401.0

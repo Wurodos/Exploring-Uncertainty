@@ -99,6 +99,7 @@ func _on_enter_city(city: Room) -> void:
 	if not current_city.flag and CurrentRun.discounts > 0:
 		CurrentRun.discounts -= 1
 		current_city.flag = true
+		current_city.sprite.texture = Gallery.img_free_city
 		for item in city.items: item.cost /= 2
 		
 	

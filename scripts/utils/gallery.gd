@@ -10,6 +10,9 @@ const icon_run = preload("res://images/icons/run.png")
 const icon_summon_stars = preload("res://images/icons/summon.png")
 
 const img_dead_slave = preload("res://images/slaves/dead.png")
+
+const img_free_city = preload("res://images/rooms/free_city.png")
+
 const icon_power = preload("res://images/icons/power.svg")
 const icon_luck = preload("res://images/icons/clover.svg")
 const icon_speed = preload("res://images/icons/speed.svg")

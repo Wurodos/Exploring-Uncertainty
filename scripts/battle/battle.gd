@@ -254,3 +254,8 @@ func _on_evil_won() -> void:
 
 func _on_newturn_pressed() -> void:
 	SignalBus.new_turn.emit()
+
+
+func _on_lower_hp_pressed() -> void:
+	evil_team.boys_nodes[1].set_hp(1, false)
+	evil_team.boys_nodes[2].set_hp(1, false)

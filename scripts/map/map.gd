@@ -119,8 +119,10 @@ func encounter(room: Room) -> void:
 				await $AnimationPlayer.animation_finished
 				SignalBus.battle_encounter.emit()
 				since_last_battle = 0
+				since_last_item += 1
 			else: 
 				since_last_battle += 1
+				print(since_last_item)
 				if since_last_item >= randi_range(4, 8):
 					SignalBus.found_item.emit()
 					since_last_item = 0

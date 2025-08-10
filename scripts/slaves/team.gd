@@ -37,6 +37,9 @@ func cull_the_dead() -> void:
 			CurrentRun.evil_boys.erase(slave_node.held)
 			slave_node.free()
 	
+	boys_nodes = boys_nodes.filter(func(node): return is_instance_valid(node))\
+		 as Array[SlaveNode]
+	
 	boys = CurrentRun.evil_boys
 
 func add_slave(slave: Slave) -> void:
@@ -44,6 +47,7 @@ func add_slave(slave: Slave) -> void:
 		if parent.get_child_count() == 0:
 			CurrentRun.evil_boys.append(slave)
 			boys = CurrentRun.evil_boys
+			
 			var new_slave : SlaveNode = slave_prefab.instantiate()
 			new_slave.team = self
 			new_slave.apply(slave, is_evil)
