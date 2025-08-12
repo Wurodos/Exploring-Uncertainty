@@ -1,0 +1,10 @@
+keys;en;ru
+cherv_info_0;INFLICTS {}-{} HARM;ПРИЧИНЯЕТ {}-{} ВРЕДА
+chomper_info_0;INFLICTS {} HARM TO ALL;ПРИЧИНЯЕТ {} ВРЕДА ВСЕМ
+starry_info_0;GAINS {} POWER AND SHIELD ({} TURNS);ПОЛУЧАЕТ {} МОЩИ И ЩИТ ({} ХОД.)
+starry_info_1;INFLICTS {}-{} HARM;ПРИЧИНЯЕТ {}-{} ВРЕДА
+swirly_info_0;INFLICTS {} HARM;ПРИЧИНЯЕТ {} ВРЕДА
+quagmire_info_0;HEALS {}-{} HEALTH TO ALLY;ЛЕЧИТ {}-{} ЗДОРОВЬЯ СОЮЗНИКУ
+quagmire_info_1;HEALS {} HEALTH TO EVERYONE, SHIELD {} TURNS;ЛЕЧИТ {} ЗДОРОВЬЯ ВСЕМ, ЩИТ {} ХОД.
+quagmire_info_2;GRANTS {} POWER TO ALLY;ДАЕТ {} МОЩИ СОЮЗНИКУ
+quagmire_info_3;IF ALONE, RUNS AWAY;ЕСЛИ ОДИН, СБЕГАЕТ

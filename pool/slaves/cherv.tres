@@ -5,6 +5,9 @@
 
 [resource]
 script = ExtResource("1_ph071")
+harm_lower = 2
+harm_higher = 5
+info_count = 1
 info_1 = "ПРИЧИНЯЕТ 2-5 ВРЕДА"
 info_2 = ""
 info_3 = ""
@@ -12,5 +15,6 @@ info_4 = ""
 u_name = &"cherv"
 base_maxhp = 10
 base_speed = 0
+base_cost = 0
 texture = ExtResource("2_lp2vr")
 metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

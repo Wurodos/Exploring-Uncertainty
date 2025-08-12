@@ -1,8 +1,8 @@
-keys,en,ru
-prepare,Preparation,Подготовка
-pick_one,Pick 1,Выберите 1
-purge,Purge,Истребить
-brigade,Brigade,Бригада
-heal,Heal,Лечить
-sell,Sell,Продать
-undress,Undress,Раздеть
+keys;en;ru
+prepare;Preparation;Подготовка
+pick_one;Pick 1;Выберите 1
+purge;Purge;Истребить
+brigade;Brigade;Бригада
+heal;Heal;Лечить
+sell;Sell;Продать
+undress;Undress;Раздеть

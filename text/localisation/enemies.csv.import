@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bmxm6nbv2nvfn"
+
+[deps]
+
+files=["res://text/localisation/enemies.en.translation", "res://text/localisation/enemies.ru.translation"]
+
+source_file="res://text/localisation/enemies.csv"
+dest_files=["res://text/localisation/enemies.en.translation", "res://text/localisation/enemies.ru.translation"]
+
+[params]
+
+compress=true
+delimiter=1

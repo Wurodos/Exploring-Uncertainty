@@ -20,18 +20,26 @@ class Intention:
 		self.amount = amount
 		self.extra_effect = func() : return
 	
-
+@export var info_count: int = 0
 @export_multiline var info_1 : String
 @export_multiline var info_2 : String
 @export_multiline var info_3 : String
 @export_multiline var info_4 : String
 
+var info: Array[String] = []
 var intention: Intention
 var is_final_boss: bool = false
 
 func _init() -> void:
 	super._init()
 	is_evil = true
+	info = []
+
+func localize() -> void:
+	super.localize()
+	info = []
+	for i in range(info_count):
+		info.append(tr(u_name + "_info_" + str(i)))
 
 func get_all_info() -> Array[String]:
 	return [info_1, info_2, info_3, info_4]

@@ -7,14 +7,17 @@ func _ready() -> void:
 func _on_slave_info(slave_node: SlaveNode):
 	var i : int = 0
 	if slave_node.held is Enemy:
-		for info : String in slave_node.held.get_all_info():
+		for info : String in (slave_node.held as Enemy).info:
 			var entry: ItemEntry = $Entries.get_child(i)
 			entry.item_name.text = ""
 			entry.item_desc.text = info
 			entry.color = Color(1.0, 0.761, 0.42)
-			entry.visible = info != ""
+			entry.visible = true
 			
 			i += 1
+		for j in range(i,4):
+			var entry: ItemEntry = $Entries.get_child(j)
+			entry.visible = false
 	else:
 		for item : Item in slave_node.get_all_items():
 			var entry: ItemEntry = $Entries.get_child(i)

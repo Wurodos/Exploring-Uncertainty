@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_ry55x")
+info_count = 2
 info_1 = "ПОЛУЧАЕТ МОЩЬ И ЩИТ"
 info_2 = "ПРИЧИНЯЕТ 5-8 ВРЕДА"
 info_3 = ""
@@ -12,5 +13,6 @@ info_4 = ""
 u_name = &"starry"
 base_maxhp = 20
 base_speed = 0
+base_cost = 0
 texture = ExtResource("2_a3iwr")
 metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

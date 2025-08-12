@@ -1,7 +1,18 @@
 extends Enemy
 
+@export var power_gain: int = 2
+@export var shield_turns: int = 1
+@export var harm_lower: int = 5
+@export var harm_higher: int = 8
+
+
 func _init() -> void:
 	super._init()
+
+func localize() -> void:
+	super.localize()
+	info[0] = info[0].format([power_gain, shield_turns], "{}")
+	info[1] = info[1].format([harm_lower, harm_higher], "{}")
 
 # weapon = +2 dmg range
 # hat = shield gain increase
@@ -9,20 +20,21 @@ func _init() -> void:
 # 	1 - +2 hp +1 speed
 #	2 - +3 hp +1 powerup
 
-var _dmg_increase = 0
-var _shield_increase = 0
-var _power_up_increase = 0
-
 func update_stats(node: SlaveNode) -> void:
 	if hat.is_item(): 
-		_shield_increase += 1
-	if weapon.is_item(): _dmg_increase += 2
+		shield_turns += 1
+	if weapon.is_item():
+		harm_lower += 2
+		harm_higher += 2
 	if trinket1.is_item():
 		node.set_max_hp(+2) 
+		node.set_hp(+2) 
 		node.set_speed(+1)
 	if trinket2.is_item():
 		node.set_max_hp(+3)
-		_power_up_increase += 1
+		node.set_hp(+3) 
+		power_gain += 1
+	localize()
 
 # either attacks or powers and shields up (does it in groups of 2)
 
@@ -42,12 +54,12 @@ func decide_intention(node: SlaveNode) -> void:
 		previous = 0
 	
 	if current == 1:
-		intention = Intention.new(Intention.Type.DamageSingular, randi_range(5, 8)+_dmg_increase)
+		intention = Intention.new(Intention.Type.DamageSingular, randi_range(harm_lower,harm_higher))
 		intention.target = _get_random_good_target()
 	elif current == -1:
-		intention = Intention.new(Intention.Type.PowerUp, 1 + _power_up_increase)
+		intention = Intention.new(Intention.Type.PowerUp, power_gain)
 		intention.extra_effect = func() :
-			node.add_buff(Action.SHIELD, 1 + _shield_increase)
+			node.add_buff(Action.SHIELD, shield_turns)
 		intention.target = _get_self_target()
 	
 	

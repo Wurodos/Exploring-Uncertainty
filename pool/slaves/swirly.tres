@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_x217g")
+info_count = 1
 info_1 = "ПРИЧИНЯЕТ 5 ВРЕДА"
 info_2 = ""
 info_3 = ""
@@ -12,5 +13,6 @@ info_4 = ""
 u_name = &"swirly"
 base_maxhp = 10
 base_speed = 2
+base_cost = 0
 texture = ExtResource("2_8mv2p")
 metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

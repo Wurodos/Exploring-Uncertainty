@@ -134,6 +134,10 @@ func _prepare_archive() -> void:
 	#	else: slave.debug()
 
 func arrange_evil_team() -> void:
+	##	Debug
+	#CurrentRun.evil_boys = [SlavePool.fetch("swirly")]
+	#return
+	
 	CurrentRun.evil_boys = []
 	
 	for i in range(3):

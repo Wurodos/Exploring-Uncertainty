@@ -23,12 +23,18 @@ var trinket2 : Item
 var is_evil : bool
 var is_alive : bool
 
+func localize() -> void:
+	pass
+
 func reinit() -> void:
 	hp = base_maxhp
 	maxhp = base_maxhp
 	speed = base_speed
+	localize()
 
 func _init() -> void:
+	SignalBus.locale_changed.connect(localize)
+	
 	is_evil = false
 	is_alive = true
 	
