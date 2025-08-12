@@ -21,17 +21,17 @@ func apply(slave: Slave, type: Type, show_hp: bool = true):
 	
 	match (type):
 		Type.Brigade:
-			$Undress.text = "Раздеть"
+			$Undress.text = tr("undress")
 			if not $Undress.is_connected("pressed", _on_undress_pressed):
 				$Undress.pressed.connect(_on_undress_pressed)
 		Type.City:
-			$Undress.text = "Лечить"
+			$Undress.text = tr("heal")
 			if not $Undress.is_connected("pressed", _on_heal_pressed):
 				$Undress.pressed.connect(_on_heal_pressed)
 		Type.Govnov:
 			$Sell.visible = true
-			$Sell.text = "Продать\n(%d)" % held.get_cost()
-			$Undress.text = "Лечить"
+			$Sell.text = tr("sell") + "\n(" + str(held.get_cost()) + ")"
+			$Undress.text = tr("heal")
 			if not $Undress.is_connected("pressed", _on_govnov_heal_pressed):
 				$Undress.pressed.connect(_on_govnov_heal_pressed)
 	
@@ -48,7 +48,7 @@ func update_healing_cost(heals_used: int, value: int, heal_price: int) -> void:
 	else: 
 		$Undress.disabled = false
 		
-	$Undress.text = "Лечить"
+	$Undress.text = tr("heal")
 	if heals_used > 0:
 		$Undress.text += "\n(" + str(heals_used*heal_price) + ")"
 
@@ -83,12 +83,10 @@ func _on_govnov_heal_pressed() -> void:
 
 func _on_mouse_entered() -> void:
 	selected = self
-	print("selected slave!")
 
 
 func _on_mouse_exited() -> void:
 	selected = null
-	print("unselected")
 
 
 func _on_sell_pressed() -> void:

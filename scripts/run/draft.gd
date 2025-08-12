@@ -3,6 +3,8 @@ extends Node
 var deck : Array[Item] = []
 
 func _ready() -> void:
+	$Label.text = tr("pick_one")
+	
 	for i in range(3):
 		deck.append(ItemPool.fetch_random(Item.Type.Weapon))
 		deck.append(ItemPool.fetch_random(Item.Type.Hat))
@@ -22,6 +24,7 @@ func _next() -> void:
 	if deck.is_empty():
 		$ItemRow.visible = false
 		$Label.visible = false
+		$Start.text = tr("purge")
 		$Start.visible = true
 		return
 	

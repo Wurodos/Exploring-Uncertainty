@@ -75,6 +75,10 @@ stay={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://text/localisation/items.en.translation", "res://text/localisation/items.ru.translation", "res://text/localisation/ui.en.translation", "res://text/localisation/ui.ru.translation")
+
 [rendering]
 
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)

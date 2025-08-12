@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyrtd13gpi41u"]
+[gd_scene load_steps=10 format=3 uid="uid://dyrtd13gpi41u"]
 
 [ext_resource type="Script" uid="uid://bgtuvu7j415s5" path="res://scripts/run/main_menu.gd" id="1_ekxnf"]
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://dgy136hcry3qc" path="res://images/languages/russian.png" id="3_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://bv5ejcc3ftpul" path="res://images/languages/russian_unselect.png" id="3_wu84c"]
+[ext_resource type="Texture2D" uid="uid://bj8rgm4anxbfv" path="res://images/languages/english_unselect.png" id="5_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://b23qmkqdemon6" path="res://images/languages/english.png" id="6_oa1go"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekxnf"]
 bg_color = Color(0.352941, 0, 0, 1)
@@ -23,16 +27,44 @@ script = ExtResource("1_ekxnf")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 217.0
-offset_top = 321.0
-offset_right = 961.0
-offset_bottom = 565.0
+offset_left = 352.0
+offset_top = 384.0
+offset_right = 867.0
+offset_bottom = 553.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("1_l6cm7")
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 64
 theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
 theme_override_styles/normal = SubResource("StyleBoxFlat_wu84c")
 text = "Подготовка"
 
+[node name="Language_en" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 502.0
+offset_right = 150.0
+offset_bottom = 581.0
+focus_mode = 0
+texture_normal = ExtResource("5_rtw2f")
+texture_pressed = ExtResource("5_rtw2f")
+texture_hover = ExtResource("6_oa1go")
+texture_disabled = ExtResource("6_oa1go")
+stretch_mode = 0
+
+[node name="Language_ru" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 165.0
+offset_top = 502.0
+offset_right = 262.0
+offset_bottom = 581.0
+focus_mode = 0
+texture_normal = ExtResource("3_wu84c")
+texture_pressed = ExtResource("3_wu84c")
+texture_hover = ExtResource("3_bqqt6")
+texture_disabled = ExtResource("3_bqqt6")
+stretch_mode = 0
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Language_en" to="." method="_on_switch_language" binds= ["en"]]
+[connection signal="pressed" from="Language_ru" to="." method="_on_switch_language" binds= ["ru"]]

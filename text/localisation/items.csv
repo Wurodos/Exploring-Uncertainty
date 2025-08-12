@@ -1,0 +1,45 @@
+keys;en;ru
+sword_name;Sword;Меч
+sword_desc;INFLICTS {} HARM;ПРИЧИНЯЕТ {} ВРЕДА
+no_weapon_name;Fist;Кулак
+no_weapon_desc;INFLICTS {} HARM;ПРИЧИНЯЕТ {} ВРЕДА
+pipe_name;Pipe;Труба
+pipe_desc;{} HARM, {} HARM INSTEAD IF USED LAST TURN;{} ВРЕДА, {} ВРЕДА ЕСЛИ БЫЛО ИСПОЛЬЗОВАНО В ПРОШЛОМ ХОДУ
+razor_name;Razor;Бритва
+razor_desc;{} HARM, +1 POWER TO SELF;{} ВРЕДА, +1 МОЩЬ СЕБЕ
+tennis_ball_name;Tennis Ball;Теннисный Мяч
+tennis_ball_desc;{} HARM, +{} PER DIFFERENCE IN INITIATIVE;{} ВРЕДА, +{} ЗА КАЖДУЮ РАЗНИЦУ В ИНИЦИАТИВЕ
+whistle_name;Whistle;Свисток
+whistle_desc;{} HARM TO ALL ENEMIES;{} ВРЕДА ВСЕМ ВРАГАМ
+winchester_name;Winchester;Винчестер
+winchester_desc;{} HARM, {} HARM TO OTHER RANDOM TARGET;{} ВРЕДА, {} ВРЕДА ДРУГОЙ СЛУЧАЙНОЙ ЦЕЛИ
+anvil_name;Anvil;Наковальня
+anvil_desc;EACH {} RECEIVED HARM WILL GRANT {} POWER (LASTS {} TURNS);КАЖДЫЕ ПОЛУЧЕННЫЕ {} ВРЕДА ПРИНЕСУТ {} МОЩЬ (ДЛИТСЯ {} ХОД.)
+cowboy_hat_name;Cowboy Hat;Ковбойская Шляпа
+cowboy_hat_desc;SHIELD 1 TURN TO ALL;ЩИТ 1 ХОД ВСЕМ
+crown_name;Crown;Корона
+crown_desc;-{} INITIATIVE;-{} ИНИЦИАТИВЫ
+helmet_name;Helmet;Каска
+helmet_desc;SHIELD {} TURNS;ЩИТ {} ХОД.
+jester_hat_name;Jester Hat;Шляпа Шута
+jester_hat_desc;BLASPHEMY {} TURNS;КОЩУНСТВО {} ХОД.
+no_hat_name;Head Empty;Пустоголовие
+no_hat_desc;+{} INITIATIVE, HEAL {} HEALTH;+{} ИНИЦИАТИВЫ, ЛЕЧИТЬ {} ЗДОРОВЬЯ
+wizard_hat_name;Wizard Hat;Шляпа Колдуна
+wizard_hat_desc;HEAL {} HEALTH;ВЫЛЕЧИТЬ {} ЗДОРОВЬЯ
+alcohol_name;Alcohol;Алкоголь
+alcohol_desc;START TURN: +{} POWER, LOSE {} HEALTH;НАЧАЛО ХОДА: +{} МОЩЬ, ПОТЕРЯ {} ЗДРАВИЙ
+bomb_name;Bomb;Бомба
+bomb_desc;{} HARM WHEN ATTACKING, ONE-TIME USE; {} ВРЕДА ПРИ АТАКЕ, ОДНОРАЗОВОЕ
+die_name;Die;Кубик
+die_desc;START OF BATTLE: +{} LUCK;НАЧАЛО БОЯ: +{} УДАЧА
+draniki_name;Draniki;Драники
+draniki_desc;WHEN HEALTH LOWER THAN {}%, HEALS {}%, ONE-TIME USE;КОГДА ЗДОРОВЬЕ МЕНЬШЕ {}%, ЛЕЧИТ {}%, ОДНОРАЗОВОЕ
+heart_lock_name;Heart Lock;Сердечный Замок
+heart_lock_desc;START OF BATTLE: SHIELD {} TURNS;НАЧАЛО БОЯ: ЩИТ {} ХОД.
+obsidian_name;Obsidian;Обсидиан
+obsidian_desc;START OF BATTLE: +{} POWER, +{} LUCK;НАЧАЛО БОЯ: +{} МОЩЬ, +{} УДАЧА
+pocket_watch_name;Pocket Watch;Карманные Часы
+pocket_watch_desc;END OF {} TURN: +{} POWER, SHIELD {} TURNS, HEAL {}% HEALTH;КОНЕЦ {} ХОД: +{} МОЩИ, ЩИТ {} ХОДА, ВОССТАНОВИТЬ {}% ЗДРАВИЯ
+teapot_name;Teapot;Чайник
+teapot_desc;WHEN LOSING HEALTH, INFLICT {} HARM UPON OFFENDER;ПРИ ПОТЕРЕ ЗДРАВИЯ, {} ВРЕДА ОБИДЧИКУ

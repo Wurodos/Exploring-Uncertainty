@@ -42,7 +42,7 @@ func _on_slave_info(slave_node: SlaveNode):
 				Item.Type.Trinket:
 					entry.color = Color(0.459, 1.0, 0.51)
 				
-			entry.visible = item.name != ""
+			entry.visible = item.u_name != "no_trinket"
 			i += 1
 	
 	$HPBar.value = (slave_node.held.hp/float(slave_node.held.maxhp)*100)

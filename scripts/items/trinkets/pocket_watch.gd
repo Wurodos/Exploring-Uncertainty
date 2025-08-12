@@ -1,7 +1,16 @@
 extends Item
 
+@export var turns: int = 4
+@export var power_gain: int  = 5
+@export var shield_turns: int = 3
+@export var heal_hp_percent: int = 20
+
 var sender : SlaveNode
 var _timer : int = 0
+
+func localize():
+	super.localize()
+	desc = desc.format([turns, power_gain, shield_turns, heal_hp_percent], "{}")
 
 func on_start_battle(owner: SlaveNode):
 	super.on_start_battle(owner)
@@ -11,7 +20,7 @@ func on_start_battle(owner: SlaveNode):
 
 func _on_turn_ended():
 	_timer += 1
-	if _timer == 4:
-		sender.set_power(+5)
-		sender.add_buff("shield", 3)
-		Action.heal(sender, sender, sender.held.maxhp / 5)		
+	if _timer == turns:
+		sender.set_power(+power_gain)
+		sender.add_buff("shield", shield_turns)
+		Action.heal(sender, sender, sender.held.maxhp / (100.0 / heal_hp_percent))		

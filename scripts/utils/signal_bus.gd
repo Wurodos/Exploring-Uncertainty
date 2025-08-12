@@ -1,5 +1,11 @@
 extends Node
 
+#
+# Common
+#
+
+signal locale_changed
+
 # ====================
 # Change scene
 # ====================

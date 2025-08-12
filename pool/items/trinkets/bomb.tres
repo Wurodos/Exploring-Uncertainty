@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_6d5wu")
+harm = 10
 u_name = &"bomb"
 name = "Бомба"
 desc = "8 ВРЕДА ПРИ ПЕРВОЙ АТАКЕ"

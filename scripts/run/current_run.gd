@@ -25,10 +25,28 @@ var evil_deck: Array[Slave] = []
 var evil_archive: Array[Slave] = []
 var archive_level: int = 0
 
+var config: ConfigFile
+
 func _ready() -> void:
+	_load_config()
+	
+	TranslationServer.set_locale(config.get_value("prefs", "language"))
+	
 	randomize()
 	_prepare_deck.call_deferred()
 	_prepare_archive.call_deferred()
+	
+	
+func _load_config() -> void:
+	config = ConfigFile.new()
+	var err = config.load("user://prefs.cfg")
+	
+	if err != OK:
+		config.set_value("prefs", "language", "en")
+		config.save("user://prefs.cfg")
+		return
+
+
 
 func _prepare_deck() -> void:
 	# items

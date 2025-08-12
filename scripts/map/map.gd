@@ -57,6 +57,8 @@ var since_last_item: int = 0
 
 
 func _ready() -> void:
+	$Camera2D/UI/ShowTeam.text = tr("brigade")
+	
 	$Camera2D.make_current()
 	$Camera2D/UI/Steps.text = str(steps)
 	

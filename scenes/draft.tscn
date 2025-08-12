@@ -43,6 +43,7 @@ offset_right = 827.0
 offset_bottom = 129.0
 text = "Выберите 1"
 label_settings = SubResource("LabelSettings_abqjp")
+horizontal_alignment = 1
 
 [node name="ItemRow" type="HBoxContainer" parent="."]
 layout_mode = 0

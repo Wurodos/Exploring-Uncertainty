@@ -6,9 +6,7 @@ enum Type { Weapon, Hat, Trinket, All}
 enum Target { Single, AllTeam, Self, None}
 enum Enchant { None, Red, Blue, Green, Yellow }
 
-@export var u_name: StringName
-@export var name: String
-@export_multiline var desc: String
+
 @export var type : Type
 @export var target: Target
 @export var extra_hp : int
@@ -16,7 +14,18 @@ enum Enchant { None, Red, Blue, Green, Yellow }
 @export var texture: Texture2D
 @export var cost: int
 
+@export var u_name: StringName = ""
+@export var name: String = ""
+@export var desc: String = ""
+
 var enchant : Enchant = Enchant.None
+
+func _init() -> void:
+	SignalBus.locale_changed.connect(localize)
+
+func localize() -> void:
+	name = tr(u_name + "_name")
+	desc = tr(u_name + "_desc")
 
 func is_item() -> bool:
 	return u_name != "no_weapon" and u_name != "no_hat"\
