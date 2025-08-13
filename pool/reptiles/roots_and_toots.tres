@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_53ir3")
+info_count = 4
 info_1 = "ВЕСЕЛОЕ ВРЕМЯ НАСТУПАЕТ С БРАТВОЙ ЗВЕЗДОНУТЫХ"
 info_2 = "ЗАВТРАК, УЖИН И ОБЕД МЕРТВЫМИ МУЖИЧКАМИ"
 info_3 = "ЛОВИТ В КАПКАН (ОДНОГО, ЗАМЕДЛЯЕТ)"
@@ -12,5 +13,6 @@ info_4 = "ВЕРШКИ (ОДИН) и КОРЕШКИ (ДРУГОЙ)"
 u_name = &"roots_and_toots"
 base_maxhp = 150
 base_speed = 0
+base_cost = 0
 texture = ExtResource("2_rb82r")
 metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

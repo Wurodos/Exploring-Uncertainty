@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://cgylw3j3sk4da"]
+[gd_scene load_steps=9 format=3 uid="uid://cgylw3j3sk4da"]
 
 [ext_resource type="Script" uid="uid://cfsw4hc8sq20x" path="res://scripts/run/game.gd" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://tyb7waldpp30" path="res://scripts/utils/input_manager.gd" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://uotbjopre7ad" path="res://scripts/utils/audio_manager.gd" id="3_lbhrr"]
+[ext_resource type="AudioStream" uid="uid://c7je145cmmkhl" path="res://audio/music/Wake Up For the Battle.wav" id="4_lbhrr"]
+[ext_resource type="AudioStream" uid="uid://fi6vie705cx5" path="res://audio/sfx/hurt.wav" id="5_u5sy4"]
+[ext_resource type="AudioStream" uid="uid://bxxfd1kj5wm85" path="res://audio/sfx/shop.wav" id="6_gee14"]
+[ext_resource type="AudioStream" uid="uid://cg5lsmrsbfbi2" path="res://audio/sfx/powerUp.wav" id="7_0tnpc"]
+[ext_resource type="AudioStream" uid="uid://bv52qwiseqwlq" path="res://audio/sfx/heal.wav" id="8_gee14"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_uwrxv")
@@ -12,3 +18,21 @@ script = ExtResource("1_uwrxv")
 script = ExtResource("2_yqjtg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AudioManager" type="Node" parent="."]
+script = ExtResource("3_lbhrr")
+music = Dictionary[StringName, AudioStream]({
+&"battle": ExtResource("4_lbhrr"),
+&"heal": ExtResource("8_gee14"),
+&"hurt": ExtResource("5_u5sy4"),
+&"powerup": ExtResource("7_0tnpc"),
+&"shop": ExtResource("6_gee14")
+})
+
+[node name="Music" type="AudioStreamPlayer" parent="AudioManager"]
+
+[node name="Sound" type="AudioStreamPlayer" parent="AudioManager"]
+
+[node name="Sound2" type="AudioStreamPlayer" parent="AudioManager"]
+
+[node name="Sound3" type="AudioStreamPlayer" parent="AudioManager"]

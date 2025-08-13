@@ -11,7 +11,7 @@ func _on_slave_info(slave_node: SlaveNode):
 			var entry: ItemEntry = $Entries.get_child(i)
 			entry.item_name.text = ""
 			entry.item_desc.text = info
-			entry.color = Color(1.0, 0.761, 0.42)
+			entry.color = Color(0.532, 0.352, 0.0)
 			entry.visible = true
 			
 			i += 1

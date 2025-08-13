@@ -8,6 +8,9 @@ func _ready() -> void:
 	
 	for file_name : String in files:
 		var loaded : Slave = load(("res://pool/slaves/" + file_name).trim_suffix(".remap"))
+		loaded.u_name = file_name.trim_suffix(".remap")
+		loaded.u_name = loaded.u_name.trim_suffix(".tres")
+		
 		loaded.reinit()
 		_pool[loaded.u_name] = loaded
 		print("SLAVE_POOL: Loaded " + loaded.u_name + " successfully")

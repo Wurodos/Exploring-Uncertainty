@@ -22,7 +22,8 @@ func _ready() -> void:
 
 
 func _buy(item_node: ItemShop) -> void:
-	print("Bought item for " + str(item_node.cost))
+	SignalBus.play_sound.emit("shop")
+	
 	_change_value(-item_node.cost)
 	current_city.items.erase(item_node.held)
 	CurrentRun.inventory.append(item_node.held)
@@ -35,6 +36,8 @@ func _buy(item_node: ItemShop) -> void:
 	_update_items()
 
 func _sell(item_node: ItemShop) -> void:
+	SignalBus.play_sound.emit("shop")
+	
 	_change_value(item_node.cost)
 	CurrentRun.inventory.erase(item_node.held)
 	item_node.queue_free()

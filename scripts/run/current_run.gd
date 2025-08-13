@@ -25,12 +25,15 @@ var evil_deck: Array[Slave] = []
 var evil_archive: Array[Slave] = []
 var archive_level: int = 0
 
+var is_tutorial: bool = false
+
 var config: ConfigFile
 
 func _ready() -> void:
 	_load_config()
 	
 	TranslationServer.set_locale(config.get_value("prefs", "language"))
+	
 	
 	randomize()
 	_prepare_deck.call_deferred()
@@ -135,7 +138,7 @@ func _prepare_archive() -> void:
 
 func arrange_evil_team() -> void:
 	##	Debug
-	#CurrentRun.evil_boys = [SlavePool.fetch("swirly")]
+	#CurrentRun.evil_boys = [ReptilePool.fetch("roots_and_toots")]
 	#return
 	
 	CurrentRun.evil_boys = []
@@ -156,8 +159,8 @@ func arrange_evil_team() -> void:
 		var enemy = SlavePool.fetch("cherv")
 		enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
 		enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
-		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket))
-		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket))
+		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
+		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
 		CurrentRun.evil_boys.append(enemy)
 
 func arrange_difficult() -> void:

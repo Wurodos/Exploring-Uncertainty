@@ -21,13 +21,18 @@ func _ready() -> void:
 	SignalBus.hide_item_info.connect(_on_hide_item_info)
 
 func _sell(item_node: ItemShop) -> void:
+	SignalBus.play_sound.emit("shop")
+	
 	_change_value(item_node.cost)
 	CurrentRun.inventory.erase(item_node.held)
+	
 	
 	item_node.queue_free()
 	_update_items()
 
 func _buy_slave(item_node: ItemShop) -> void:
+	SignalBus.play_sound.emit("shop")
+	
 	$Close.text = "X"
 	_transaction_made = true
 	
@@ -51,6 +56,8 @@ func _buy_slave(item_node: ItemShop) -> void:
 
 
 func _sell_slave(slave_node: SlaveTeamNode) -> void:
+	SignalBus.play_sound.emit("shop")
+	
 	print("sold slave with hat " + slave_node.held.hat.u_name)
 	_change_value(slave_node.held.get_cost())
 	

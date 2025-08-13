@@ -6,6 +6,11 @@ extends Node
 
 signal locale_changed
 
+# Stops existing music, plays new
+signal play_music(track: String)
+# Doesn't stop other sounds
+signal play_sound(track: String)
+
 # ====================
 # Change scene
 # ====================

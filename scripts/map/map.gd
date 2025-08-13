@@ -119,6 +119,7 @@ func encounter(room: Room) -> void:
 				CurrentRun.arrange_evil_team()
 				$AnimationPlayer.play("battle_start")
 				await $AnimationPlayer.animation_finished
+				SignalBus.play_music.emit("battle")
 				SignalBus.battle_encounter.emit()
 				since_last_battle = 0
 				since_last_item += 1

@@ -15,7 +15,7 @@ func _ready() -> void:
 		for file_name : String in files:
 			var loaded : Item = load(("res://pool/items/" + subfolder + "/" + file_name).trim_suffix(".remap"))
 			loaded.u_name = file_name.trim_suffix(".remap")
-			loaded.u_name = file_name.trim_suffix(".tres")
+			loaded.u_name = loaded.u_name.trim_suffix(".tres")
 			
 			loaded.localize()
 			_pool[loaded.u_name] = loaded

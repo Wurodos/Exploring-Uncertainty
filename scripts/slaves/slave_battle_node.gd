@@ -33,6 +33,8 @@ var power : int = 0
 var luck : int = 0
 
 func _ready() -> void:
+	$AnimationSprites/Label.text = tr("crit")
+	
 	SignalBus.mouse_up.connect(_on_mouse_up)
 	SignalBus.mouse_right_down.connect(_on_mouse_right_down)
 	if held is Enemy:
@@ -98,9 +100,14 @@ func set_speed(new_val: int, is_delta: bool = true):
 	#Battle.instance.recalculate_speed()
 
 func set_power(new_val: int, is_delta: bool = true):
+	var old_val: int = power
+	
 	if is_delta:
 		power += new_val
 	else: power = new_val
+	
+	if power > old_val:
+		SignalBus.play_sound.emit("powerup")
 	add_stat("power", Gallery.icon_power, power)
 	
 	animation_player.play("power_up")

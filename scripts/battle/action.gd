@@ -4,6 +4,7 @@ const SHIELD = "shield"
 const BLASPHEMY = "blasphemy"
 
 func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int):
+	SignalBus.play_sound.emit("hurt")
 	
 	var total_dmg = dmg
 	
@@ -32,6 +33,8 @@ func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int):
 	victim.animation_player.play("idle")
 
 func heal(sender: SlaveNode, ally: SlaveNode, amount: int):
+	SignalBus.play_sound.emit("heal")
+	
 	if not ally.held.is_alive: return
 	
 	ally.set_hp(min(ally.held.maxhp, ally.held.hp + amount), false)
