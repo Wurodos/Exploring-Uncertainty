@@ -8,6 +8,8 @@ var held: Slave
 var type: Type
 static var selected: SlaveTeamNode
 
+@onready var btn_sell: Button = $Sell
+
 signal sell
 
 func apply(slave: Slave, type: Type, show_hp: bool = true):
@@ -64,7 +66,6 @@ func _on_undress_pressed() -> void:
 	
 	for item: Item in old_items:
 		if item.is_item():
-			CurrentRun.inventory.append(item)
 			SignalBus.add_item.emit(item)
 	
 func _on_heal_pressed() -> void:

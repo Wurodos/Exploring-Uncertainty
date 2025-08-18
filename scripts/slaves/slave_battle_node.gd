@@ -13,6 +13,8 @@ signal attacked(victim: SlaveNode)
 @onready var ellipse: Sprite2D = $CircleSelect
 @onready var stat_parent: Control = $Stats
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var arrow: Sprite2D = $Arrow
+@onready var arrow_animation: AnimationPlayer = $ArrowAnimation
 
 const item_prefab = preload("res://prefabs/items/item.tscn")
 const stat_entry_prefab = preload("res://prefabs/battle/stat_entry.tscn")

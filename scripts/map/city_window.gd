@@ -26,7 +26,7 @@ func _buy(item_node: ItemShop) -> void:
 	
 	_change_value(-item_node.cost)
 	current_city.items.erase(item_node.held)
-	CurrentRun.inventory.append(item_node.held)
+	CurrentRun.put_item_in_inventory(item_node.held)
 	
 	
 	item_node.apply(item_node.held, true)
@@ -49,7 +49,7 @@ func _change_value(new_value: int) -> void:
 
 func _update_items() -> void:
 	for item_node : ItemShop in $Shop.get_children():
-		if item_node.cost > value:
+		if item_node.cost > value or CurrentRun.inventory.size() == 24:
 			item_node.toggle(false)
 		else: item_node.toggle(true)
 	

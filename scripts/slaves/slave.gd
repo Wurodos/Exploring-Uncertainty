@@ -32,6 +32,30 @@ func reinit() -> void:
 	speed = base_speed
 	localize()
 
+func serialize() -> Dictionary:
+	return {
+		"u_name": u_name,
+		"maxhp": maxhp,
+		"hp": hp,
+		"weapon": weapon.serialize(),
+		"hat": hat.serialize(),
+		"trinket1": trinket1.serialize(),
+		"trinket2": trinket2.serialize()
+	}
+
+static func deserialize(data: Dictionary) -> Slave:
+	var slave = SlavePool.fetch(data["u_name"])
+	
+	slave.maxhp = data["maxhp"]
+	slave.hp = data["hp"]
+	
+	slave.weapon = Item.deserialize(data["weapon"])
+	slave.hat = Item.deserialize(data["hat"])
+	slave.trinket1 = Item.deserialize(data["trinket1"])
+	slave.trinket2 = Item.deserialize(data["trinket2"])
+	return slave
+
+
 func _init() -> void:
 	SignalBus.locale_changed.connect(localize)
 	

@@ -1,5 +1,7 @@
 extends Node
 
+const save_path = "user://run.save"
+
 var good_boys: Array[Slave] = []
 var evil_boys: Array[Slave] = []
 var inventory: Array[Item] = []
@@ -25,8 +27,10 @@ var evil_deck: Array[Slave] = []
 var evil_archive: Array[Slave] = []
 var archive_level: int = 0
 
+var is_saved_game: bool = false
 var is_tutorial: bool = false
 
+var map_data: Dictionary = {}
 var config: ConfigFile
 
 func _ready() -> void:
@@ -36,6 +40,7 @@ func _ready() -> void:
 	
 	
 	randomize()
+	_prepare_good_boys.call_deferred()
 	_prepare_deck.call_deferred()
 	_prepare_archive.call_deferred()
 	
@@ -49,7 +54,99 @@ func _load_config() -> void:
 		config.save("user://prefs.cfg")
 		return
 
+func save_game() -> void:
+	var save_file : FileAccess = FileAccess.open(save_path, FileAccess.WRITE)
+	
+	var save_data = {
+		"good_boys": good_boys.map(func(slave : Slave):
+			return slave.serialize()),
+		"inventory": inventory.map(func(item: Item):
+			return item.serialize()),
+		"evil_deck": evil_deck.map(func(slave : Enemy):
+			if not slave: return null
+			else: return slave.serialize()),
+		"evil_archive": evil_archive.map(func(slave : Enemy):
+			if not slave: return null
+			else: return slave.serialize()),
+		"archive_level": archive_level,
+		"discounts": discounts,
+		"map" : Map.instance.serialize()
+	}
 
+	save_file.store_line(JSON.stringify(save_data))
+	
+		
+func has_save_file() -> bool:
+	return FileAccess.file_exists(save_path)
+
+func load_save() -> void:
+	var save_file : FileAccess = FileAccess.open(save_path, FileAccess.READ)
+	while save_file.get_position() < save_file.get_length():
+		var json_string = save_file.get_line()
+		var json = JSON.new()
+		var parse_result = json.parse(json_string)
+		
+		if not parse_result == OK:
+			print("JSON PARSE ERROR: ", json.get_error_message())
+			continue
+		
+		var data = json.data
+		
+		# Evil deck
+		evil_deck = []
+		for value in data["evil_deck"]:
+			if value == null: evil_deck.append(null)
+			else: evil_deck.append(Enemy.deserialize(value))
+		
+		# Evil archive
+		evil_archive = []
+		for value in data["evil_archive"]:
+			if value == null: evil_archive.append(null)
+			else: evil_archive.append(Enemy.deserialize(value))
+		
+		# Good boys
+		good_boys = []
+		for value in data["good_boys"]:
+			good_boys.append(Slave.deserialize(value))
+		
+		# Discounts
+		discounts = floor(data["discounts"])
+		
+		# Inventory
+		inventory = []
+		for value in data["inventory"]:
+			inventory.append(Item.deserialize(value))
+		
+		# Archive level
+		archive_level = floor(data["archive_level"])
+		
+		# Map
+		map_data = data["map"]
+		
+		## DEBUG
+		continue
+		for value in data.values():
+			if value is Array:
+				for element in value:
+					print(element)
+			else: print(value)
+	
+	
+	## DEBUG
+	return
+	# Deck
+	for enemy in evil_deck:
+		if not enemy: 
+			print("\n EMPTY SLOT")
+			continue
+		print("\n" + enemy.u_name)
+		print(enemy.weapon.name)
+		print(enemy.hat.name)
+		print(enemy.trinket1.name)
+		print(enemy.trinket2.name)
+
+func _prepare_good_boys() -> void:
+	good_boys = [SlavePool.fetch("blob"), SlavePool.fetch("blob"), SlavePool.fetch("blob")]
 
 func _prepare_deck() -> void:
 	# items
@@ -162,6 +259,14 @@ func arrange_evil_team() -> void:
 		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
 		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
 		CurrentRun.evil_boys.append(enemy)
+
+# Throws random item out if at 24
+func put_item_in_inventory(item: Item) -> void:
+	if CurrentRun.inventory.size() == 24:
+		var id = randi_range(0, 23)
+		SignalBus.lost_item.emit(CurrentRun.inventory.pop_at(id))
+	
+	CurrentRun.inventory.append(item)
 
 func arrange_difficult() -> void:
 	CurrentRun.evil_boys = []

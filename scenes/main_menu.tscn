@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://dyrtd13gpi41u"]
+[gd_scene load_steps=19 format=3 uid="uid://dyrtd13gpi41u"]
 
 [ext_resource type="Script" uid="uid://bgtuvu7j415s5" path="res://scripts/run/main_menu.gd" id="1_ekxnf"]
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="1_l6cm7"]
 [ext_resource type="Texture2D" uid="uid://dgy136hcry3qc" path="res://images/languages/russian.png" id="3_bqqt6"]
+[ext_resource type="Script" uid="uid://bg2spyp44xpw7" path="res://scripts/common/btn_localized.gd" id="3_tbmy8"]
 [ext_resource type="Texture2D" uid="uid://bv5ejcc3ftpul" path="res://images/languages/russian_unselect.png" id="3_wu84c"]
 [ext_resource type="Texture2D" uid="uid://bj8rgm4anxbfv" path="res://images/languages/english_unselect.png" id="5_rtw2f"]
 [ext_resource type="Texture2D" uid="uid://b23qmkqdemon6" path="res://images/languages/english.png" id="6_oa1go"]
@@ -30,6 +31,15 @@ bg_color = Color(0.690196, 0.67451, 0, 1)
 font = ExtResource("1_l6cm7")
 font_size = 64
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jk1qb"]
+bg_color = Color(0.703105, 0.770696, 0.993789, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5dd4i"]
+bg_color = Color(0.123761, 0.0260562, 0.525897, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lgwnu"]
+bg_color = Color(0.270588, 0.262745, 1, 1)
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -51,7 +61,8 @@ theme_override_font_sizes/font_size = 64
 theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
 theme_override_styles/normal = SubResource("StyleBoxFlat_wu84c")
-text = "Подготовка"
+script = ExtResource("3_tbmy8")
+string_id = &"prepare"
 
 [node name="Tutorial" type="Button" parent="."]
 layout_mode = 0
@@ -65,7 +76,8 @@ theme_override_font_sizes/font_size = 64
 theme_override_styles/hover = SubResource("StyleBoxFlat_rtw2f")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_oa1go")
 theme_override_styles/normal = SubResource("StyleBoxFlat_tbmy8")
-text = "Обучение"
+script = ExtResource("3_tbmy8")
+string_id = &"tutorial"
 
 [node name="Language_en" type="TextureButton" parent="."]
 layout_mode = 0
@@ -102,7 +114,23 @@ offset_bottom = 130.0
 label_settings = SubResource("LabelSettings_oa1go")
 script = ExtResource("7_oa1go")
 
+[node name="Continue" type="Button" parent="."]
+layout_mode = 0
+offset_left = 433.0
+offset_top = 102.0
+offset_right = 768.0
+offset_bottom = 237.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_l6cm7")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/hover = SubResource("StyleBoxFlat_jk1qb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5dd4i")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lgwnu")
+script = ExtResource("3_tbmy8")
+string_id = &"continue"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Tutorial" to="." method="_on_tutorial_pressed"]
 [connection signal="pressed" from="Language_en" to="." method="_on_switch_language" binds= ["en"]]
 [connection signal="pressed" from="Language_ru" to="." method="_on_switch_language" binds= ["ru"]]
+[connection signal="pressed" from="Continue" to="." method="_on_load_pressed"]

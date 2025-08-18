@@ -1,6 +1,6 @@
-extends Label
+extends Button
 
-class_name LabelLocalized
+class_name ButtonLocalized
 
 @export var string_id: StringName
 

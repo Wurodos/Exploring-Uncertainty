@@ -5,13 +5,17 @@
 
 [resource]
 script = ExtResource("1_fm67b")
-u_name = &"anvil"
-name = "Наковальня"
-desc = "КАЖДЫЕ ПОЛУЧЕННЫЕ 3 ВРЕДА ПРИНЕСУТ 1 МОЩЬ (ДЛИТСЯ 3 ХОДА)"
+required_harm = 3
+power_gain = 1
+turns = 3
 type = 1
 target = 2
 extra_hp = 10
 extra_speed = 0
 texture = ExtResource("2_i7h4p")
 cost = 6
+keywords = Array[String](["power"])
+u_name = &"anvil"
+name = "Наковальня"
+desc = "КАЖДЫЕ ПОЛУЧЕННЫЕ 3 ВРЕДА ПРИНЕСУТ 1 МОЩЬ (ДЛИТСЯ 3 ХОДА)"
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

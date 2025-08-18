@@ -37,6 +37,28 @@ func localize() -> void:
 	for i in range(info_count):
 		info.append(tr(u_name + "_info_" + str(i)))
 
+#func serialize() -> Dictionary:
+#	var data = super.serialize()
+#	data.merge({
+#		
+#	})
+#	return data
+#
+
+static func deserialize(data: Dictionary) -> Enemy:
+	var enemy : Enemy = SlavePool.fetch(data["u_name"])
+	
+	enemy.maxhp = data["maxhp"]
+	enemy.hp = data["hp"]
+	
+	enemy.weapon = Item.deserialize(data["weapon"])
+	enemy.hat = Item.deserialize(data["hat"])
+	enemy.trinket1 = Item.deserialize(data["trinket1"])
+	enemy.trinket2 = Item.deserialize(data["trinket2"])
+	
+	return enemy
+	
+
 # Override this
 func update_stats(node: SlaveNode) -> void:
 	pass

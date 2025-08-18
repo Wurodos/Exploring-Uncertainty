@@ -8,3 +8,17 @@ sell;Sell;Продать
 undress;Undress;Раздеть
 crit;CRIT!;КРИТ!
 tutorial;Tutorial;Обучение
+item_found;Item found!;Обнаружен предмет!
+item_lost;Item lost...;Предмет утерян...
+continue;Continue;Продолжить
+save;Save;Сохранить
+kw_power_name;Power;Мощь
+kw_power_desc;Increases inflicted HARM;Увеличивает причиняемый ВРЕД
+kw_luck_name;Luck;Удача
+kw_luck_desc;Increases probability of CRIT;Увеличивает шанс КРИТА
+kw_crit_name;CRIT;КРИТ
+kw_crit_desc;2x HARM;2x ВРЕД
+kw_shield_name;Shield;Щит
+kw_shield_desc;Halves received HARM;Получает только половину ВРЕДА
+kw_blasphemy_name;Blasphemy;Кощунство
+kw_blasphemy_desc;Half of inflicted HARM is converted to HEALTH;Лечит здоровье от половины причиняемого ВРЕДА

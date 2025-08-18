@@ -2,12 +2,16 @@ extends ColorRect
 
 class_name ItemEntry
 
+const kw_box_prefab = preload("res://prefabs/items/keyword_box.tscn")
+
 @onready var item_name : Label = $Name
 @onready var item_desc : Label = $Desc
 
 @onready var single_target: Control = $Single
 @onready var all_targets: Control = $All
 @onready var self_target: Control = $Self
+
+@onready var keyword_row: BoxContainer = $KeywordRow
 
 
 func apply(item: Item) -> void:
@@ -44,3 +48,12 @@ func apply(item: Item) -> void:
 	if item.extra_speed != 0:
 		$ExtraSpeed.visible = true
 		$ExtraSpeed/Label.text = str(item.extra_speed)
+	
+	while keyword_row.get_child_count() > 0:
+		keyword_row.get_child(0).free()
+	
+	for keyword : String in item.keywords:
+		var kw_box = kw_box_prefab.instantiate()
+		kw_box.get_node("Name").text = tr("kw_" + keyword + "_name")
+		kw_box.get_node("Desc").text = tr("kw_" + keyword + "_desc")
+		keyword_row.add_child(kw_box)

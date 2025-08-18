@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcemwbtv68enm"]
+
+[ext_resource type="Texture2D" uid="uid://dsg8rhc6kicjx" path="res://images/shapes/keyword_box.png" id="1_qvyrg"]
+[ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="2_igbkc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jej01"]
+font = ExtResource("2_igbkc")
+font_size = 32
+font_color = Color(1, 1, 0, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_aq8m5"]
+font = ExtResource("2_igbkc")
+font_size = 32
+font_color = Color(1, 1, 0, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="KeywordBox" type="TextureRect"]
+z_index = 10
+texture = ExtResource("1_qvyrg")
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 0
+offset_right = 197.0
+offset_bottom = 40.0
+label_settings = SubResource("LabelSettings_jej01")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Desc" type="Label" parent="."]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 55.0
+offset_right = 373.0
+offset_bottom = 197.0
+scale = Vector2(0.5, 0.5)
+label_settings = SubResource("LabelSettings_aq8m5")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

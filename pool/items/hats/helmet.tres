@@ -5,13 +5,15 @@
 
 [resource]
 script = ExtResource("1_5ckre")
-u_name = &"helmet"
-name = "Каска"
-desc = "ЩИТ 3 ХОДА"
+turns = 3
 type = 1
 target = 2
 extra_hp = 5
 extra_speed = 1
 texture = ExtResource("2_oc4hn")
 cost = 10
+keywords = Array[String](["shield"])
+u_name = &"helmet"
+name = "Каска"
+desc = "ЩИТ 3 ХОДА"
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

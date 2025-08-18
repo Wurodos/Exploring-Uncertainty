@@ -75,7 +75,12 @@ func _update_items() -> void:
 			item_node.toggle(false)
 		else: item_node.toggle(true)
 	
+	var disable_sell = CurrentRun.good_boys.size() == 1
 	for slave_node : SlaveTeamNode in $Slaves.get_children():
+		if disable_sell and slave_node.visible:
+			slave_node.btn_sell.visible = false
+		else: slave_node.btn_sell.visible = true
+		
 		slave_node.update_healing_cost(heal_multiplier, value, 10)
 
 
@@ -124,8 +129,7 @@ func _on_enter_govnov() -> void:
 	for k in range(3):
 		var slave = SlavePool.fetch("blob")
 	
-		slave.base_maxhp += randi_range(-10, 10) 
-		slave.maxhp = slave.base_maxhp
+		slave.maxhp += randi_range(-10, 10) 
 		
 		slave.hp = randi_range(1, slave.maxhp)
 		var item_node: ItemShop = item_shop_prefab.instantiate()

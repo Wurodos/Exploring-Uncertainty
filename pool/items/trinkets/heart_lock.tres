@@ -5,13 +5,15 @@
 
 [resource]
 script = ExtResource("1_6nu6c")
-u_name = &"heart_lock"
-name = "Сердечный Замок"
-desc = "НАЧАЛО БОЯ: ЩИТ 1 ХОД"
+turns = 1
 type = 2
 target = 2
 extra_hp = 4
 extra_speed = 0
 texture = ExtResource("2_bs1fd")
 cost = 4
+keywords = Array[String](["shield"])
+u_name = &"heart_lock"
+name = "Сердечный Замок"
+desc = "НАЧАЛО БОЯ: ЩИТ 1 ХОД"
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

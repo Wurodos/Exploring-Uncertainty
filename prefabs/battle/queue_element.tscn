@@ -12,3 +12,6 @@ layout_mode = 0
 offset_right = 87.0
 offset_bottom = 87.0
 expand_mode = 1
+
+[connection signal="mouse_entered" from="Body" to="." method="_on_body_mouse_entered"]
+[connection signal="mouse_exited" from="Body" to="." method="_on_body_mouse_exited"]

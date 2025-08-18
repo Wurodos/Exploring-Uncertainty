@@ -15,15 +15,16 @@
 [ext_resource type="Texture2D" uid="uid://bnm1bapsll7sa" path="res://images/rooms/govnov.png" id="6_m335s"]
 [ext_resource type="PackedScene" uid="uid://dj5w5iqx004t4" path="res://prefabs/battle/item_entry.tscn" id="7_nakos"]
 [ext_resource type="Texture2D" uid="uid://bo8wxy1ul73tg" path="res://images/rooms/37.png" id="7_sq6bu"]
+[ext_resource type="Texture2D" uid="uid://k20uxq34h120" path="res://images/rooms/comms.png" id="8_5u2yt"]
 [ext_resource type="Texture2D" uid="uid://bdkbuhwojnmqq" path="res://images/rooms/fog.png" id="8_m335s"]
 [ext_resource type="Script" uid="uid://dvl21h34uashq" path="res://scripts/map/city_window.gd" id="11_c70he"]
-[ext_resource type="Texture2D" uid="uid://ch6hg4b6lngkw" path="res://images/backdrops/found_item.png" id="12_2cfcp"]
 [ext_resource type="Script" uid="uid://ql10jr5klb8g" path="res://scripts/map/govnov_window.gd" id="12_4b7dj"]
 [ext_resource type="Texture2D" uid="uid://dhfpnnlwg86d" path="res://images/backdrops/city.png" id="12_mo32q"]
-[ext_resource type="Script" uid="uid://nfc35q5k6hhx" path="res://scripts/map/found_item_window.gd" id="12_y2ir2"]
+[ext_resource type="Script" uid="uid://bg2spyp44xpw7" path="res://scripts/common/btn_localized.gd" id="12_y2ir2"]
 [ext_resource type="Texture2D" uid="uid://jhgrrel3ox4a" path="res://images/backdrops/govnov.png" id="13_sq6bu"]
 [ext_resource type="Texture2D" uid="uid://bs1oxtclo4qgp" path="res://images/icons/coin.png" id="14_6k6j1"]
 [ext_resource type="LabelSettings" uid="uid://34c71nyrmk01" path="res://text/labelsettings/item_name.tres" id="15_m335s"]
+[ext_resource type="Script" uid="uid://db0mfu8jn8b8j" path="res://scripts/map/popups.gd" id="23_5u2yt"]
 
 [sub_resource type="Animation" id="Animation_5u2yt"]
 length = 0.001
@@ -116,12 +117,6 @@ font_size = 64
 outline_size = 12
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_2cfcp"]
-font = ExtResource("1_4xfga")
-font_size = 40
-outline_size = 16
-outline_color = Color(0, 0, 0, 1)
-
 [node name="Map" type="Node2D"]
 script = ExtResource("1_blm8a")
 size = 17
@@ -129,14 +124,16 @@ branch_chance = 0.3
 city_rate = 0.06
 cherv_rate = 0.15
 govnov_rate = 0.05
-steps = 300
+comms_rate = 0.04
+steps = 100
 room_sprites = Dictionary[int, Texture2D]({
 0: ExtResource("2_p7tei"),
 1: ExtResource("3_c70he"),
 2: ExtResource("4_mo32q"),
 3: ExtResource("5_6k6j1"),
 4: ExtResource("6_m335s"),
-5: ExtResource("7_sq6bu")
+5: ExtResource("7_sq6bu"),
+6: ExtResource("8_5u2yt")
 })
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -167,6 +164,7 @@ autoplay = "fog"
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_blm8a")
 speed = 600.0
+drag_multiplier = 1.5
 bound = 1100.0
 
 [node name="UI" type="Control" parent="Camera2D"]
@@ -188,6 +186,15 @@ theme_override_fonts/font = ExtResource("1_4xfga")
 theme_override_font_sizes/font_size = 48
 text = "Бригада"
 
+[node name="Save" type="Button" parent="Camera2D/UI"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 527.0
+offset_right = 204.0
+offset_bottom = 611.0
+script = ExtResource("12_y2ir2")
+string_id = &"save"
+
 [node name="Steps" type="Label" parent="Camera2D/UI"]
 layout_mode = 0
 offset_left = 436.0
@@ -197,59 +204,6 @@ text = "200"
 label_settings = SubResource("LabelSettings_4b7dj")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="FoundItem" type="Control" parent="Camera2D/UI"]
-anchors_preset = 0
-script = ExtResource("12_y2ir2")
-
-[node name="ColorRect" type="ColorRect" parent="Camera2D/UI/FoundItem"]
-layout_mode = 0
-offset_left = -193.0
-offset_top = -113.0
-offset_right = 1191.0
-offset_bottom = 636.0
-color = Color(0, 0, 0, 0.513726)
-
-[node name="BG" type="TextureRect" parent="Camera2D/UI/FoundItem"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 273.0
-offset_top = 98.0
-offset_right = 873.0
-offset_bottom = 498.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("12_2cfcp")
-
-[node name="Close" type="Button" parent="Camera2D/UI/FoundItem"]
-layout_mode = 0
-offset_left = 301.0
-offset_top = 124.0
-offset_right = 401.0
-offset_bottom = 224.0
-focus_mode = 0
-theme_override_fonts/font = ExtResource("1_4xfga")
-theme_override_font_sizes/font_size = 64
-text = "X"
-
-[node name="Label" type="Label" parent="Camera2D/UI/FoundItem"]
-layout_mode = 0
-offset_left = 417.0
-offset_top = 150.0
-offset_right = 892.0
-offset_bottom = 220.0
-text = "Обнаружен предмет!"
-label_settings = SubResource("LabelSettings_2cfcp")
-
-[node name="Item" type="TextureRect" parent="Camera2D/UI/FoundItem"]
-layout_mode = 0
-offset_left = 564.0
-offset_top = 283.0
-offset_right = 685.0
-offset_bottom = 404.0
-expand_mode = 1
 
 [node name="GovnovWindow" type="Control" parent="Camera2D/UI"]
 visible = false
@@ -504,7 +458,6 @@ offset_bottom = 364.0
 mouse_filter = 2
 
 [node name="TeamWindow" type="Control" parent="Camera2D/UI"]
-visible = false
 anchors_preset = 0
 offset_left = 106.0
 offset_top = 57.0
@@ -528,6 +481,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_gldc4")
+
+[node name="Slaves" type="Control" parent="Camera2D/UI/TeamWindow"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Left" parent="Camera2D/UI/TeamWindow/Slaves" instance=ExtResource("4_2lpho")]
+layout_mode = 1
+offset_top = 235.0
+offset_bottom = 319.0
+
+[node name="Middle" parent="Camera2D/UI/TeamWindow/Slaves" instance=ExtResource("4_2lpho")]
+layout_mode = 1
+offset_left = 398.0
+offset_top = 307.0
+offset_right = 491.0
+offset_bottom = 391.0
+
+[node name="Right" parent="Camera2D/UI/TeamWindow/Slaves" instance=ExtResource("4_2lpho")]
+layout_mode = 1
+offset_left = 670.0
+offset_top = 242.0
+offset_right = 763.0
+offset_bottom = 326.0
 
 [node name="ItemGrid" type="VBoxContainer" parent="Camera2D/UI/TeamWindow"]
 z_index = 1
@@ -558,28 +535,6 @@ layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="Slaves" type="Control" parent="Camera2D/UI/TeamWindow"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Left" parent="Camera2D/UI/TeamWindow/Slaves" instance=ExtResource("4_2lpho")]
-layout_mode = 1
-
-[node name="Middle" parent="Camera2D/UI/TeamWindow/Slaves" instance=ExtResource("4_2lpho")]
-layout_mode = 1
-offset_left = 398.0
-offset_top = 166.0
-offset_right = 491.0
-offset_bottom = 250.0
-
-[node name="Right" parent="Camera2D/UI/TeamWindow/Slaves" instance=ExtResource("4_2lpho")]
-layout_mode = 1
-offset_left = 670.0
-offset_top = 289.0
-offset_right = 763.0
-offset_bottom = 373.0
-
 [node name="ItemEntry" parent="Camera2D/UI/TeamWindow" instance=ExtResource("7_nakos")]
 visible = false
 layout_mode = 0
@@ -600,6 +555,13 @@ theme_override_fonts/font = ExtResource("1_4xfga")
 theme_override_font_sizes/font_size = 64
 text = "X"
 
+[node name="Popups" type="Control" parent="Camera2D/UI"]
+z_index = 10
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("23_5u2yt")
+
 [node name="Fade" type="ColorRect" parent="Camera2D/UI"]
 layout_mode = 0
 offset_left = -303.0
@@ -610,7 +572,7 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
 [connection signal="pressed" from="Camera2D/UI/ShowTeam" to="Camera2D/UI/TeamWindow" method="_on_show_team_pressed"]
-[connection signal="pressed" from="Camera2D/UI/FoundItem/Close" to="Camera2D/UI/FoundItem" method="_on_close_pressed"]
+[connection signal="pressed" from="Camera2D/UI/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="Camera2D/UI/GovnovWindow/Close" to="Camera2D/UI/GovnovWindow" method="_on_close_pressed"]
 [connection signal="pressed" from="Camera2D/UI/CityWindow/Close" to="Camera2D/UI/CityWindow" method="_on_close_pressed"]
 [connection signal="pressed" from="Camera2D/UI/TeamWindow/Close" to="Camera2D/UI/TeamWindow" method="_on_close_pressed"]

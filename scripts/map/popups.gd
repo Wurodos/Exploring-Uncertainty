@@ -1,0 +1,37 @@
+extends Node
+
+const _found_item_prefab = preload("res://prefabs/map/found_item.tscn")
+const _lost_item_prefab = preload("res://prefabs/map/lost_item.tscn")
+
+var popup_count: int = 0
+var last_state: Game.State
+
+func _ready() -> void:
+	SignalBus.found_item.connect(_on_found_item)
+	SignalBus.lost_item.connect(_on_lost_item)
+
+func _on_popup_closed():
+	popup_count -= 1
+	if popup_count == 0:
+		CurrentRun.state = last_state
+
+func _on_found_item():
+	if CurrentRun.state != Game.State.Popup:
+		last_state = CurrentRun.state
+	
+	CurrentRun.state = Game.State.Popup
+	popup_count += 1
+	var popup = _found_item_prefab.instantiate()
+	add_child(popup)
+	popup.tree_exited.connect(_on_popup_closed)
+
+func _on_lost_item(item: Item):
+	if CurrentRun.state != Game.State.Popup:
+		last_state = CurrentRun.state
+	
+	CurrentRun.state = Game.State.Popup
+	popup_count += 1
+	var popup = _lost_item_prefab.instantiate()
+	popup.apply(item)
+	add_child(popup)
+	popup.tree_exited.connect(_on_popup_closed)

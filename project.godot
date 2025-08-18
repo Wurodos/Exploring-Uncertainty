@@ -26,6 +26,11 @@ Action="*res://scripts/battle/action.gd"
 Gallery="*res://scripts/utils/gallery.gd"
 ReptilePool="*res://scripts/reptiles/reptile_pool.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+
 [input]
 
 up={

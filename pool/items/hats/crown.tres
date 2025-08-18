@@ -5,13 +5,15 @@
 
 [resource]
 script = ExtResource("1_l8oqh")
-u_name = &"crown"
-name = "Корона"
-desc = "-1 ИНИЦИАТИВЫ"
+speed_loss = 1
 type = 1
 target = 0
 extra_hp = 20
 extra_speed = -1
 texture = ExtResource("2_g3t71")
 cost = 12
+keywords = Array[String]([])
+u_name = &"crown"
+name = "Корона"
+desc = "-1 ИНИЦИАТИВЫ"
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

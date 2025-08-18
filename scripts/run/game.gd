@@ -2,7 +2,7 @@ extends Node
 
 class_name Game
 
-enum State {Map, Battle, Window}
+enum State {Map, Battle, Window, Popup}
 
 const battle_scene = preload("res://scenes/battle.tscn")
 const map_scene = preload("res://scenes/map.tscn")
@@ -15,18 +15,18 @@ func _ready() -> void:
 	
 	SignalBus.battle_encounter.connect(_on_battle_encounter)
 	SignalBus.end_battle.connect(_on_end_battle)
-	
-	CurrentRun.good_boys = [SlavePool.fetch("blob"), SlavePool.fetch("blob"),
-	  SlavePool.fetch("blob")
-	]
-	
-	#CurrentRun.good_boys[0].hp = 1
-	#CurrentRun.good_boys[1].hp = 1
-	#CurrentRun.good_boys[2].hp = 1
+	SignalBus.play_music.emit("map")
 	
 	map_node = map_scene.instantiate()
 	add_child(map_node)
-	map_node.generate_floor()
+	
+	if CurrentRun.map_data.is_empty():
+		map_node.generate_floor()
+	else: map_node.generate_from_data(CurrentRun.map_data)
+	
+	## DEBUG -> Inventory limit
+	#for i in range(20):
+	#	CurrentRun.inventory.append(ItemPool.fetch("anvil"))
 	
 
 func _on_battle_encounter() -> void:
@@ -42,4 +42,7 @@ func _on_end_battle() -> void:
 	
 	map_node.visible = true
 	map_node.camera.make_current()
-	CurrentRun.state = State.Map
+	SignalBus.play_music.emit("map")
+	
+	if CurrentRun.state != State.Popup:
+		CurrentRun.state = State.Map

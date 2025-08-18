@@ -1,15 +1,24 @@
 extends Node
 
-#
+# ====================
 # Common
-#
+# ====================
 
 signal locale_changed
 
 # Stops existing music, plays new
 signal play_music(track: String)
+
+signal stop_music
+
 # Doesn't stop other sounds
 signal play_sound(track: String)
+
+# ====================
+# POPUPS
+# ====================
+
+signal lost_item(item: Item)
 
 # ====================
 # Change scene
@@ -26,6 +35,7 @@ signal refresh
 
 signal mouse_up
 signal mouse_dragged(pos: Vector2)
+signal mouse_delta(delta: Vector2)
 signal mouse_right_down
 signal mouse_right_up
 
@@ -41,6 +51,9 @@ signal action_ended
 signal slave_selected(slave: SlaveNode)
 signal slave_mouse_entered(slave: SlaveNode)
 signal slave_mouse_exited(slave: SlaveNode)
+
+signal speed_queue_mouse_entered(slave: Slave)
+signal speed_queue_mouse_exit(slave: Slave)
 
 signal slave_info(slave: SlaveNode)
 

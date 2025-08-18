@@ -50,7 +50,7 @@ func _present_choice() -> void:
 
 func _on_bag_mouse_entered() -> void:
 	if ItemDraggable.selected:
-		CurrentRun.inventory.append(ItemDraggable.selected.held)
+		CurrentRun.put_item_in_inventory(ItemDraggable.selected.held)
 		if items.is_empty():
 			visible = false
 			SignalBus.end_battle.emit()

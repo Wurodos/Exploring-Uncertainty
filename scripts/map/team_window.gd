@@ -66,23 +66,19 @@ func _on_mouse_up() -> void:
 		
 		var old_item : Item = slave_node.held.equip(item_node.held, trinket_id)
 		if old_item.is_item():
-			CurrentRun.inventory.append(old_item)
-			SignalBus.add_item.emit(old_item)
+			CurrentRun.put_item_in_inventory(old_item)
 		
 		slave_node.apply(slave_node.held, SlaveTeamNode.Type.Brigade)
 		
 		CurrentRun.inventory.erase(item_node.held)
-		item_node.queue_free()
+		refresh_inventory()
 		
 func _on_add_item(item: Item) -> void:
-	
-	
-	var item_draggable : ItemDraggable = item_draggable_prefab.instantiate()
-	item_draggable.apply(item)
-	item_grid.add_to_grid(item_draggable)
+	CurrentRun.put_item_in_inventory(item)
+	refresh_inventory()
 
 func _on_show_item_info(item: Item) -> void:
-	if CurrentRun.state != Game.State.Map: return
+	if not visible: return
 	_hide_info = false
 	$ItemEntry.visible = true
 	$ItemEntry.apply(item)
@@ -94,7 +90,9 @@ func _on_hide_item_info() -> void:
 
 func _on_show_team_pressed() -> void:
 	refresh_inventory()
+	CurrentRun.state = Game.State.Window
 	visible = true
 
 func _on_close_pressed() -> void:
+	CurrentRun.state = Game.State.Map
 	visible = false

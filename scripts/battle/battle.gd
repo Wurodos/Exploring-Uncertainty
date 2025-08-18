@@ -15,6 +15,7 @@ const queue_element = preload("res://prefabs/battle/queue_element.tscn")
 var speed_queue: Array[Slave] = []
 var current_slave_position : int = 0
 var current_slave: Slave
+var current_slave_node: SlaveNode
 
 var selected_sender: SlaveNode
 var selected_victim: SlaveNode
@@ -29,6 +30,10 @@ func _ready() -> void:
 	SignalBus.new_turn.connect(_on_new_turn)
 	SignalBus.mouse_dragged.connect(_on_mouse_dragged)
 	SignalBus.mouse_up.connect(_on_mouse_released)
+	
+	SignalBus.speed_queue_mouse_entered.connect(_on_speed_queue_mouse_entered)
+	SignalBus.speed_queue_mouse_exit.connect(_on_speed_queue_mouse_exited)
+	
 	SignalBus.slave_selected.connect(_on_slave_selected)
 	SignalBus.slave_mouse_entered.connect(_on_slave_mouse_entered)
 	SignalBus.slave_mouse_exited.connect(_on_slave_mouse_exited)
@@ -133,6 +138,7 @@ func _on_new_turn() -> void:
 	
 	queue_node.get_child(current_slave_position).toggle_select(true)
 	current_slave = speed_queue[current_slave_position]
+	current_slave_node = _find_slave_node(current_slave)
 	
 	for slave_node in good_team.boys_nodes:
 		if slave_node.held == current_slave:
@@ -189,7 +195,7 @@ func _on_mouse_dragged(pos: Vector2):
 		if selected_victim:
 			line2d.points = [selected_sender.line_start, selected_victim.line_end]
 		else:
-			line2d.points = [selected_sender.line_start, line2d.to_local(pos)]
+			line2d.points = [selected_sender.line_start, pos]
 	
 func _on_mouse_released():
 	is_line = false
@@ -230,11 +236,29 @@ func _on_slave_mouse_exited(slave_node: SlaveNode):
 			selected_victim.toggle_ellipse(false)
 		selected_victim = null
 
+func _on_speed_queue_mouse_entered(slave: Slave):
+	if slave == current_slave: return
+	
+	var slave_node = _find_slave_node(slave)
+	current_slave_node.arrow.visible = false
+	slave_node.arrow.visible = true
+	slave_node.arrow_animation.play("bounce")
+
+func _on_speed_queue_mouse_exited(slave: Slave):
+	if slave == current_slave: return
+	var slave_node = _find_slave_node(slave)
+	
+	if not current_slave_node.team.is_evil:
+		current_slave_node.arrow.visible = true
+		
+	slave_node.arrow.visible = false
+	slave_node.arrow_animation.play("RESET")
 
 func _on_good_won() -> void:
 	print("Good won!")
 	is_marauder = true
 	CurrentRun.good_boys = CurrentRun.good_boys.filter(func(slave: Slave): return slave.is_alive)
+	SignalBus.stop_music.emit()
 	
 	for slave : Slave in CurrentRun.good_boys:
 		slave.speed = slave.base_speed
@@ -242,11 +266,25 @@ func _on_good_won() -> void:
 	loot_node.start_marauder()
 	loot_node.visible = true
 	
+	## DEBUG -> Inventory limit
+	#for i in range(8): CurrentRun.put_item_in_inventory(ItemPool.fetch("bomb"))
+	
 
 func _on_evil_won() -> void:
 	print("Evil won!")
 	SignalBus.new_turn.disconnect(_on_new_turn)
 	$AnimationPlayer.play("fail")
+
+func _find_slave_node(slave: Slave) -> SlaveNode:
+	var slave_node: SlaveNode = null
+	var id = good_team.boys_nodes.find_custom(func(node): return node.held == slave)
+	
+	if id != -1: 
+		slave_node = good_team.boys_nodes[id]
+	else:
+		id = evil_team.boys_nodes.find_custom(func(node): return node.held == slave)
+		slave_node = evil_team.boys_nodes[id]
+	return slave_node
 
 # ====================
 # Debug panel

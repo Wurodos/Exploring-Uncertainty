@@ -51,6 +51,7 @@ offset_right = 66.5
 offset_bottom = 55.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 expand_mode = 1
 
 [node name="Weapon" type="TextureRect" parent="."]
@@ -59,6 +60,7 @@ offset_left = 61.0
 offset_top = -2.0
 offset_right = 151.0
 offset_bottom = 88.0
+mouse_filter = 2
 expand_mode = 1
 
 [node name="Hat" type="TextureRect" parent="."]
@@ -67,6 +69,7 @@ offset_left = 3.0
 offset_top = -77.0
 offset_right = 89.0
 offset_bottom = 9.0
+mouse_filter = 2
 expand_mode = 1
 
 [node name="Trinket2" type="TextureRect" parent="."]
@@ -75,6 +78,7 @@ offset_left = -33.0
 offset_top = 37.0
 offset_right = 16.0
 offset_bottom = 86.0
+mouse_filter = 2
 expand_mode = 1
 
 [node name="Trinket1" type="TextureRect" parent="."]
@@ -83,6 +87,7 @@ offset_left = -9.0
 offset_top = 48.0
 offset_right = 40.0
 offset_bottom = 97.0
+mouse_filter = 2
 expand_mode = 1
 
 [node name="HPBar" type="ProgressBar" parent="."]
@@ -90,6 +95,7 @@ layout_mode = 0
 offset_top = -66.0
 offset_right = 93.0
 offset_bottom = -41.0
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_nrvhk")
 theme_override_styles/fill = SubResource("StyleBoxFlat_y6rnb")
 value = 100.0

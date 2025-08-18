@@ -1,9 +1,19 @@
 extends Camera2D
 
 @export var speed : float
+@export var drag_multiplier: float
 @export var bound : float
 
 var current_speed : float
+
+func _ready() -> void:
+	SignalBus.mouse_delta.connect(_on_mouse_dragged)
+
+func _on_mouse_dragged(delta: Vector2):
+	if CurrentRun.state == Game.State.Map:
+		delta *= drag_multiplier
+		position.x = clamp(position.x - delta.x, -bound, bound)
+		position.y = clamp(position.y - delta.y, -bound, bound)
 
 func _process(delta: float) -> void:
 	if Input.is_physical_key_pressed(KEY_SHIFT):

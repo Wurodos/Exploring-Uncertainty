@@ -7,7 +7,8 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		SignalBus.mouse_dragged.emit(event.position - screen_size*0.5)
+		SignalBus.mouse_dragged.emit(get_viewport().get_mouse_position() - screen_size*0.5)
+		SignalBus.mouse_delta.emit(event.screen_relative)
 	
 	if event is InputEventMouseButton:
 		if event.is_released():

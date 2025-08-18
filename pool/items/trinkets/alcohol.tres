@@ -5,13 +5,16 @@
 
 [resource]
 script = ExtResource("1_oapy2")
-u_name = &"alcohol"
-name = "Алкоголь"
-desc = "НАЧАЛО ХОДА: +1 МОЩЬ, ПОТЕРЯ 2 ХП"
+power_gain = 1
+health_loss = 2
 type = 2
 target = 2
 extra_hp = 0
 extra_speed = 0
 texture = ExtResource("2_wquac")
 cost = 5
+keywords = Array[String](["power"])
+u_name = &"alcohol"
+name = "Алкоголь"
+desc = "НАЧАЛО ХОДА: +1 МОЩЬ, ПОТЕРЯ 2 ХП"
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

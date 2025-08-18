@@ -5,13 +5,15 @@
 
 [resource]
 script = ExtResource("1_vvdgr")
-u_name = &"razor"
-name = "Бритва"
-desc = "4 ВРЕДА, +1 МОЩЬ СЕБЕ"
+harm = 4
 type = 0
 target = 0
 extra_hp = 0
 extra_speed = 0
 texture = ExtResource("2_cbwy8")
 cost = 7
+keywords = Array[String](["power"])
+u_name = &"razor"
+name = "Бритва"
+desc = "4 ВРЕДА, +1 МОЩЬ СЕБЕ"
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

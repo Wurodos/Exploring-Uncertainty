@@ -6,13 +6,14 @@
 [resource]
 script = ExtResource("1_6d5wu")
 harm = 10
-u_name = &"bomb"
-name = "Бомба"
-desc = "8 ВРЕДА ПРИ ПЕРВОЙ АТАКЕ"
 type = 2
 target = 0
 extra_hp = 0
 extra_speed = 0
 texture = ExtResource("2_sj7jo")
 cost = 4
+keywords = Array[String]([])
+u_name = &"bomb"
+name = "Бомба"
+desc = "8 ВРЕДА ПРИ ПЕРВОЙ АТАКЕ"
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

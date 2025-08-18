@@ -3,6 +3,10 @@ extends Node
 var deck : Array[Item] = []
 
 func _ready() -> void:
+	if CurrentRun.is_saved_game:
+		_end_draft()
+		return
+	
 	$Label.text = tr("pick_one")
 	
 	for i in range(3):
@@ -20,12 +24,15 @@ func _ready() -> void:
 	deck.shuffle()
 	_next()
 
+func _end_draft():
+	$ItemRow.visible = false
+	$Label.visible = false
+	$Start.text = tr("purge")
+	$Start.visible = true
+
 func _next() -> void:
 	if deck.is_empty():
-		$ItemRow.visible = false
-		$Label.visible = false
-		$Start.text = tr("purge")
-		$Start.visible = true
+		_end_draft()
 		return
 	
 	for i in range(3):
@@ -35,7 +42,7 @@ func _next() -> void:
 		
 
 func _buy(item_node: ItemShop) -> void:
-	CurrentRun.inventory.append(item_node.held)
+	CurrentRun.put_item_in_inventory(item_node.held)
 	$ItemEntry.visible = false
 	_next()
 

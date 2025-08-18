@@ -5,13 +5,16 @@
 
 [resource]
 script = ExtResource("1_ly2o0")
-u_name = &"obsidian"
-name = "Обсидиан"
-desc = "НАЧАЛО БОЯ: +1 МОЩЬ, +1 УДАЧА"
+power_gain = 1
+luck_gain = 1
 type = 2
 target = 2
 extra_hp = 1
 extra_speed = 1
 texture = ExtResource("2_ly2o0")
 cost = 4
+keywords = Array[String](["power", "luck"])
+u_name = &"obsidian"
+name = "Обсидиан"
+desc = "НАЧАЛО БОЯ: +1 МОЩЬ, +1 УДАЧА"
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

@@ -40,6 +40,7 @@ const _dcol = [0,0,+1,-1]
 @export var city_rate: float
 @export var cherv_rate: float
 @export var govnov_rate: float
+@export var comms_rate: float
 @export var steps: int
 
 
@@ -55,13 +56,15 @@ var is_encountering: bool = false
 var since_last_battle : int = 0
 var since_last_item: int = 0
 
+static var instance: Map
 
 func _ready() -> void:
+	instance = self
 	$Camera2D/UI/ShowTeam.text = tr("brigade")
 	
 	$Camera2D.make_current()
 	$Camera2D/UI/Steps.text = str(steps)
-	
+
 func _process(delta: float) -> void:
 	if CurrentRun.state != Game.State.Map: return
 	
@@ -140,16 +143,58 @@ func encounter(room: Room) -> void:
 			CurrentRun.arrange_difficult()
 			$AnimationPlayer.play("battle_start")
 			await $AnimationPlayer.animation_finished
+			SignalBus.play_music.emit("battle_difficult")
 			SignalBus.battle_encounter.emit()
 		Room.Type.Reptile:
 			CurrentRun.arrange_boss()
 			$AnimationPlayer.play("battle_start")
 			await $AnimationPlayer.animation_finished
 			SignalBus.battle_encounter.emit()
+		Room.Type.Comms:
+			pass
 	$AnimationPlayer.play("RESET")
 
 func room_at(row: int, col: int) -> Room:
 	return room_parent.get_node_or_null(str(row) + "_" + str(col))
+
+func generate_from_data(data: Dictionary) -> void:
+	for i in range(size + 2):
+		space_taken.append([])
+		for j in range(size + 2):
+			space_taken[i].append(false)
+	
+	since_last_battle = data["since_last_battle"]
+	since_last_item = data["since_last_item"]
+	
+	party_col = data["party_col"]
+	party_row = data["party_row"]
+	
+	steps = data["steps"]
+	$Camera2D/UI/Steps.text = str(steps)
+	
+	_initialize_fog()
+	
+	for room_data in data["rooms"]:
+		var room: Room = add_room(room_data["row"], room_data["col"])
+		room.type = floor(room_data["type"])
+		room.sprite.texture = room_sprites[room.type]
+		
+		if room.type == Room.Type.City:
+			room.visited = room_data["visited"]
+			if room.visited: _explore(room.row, room.col)
+			
+			room.flag = room_data["flag"]
+			if room.flag: room.sprite.texture = Gallery.img_free_city
+			
+			room.heal_used = room_data["heal_used"]
+			
+			for item_data: Dictionary in room_data["items"]:
+				room.items.append(Item.deserialize(item_data))
+		if room.type == Room.Type.Purged:
+			_explore(room.row, room.col)
+		
+	_explore(party_row, party_col)
+	player_node.global_position = room_at(party_row, party_col).global_position
 
 func generate_floor() -> void:
 	
@@ -229,6 +274,7 @@ func _add_structures() -> void:
 	var city_n = floor(all_rooms.size()*city_rate)
 	var cherv_n = floor(all_rooms.size()*cherv_rate)
 	var govnov_n = floor(all_rooms.size()*govnov_rate)
+	var comms_n = floor(all_rooms.size()*comms_rate)
 	
 	
 	for room : Room in all_rooms:
@@ -243,6 +289,9 @@ func _add_structures() -> void:
 		elif govnov_n > 0 and not _is_adjacent_to(room.row, room.col, Room.Type.Govnov):
 			room.type = Room.Type.Govnov
 			govnov_n -= 1
+		elif comms_n > 0 and not _is_adjacent_to(room.row, room.col, Room.Type.Comms):
+			room.type = Room.Type.Comms
+			comms_n -= 1
 		
 		room.sprite.texture = room_sprites[room.type]
 
@@ -289,3 +338,17 @@ func _explore(row: int, col: int):
 	
 	
 # end
+
+func serialize() -> Dictionary:
+	return {
+		"rooms": room_parent.get_children().map(func(room: Room):
+			return room.serialize()),
+		"party_col": party_col,
+		"party_row": party_row,
+		"since_last_battle": since_last_battle,
+		"since_last_item": since_last_item,
+		"steps": steps
+	}
+
+func _on_save_pressed() -> void:
+	CurrentRun.save_game()
