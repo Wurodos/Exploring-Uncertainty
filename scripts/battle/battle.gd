@@ -166,11 +166,18 @@ func _on_slave_death(slave_node: SlaveNode, is_loot: bool = true) -> void:
 	
 	for i in range(speed_queue.size()):
 		if speed_queue[i] == slave_node.held:
-			if i <= current_slave_position:
+			if i < current_slave_position:
 				current_slave_position -= 1
 			
 			queue_node.get_child(i).free()
 			speed_queue.remove_at(i)
+			
+			if i == current_slave_position:
+				slave_node.toggle_arrow(false)
+				current_slave_position -= 1
+				
+				# dirty hack, can cause issues later
+				get_tree().create_timer(1).timeout.connect(func(): SignalBus.new_turn.emit())
 			break
 	
 	if good_team.boys.is_empty():
@@ -297,3 +304,7 @@ func _on_newturn_pressed() -> void:
 func _on_lower_hp_pressed() -> void:
 	evil_team.boys_nodes[1].set_hp(1, false)
 	evil_team.boys_nodes[2].set_hp(1, false)
+
+
+func _on_restart_pressed() -> void:
+	get_tree().quit()

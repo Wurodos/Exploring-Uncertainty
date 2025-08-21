@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://depp1uisw6gfy"]
+
+[ext_resource type="Script" uid="uid://cyy5g4ohf44d1" path="res://scripts/items/hats/boot.gd" id="1_h4sjr"]
+[ext_resource type="Texture2D" uid="uid://1r6dukld4kxf" path="res://images/items/leather-boot.png" id="2_fimbi"]
+
+[resource]
+script = ExtResource("1_h4sjr")
+heal = 2
+harm = 4
+type = 1
+target = 0
+extra_hp = 3
+extra_speed = 2
+texture = ExtResource("2_fimbi")
+cost = 4
+keywords = Array[String]([])
+u_name = &""
+name = ""
+desc = ""
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

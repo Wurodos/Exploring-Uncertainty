@@ -19,6 +19,10 @@ func _ready() -> void:
 	SignalBus.govnov_heal.connect(_on_heal)
 	SignalBus.show_item_info.connect(_on_show_item_info)
 	SignalBus.hide_item_info.connect(_on_hide_item_info)
+	
+	for slave_node : SlaveTeamNode in $Slaves.get_children():
+		var captured = slave_node
+		slave_node.sell.connect(func(): _sell_slave(captured))
 
 func _sell(item_node: ItemShop) -> void:
 	SignalBus.play_sound.emit("shop")
@@ -110,7 +114,6 @@ func _on_enter_govnov() -> void:
 		var slave_node : SlaveTeamNode = $Slaves.get_child(i)
 		slave_node.visible = true
 		slave_node.apply(slave, SlaveTeamNode.Type.Govnov)
-		slave_node.sell.connect(func(): _sell_slave(slave_node))
 		slave_node.update_healing_cost(heal_multiplier, value, 10)
 		i += 1
 	for j in range(i,3): $Slaves.get_child(j).visible = false

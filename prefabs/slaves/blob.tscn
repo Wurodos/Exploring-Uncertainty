@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ot7y20rg1fqo"]
+[gd_scene load_steps=31 format=3 uid="uid://ot7y20rg1fqo"]
 
 [ext_resource type="Texture2D" uid="uid://bvt0n20v88f7o" path="res://images/slaves/blob.png" id="1_fhcuj"]
 [ext_resource type="Script" uid="uid://de24o14tl4lyy" path="res://scripts/slaves/slave_battle_node.gd" id="1_kr451"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dxa7wr6gumrrb" path="res://images/buffs/anvil.png" id="6_8sljb"]
 [ext_resource type="Texture2D" uid="uid://dhmqbwahk027p" path="res://images/icons/middle.png" id="6_gppif"]
 [ext_resource type="Texture2D" uid="uid://orgdll7utn86" path="res://images/icons/bottom.png" id="7_8sljb"]
+[ext_resource type="Texture2D" uid="uid://nknu23hrvind" path="res://images/buffs/appetite.png" id="7_erpc0"]
 [ext_resource type="Texture2D" uid="uid://ctm4vajohb528" path="res://images/shapes/arrow.png" id="11_5t34c"]
 [ext_resource type="Texture2D" uid="uid://ds35lotmqbcya" path="res://images/icons/harm.png" id="11_7y33p"]
 [ext_resource type="Texture2D" uid="uid://bsxa2pqrugam1" path="res://images/icons/heal.png" id="12_82wb0"]
@@ -485,7 +486,7 @@ texture = ExtResource("4_lpdx8")
 
 [node name="blasphemy" type="Sprite2D" parent="Buffs"]
 visible = false
-self_modulate = Color(1, 1, 1, 0.462745)
+self_modulate = Color(1, 1, 1, 0.815686)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_gppif")
 
@@ -494,6 +495,12 @@ visible = false
 self_modulate = Color(1, 1, 1, 0.462745)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_8sljb")
+
+[node name="appetite" type="Sprite2D" parent="Buffs"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.87451)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_erpc0")
 
 [node name="Intention" type="Node2D" parent="."]
 z_index = 1

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bt6plnrf47fk7"]
+
+[ext_resource type="Script" uid="uid://4i7i8rhmwc46" path="res://scripts/items/weapons/riot_shield.gd" id="1_vnxba"]
+[ext_resource type="Texture2D" uid="uid://cjrms67h2x512" path="res://images/items/riot-shield.png" id="2_ir1gl"]
+
+[resource]
+script = ExtResource("1_vnxba")
+harm = 4
+shield_turns = 1
+type = 0
+target = 0
+extra_hp = 4
+extra_speed = 0
+texture = ExtResource("2_ir1gl")
+cost = 4
+keywords = Array[String](["shield"])
+u_name = &""
+name = ""
+desc = ""
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

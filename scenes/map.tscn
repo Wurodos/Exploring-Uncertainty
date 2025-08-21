@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://caaw5385eudd6"]
+[gd_scene load_steps=48 format=3 uid="uid://caaw5385eudd6"]
 
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="1_4xfga"]
 [ext_resource type="Script" uid="uid://bjl8be1ygje44" path="res://scripts/map/map.gd" id="1_blm8a"]
@@ -24,7 +24,14 @@
 [ext_resource type="Texture2D" uid="uid://jhgrrel3ox4a" path="res://images/backdrops/govnov.png" id="13_sq6bu"]
 [ext_resource type="Texture2D" uid="uid://bs1oxtclo4qgp" path="res://images/icons/coin.png" id="14_6k6j1"]
 [ext_resource type="LabelSettings" uid="uid://34c71nyrmk01" path="res://text/labelsettings/item_name.tres" id="15_m335s"]
+[ext_resource type="Script" uid="uid://ctoap32euag0p" path="res://scripts/battle/slave_info.gd" id="19_mkblt"]
+[ext_resource type="Texture2D" uid="uid://cfowi84shmwbh" path="res://images/icons/power.svg" id="20_4o3w1"]
 [ext_resource type="Script" uid="uid://db0mfu8jn8b8j" path="res://scripts/map/popups.gd" id="23_5u2yt"]
+[ext_resource type="Texture2D" uid="uid://n6xuklvtiooj" path="res://images/backdrops/comms.png" id="27_4o3w1"]
+[ext_resource type="Script" uid="uid://yf2cnuqvjpkd" path="res://scripts/map/comms_window.gd" id="27_6ek7f"]
+[ext_resource type="Texture2D" uid="uid://dgy0pujd1t2qq" path="res://images/shapes/plain-circle.png" id="29_mniao"]
+[ext_resource type="FontFile" uid="uid://hym6fbjhhg2u" path="res://text/font/Share-Tech-CYR.otf" id="31_mniao"]
+[ext_resource type="Script" uid="uid://b7a2ai83umgwf" path="res://scripts/common/typewriter.gd" id="32_yfm5w"]
 
 [sub_resource type="Animation" id="Animation_5u2yt"]
 length = 0.001
@@ -117,10 +124,47 @@ font_size = 64
 outline_size = 12
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ek7f"]
+bg_color = Color(0.301961, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4qxv8"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_fq663"]
+font = ExtResource("1_4xfga")
+font_size = 18
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mniao"]
+font = ExtResource("1_4xfga")
+font_size = 32
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_081xv"]
+font = ExtResource("1_4xfga")
+font_size = 64
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yfm5w"]
+font = ExtResource("31_mniao")
+font_size = 28
+font_color = Color(0, 0.788235, 0, 1)
+
 [node name="Map" type="Node2D"]
 script = ExtResource("1_blm8a")
 size = 17
-branch_chance = 0.3
+branch_chance = 0.35
 city_rate = 0.06
 cherv_rate = 0.15
 govnov_rate = 0.05
@@ -150,6 +194,7 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_be0no")
 
 [node name="Fog" type="Node2D" parent="World"]
+visible = false
 
 [node name="TileMapLayer" type="TileMapLayer" parent="World/Fog"]
 position = Vector2(-64, -64)
@@ -202,6 +247,205 @@ offset_right = 717.0
 offset_bottom = 101.0
 text = "200"
 label_settings = SubResource("LabelSettings_4b7dj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TeamWindow" type="Control" parent="Camera2D/UI"]
+visible = false
+anchors_preset = 0
+offset_left = 106.0
+offset_top = 57.0
+offset_right = 1006.0
+offset_bottom = 557.0
+script = ExtResource("2_paxxb")
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/UI/TeamWindow"]
+layout_mode = 0
+offset_left = -193.0
+offset_top = -113.0
+offset_right = 1191.0
+offset_bottom = 636.0
+color = Color(0, 0, 0, 0.513726)
+
+[node name="BG" type="TextureRect" parent="Camera2D/UI/TeamWindow"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_gldc4")
+
+[node name="Slaves" type="Control" parent="Camera2D/UI/TeamWindow"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Left" parent="Camera2D/UI/TeamWindow/Slaves" instance=ExtResource("4_2lpho")]
+layout_mode = 1
+offset_top = 235.0
+offset_bottom = 319.0
+
+[node name="Middle" parent="Camera2D/UI/TeamWindow/Slaves" instance=ExtResource("4_2lpho")]
+layout_mode = 1
+offset_left = 398.0
+offset_top = 307.0
+offset_right = 491.0
+offset_bottom = 391.0
+
+[node name="Right" parent="Camera2D/UI/TeamWindow/Slaves" instance=ExtResource("4_2lpho")]
+layout_mode = 1
+offset_left = 670.0
+offset_top = 242.0
+offset_right = 763.0
+offset_bottom = 326.0
+
+[node name="ItemGrid" type="VBoxContainer" parent="Camera2D/UI/TeamWindow"]
+z_index = 1
+layout_mode = 0
+offset_left = 27.0
+offset_top = 15.0
+offset_right = 762.0
+offset_bottom = 179.0
+mouse_filter = 2
+script = ExtResource("4_2klcf")
+row_capacity = 8
+
+[node name="Row1" type="HBoxContainer" parent="Camera2D/UI/TeamWindow/ItemGrid"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Row2" type="HBoxContainer" parent="Camera2D/UI/TeamWindow/ItemGrid"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Row3" type="HBoxContainer" parent="Camera2D/UI/TeamWindow/ItemGrid"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="ItemEntry" parent="Camera2D/UI/TeamWindow" instance=ExtResource("7_nakos")]
+visible = false
+layout_mode = 0
+offset_left = 222.0
+offset_top = 334.0
+offset_right = 707.0
+offset_bottom = 454.0
+mouse_filter = 2
+
+[node name="Close" type="Button" parent="Camera2D/UI/TeamWindow"]
+layout_mode = 0
+offset_left = 785.0
+offset_top = 19.0
+offset_right = 885.0
+offset_bottom = 119.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_4xfga")
+theme_override_font_sizes/font_size = 64
+text = "X"
+
+[node name="SlaveInfo" type="Control" parent="Camera2D/UI/TeamWindow"]
+visible = false
+z_index = 5
+layout_mode = 3
+anchors_preset = 0
+offset_left = 533.0
+offset_top = -48.0
+offset_right = 573.0
+offset_bottom = -8.0
+script = ExtResource("19_mkblt")
+
+[node name="BGOutline" type="ColorRect" parent="Camera2D/UI/TeamWindow/SlaveInfo"]
+layout_mode = 0
+offset_left = -26.0
+offset_top = -9.0
+offset_right = 474.0
+offset_bottom = 615.0
+color = Color(0.57205, 0.391678, 0.051943, 1)
+
+[node name="BG" type="ColorRect" parent="Camera2D/UI/TeamWindow/SlaveInfo/BGOutline"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 9.0
+offset_right = 491.0
+offset_bottom = 611.0
+color = Color(0.974868, 0.699813, 0.238424, 1)
+
+[node name="Entries" type="VBoxContainer" parent="Camera2D/UI/TeamWindow/SlaveInfo"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 99.0
+offset_right = 450.0
+offset_bottom = 692.0
+
+[node name="ItemEntry" parent="Camera2D/UI/TeamWindow/SlaveInfo/Entries" instance=ExtResource("7_nakos")]
+layout_mode = 2
+
+[node name="ItemEntry2" parent="Camera2D/UI/TeamWindow/SlaveInfo/Entries" instance=ExtResource("7_nakos")]
+layout_mode = 2
+
+[node name="ItemEntry3" parent="Camera2D/UI/TeamWindow/SlaveInfo/Entries" instance=ExtResource("7_nakos")]
+layout_mode = 2
+
+[node name="ItemEntry4" parent="Camera2D/UI/TeamWindow/SlaveInfo/Entries" instance=ExtResource("7_nakos")]
+layout_mode = 2
+
+[node name="HPBar" type="ProgressBar" parent="Camera2D/UI/TeamWindow/SlaveInfo"]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 38.0
+offset_right = 350.0
+offset_bottom = 63.0
+theme_override_styles/background = SubResource("StyleBoxFlat_6ek7f")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4qxv8")
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="Camera2D/UI/TeamWindow/SlaveInfo/HPBar"]
+layout_mode = 0
+offset_top = -12.0
+offset_right = 232.0
+offset_bottom = 35.0
+label_settings = SubResource("LabelSettings_fq663")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buffs" type="VBoxContainer" parent="Camera2D/UI/TeamWindow/SlaveInfo"]
+visible = false
+layout_mode = 0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 110.0
+offset_bottom = 91.0
+
+[node name="BuffEntry" type="ColorRect" parent="Camera2D/UI/TeamWindow/SlaveInfo/Buffs"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+color = Color(0.410615, 0.178771, 0.0531023, 1)
+
+[node name="Icon" type="TextureRect" parent="Camera2D/UI/TeamWindow/SlaveInfo/Buffs/BuffEntry"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 24.0
+offset_bottom = 23.0
+texture = ExtResource("20_4o3w1")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Camera2D/UI/TeamWindow/SlaveInfo/Buffs/BuffEntry"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 3.0
+offset_right = 154.0
+offset_bottom = 41.0
+scale = Vector2(0.5, 0.5)
+text = "3"
+label_settings = SubResource("LabelSettings_mniao")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -457,103 +701,166 @@ offset_right = 526.0
 offset_bottom = 364.0
 mouse_filter = 2
 
-[node name="TeamWindow" type="Control" parent="Camera2D/UI"]
+[node name="CommsWindow" type="Control" parent="Camera2D/UI"]
 anchors_preset = 0
-offset_left = 106.0
-offset_top = 57.0
-offset_right = 1006.0
-offset_bottom = 557.0
-script = ExtResource("2_paxxb")
+offset_left = 575.0
+offset_top = 320.0
+offset_right = 615.0
+offset_bottom = 360.0
+script = ExtResource("27_6ek7f")
+required_points = 8
 
-[node name="ColorRect" type="ColorRect" parent="Camera2D/UI/TeamWindow"]
+[node name="ColorRect" type="ColorRect" parent="Camera2D/UI/CommsWindow"]
 layout_mode = 0
-offset_left = -193.0
-offset_top = -113.0
-offset_right = 1191.0
-offset_bottom = 636.0
+offset_left = -726.0
+offset_top = -398.0
+offset_right = 658.0
+offset_bottom = 351.0
 color = Color(0, 0, 0, 0.513726)
 
-[node name="BG" type="TextureRect" parent="Camera2D/UI/TeamWindow"]
+[node name="BG" type="TextureRect" parent="Camera2D/UI/CommsWindow"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -416.0
+offset_top = -226.0
+offset_right = 444.0
+offset_bottom = 234.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_gldc4")
+texture = ExtResource("27_4o3w1")
 
-[node name="Slaves" type="Control" parent="Camera2D/UI/TeamWindow"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Left" parent="Camera2D/UI/TeamWindow/Slaves" instance=ExtResource("4_2lpho")]
-layout_mode = 1
-offset_top = 235.0
-offset_bottom = 319.0
-
-[node name="Middle" parent="Camera2D/UI/TeamWindow/Slaves" instance=ExtResource("4_2lpho")]
-layout_mode = 1
-offset_left = 398.0
-offset_top = 307.0
-offset_right = 491.0
-offset_bottom = 391.0
-
-[node name="Right" parent="Camera2D/UI/TeamWindow/Slaves" instance=ExtResource("4_2lpho")]
-layout_mode = 1
-offset_left = 670.0
-offset_top = 242.0
-offset_right = 763.0
-offset_bottom = 326.0
-
-[node name="ItemGrid" type="VBoxContainer" parent="Camera2D/UI/TeamWindow"]
-z_index = 1
+[node name="Close" type="Button" parent="Camera2D/UI/CommsWindow"]
 layout_mode = 0
-offset_left = 27.0
-offset_top = 15.0
-offset_right = 762.0
-offset_bottom = 179.0
-mouse_filter = 2
-script = ExtResource("4_2klcf")
-row_capacity = 8
-
-[node name="Row1" type="HBoxContainer" parent="Camera2D/UI/TeamWindow/ItemGrid"]
-custom_minimum_size = Vector2(0, 52)
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="Row2" type="HBoxContainer" parent="Camera2D/UI/TeamWindow/ItemGrid"]
-custom_minimum_size = Vector2(0, 52)
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="Row3" type="HBoxContainer" parent="Camera2D/UI/TeamWindow/ItemGrid"]
-custom_minimum_size = Vector2(0, 52)
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="ItemEntry" parent="Camera2D/UI/TeamWindow" instance=ExtResource("7_nakos")]
-visible = false
-layout_mode = 0
-offset_left = 222.0
-offset_top = 334.0
-offset_right = 707.0
-offset_bottom = 454.0
-mouse_filter = 2
-
-[node name="Close" type="Button" parent="Camera2D/UI/TeamWindow"]
-layout_mode = 0
-offset_left = 785.0
-offset_top = 19.0
-offset_right = 885.0
-offset_bottom = 119.0
+offset_left = -395.0
+offset_top = -206.0
+offset_right = -295.0
+offset_bottom = -106.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("1_4xfga")
 theme_override_font_sizes/font_size = 64
 text = "X"
+
+[node name="Power" type="Button" parent="Camera2D/UI/CommsWindow"]
+layout_mode = 0
+offset_left = 155.0
+offset_top = 161.0
+offset_right = 445.0
+offset_bottom = 237.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_4xfga")
+theme_override_font_sizes/font_size = 36
+script = ExtResource("12_y2ir2")
+string_id = &"comms_repair"
+metadata/_custom_type_script = "uid://bg2spyp44xpw7"
+
+[node name="ItemGrid" type="VBoxContainer" parent="Camera2D/UI/CommsWindow"]
+z_index = 1
+layout_mode = 0
+offset_left = -380.0
+offset_top = 72.0
+offset_right = 139.0
+offset_bottom = 236.0
+mouse_filter = 2
+script = ExtResource("4_2klcf")
+row_capacity = 8
+
+[node name="Row1" type="HBoxContainer" parent="Camera2D/UI/CommsWindow/ItemGrid"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Row2" type="HBoxContainer" parent="Camera2D/UI/CommsWindow/ItemGrid"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Row3" type="HBoxContainer" parent="Camera2D/UI/CommsWindow/ItemGrid"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Required" type="HBoxContainer" parent="Camera2D/UI/CommsWindow"]
+layout_mode = 0
+offset_left = -267.0
+offset_top = -109.0
+offset_right = 327.0
+offset_bottom = -5.0
+alignment = 1
+
+[node name="Weapons" type="TextureRect" parent="Camera2D/UI/CommsWindow/Required"]
+self_modulate = Color(1, 0, 0, 0.627451)
+layout_mode = 2
+texture = ExtResource("29_mniao")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="Camera2D/UI/CommsWindow/Required/Weapons"]
+layout_mode = 0
+offset_right = 101.0
+offset_bottom = 103.0
+text = "0"
+label_settings = SubResource("LabelSettings_081xv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hats" type="TextureRect" parent="Camera2D/UI/CommsWindow/Required"]
+self_modulate = Color(0, 0, 1, 0.627451)
+layout_mode = 2
+texture = ExtResource("29_mniao")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="Camera2D/UI/CommsWindow/Required/Hats"]
+layout_mode = 0
+offset_right = 101.0
+offset_bottom = 103.0
+text = "0"
+label_settings = SubResource("LabelSettings_081xv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Trinkets" type="TextureRect" parent="Camera2D/UI/CommsWindow/Required"]
+self_modulate = Color(0, 1, 0, 0.627451)
+layout_mode = 2
+texture = ExtResource("29_mniao")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="Camera2D/UI/CommsWindow/Required/Trinkets"]
+layout_mode = 0
+offset_right = 101.0
+offset_bottom = 103.0
+text = "0"
+label_settings = SubResource("LabelSettings_081xv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Any" type="TextureRect" parent="Camera2D/UI/CommsWindow/Required"]
+self_modulate = Color(1, 1, 0, 0.627451)
+layout_mode = 2
+texture = ExtResource("29_mniao")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="Camera2D/UI/CommsWindow/Required/Any"]
+layout_mode = 0
+offset_right = 101.0
+offset_bottom = 103.0
+text = "0"
+label_settings = SubResource("LabelSettings_081xv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Message" type="Label" parent="Camera2D/UI/CommsWindow"]
+layout_mode = 0
+offset_left = -279.0
+offset_top = -123.0
+offset_right = 358.0
+offset_bottom = 17.0
+label_settings = SubResource("LabelSettings_yfm5w")
+autowrap_mode = 3
+script = ExtResource("32_yfm5w")
 
 [node name="Popups" type="Control" parent="Camera2D/UI"]
 z_index = 10
@@ -573,6 +880,8 @@ color = Color(1, 1, 1, 0)
 
 [connection signal="pressed" from="Camera2D/UI/ShowTeam" to="Camera2D/UI/TeamWindow" method="_on_show_team_pressed"]
 [connection signal="pressed" from="Camera2D/UI/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Camera2D/UI/TeamWindow/Close" to="Camera2D/UI/TeamWindow" method="_on_close_pressed"]
 [connection signal="pressed" from="Camera2D/UI/GovnovWindow/Close" to="Camera2D/UI/GovnovWindow" method="_on_close_pressed"]
 [connection signal="pressed" from="Camera2D/UI/CityWindow/Close" to="Camera2D/UI/CityWindow" method="_on_close_pressed"]
-[connection signal="pressed" from="Camera2D/UI/TeamWindow/Close" to="Camera2D/UI/TeamWindow" method="_on_close_pressed"]
+[connection signal="pressed" from="Camera2D/UI/CommsWindow/Close" to="Camera2D/UI/CommsWindow" method="_on_close_pressed"]
+[connection signal="pressed" from="Camera2D/UI/CommsWindow/Power" to="Camera2D/UI/CommsWindow" method="_on_power_pressed"]

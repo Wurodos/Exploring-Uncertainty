@@ -14,4 +14,4 @@ func on_start_battle(owner: SlaveNode):
 	owner.received_damage.connect(_revenge)
 	
 func _revenge(source: SlaveNode, _dmg: int):
-	Action.deal_damage(sender, source, harm)
+	Action.deal_damage(sender, source, harm, true)

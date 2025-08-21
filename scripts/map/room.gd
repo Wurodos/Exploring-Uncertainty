@@ -27,6 +27,13 @@ func serialize() -> Dictionary:
 			"items": items.map(func(item: Item):
 				return item.serialize())
 		})
+	elif type == Room.Type.Comms:
+		data.merge({
+			"visited": visited,
+			"flag": flag,
+			"message_id": heal_used,
+			"data": self.data
+		})
 	return data
 
 # =======
@@ -34,4 +41,5 @@ func serialize() -> Dictionary:
 # =======
 
 var heal_used: int = 0
+var data: int = 0
 var items: Array[Item] = []

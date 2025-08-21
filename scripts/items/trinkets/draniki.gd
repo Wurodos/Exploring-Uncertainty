@@ -15,6 +15,12 @@ func on_start_battle(owner: SlaveNode):
 	owner.hp_changed.connect(_on_hp_changed)
 	sender = owner
 
+func on_equip(owner: Slave):
+	super.on_equip(owner)
+	if owner.hp * (100.0 / hp_threshold_percent) <= owner.maxhp:
+		owner.hp = min(owner.maxhp, owner.hp + owner.maxhp / (100.0 / hp_heal_percent))
+		owner.unequip(self)
+
 func _on_hp_changed():
 	if not _proc_once and sender.held.hp * (100.0 / hp_threshold_percent) <= sender.held.maxhp:
 		_proc_once = true

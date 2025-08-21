@@ -1,9 +1,10 @@
 extends Node
 
+const APPETITE = "appetite"
 const SHIELD = "shield"
 const BLASPHEMY = "blasphemy"
 
-func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int):
+func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, dont_proc: bool = false):
 	SignalBus.play_sound.emit("hurt")
 	
 	var total_dmg = dmg
@@ -14,17 +15,21 @@ func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int):
 	var is_crit = roll < 4 * (sender.luck+1)
 	
 	if victim.buffs.has(SHIELD) and not is_crit:
-		total_dmg /= 2
+		total_dmg = floor(total_dmg * 0.7)
+	
+	if sender.buffs.has(APPETITE):
+		total_dmg += floor(total_dmg / 3)
 	
 	if sender.buffs.has(BLASPHEMY):
-		heal(sender, sender, total_dmg*2/5)
+		heal(sender, sender, floor(total_dmg*2/5))
 	
 	if is_crit:
-		print("Critical hit! " + str(roll))
 		total_dmg *= 2
 	
 	victim.set_hp(-total_dmg)
-	victim.received_damage.emit(sender, total_dmg)
+	
+	if not dont_proc:
+		victim.received_damage.emit(sender, total_dmg)
 	
 	if is_crit: victim.animation_player.play("crit")
 	else: victim.animation_player.play("hit")

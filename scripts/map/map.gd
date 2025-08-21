@@ -64,6 +64,10 @@ func _ready() -> void:
 	
 	$Camera2D.make_current()
 	$Camera2D/UI/Steps.text = str(steps)
+	
+	SignalBus.change_steps.connect(func(delta):
+		steps += delta
+		$Camera2D/UI/Steps.text = str(steps))
 
 func _process(delta: float) -> void:
 	if CurrentRun.state != Game.State.Map: return
@@ -111,11 +115,12 @@ func move_player(direction: Direction) -> void:
 		await get_tree().create_timer(0.6).timeout	
 	is_encountering = false	
 	
-	if room.type != Room.Type.City:
+	if room.type != Room.Type.City and room.type != Room.Type.Comms:
 		room.type = Room.Type.Purged
 		room.sprite.texture = room_sprites[Room.Type.Purged]
 	
 func encounter(room: Room) -> void:
+	SignalBus.entered_room.emit(room)
 	match(room.type):
 		Room.Type.Empty:
 			if since_last_battle >= randi_range(0,6):
@@ -151,7 +156,7 @@ func encounter(room: Room) -> void:
 			await $AnimationPlayer.animation_finished
 			SignalBus.battle_encounter.emit()
 		Room.Type.Comms:
-			pass
+			SignalBus.enter_comms.emit(room)
 	$AnimationPlayer.play("RESET")
 
 func room_at(row: int, col: int) -> Room:
@@ -190,7 +195,18 @@ func generate_from_data(data: Dictionary) -> void:
 			
 			for item_data: Dictionary in room_data["items"]:
 				room.items.append(Item.deserialize(item_data))
-		if room.type == Room.Type.Purged:
+		elif room.type == Room.Type.Comms:
+			room.visited = room_data["visited"]
+			if room.visited: _explore(room.row, room.col)
+			
+			room.flag = room_data["flag"]
+			
+			room.heal_used = room_data["message_id"]
+			if room.flag:
+				CurrentRun.messages_not_seen.erase(room.heal_used)
+			
+			room.data = room_data["data"]
+		elif room.type == Room.Type.Purged:
 			_explore(room.row, room.col)
 		
 	_explore(party_row, party_col)

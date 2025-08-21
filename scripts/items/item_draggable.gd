@@ -25,6 +25,15 @@ func snap() -> void:
 func apply(item: Item) -> void:
 	held = item
 	texture = held.texture
+	
+	var color : Color
+	match(item.type):
+		Item.Type.Weapon: color = Color(1,0,0,0.2)
+		Item.Type.Hat: color = Color(0,0,1,0.2)
+		Item.Type.Trinket: color = Color(0,1,0,0.2)
+	var style_box = StyleBoxFlat.new()
+	style_box.bg_color = color
+	$Clickable.add_theme_stylebox_override("normal", style_box)
 
 func _on_clickable_button_down() -> void:
 	$Clickable.visible = false

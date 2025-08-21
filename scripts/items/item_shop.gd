@@ -20,6 +20,15 @@ func apply(item: Item, is_sell: bool) -> void:
 
 	$Cost.text = str(cost)
 	texture = held.texture
+	
+	var color : Color
+	match(item.type):
+		Item.Type.Weapon: color = Color(1,0,0,0.2)
+		Item.Type.Hat: color = Color(0,0,1,0.2)
+		Item.Type.Trinket: color = Color(0,1,0,0.2)
+	var style_box = StyleBoxFlat.new()
+	style_box.bg_color = color
+	$Clickable.add_theme_stylebox_override("normal", style_box)
 
 func apply_slave(slave: Slave) -> void:
 	held_slave = slave

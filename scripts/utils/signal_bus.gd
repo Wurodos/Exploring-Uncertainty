@@ -5,6 +5,7 @@ extends Node
 # ====================
 
 signal locale_changed
+signal exit_game
 
 # Stops existing music, plays new
 signal play_music(track: String)
@@ -55,7 +56,7 @@ signal slave_mouse_exited(slave: SlaveNode)
 signal speed_queue_mouse_entered(slave: Slave)
 signal speed_queue_mouse_exit(slave: Slave)
 
-signal slave_info(slave: SlaveNode)
+signal slave_info(slave: Slave)
 
 signal slave_death(slave: SlaveNode)
 signal slave_ran(slave: SlaveNode)
@@ -77,10 +78,16 @@ signal hide_item_info
 # Room encounters
 # ====================
 
+# for triggers
+signal entered_room(room: Room)
+
 signal battle_encounter
+
 
 signal found_item
 signal enter_city(city: Room)
 signal enter_govnov
+signal enter_comms(comms: Room)
+signal change_steps(delta: int)
 signal city_heal
 signal govnov_heal

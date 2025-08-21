@@ -54,7 +54,7 @@ func on_equip(owner: Slave):
 func on_unequip(owner: Slave):
 	owner.maxhp -= extra_hp
 	owner.hp -= extra_hp
-	
+
 func on_start_battle(owner: SlaveNode):
 	owner.set_speed(extra_speed)
 	print(name)

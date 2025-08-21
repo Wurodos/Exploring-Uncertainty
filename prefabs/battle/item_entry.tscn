@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bte8d08tb1j05" path="res://images/icons/all.png" id="5_2hvcx"]
 [ext_resource type="Texture2D" uid="uid://3jo6gkrdcpjj" path="res://images/icons/self.png" id="6_ikiu5"]
 [ext_resource type="Texture2D" uid="uid://dm6uygsqqi566" path="res://images/icons/max_hp.png" id="7_qogv1"]
-[ext_resource type="Texture2D" uid="uid://cj7g4t1y7b612" path="res://images/icons/extra_speed.png" id="8_bmqyk"]
+[ext_resource type="Texture2D" uid="uid://d3qpvfvers1k3" path="res://images/icons/speed.svg" id="8_bmqyk"]
 
 [node name="ItemEntry" type="ColorRect"]
 custom_minimum_size = Vector2(0, 120)
@@ -105,4 +105,5 @@ offset_left = -113.0
 offset_top = -152.0
 offset_right = 688.0
 offset_bottom = -19.0
+mouse_filter = 2
 alignment = 1

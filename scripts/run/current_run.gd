@@ -7,6 +7,7 @@ var evil_boys: Array[Slave] = []
 var inventory: Array[Item] = []
 
 var discounts : int = 0
+var messages_not_seen: Array[int] = [0,1,2,3,4,5,6,7,8,9]
 
 var state: Game.State = Game.State.Map
 
@@ -116,6 +117,7 @@ func load_save() -> void:
 		inventory = []
 		for value in data["inventory"]:
 			inventory.append(Item.deserialize(value))
+		print(inventory.size())
 		
 		# Archive level
 		archive_level = floor(data["archive_level"])
@@ -147,6 +149,13 @@ func load_save() -> void:
 
 func _prepare_good_boys() -> void:
 	good_boys = [SlavePool.fetch("blob"), SlavePool.fetch("blob"), SlavePool.fetch("blob")]
+	
+	#good_boys[0].equip(ItemPool.fetch("alcohol"))
+	#good_boys[0].equip(ItemPool.fetch("crown"))
+	#good_boys[1].equip(ItemPool.fetch("crown"))
+	#good_boys[2].equip(ItemPool.fetch("crown"))
+	#good_boys[0].hp = 1
+	#good_boys[0].speed = -3
 
 func _prepare_deck() -> void:
 	# items

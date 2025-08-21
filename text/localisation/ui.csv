@@ -12,6 +12,9 @@ item_found;Item found!;Обнаружен предмет!
 item_lost;Item lost...;Предмет утерян...
 continue;Continue;Продолжить
 save;Save;Сохранить
+restart;Restart;Перезапуск
+exit;Power off;Выключить
+comms_repair;Repair;Восстановить
 kw_power_name;Power;Мощь
 kw_power_desc;Increases inflicted HARM;Увеличивает причиняемый ВРЕД
 kw_luck_name;Luck;Удача

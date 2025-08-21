@@ -26,7 +26,7 @@ func _ready() -> void:
 	
 	## DEBUG -> Inventory limit
 	#for i in range(20):
-	#	CurrentRun.inventory.append(ItemPool.fetch("anvil"))
+	#	CurrentRun.inventory.append(ItemPool.fetch_random())
 	
 
 func _on_battle_encounter() -> void:

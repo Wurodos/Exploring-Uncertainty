@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bglmrdyj5hy03"]
+
+[ext_resource type="Script" uid="uid://baqdastxiqocq" path="res://scripts/items/hats/viking_helmet.gd" id="1_g8yak"]
+[ext_resource type="Texture2D" uid="uid://ca3v7kxh4etl1" path="res://images/items/viking-helmet.png" id="2_g8yak"]
+
+[resource]
+script = ExtResource("1_g8yak")
+turns = 2
+type = 1
+target = 0
+extra_hp = 10
+extra_speed = 1
+texture = ExtResource("2_g8yak")
+cost = 8
+keywords = Array[String](["appetite"])
+u_name = &""
+name = ""
+desc = ""
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://b2orhw6po66rx"]
+
+[ext_resource type="Script" uid="uid://b2suv7mlet8ey" path="res://scripts/items/trinkets/pig.gd" id="1_xu5w4"]
+[ext_resource type="Texture2D" uid="uid://ku7eqx4hil3j" path="res://images/items/pig.png" id="2_xu5w4"]
+
+[resource]
+script = ExtResource("1_xu5w4")
+value_per_power = 7
+type = 2
+target = 0
+extra_hp = 0
+extra_speed = 0
+texture = ExtResource("2_xu5w4")
+cost = 5
+keywords = Array[String]([])
+u_name = &""
+name = ""
+desc = ""
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bfx1ij738o32v"]
+[gd_scene load_steps=25 format=3 uid="uid://bfx1ij738o32v"]
 
 [ext_resource type="Script" uid="uid://blaomclhrxsrs" path="res://scripts/slaves/team.gd" id="1_dn72j"]
 [ext_resource type="Script" uid="uid://cukwfw80fb48e" path="res://scripts/battle/battle.gd" id="1_th188"]
@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://cfowi84shmwbh" path="res://images/icons/power.svg" id="7_4k1nj"]
 [ext_resource type="Script" uid="uid://eixrg1y86v7e" path="res://scripts/battle/loot.gd" id="7_v7i3o"]
 [ext_resource type="PackedScene" uid="uid://jj5vyo6gkyhv" path="res://prefabs/items/item_draggable.tscn" id="7_yahae"]
+[ext_resource type="Texture2D" uid="uid://ctm4vajohb528" path="res://images/shapes/arrow.png" id="8_v7i3o"]
 [ext_resource type="Texture2D" uid="uid://dpdtec6oeuogd" path="res://images/icons/bag.png" id="10_v7i3o"]
+[ext_resource type="Script" uid="uid://bg2spyp44xpw7" path="res://scripts/common/btn_localized.gd" id="11_66ngm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpir7"]
 bg_color = Color(0.301961, 0, 0, 1)
@@ -35,6 +37,44 @@ font = ExtResource("6_6vh42")
 font_size = 32
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_22uqi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-34, 66)]
+}
+
+[sub_resource type="Animation" id="Animation_03edq"]
+resource_name = "arrow_bounce"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-34, 66), Vector2(-34, 166)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6ni85"]
+_data = {
+&"RESET": SubResource("Animation_22uqi"),
+&"arrow_bounce": SubResource("Animation_03edq")
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_yahae"]
 font = ExtResource("6_6vh42")
@@ -96,6 +136,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/Fail/Exit:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_yahae"]
 resource_name = "fail"
@@ -123,6 +175,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": ["", "", "С", "СВ", "СВЯ", "СВЯЗ", "СВЯЗЬ", "СВЯЗЬ Р", "СВЯЗЬ РА", "СВЯЗЬ РАЗ", "СВЯЗЬ РАЗО", "СВЯЗЬ РАЗОР", "СВЯЗЬ РАЗОРВ", "СВЯЗЬ РАЗОРВА", "СВЯЗЬ РАЗОРВАН", "СВЯЗЬ РАЗОРВАНА"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UI/Fail/Exit:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0333333, 2.43333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_66ngm"]
@@ -326,6 +390,22 @@ offset_right = 607.0
 offset_bottom = 448.0
 color = Color(0, 0, 0, 0.470588)
 
+[node name="Arrow" type="TextureRect" parent="UI/Loot"]
+self_modulate = Color(1, 0, 0, 1)
+layout_mode = 0
+offset_left = -34.0
+offset_top = 66.0
+offset_right = 29.0
+offset_bottom = 129.0
+texture = ExtResource("8_v7i3o")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Loot/Arrow"]
+libraries = {
+&"": SubResource("AnimationLibrary_6ni85")
+}
+autoplay = "arrow_bounce"
+
 [node name="Label" type="Label" parent="UI/Loot"]
 layout_mode = 0
 offset_left = -143.0
@@ -339,10 +419,10 @@ vertical_alignment = 1
 
 [node name="Bag" type="TextureRect" parent="UI/Loot"]
 layout_mode = 0
-offset_left = -180.0
-offset_top = 159.0
-offset_right = 195.0
-offset_bottom = 256.0
+offset_left = -106.0
+offset_top = 131.0
+offset_right = 91.0
+offset_bottom = 282.0
 texture = ExtResource("10_v7i3o")
 expand_mode = 1
 
@@ -377,9 +457,9 @@ expand_mode = 1
 visible = false
 layout_mode = 0
 offset_left = -299.0
-offset_top = -252.0
+offset_top = -150.0
 offset_right = 201.0
-offset_bottom = -112.0
+offset_bottom = -10.0
 
 [node name="Debug" type="Control" parent="UI"]
 visible = false
@@ -429,6 +509,18 @@ offset_bottom = 56.0
 label_settings = SubResource("LabelSettings_v7i3o")
 vertical_alignment = 1
 
+[node name="Exit" type="Button" parent="UI/Fail"]
+visible = false
+layout_mode = 0
+offset_left = 94.0
+offset_top = 63.0
+offset_right = 298.0
+offset_bottom = 117.0
+theme_override_fonts/font = ExtResource("6_6vh42")
+theme_override_font_sizes/font_size = 24
+script = ExtResource("11_66ngm")
+string_id = &"exit"
+
 [node name="Win" type="Control" parent="UI"]
 z_index = 999
 layout_mode = 3
@@ -468,3 +560,4 @@ libraries = {
 [connection signal="mouse_entered" from="UI/Loot/Bag" to="UI/Loot" method="_on_bag_mouse_entered"]
 [connection signal="pressed" from="UI/Debug/Newturn" to="." method="_on_newturn_pressed"]
 [connection signal="pressed" from="UI/Debug/LowerHP" to="." method="_on_lower_hp_pressed"]
+[connection signal="pressed" from="UI/Fail/Exit" to="." method="_on_restart_pressed"]

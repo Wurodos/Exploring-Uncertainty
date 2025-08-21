@@ -113,6 +113,14 @@ func equip(item: Item, trinket_id: int = 1) -> Item:
 	
 	return old_item
 
+func unequip(item: Item) -> void:
+	var id = [weapon, hat, trinket1, trinket2].find(item)
+	match(id):
+		0: equip(ItemPool.fetch("no_weapon"))
+		1: equip(ItemPool.fetch("no_hat"))
+		2: equip(ItemPool.fetch("no_trinket"), 1)
+		3: equip(ItemPool.fetch("no_trinket"), 2)
+
 func debug() -> void:
 	print("-----")
 	print(u_name)

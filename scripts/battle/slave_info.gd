@@ -1,13 +1,20 @@
 extends Control
 
+var should_close : bool = false
+
 func _ready() -> void:
+	visible = false
 	SignalBus.slave_info.connect(_on_slave_info)
 	SignalBus.mouse_right_up.connect(_hide)
+	SignalBus.mouse_right_down.connect(func(): 
+		if CurrentRun.state == Game.State.Window and SlaveTeamNode.selected:
+			_on_slave_info(SlaveTeamNode.selected.held))
 
-func _on_slave_info(slave_node: SlaveNode):
+func _on_slave_info(slave: Slave):
+	should_close = false
 	var i : int = 0
-	if slave_node.held is Enemy:
-		for info : String in (slave_node.held as Enemy).info:
+	if slave is Enemy:
+		for info : String in (slave as Enemy).info:
 			var entry: ItemEntry = $Entries.get_child(i)
 			entry.item_name.text = ""
 			entry.item_desc.text = info
@@ -19,7 +26,7 @@ func _on_slave_info(slave_node: SlaveNode):
 			var entry: ItemEntry = $Entries.get_child(j)
 			entry.visible = false
 	else:
-		for item : Item in slave_node.get_all_items():
+		for item : Item in [slave.weapon, slave.hat, slave.trinket1, slave.trinket2]:
 			var entry: ItemEntry = $Entries.get_child(i)
 			entry.item_name.text = item.name
 			entry.item_desc.text = item.desc
@@ -48,10 +55,11 @@ func _on_slave_info(slave_node: SlaveNode):
 			entry.visible = item.u_name != "no_trinket"
 			i += 1
 	
-	$HPBar.value = (slave_node.held.hp/float(slave_node.held.maxhp)*100)
-	$HPBar/Label.text = str(slave_node.held.hp) + "/" + str(slave_node.held.maxhp)
+	$HPBar.value = (slave.hp/float(slave.maxhp)*100)
+	$HPBar/Label.text = str(slave.hp) + "/" + str(slave.maxhp)
 	
 	visible = true
 
 func _hide():
-	visible = false
+	if should_close == true: visible = false
+	should_close = true

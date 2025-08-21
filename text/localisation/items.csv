@@ -14,19 +14,19 @@ whistle_desc;{} HARM TO ALL ENEMIES;{} ВРЕДА ВСЕМ ВРАГАМ
 winchester_name;Winchester;Винчестер
 winchester_desc;{} HARM, {} HARM TO OTHER RANDOM TARGET;{} ВРЕДА, {} ВРЕДА ДРУГОЙ СЛУЧАЙНОЙ ЦЕЛИ
 anvil_name;Anvil;Наковальня
-anvil_desc;EACH {} RECEIVED HARM WILL GRANT {} POWER (LASTS {} TURNS);КАЖДЫЕ ПОЛУЧЕННЫЕ {} ВРЕДА ПРИНЕСУТ {} МОЩЬ (ДЛИТСЯ {} ХОД.)
+anvil_desc;ACTION: EACH {} RECEIVED HARM WILL GRANT {} POWER (LASTS {} TURNS);ДЕЙСТВИЕ: КАЖДЫЕ ПОЛУЧЕННЫЕ {} ВРЕДА ПРИНЕСУТ {} МОЩЬ (ДЛИТСЯ {} ХОД.)
 cowboy_hat_name;Cowboy Hat;Ковбойская Шляпа
-cowboy_hat_desc;SHIELD 1 TURN TO ALL;ЩИТ 1 ХОД ВСЕМ
+cowboy_hat_desc;ACTION: SHIELD 1 TURN TO ALL;ДЕЙСТВИЕ: ЩИТ 1 ХОД ВСЕМ
 crown_name;Crown;Корона
-crown_desc;-{} INITIATIVE;-{} ИНИЦИАТИВЫ
+crown_desc;ACTION: -{} INITIATIVE;ДЕЙСТВИЕ: -{} ИНИЦИАТИВЫ
 helmet_name;Helmet;Каска
-helmet_desc;SHIELD {} TURNS;ЩИТ {} ХОД.
+helmet_desc;ACTION: SHIELD {} TURNS;ДЕЙСТВИЕ: ЩИТ {} ХОД.
 jester_hat_name;Jester Hat;Шляпа Шута
-jester_hat_desc;BLASPHEMY {} TURNS;КОЩУНСТВО {} ХОД.
+jester_hat_desc;ACTION: BLASPHEMY {} TURNS;ДЕЙСТВИЕ: КОЩУНСТВО {} ХОД.
 no_hat_name;Head Empty;Пустоголовие
-no_hat_desc;+{} INITIATIVE, HEAL {} HEALTH;+{} ИНИЦИАТИВЫ, ЛЕЧИТЬ {} ЗДОРОВЬЯ
+no_hat_desc;ACTION: +{} INITIATIVE, HEAL {} HEALTH;ДЕЙСТВИЕ: +{} ИНИЦИАТИВЫ, ЛЕЧИТЬ {} ЗДОРОВЬЯ
 wizard_hat_name;Wizard Hat;Шляпа Колдуна
-wizard_hat_desc;HEAL {} HEALTH;ВЫЛЕЧИТЬ {} ЗДОРОВЬЯ
+wizard_hat_desc;ACTION: HEAL {} HEALTH;ДЕЙСТВИЕ: ВЫЛЕЧИТЬ {} ЗДОРОВЬЯ
 alcohol_name;Alcohol;Алкоголь
 alcohol_desc;START TURN: +{} POWER, LOSE {} HEALTH;НАЧАЛО ХОДА: +{} МОЩЬ, ПОТЕРЯ {} ЗДРАВИЙ
 bomb_name;Bomb;Бомба
@@ -43,3 +43,15 @@ pocket_watch_name;Pocket Watch;Карманные Часы
 pocket_watch_desc;END OF {} TURN: +{} POWER, SHIELD {} TURNS, HEAL {}% HEALTH;КОНЕЦ {} ХОД: +{} МОЩИ, ЩИТ {} ХОДА, ВОССТАНОВИТЬ {}% ЗДРАВИЯ
 teapot_name;Teapot;Чайник
 teapot_desc;WHEN LOSING HEALTH, INFLICT {} HARM UPON OFFENDER;ПРИ ПОТЕРЕ ЗДРАВИЯ, {} ВРЕДА ОБИДЧИКУ
+riot_shield_name;Riot Shield;Мятежный Щит
+riot_shield_desc;INFLICTS {} HARM, SHIELD {} TURN TO SELF;ПРИЧИНЯЕТ {} ВРЕДА, ЩИТ {} ХОД СЕБЕ
+hammer_name;Hammer;Молоток
+hammer_desc;BREAKS SHIELD, INFLICTS {} HARM;ЛОМАЕТ ЩИТ, ПРИЧИНЯЕТ {} ВРЕДА
+viking_helmet_name;Viking Helmet;Шлем Викинга
+viking_helmet_desc;ACTION: APPETITE {} TURNS TO ALLY AND SELF;ДЕЙСТВИЕ: АППЕТИТ {} ХОД. СЕБЕ И СОЮЗНИКУ
+boot_name;Boot;Сапог
+boot_desc;OUT OF BATTLE: {} HEALTH FOR ENTERING EMPTY ROOM.\nACTION: {} HARM TO ALLY, THEY ATTACK.;ВНЕ БИТВЫ: {} ЗДОРОВЬЯ В ПУСТОЙ КОМНАТЕ.\nДЕЙСТВИЕ: {} ВРЕДА СОЮЗНИКУ, ТОТ АТАКУЕТ
+shot_shells_name;Shot Shells;Стреляные Гильзы
+shot_shells_desc;FIRST ATTACK: ATTACK ALL ENEMIES;ПРИ ПЕРВОЙ АТАКЕ: АТАКУЙТЕ ВСЕХ ВРАГОВ
+pig_name;Pig;Хрюс
+pig_desc;START OF BATTLE: +1 POWER FOR EACH {} VALUE OF EQUIPPED ITEMS;НАЧАЛО БОЯ: +1 МОЩЬ ЗА КАЖДЫЕ {} ЦЕННОСТИ НАДЕТЫХ ПРЕДМЕТОВ

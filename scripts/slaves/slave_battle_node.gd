@@ -91,6 +91,7 @@ func set_hp(new_val: int, is_delta: bool = true):
 		$HPBar.visible = false
 		$Items.visible = false
 		$Intention.visible = false
+		arrow.visible = false
 		SignalBus.slave_death.emit(self)
 	else: hp_changed.emit()
 
@@ -214,10 +215,13 @@ func ticker_down_buffs() -> void:
 		if buffs[key] == 0: to_be_erased.append(key)
 	
 	for key in to_be_erased:
-		var visual : Node2D = $Buffs.find_child(key)
-		if visual: visual.visible = false
-		
-		buffs.erase(key)
+		remove_buff(key)
+
+func remove_buff(buff_name: String):
+	var visual : Node2D = $Buffs.find_child(buff_name)
+	if visual: visual.visible = false
+	
+	buffs.erase(buff_name)
 
 func execute_intention():
 	var held_enemy : Enemy = held
@@ -313,7 +317,7 @@ func _on_mouse_up() -> void:
 
 func _on_mouse_right_down() -> void:
 	if is_mouse_over:
-		SignalBus.slave_info.emit(self)
+		SignalBus.slave_info.emit(held)
 
 func _on_clickable_area_button_down() -> void:
 	SignalBus.slave_selected.emit(self)
