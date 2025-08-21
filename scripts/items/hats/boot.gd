@@ -29,3 +29,5 @@ func use_item(sender: SlaveNode, ally: SlaveNode):
 	
 	var victim : SlaveNode = Battle.instance.evil_team.boys_nodes.filter(func(enemy: SlaveNode): return enemy.held.is_alive).pick_random()
 	ally.held.weapon.use_item(ally, victim)
+	ally.attacked.emit(victim)
+	ally.turn_ended.emit()

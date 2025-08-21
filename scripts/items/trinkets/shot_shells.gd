@@ -8,6 +8,7 @@ func localize():
 func on_start_battle(owner: SlaveNode):
 	super.on_start_battle(owner)
 	owner.attacked.connect(_hit_everyone)
+	owner.turn_ended.connect(func(): sender.remove_buff("shells_used"))
 	sender = owner
 
 func _hit_everyone(victim: SlaveNode):
