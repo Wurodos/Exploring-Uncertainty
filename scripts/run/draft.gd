@@ -1,6 +1,7 @@
 extends Node
 
 var deck : Array[Item] = []
+var tutorial_progress: int = 0
 
 func _ready() -> void:
 	if CurrentRun.is_saved_game:
@@ -8,6 +9,11 @@ func _ready() -> void:
 		return
 	
 	$Label.text = tr("pick_one")
+	
+	if CurrentRun.is_tutorial:
+		$TutorialBox.visible = true
+		$TutorialBox/Text.set_string_id("tutorial_intro_0")
+		tutorial_progress += 1
 	
 	for i in range(3):
 		deck.append(ItemPool.fetch_random(Item.Type.Weapon))
@@ -55,3 +61,10 @@ func _on_show_item_info(item: Item) -> void:
 
 func _on_hide_item_info() -> void:
 	$ItemEntry.visible = false
+
+
+func _on_ok_pressed() -> void:
+	$TutorialBox/Text.set_string_id("tutorial_intro_" + str(tutorial_progress))
+	tutorial_progress += 1
+	if tutorial_progress > 4:
+		$TutorialBox.visible = false

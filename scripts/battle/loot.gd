@@ -53,6 +53,7 @@ func _on_bag_mouse_entered() -> void:
 		CurrentRun.put_item_in_inventory(ItemDraggable.selected.held)
 		if items.is_empty():
 			visible = false
+			CurrentRun.is_battle_tutorial = false
 			SignalBus.end_battle.emit()
 		else: _present_choice()
 

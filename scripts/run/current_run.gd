@@ -30,6 +30,7 @@ var archive_level: int = 0
 
 var is_saved_game: bool = false
 var is_tutorial: bool = false
+var is_battle_tutorial: bool = false
 
 var map_data: Dictionary = {}
 var config: ConfigFile
@@ -150,7 +151,7 @@ func load_save() -> void:
 func _prepare_good_boys() -> void:
 	good_boys = [SlavePool.fetch("blob"), SlavePool.fetch("blob"), SlavePool.fetch("blob")]
 	
-	#good_boys[0].equip(ItemPool.fetch("alcohol"))
+	#good_boys[0].equip(ItemPool.fetch("hammer"))
 	#good_boys[0].equip(ItemPool.fetch("crown"))
 	#good_boys[1].equip(ItemPool.fetch("crown"))
 	#good_boys[2].equip(ItemPool.fetch("crown"))
@@ -253,6 +254,9 @@ func arrange_evil_team() -> void:
 		var enemy = evil_deck.pop_back()
 		if enemy != null:
 			CurrentRun.evil_boys.append(enemy)
+	
+	if CurrentRun.is_battle_tutorial and CurrentRun.evil_boys[0]:
+		CurrentRun.evil_boys[0].equip(ItemPool.fetch_random())
 	
 	for i in range(3):
 		evil_deck.append(evil_archive.pop_back())

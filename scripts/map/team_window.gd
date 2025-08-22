@@ -90,9 +90,17 @@ func _on_hide_item_info() -> void:
 
 func _on_show_team_pressed() -> void:
 	refresh_inventory()
+	
+	if CurrentRun.is_tutorial:
+		SignalBus.advance_tutorial.emit()
+	
 	CurrentRun.state = Game.State.Window
 	visible = true
 
 func _on_close_pressed() -> void:
 	CurrentRun.state = Game.State.Map
+	
+	if CurrentRun.is_tutorial:
+		SignalBus.advance_tutorial.emit()
+	
 	visible = false

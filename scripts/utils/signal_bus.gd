@@ -19,6 +19,7 @@ signal play_sound(track: String)
 # POPUPS
 # ====================
 
+signal advance_tutorial
 signal lost_item(item: Item)
 
 # ====================
@@ -82,7 +83,6 @@ signal hide_item_info
 signal entered_room(room: Room)
 
 signal battle_encounter
-
 
 signal found_item
 signal enter_city(city: Room)

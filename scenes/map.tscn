@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://caaw5385eudd6"]
+[gd_scene load_steps=58 format=3 uid="uid://caaw5385eudd6"]
 
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="1_4xfga"]
 [ext_resource type="Script" uid="uid://bjl8be1ygje44" path="res://scripts/map/map.gd" id="1_blm8a"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://k20uxq34h120" path="res://images/rooms/comms.png" id="8_5u2yt"]
 [ext_resource type="Texture2D" uid="uid://bdkbuhwojnmqq" path="res://images/rooms/fog.png" id="8_m335s"]
 [ext_resource type="Script" uid="uid://dvl21h34uashq" path="res://scripts/map/city_window.gd" id="11_c70he"]
+[ext_resource type="Texture2D" uid="uid://ctm4vajohb528" path="res://images/shapes/arrow.png" id="11_lhdcv"]
 [ext_resource type="Script" uid="uid://ql10jr5klb8g" path="res://scripts/map/govnov_window.gd" id="12_4b7dj"]
 [ext_resource type="Texture2D" uid="uid://dhfpnnlwg86d" path="res://images/backdrops/city.png" id="12_mo32q"]
 [ext_resource type="Script" uid="uid://bg2spyp44xpw7" path="res://scripts/common/btn_localized.gd" id="12_y2ir2"]
@@ -32,6 +33,9 @@
 [ext_resource type="Texture2D" uid="uid://dgy0pujd1t2qq" path="res://images/shapes/plain-circle.png" id="29_mniao"]
 [ext_resource type="FontFile" uid="uid://hym6fbjhhg2u" path="res://text/font/Share-Tech-CYR.otf" id="31_mniao"]
 [ext_resource type="Script" uid="uid://b7a2ai83umgwf" path="res://scripts/common/typewriter.gd" id="32_yfm5w"]
+[ext_resource type="Texture2D" uid="uid://dls2t3f7lvsqx" path="res://images/shapes/tutorial_box.png" id="33_12q1p"]
+[ext_resource type="LabelSettings" uid="uid://dhb60ypduj2te" path="res://text/labelsettings/tutorial_box.tres" id="34_lhdcv"]
+[ext_resource type="Script" uid="uid://dd2yytdivaq0j" path="res://scripts/common/label_localized.gd" id="35_cgoaf"]
 
 [sub_resource type="Animation" id="Animation_5u2yt"]
 length = 0.001
@@ -118,6 +122,53 @@ _data = {
 &"fog": SubResource("Animation_4b7dj")
 }
 
+[sub_resource type="Animation" id="Animation_lhdcv"]
+resource_name = "spin"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_cgoaf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mwr4f"]
+_data = {
+&"RESET": SubResource("Animation_cgoaf"),
+&"spin": SubResource("Animation_lhdcv")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lhdcv"]
+bg_color = Color(4.71681e-06, 0.602702, 0.631045, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cgoaf"]
+bg_color = Color(1.74474e-07, 0.169159, 0.178819, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mwr4f"]
+bg_color = Color(1.13107e-06, 0.398677, 0.417649, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_4b7dj"]
 font = ExtResource("1_4xfga")
 font_size = 64
@@ -194,7 +245,6 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_be0no")
 
 [node name="Fog" type="Node2D" parent="World"]
-visible = false
 
 [node name="TileMapLayer" type="TileMapLayer" parent="World/Fog"]
 position = Vector2(-64, -64)
@@ -205,6 +255,19 @@ libraries = {
 &"": SubResource("AnimationLibrary_y2ir2")
 }
 autoplay = "fog"
+
+[node name="ArrowAxis" type="Node2D" parent="World"]
+
+[node name="Arrow" type="Sprite2D" parent="World/ArrowAxis"]
+position = Vector2(0, -112)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("11_lhdcv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World/ArrowAxis"]
+libraries = {
+&"": SubResource("AnimationLibrary_mwr4f")
+}
+autoplay = "spin"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_blm8a")
@@ -229,6 +292,9 @@ offset_bottom = 592.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("1_4xfga")
 theme_override_font_sizes/font_size = 48
+theme_override_styles/hover = SubResource("StyleBoxFlat_lhdcv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cgoaf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mwr4f")
 text = "Бригада"
 
 [node name="Save" type="Button" parent="Camera2D/UI"]
@@ -336,7 +402,6 @@ offset_left = 222.0
 offset_top = 334.0
 offset_right = 707.0
 offset_bottom = 454.0
-mouse_filter = 2
 
 [node name="Close" type="Button" parent="Camera2D/UI/TeamWindow"]
 layout_mode = 0
@@ -573,7 +638,6 @@ offset_left = 41.0
 offset_top = 244.0
 offset_right = 526.0
 offset_bottom = 364.0
-mouse_filter = 2
 
 [node name="CityWindow" type="Control" parent="Camera2D/UI"]
 visible = false
@@ -699,9 +763,9 @@ offset_left = 41.0
 offset_top = 244.0
 offset_right = 526.0
 offset_bottom = 364.0
-mouse_filter = 2
 
 [node name="CommsWindow" type="Control" parent="Camera2D/UI"]
+visible = false
 anchors_preset = 0
 offset_left = 575.0
 offset_top = 320.0
@@ -869,6 +933,39 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("23_5u2yt")
 
+[node name="TutorialBox" type="TextureRect" parent="Camera2D/UI"]
+self_modulate = Color(1, 1, 1, 0.443137)
+layout_mode = 0
+offset_left = 18.0
+offset_top = 295.0
+offset_right = 629.0
+offset_bottom = 559.0
+mouse_filter = 2
+texture = ExtResource("33_12q1p")
+
+[node name="Text" type="Label" parent="Camera2D/UI/TutorialBox"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 21.0
+offset_right = 578.0
+offset_bottom = 245.0
+label_settings = ExtResource("34_lhdcv")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+script = ExtResource("35_cgoaf")
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
+
+[node name="OK" type="Button" parent="Camera2D/UI/TutorialBox"]
+layout_mode = 0
+offset_left = 237.0
+offset_top = 269.0
+offset_right = 348.0
+offset_bottom = 324.0
+theme_override_fonts/font = ExtResource("1_4xfga")
+theme_override_font_sizes/font_size = 32
+text = "OK"
+
 [node name="Fade" type="ColorRect" parent="Camera2D/UI"]
 layout_mode = 0
 offset_left = -303.0
@@ -885,3 +982,4 @@ color = Color(1, 1, 1, 0)
 [connection signal="pressed" from="Camera2D/UI/CityWindow/Close" to="Camera2D/UI/CityWindow" method="_on_close_pressed"]
 [connection signal="pressed" from="Camera2D/UI/CommsWindow/Close" to="Camera2D/UI/CommsWindow" method="_on_close_pressed"]
 [connection signal="pressed" from="Camera2D/UI/CommsWindow/Power" to="Camera2D/UI/CommsWindow" method="_on_power_pressed"]
+[connection signal="pressed" from="Camera2D/UI/TutorialBox/OK" to="." method="_on_tutorial_ok_pressed"]

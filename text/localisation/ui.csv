@@ -22,6 +22,8 @@ kw_luck_desc;Increases probability of CRIT;Увеличивает шанс КР�
 kw_crit_name;CRIT;КРИТ
 kw_crit_desc;2x HARM;2x ВРЕД
 kw_shield_name;Shield;Щит
-kw_shield_desc;Halves received HARM;Получает только половину ВРЕДА
+kw_shield_desc;Ignore 30% of received HARM;Получает только 70% ВРЕДА
 kw_blasphemy_name;Blasphemy;Кощунство
-kw_blasphemy_desc;Half of inflicted HARM is converted to HEALTH;Лечит здоровье от половины причиняемого ВРЕДА
+kw_blasphemy_desc;40% of inflicted HARM is converted to HEALTH;Лечит здоровье от 40% причиняемого ВРЕДА
+kw_appetite_name;Appetite;Аппетит
+kw_appetite_desc;Inflicts 33% more HARM;Наносит на 33% ВРЕДА больше

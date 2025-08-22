@@ -11,6 +11,9 @@ func _ready() -> void:
 			_on_slave_info(SlaveTeamNode.selected.held))
 
 func _on_slave_info(slave: Slave):
+	if CurrentRun.is_battle_tutorial and Battle.instance.tutorial_progress == 2:
+		SignalBus.advance_tutorial.emit()
+	
 	should_close = false
 	var i : int = 0
 	if slave is Enemy:

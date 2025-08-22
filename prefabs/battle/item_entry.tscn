@@ -13,6 +13,7 @@
 custom_minimum_size = Vector2(0, 120)
 offset_bottom = 140.0
 size_flags_vertical = 0
+mouse_filter = 2
 color = Color(1, 0.760784, 0.419608, 1)
 script = ExtResource("1_7r2q4")
 
@@ -40,6 +41,7 @@ visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 texture = ExtResource("4_6brbo")
 expand_mode = 1
 
@@ -48,6 +50,7 @@ visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 texture = ExtResource("5_2hvcx")
 expand_mode = 1
 
@@ -56,6 +59,7 @@ visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 texture = ExtResource("6_ikiu5")
 expand_mode = 1
 
@@ -65,6 +69,7 @@ layout_mode = 0
 offset_left = 385.0
 offset_right = 427.0
 offset_bottom = 42.0
+mouse_filter = 2
 texture = ExtResource("7_qogv1")
 expand_mode = 1
 
@@ -85,6 +90,7 @@ layout_mode = 0
 offset_left = 442.0
 offset_right = 484.0
 offset_bottom = 42.0
+mouse_filter = 2
 texture = ExtResource("8_bmqyk")
 expand_mode = 1
 

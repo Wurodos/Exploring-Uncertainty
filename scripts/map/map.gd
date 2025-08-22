@@ -1,5 +1,7 @@
 extends Node2D
 
+
+
 #--------------------------------------------------------------------------------------------------
 #----------------------------------------- MAP GENERATION -----------------------------------------
 #--------------------------------------------------------------------------------------------------
@@ -16,6 +18,10 @@ extends Node2D
 # -- Repeat those 2 steps until all 4 orthoganal are resolved (w/ branches)
 
 class_name Map
+
+@onready var tutorial_box: Control = $Camera2D/UI/TutorialBox
+var tutorial_progress: int = 0
+
 
 enum Direction {Up, Down, Right, Left}
 
@@ -59,11 +65,16 @@ var since_last_item: int = 0
 static var instance: Map
 
 func _ready() -> void:
+	tutorial_box.visible = CurrentRun.is_tutorial
+	tutorial_box.get_node("Text").set_string_id("tutorial_map_0")
+	
 	instance = self
 	$Camera2D/UI/ShowTeam.text = tr("brigade")
 	
 	$Camera2D.make_current()
 	$Camera2D/UI/Steps.text = str(steps)
+	
+	SignalBus.advance_tutorial.connect(_on_tutorial_ok_pressed)
 	
 	SignalBus.change_steps.connect(func(delta):
 		steps += delta
@@ -368,3 +379,17 @@ func serialize() -> Dictionary:
 
 func _on_save_pressed() -> void:
 	CurrentRun.save_game()
+
+
+func _on_tutorial_ok_pressed() -> void:
+	tutorial_progress += 1
+	if tutorial_progress == 1:
+		tutorial_box.get_node("OK").disabled = true
+	elif tutorial_progress == 3:
+		tutorial_box.get_node("OK").disabled = false
+	
+	if tutorial_progress == 4:
+		tutorial_box.visible = false
+	else:
+		tutorial_box.get_node("Text").set_string_id("tutorial_map_"+str(tutorial_progress))
+	

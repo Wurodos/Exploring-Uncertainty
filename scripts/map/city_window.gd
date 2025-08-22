@@ -55,7 +55,7 @@ func _update_items() -> void:
 	
 	for slave_node : SlaveTeamNode in $Slaves.get_children():
 		if current_city.flag:
-			slave_node.update_healing_cost(current_city.heal_used, value, 5)
+			slave_node.update_healing_cost(current_city.heal_used, value, 7)
 		else:
 			slave_node.update_healing_cost(current_city.heal_used, value, 10)
 
@@ -63,7 +63,7 @@ func _update_items() -> void:
 func _on_heal() -> void:
 	
 	if current_city.flag:
-		_change_value(-current_city.heal_used * 5)
+		_change_value(-current_city.heal_used * 7)
 	else:
 		_change_value(-current_city.heal_used * 10)
 	
@@ -103,7 +103,7 @@ func _on_enter_city(city: Room) -> void:
 		CurrentRun.discounts -= 1
 		current_city.flag = true
 		current_city.sprite.texture = Gallery.img_free_city
-		for item in city.items: item.cost /= 2
+		for item in city.items: item.cost = floor(item.cost * 3/4)
 		
 	
 	var j = 0

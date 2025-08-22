@@ -9,6 +9,7 @@ static var instance: Battle
 @onready var queue_node: Control = $UI/SpeedQueue
 @onready var line2d : Line2D = $World/Line2D
 @onready var loot_node: Loot = $UI/Loot
+@onready var tutorial_box: Control = $UI/TutorialBox
 
 const queue_element = preload("res://prefabs/battle/queue_element.tscn")
 
@@ -23,8 +24,17 @@ var selected_victim: SlaveNode
 var is_line : bool = false
 var is_marauder : bool = false
 
+var tutorial_progress: int = 0
+
 func _ready() -> void:
 	instance = self
+
+	tutorial_box.visible = CurrentRun.is_battle_tutorial
+	tutorial_box.get_node("Text").set_string_id("tutorial_battle_0")
+	
+	if CurrentRun.is_battle_tutorial:
+		SignalBus.advance_tutorial.connect(_on_tutorial_ok_pressed)
+	
 	SignalBus.start_battle.connect(_on_start_battle)
 	SignalBus.new_round.connect(_on_new_round)
 	SignalBus.new_turn.connect(_on_new_turn)
@@ -209,8 +219,12 @@ func _on_mouse_released():
 	line2d.points = []
 	if selected_victim:
 		if selected_victim.team.is_evil:
+			if CurrentRun.is_battle_tutorial and tutorial_progress == 4:
+				SignalBus.advance_tutorial.emit()
 			selected_sender.attack(selected_victim)
 		else:
+			if CurrentRun.is_battle_tutorial and tutorial_progress == 6:
+				SignalBus.advance_tutorial.emit()
 			selected_sender.support(selected_victim)
 		selected_victim = null
 		SignalBus.new_turn.emit()
@@ -219,6 +233,11 @@ func _on_slave_mouse_entered(slave_node: SlaveNode):
 	if is_line:
 		if not slave_node.team.is_evil and slave_node != selected_sender and selected_sender.held.hat.target == Item.Target.Self:
 			return
+		if CurrentRun.is_battle_tutorial and tutorial_progress == 4 and not slave_node.team.is_evil:
+			return
+		if CurrentRun.is_battle_tutorial and tutorial_progress == 6 and slave_node.team.is_evil:
+			return
+		
 		
 		selected_victim = slave_node
 		selected_victim.toggle_ellipse(true)
@@ -273,6 +292,13 @@ func _on_good_won() -> void:
 	loot_node.start_marauder()
 	loot_node.visible = true
 	
+	if CurrentRun.is_battle_tutorial:
+		tutorial_progress = 0
+		tutorial_box.visible = true
+		tutorial_box.get_node("Text").set_string_id("tutorial_battle_loot_0")
+	
+	
+	
 	## DEBUG -> Inventory limit
 	#for i in range(8): CurrentRun.put_item_in_inventory(ItemPool.fetch("bomb"))
 	
@@ -308,3 +334,29 @@ func _on_lower_hp_pressed() -> void:
 
 func _on_restart_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_tutorial_ok_pressed() -> void:
+	tutorial_progress += 1
+	
+	if is_marauder:
+		tutorial_box.get_node("Text").set_string_id("tutorial_battle_loot_" + str(tutorial_progress))
+		if tutorial_progress == 4:
+			tutorial_box.visible = false
+		return
+	
+	if tutorial_progress == 2:
+		tutorial_box.get_node("OK").disabled = true
+	elif tutorial_progress == 3:
+		tutorial_box.get_node("OK").disabled = false
+	elif tutorial_progress == 4:
+		tutorial_box.get_node("OK").disabled = true
+	elif tutorial_progress == 5:
+		tutorial_box.get_node("OK").disabled = false
+	elif tutorial_progress == 6:
+		tutorial_box.get_node("OK").disabled = true
+	elif tutorial_progress == 7:
+		tutorial_box.get_node("OK").disabled = false
+	elif tutorial_progress == 9:
+		tutorial_box.visible = false
+	tutorial_box.get_node("Text").set_string_id("tutorial_battle_" + str(tutorial_progress))

@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://c13wpflbknekq"]
+[gd_scene load_steps=12 format=3 uid="uid://c13wpflbknekq"]
 
 [ext_resource type="Script" uid="uid://p1j7xa0ecl76" path="res://scripts/run/draft.gd" id="1_ndt0q"]
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="2_abqjp"]
 [ext_resource type="PackedScene" uid="uid://dj5w5iqx004t4" path="res://prefabs/battle/item_entry.tscn" id="3_700tk"]
 [ext_resource type="PackedScene" uid="uid://dga0x3g1o5mo4" path="res://prefabs/items/item_shop.tscn" id="4_qgxk2"]
+[ext_resource type="Texture2D" uid="uid://dls2t3f7lvsqx" path="res://images/shapes/tutorial_box.png" id="5_5j11b"]
+[ext_resource type="Script" uid="uid://dd2yytdivaq0j" path="res://scripts/common/label_localized.gd" id="5_pjfeh"]
+[ext_resource type="LabelSettings" uid="uid://dhb60ypduj2te" path="res://text/labelsettings/tutorial_box.tres" id="6_ktkuy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_abqjp"]
 font = ExtResource("2_abqjp")
@@ -80,4 +83,37 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_qgxk2")
 theme_override_styles/normal = SubResource("StyleBoxFlat_pjfeh")
 text = "Истребить"
 
+[node name="TutorialBox" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 449.0
+offset_top = 249.0
+offset_right = 1060.0
+offset_bottom = 513.0
+texture = ExtResource("5_5j11b")
+
+[node name="Text" type="Label" parent="TutorialBox"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 21.0
+offset_right = 578.0
+offset_bottom = 245.0
+label_settings = ExtResource("6_ktkuy")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+script = ExtResource("5_pjfeh")
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
+
+[node name="OK" type="Button" parent="TutorialBox"]
+layout_mode = 0
+offset_left = 237.0
+offset_top = 269.0
+offset_right = 348.0
+offset_bottom = 324.0
+theme_override_fonts/font = ExtResource("2_abqjp")
+theme_override_font_sizes/font_size = 32
+text = "OK"
+
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="TutorialBox/OK" to="." method="_on_ok_pressed"]

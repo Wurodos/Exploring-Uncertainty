@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bfx1ij738o32v"]
+[gd_scene load_steps=28 format=3 uid="uid://bfx1ij738o32v"]
 
 [ext_resource type="Script" uid="uid://blaomclhrxsrs" path="res://scripts/slaves/team.gd" id="1_dn72j"]
 [ext_resource type="Script" uid="uid://cukwfw80fb48e" path="res://scripts/battle/battle.gd" id="1_th188"]
@@ -11,6 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://ctm4vajohb528" path="res://images/shapes/arrow.png" id="8_v7i3o"]
 [ext_resource type="Texture2D" uid="uid://dpdtec6oeuogd" path="res://images/icons/bag.png" id="10_v7i3o"]
 [ext_resource type="Script" uid="uid://bg2spyp44xpw7" path="res://scripts/common/btn_localized.gd" id="11_66ngm"]
+[ext_resource type="Texture2D" uid="uid://dls2t3f7lvsqx" path="res://images/shapes/tutorial_box.png" id="12_6ni85"]
+[ext_resource type="LabelSettings" uid="uid://dhb60ypduj2te" path="res://text/labelsettings/tutorial_box.tres" id="13_vceff"]
+[ext_resource type="Script" uid="uid://dd2yytdivaq0j" path="res://scripts/common/label_localized.gd" id="14_ekamt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpir7"]
 bg_color = Color(0.301961, 0, 0, 1)
@@ -552,6 +555,39 @@ label_settings = SubResource("LabelSettings_v7i3o")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="TutorialBox" type="TextureRect" parent="UI"]
+self_modulate = Color(1, 1, 1, 0.443137)
+z_index = 10
+offset_left = -299.0
+offset_top = -110.0
+offset_right = 312.0
+offset_bottom = 154.0
+mouse_filter = 2
+texture = ExtResource("12_6ni85")
+
+[node name="Text" type="Label" parent="UI/TutorialBox"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 21.0
+offset_right = 578.0
+offset_bottom = 245.0
+label_settings = ExtResource("13_vceff")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+script = ExtResource("14_ekamt")
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
+
+[node name="OK" type="Button" parent="UI/TutorialBox"]
+layout_mode = 0
+offset_left = 237.0
+offset_top = 269.0
+offset_right = 348.0
+offset_bottom = 324.0
+theme_override_fonts/font = ExtResource("6_6vh42")
+theme_override_font_sizes/font_size = 32
+text = "OK"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_66ngm")
@@ -561,3 +597,4 @@ libraries = {
 [connection signal="pressed" from="UI/Debug/Newturn" to="." method="_on_newturn_pressed"]
 [connection signal="pressed" from="UI/Debug/LowerHP" to="." method="_on_lower_hp_pressed"]
 [connection signal="pressed" from="UI/Fail/Exit" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="UI/TutorialBox/OK" to="." method="_on_tutorial_ok_pressed"]
