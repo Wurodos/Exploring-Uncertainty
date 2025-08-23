@@ -19,7 +19,7 @@ signal play_sound(track: String)
 # POPUPS
 # ====================
 
-signal advance_tutorial
+signal advance_tutorial(specific_id: StringName)
 signal lost_item(item: Item)
 
 # ====================

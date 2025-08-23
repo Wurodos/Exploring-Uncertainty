@@ -6,6 +6,7 @@ var current_city: Room
 var value: int
 
 var _hide_info: bool = false
+var sold_anything: bool = false
 
 const item_shop_prefab = preload("res://prefabs/items/item_shop.tscn")
 
@@ -38,6 +39,10 @@ func _buy(item_node: ItemShop) -> void:
 func _sell(item_node: ItemShop) -> void:
 	SignalBus.play_sound.emit("shop")
 	
+	if CurrentRun.is_tutorial and not sold_anything:
+		SignalBus.advance_tutorial.emit("tutorial_city_sell")
+	
+	sold_anything = true
 	_change_value(item_node.cost)
 	CurrentRun.inventory.erase(item_node.held)
 	item_node.queue_free()

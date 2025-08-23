@@ -122,6 +122,21 @@ _data = {
 &"fog": SubResource("Animation_4b7dj")
 }
 
+[sub_resource type="Animation" id="Animation_cgoaf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_lhdcv"]
 resource_name = "spin"
 length = 3.0
@@ -137,21 +152,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 6.28319]
-}
-
-[sub_resource type="Animation" id="Animation_cgoaf"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mwr4f"]
@@ -257,6 +257,7 @@ libraries = {
 autoplay = "fog"
 
 [node name="ArrowAxis" type="Node2D" parent="World"]
+visible = false
 
 [node name="Arrow" type="Sprite2D" parent="World/ArrowAxis"]
 position = Vector2(0, -112)
@@ -934,6 +935,7 @@ offset_bottom = 40.0
 script = ExtResource("23_5u2yt")
 
 [node name="TutorialBox" type="TextureRect" parent="Camera2D/UI"]
+visible = false
 self_modulate = Color(1, 1, 1, 0.443137)
 layout_mode = 0
 offset_left = 18.0

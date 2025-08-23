@@ -39,6 +39,7 @@ const _dcol = [0,0,+1,-1]
 
 @onready var room_parent : Node2D = $World/Rooms
 @onready var player_node : Node2D = $World/Player
+@onready var arrow_axis: Node2D = $World/ArrowAxis
 @onready var camera : Camera2D = $Camera2D
 
 @export var size: int
@@ -61,6 +62,23 @@ var party_col: int
 var is_encountering: bool = false
 var since_last_battle : int = 0
 var since_last_item: int = 0
+
+# Tutorial rooms showcase
+var first_govnov: Room = null
+var first_city: Room = null
+var first_cherv: Room = null
+var first_comms: Room = null
+var first_reptile: Room = null
+
+var shown_govnov: bool = false
+var shown_city: bool = false
+var shown_cherv: bool = false
+var shown_comms: bool = false
+var shown_reptile: int = 0
+
+var shown_govnov_window: bool = false
+var shown_comms_window: bool = false
+
 
 static var instance: Map
 
@@ -120,7 +138,7 @@ func move_player(direction: Direction) -> void:
 			get_tree().quit()
 	
 	
-	
+	SignalBus.advance_tutorial.emit()
 	encounter(room)
 	if room.type != Room.Type.Purged:
 		await get_tree().create_timer(0.6).timeout	
@@ -152,6 +170,9 @@ func encounter(room: Room) -> void:
 		Room.Type.City:
 			SignalBus.enter_city.emit(room)
 		Room.Type.Govnov:
+			if CurrentRun.is_tutorial and not shown_govnov_window:
+				shown_govnov_window = true
+				SignalBus.advance_tutorial.emit("tutorial_govnov_window")
 			SignalBus.enter_govnov.emit()
 		Room.Type.Cherv:
 			since_last_battle = 0
@@ -159,6 +180,11 @@ func encounter(room: Room) -> void:
 			CurrentRun.arrange_difficult()
 			$AnimationPlayer.play("battle_start")
 			await $AnimationPlayer.animation_finished
+			
+			if CurrentRun.is_tutorial:
+				shown_comms_window = true
+				SignalBus.advance_tutorial.emit("tutorial_cherv_won")
+				
 			SignalBus.play_music.emit("battle_difficult")
 			SignalBus.battle_encounter.emit()
 		Room.Type.Reptile:
@@ -167,6 +193,9 @@ func encounter(room: Room) -> void:
 			await $AnimationPlayer.animation_finished
 			SignalBus.battle_encounter.emit()
 		Room.Type.Comms:
+			if CurrentRun.is_tutorial and not shown_comms_window:
+				shown_comms_window = true
+				SignalBus.advance_tutorial.emit("tutorial_comms_window")
 			SignalBus.enter_comms.emit(room)
 	$AnimationPlayer.play("RESET")
 
@@ -361,6 +390,16 @@ func _explore(row: int, col: int):
 	for i in range(-2, 3):
 		for j in range(-2, 3):
 			if not (abs(i) == 2 and abs(j) == 2):
+				var room : Room = room_at(row+i, col+j)
+				
+				if room and CurrentRun.is_tutorial:
+					match(room.type):
+						Room.Type.Govnov: first_govnov = room
+						Room.Type.City: first_city = room
+						Room.Type.Cherv: first_cherv = room
+						Room.Type.Reptile: first_reptile = room
+						Room.Type.Comms: first_comms = room
+				
 				$World/Fog/TileMapLayer.set_cell(Vector2i(x+i,y+j))
 	
 	
@@ -381,15 +420,51 @@ func _on_save_pressed() -> void:
 	CurrentRun.save_game()
 
 
-func _on_tutorial_ok_pressed() -> void:
+func _on_tutorial_ok_pressed(specific_id: StringName = "") -> void:
+	if specific_id.length() > 0:
+		tutorial_box.visible = true
+		tutorial_box.get_node("OK").disabled = false
+		tutorial_box.get_node("Text").set_string_id(specific_id)
+		return
+	
+	if CurrentRun.state == Game.State.Battle: return
+	
 	tutorial_progress += 1
 	if tutorial_progress == 1:
 		tutorial_box.get_node("OK").disabled = true
 	elif tutorial_progress == 3:
 		tutorial_box.get_node("OK").disabled = false
 	
-	if tutorial_progress == 4:
-		tutorial_box.visible = false
+	if tutorial_progress >= 4:
+		tutorial_box.visible = true
+		if shown_reptile <= 3 and first_reptile:
+			arrow_axis.visible = true
+			arrow_axis.global_position = first_reptile.global_position
+			tutorial_box.get_node("Text").set_string_id("tutorial_reptile_meet_"+str(shown_reptile))
+			shown_reptile += 1
+		elif not shown_comms and first_comms:
+			shown_comms = true
+			arrow_axis.visible = true
+			arrow_axis.global_position = first_comms.global_position
+			tutorial_box.get_node("Text").set_string_id("tutorial_comms_meet")
+		elif not shown_city and first_city:
+			shown_city = true
+			arrow_axis.visible = true
+			arrow_axis.global_position = first_city.global_position
+			tutorial_box.get_node("Text").set_string_id("tutorial_city_meet")
+		elif not shown_cherv and first_cherv:
+			shown_cherv = true
+			arrow_axis.visible = true
+			arrow_axis.global_position = first_cherv.global_position
+			tutorial_box.get_node("Text").set_string_id("tutorial_cherv_meet")
+		elif not shown_govnov and first_govnov:
+			shown_govnov = true
+			arrow_axis.visible = true
+			arrow_axis.global_position = first_govnov.global_position
+			tutorial_box.get_node("Text").set_string_id("tutorial_govnov_meet")
+		else:
+			arrow_axis.visible = false
+			tutorial_box.visible = false
 	else:
 		tutorial_box.get_node("Text").set_string_id("tutorial_map_"+str(tutorial_progress))
 	

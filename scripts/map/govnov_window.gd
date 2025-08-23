@@ -6,6 +6,7 @@ var heal_multiplier: int = 1
 var value: int
 var _hide_info: bool = false
 var _transaction_made: bool = false
+var sold_anything: bool = false
 
 const item_shop_prefab = preload("res://prefabs/items/item_shop.tscn")
 
@@ -26,6 +27,10 @@ func _ready() -> void:
 
 func _sell(item_node: ItemShop) -> void:
 	SignalBus.play_sound.emit("shop")
+	
+	if CurrentRun.is_tutorial and not sold_anything:
+		SignalBus.advance_tutorial.emit("tutorial_govnov_sell")
+	sold_anything = true
 	
 	_change_value(item_node.cost)
 	CurrentRun.inventory.erase(item_node.held)
@@ -61,6 +66,10 @@ func _buy_slave(item_node: ItemShop) -> void:
 
 func _sell_slave(slave_node: SlaveTeamNode) -> void:
 	SignalBus.play_sound.emit("shop")
+	
+	if CurrentRun.is_tutorial and not sold_anything:
+		SignalBus.advance_tutorial.emit("tutorial_govnov_sell")
+	sold_anything = true
 	
 	print("sold slave with hat " + slave_node.held.hat.u_name)
 	_change_value(slave_node.held.get_cost())
