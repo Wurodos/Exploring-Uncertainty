@@ -176,13 +176,12 @@ func _on_slave_death(slave_node: SlaveNode, is_loot: bool = true) -> void:
 	
 	for i in range(speed_queue.size()):
 		if speed_queue[i] == slave_node.held:
-			if i < current_slave_position:
-				current_slave_position -= 1
-			
 			queue_node.get_child(i).free()
 			speed_queue.remove_at(i)
 			
-			if i == current_slave_position:
+			if i < current_slave_position:
+				current_slave_position -= 1
+			elif i == current_slave_position:
 				slave_node.toggle_arrow(false)
 				current_slave_position -= 1
 				

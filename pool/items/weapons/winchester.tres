@@ -5,13 +5,16 @@
 
 [resource]
 script = ExtResource("1_ib7ck")
-u_name = &"winchester"
-name = "Винчестер"
-desc = "5 ВРЕДА, 3 ВРЕДА ДРУГОЙ СЛУЧАЙНОЙ ЦЕЛИ"
+first_harm = 5
+second_harm = 3
 type = 0
 target = 0
 extra_hp = 0
 extra_speed = 0
 texture = ExtResource("2_yoghk")
-cost = 15
+cost = 10
+keywords = Array[String]([])
+u_name = &"winchester"
+name = "Винчестер"
+desc = "5 ВРЕДА, 3 ВРЕДА ДРУГОЙ СЛУЧАЙНОЙ ЦЕЛИ"
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

@@ -120,6 +120,7 @@ func _on_power_pressed() -> void:
 	current_comms.flag = true
 	$Power.visible = false
 	$Required.visible = false
+	CurrentRun.is_comms_repaired = true
 	SignalBus.change_steps.emit(+100)
 	
 	

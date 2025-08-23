@@ -5,13 +5,15 @@
 
 [resource]
 script = ExtResource("1_bd8j0")
-u_name = &"whistle"
-name = "Свисток"
-desc = "3 ВРЕДА"
+harm = 3
 type = 0
 target = 1
 extra_hp = 0
 extra_speed = 0
 texture = ExtResource("2_1nmqh")
-cost = 10
+cost = 7
+keywords = Array[String]([])
+u_name = &"whistle"
+name = "Свисток"
+desc = "3 ВРЕДА"
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

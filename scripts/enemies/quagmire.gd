@@ -30,8 +30,9 @@ func update_stats(node: SlaveNode) -> void:
 		heal_higher += 2
 		heal_team += 2
 	if trinket1.is_item():
-		power_grant += 1
+		power_grant += 2
 	if trinket2.is_item():
+		power_grant += 1
 		node.set_speed(+1)
 	localize()
 

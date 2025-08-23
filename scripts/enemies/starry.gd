@@ -24,8 +24,8 @@ func update_stats(node: SlaveNode) -> void:
 	if hat.is_item(): 
 		shield_turns += 1
 	if weapon.is_item():
-		harm_lower += 2
-		harm_higher += 2
+		harm_lower += 4
+		harm_higher += 4
 	if trinket1.is_item():
 		node.set_max_hp(+2) 
 		node.set_hp(+2) 
@@ -33,7 +33,7 @@ func update_stats(node: SlaveNode) -> void:
 	if trinket2.is_item():
 		node.set_max_hp(+3)
 		node.set_hp(+3) 
-		power_gain += 1
+		power_gain += 2
 	localize()
 
 # either attacks or powers and shields up (does it in groups of 2)
@@ -51,7 +51,7 @@ func decide_intention(node: SlaveNode) -> void:
 		previous = current
 	else: 
 		current = -previous
-		previous = 0
+		previous = current
 	
 	if current == 1:
 		intention = Intention.new(Intention.Type.DamageSingular, randi_range(harm_lower,harm_higher))

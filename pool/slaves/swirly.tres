@@ -5,11 +5,8 @@
 
 [resource]
 script = ExtResource("1_x217g")
+harm = 8
 info_count = 1
-info_1 = "ПРИЧИНЯЕТ 5 ВРЕДА"
-info_2 = ""
-info_3 = ""
-info_4 = ""
 u_name = &"swirly"
 base_maxhp = 10
 base_speed = 2

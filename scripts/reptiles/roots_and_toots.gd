@@ -15,12 +15,13 @@ func _init() -> void:
 # IF GOOD SLAVE DIES, HEALS 15 HP, +1 SPEED, +2 POWER
 
 var times_summoned : int = 0
+var _extra_damage: int = 0
 
 func decide_intention(node: SlaveNode) -> void:
 	super.decide_intention(node)
 	
 	var weak_slave_id : int = CurrentRun.good_boys.find_custom \
-		(func(slave: Slave): return slave.hp <= 10 and slave.is_alive)
+		(func(slave: Slave): return slave.hp <= 10 + _extra_damage and slave.is_alive)
 	var faster_slave_id: int = CurrentRun.good_boys.find_custom \
 		(func(slave: Slave): return slave.speed > node.held.speed and slave.is_alive)
 	
@@ -29,17 +30,23 @@ func decide_intention(node: SlaveNode) -> void:
 		intention = Intention.new(Intention.Type.SummonStars, 2)
 		times_summoned += 1
 	elif weak_slave_id != -1:
-		intention = Intention.new(Intention.Type.DamageSingular, 10)
+		intention = Intention.new(Intention.Type.DamageSingular, 10 + _extra_damage)
+		_extra_damage += 1
 		intention.target = weak_slave_id
 	elif faster_slave_id != -1:
-		intention = Intention.new(Intention.Type.DamageSingular, 5)
+		intention = Intention.new(Intention.Type.DamageSingular, 5 + _extra_damage)
+		_extra_damage += 1
 		intention.target = faster_slave_id
 		intention.extra_effect = func(): 
 			Battle.instance.good_team.boys_nodes[faster_slave_id].set_speed(-2)
 	else:
-		intention = Intention.new(Intention.Type.DamageTwo, 4)
-		intention.target = _get_random_good_target()
-		intention.target_second = _get_random_good_target()
+		intention = Intention.new(Intention.Type.DamageTwo, 4 + _extra_damage)
+		_extra_damage += 1
+		var targets = _get_2_good_targets()
+		intention.target = targets[0]
+		if targets.size() > 1:
+			intention.target_second = targets[1]
+		else: intention.target_second = -1
 		
 
 

@@ -16,12 +16,14 @@ func localize() -> void:
 #	2 - +1 speed
 
 func update_stats(node: SlaveNode) -> void:
-	if hat.is_item(): 
-		node.set_luck(+1)
-	if weapon.is_item(): harm += 1
+	if hat.is_item():
+		harm += 1
+	if weapon.is_item(): harm += 2
 	if trinket1.is_item():
+		harm += 1
 		node.set_speed(+1)
 	if trinket2.is_item():
+		harm += 1
 		node.set_speed(+1)
 	localize()
 

@@ -76,6 +76,18 @@ func _get_random_good_target() -> int:
 		i += 1	
 	return possible.pick_random()
 
+func _get_2_good_targets() -> Array[int]:
+	var possible : Array[int] = []
+	var i = 0
+	for slave : Slave in CurrentRun.good_boys:
+		if slave.is_alive:
+			possible.append(i)
+		i += 1	
+	possible.shuffle()
+	if possible.size() > 1:
+		return [possible[0], possible[1]]
+	else: return [possible[0]]
+
 func _get_good_target(score_func: Callable):
 	pass
 
@@ -83,7 +95,7 @@ func _get_random_evil_target(is_self_included: bool = true) -> int:
 	var possible : Array[int] = []
 	var i = 0
 	for slave : Slave in CurrentRun.evil_boys:
-		if is_self_included and slave == self:
+		if not is_self_included and slave == self:
 			i += 1
 			continue
 		if slave.is_alive:

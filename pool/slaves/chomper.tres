@@ -5,13 +5,10 @@
 
 [resource]
 script = ExtResource("1_adta0")
+harm = 5
 info_count = 1
-info_1 = "ПРИЧИНЯЕТ 2 ВРЕДА ВСЕМ ВРАГАМ"
-info_2 = ""
-info_3 = ""
-info_4 = ""
 u_name = &"chomper"
-base_maxhp = 30
+base_maxhp = 40
 base_speed = -2
 base_cost = 0
 texture = ExtResource("2_2vmds")

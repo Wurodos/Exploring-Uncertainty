@@ -5,13 +5,16 @@
 
 [resource]
 script = ExtResource("1_05lb1")
-u_name = &"draniki"
-name = "Драники"
-desc = "ЕСЛИ ХП МЕНЬШЕ 50%, ВОССТАНАВЛИВАЕТ ТРЕТЬ"
+hp_threshold_percent = 50
+hp_heal_percent = 30
 type = 2
 target = 2
 extra_hp = 0
 extra_speed = 0
 texture = ExtResource("2_okbog")
 cost = 3
+keywords = Array[String]([])
+u_name = &"draniki"
+name = "Драники"
+desc = "ЕСЛИ ХП МЕНЬШЕ 50%, ВОССТАНАВЛИВАЕТ ТРЕТЬ"
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

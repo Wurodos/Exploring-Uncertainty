@@ -9,39 +9,39 @@ comms_6;24/05/78. For the last month we have been arresting the same slave trade
 comms_7;07/06/78. We have broken through the blockade of one of the mine entrances! Messages were sent to the Association of Mages and the Federation leadership via restored communication channels. We will be saved!;07/06/78. Мы пробили блокаду одного из входов в шахты! По восстановленным каналам связи были высланы сообщения Ассоциации Магов и руководству Федерации. Мы будем спасены!
 comms_8;08/06/78. Today I had a good day. I recalled all messages. I disbanded the police and the rest of the army. Puleikis, Perilin and Tamm were shot with a magnetic accelerator. The people rejoice on the streets!;08/06/78. Сегодня у меня был хороший день. Я отозвал все сообщения. Я расформировал полицию и остатки армии. Пулейкис, Перилин и Тамм расстреляны магнитным ускорителем. Народ ликует!
 comms_9;37/37/37. Sparkling with joy... SCYTHE OF CIVILISATIONS!\Fluttering with joy... SCYTHE OF CIVILISATIONS!\nNo man's dead... no man's dead yet...;37/37/37. Весело сверкает... КОСА ЦИВИЛИЗАЦИЙ!\nВесело порхает... КОСА ЦИВИЛИЗАЦИЙ!\nМертвых еще нет... мертвых и пока еще нет...
-tutorial_intro_0;;Добро пожаловать в систему дистанционного управления БОЙЦАМИ 'Междуморье'.
-tutorial_intro_1;;Ваша цель - собрать как можно больше информации с одного из рукавов Полоцких солевых шахт.
-tutorial_intro_2;;Под ваше командование выделены 3 БОЙЦА. Каждый из них способен использовать 1 ОРУЖИЕ, 1 ШЛЯПУ и 2 БЕЗДЕЛУШКИ.
-tutorial_intro_3;;Сейчас вы отберете себе стартовое снаряжение. Просто нажимайте на желаемый ПРЕДМЕТ левой кнопкой мыши.
-tutorial_map_0;;Вы видите перед собой изображение рукава шахты. Зажав ЛКМ, вы можете перемещать камеру и осмотреться.
-tutorial_map_1;;Нажмите на кнопку "Бригада".
-tutorial_map_2;;Здесь вы можете экипировать ПРЕДМЕТЫ. Для этого перетаскивайте их на любого БОЙЦА. Когда закончите - закройте окно.
-tutorial_map_3;;Используйте стрелки (→←↑↓), чтобы перемещать бригаду. Попытайтесь найти Центры Коммуникации (ЦК).
-tutorial_cherv_meet;;Это - лагерь Червонозорцев. Там вас ожидает тяжелый бой, но при победе вы сможете освободить следующий посещенный ГОРОД.
-tutorial_cherv_won;;Теперь направляйтесь в любой ГОРОД, чтобы его освободить!
-tutorial_city_meet;;Это - ГОРОД. Здесь вы сможете вылечить БОЙЦОВ и обменять ПРЕДМЕТЫ.
-tutorial_city_sell;;Будьте осторожны - общая ЦЕННОСТЬ проданных ПРЕДМЕТОВ не сохраняется из города в город!
-tutorial_govnov_meet;;Это - лавка работорговца. Он отловил и продает БОЙЦОВ.
-tutorial_govnov_window;;Работорговец подозрительно относится к вам. Лучше что-нибудь приобретите, иначе попадете в засаду.
-tutorial_govnov_sell;;Будьте осторожны - общая ЦЕННОСТЬ проданных БОЙЦОВ и ПРЕДМЕТОВ не сохранится.
-tutorial_comms_meet;;Это - Центр Коммуникации. Здесь вы сможете получить информацию.
-tutorial_comms_window;;Вам необходимо потратить указанное на экране число ПРЕДМЕТОВ определенного типа. Желтое число закрывается любым ПРЕДМЕТОМ.
-tutorial_comms_repair;;Прошлый вход в этот рукав загородили Червонозорцы. Вам придется найти другой выход из шахт, чтобы выбраться.
-tutorial_reptile_meet_0;;Это - ?????????????????
-tutorial_reptile_meet_1;;ПРЕДУПРЕЖДЕНИЕ АССОЦИАЦИИ МАГОВ: НИ ЗА ЧТО НЕ ПРИБЛИЖАЙТЕСЬ К РЕПТИЛИИ.
-tutorial_reptile_meet_2;;ПРЕДЛОЖЕНИЕ ФЕДЕРАЦИИ: В случае, если это единственный выход из шахт, попытайтесь контактировать с рептилией.
-tutorial_reptile_meet_3;;АССОЦИАЦИЯ МАГОВ: ОДОБРЕНО.
-tutorial_battle_0;;На вас напали!
-tutorial_battle_1;;Бой идет поочередно, обратите внимание на строку порядка хода вверху.
-tutorial_battle_2;;В свой ход БОЕЦ совершает ДЕЙСТВИЕ. Чтобы просмотреть ДЕЙСТВИЯ, нажмите ПКМ над изображением БОЙЦА.
-tutorial_battle_3;;Красная строка - ДЕЙСТВИЕ ОРУЖИЯ. Оно применяется на врагов. Синяя - ДЕЙСТВИЕ ШЛЯПЫ. Оно применяется на союзников.
-tutorial_battle_4;;Теперь зажмите ЛКМ над бойцом под стрелкой и потяните ее на любого врага.
-tutorial_battle_5;;Вы произвели атаку ОРУЖИЕМ и нанесли ВРЕД врагу. Когда их ЗДОРОВЬЕ упадет до 0, бой закончится.
-tutorial_battle_6;;Теперь попробуйте произвести то же самое, но выберите целью союзника или самого себя.
-tutorial_battle_7;;Вы произвели ДЕЙСТВИЕ ШЛЯПЫ и тем или иным образом помогли союзнику.
-tutorial_battle_8;;Выиграйте бой.
-tutorial_battle_loot_0;;В конце боя вы можете забрать ПРЕДМЕТЫ врагов.
-tutorial_battle_loot_1;;Просто перетяните желаемый ПРЕДМЕТ из двух в ИНВЕНТАРЬ.
-tutorial_battle_loot_2;;Стоит сказать, что только БОЙЦЫ Федерации умеют использовать ПРЕДМЕТЫ.
-tutorial_battle_loot_3;;Враги же всего лишь усиляют с помощью них свои существующие возможности.
-reptile_without_comms;;ФЕДЕРАЦИЯ: Даже не думайте возвращаться, не получив информацию из Центра Коммуникации!
+tutorial_intro_0;Welcome to the FIGHTERS remote control system 'Intermarium'.;Добро пожаловать в систему дистанционного управления БОЙЦАМИ 'Междуморье'.
+tutorial_intro_1;Your objective is to collect as much information as possible from one of the branches of the Polotsk salt mines.;Ваша цель - собрать как можно больше информации с одного из рукавов Полоцких солевых шахт.
+tutorial_intro_2;You have 3 FIGHTERS under your command. Each of them is capable of using 1 WEAPON, 1 HAT and 2 TRINKETS.;Под ваше командование выделены 3 БОЙЦА. Каждый из них способен использовать 1 ОРУЖИЕ, 1 ШЛЯПУ и 2 БЕЗДЕЛУШКИ.
+tutorial_intro_3;Now you will select your starting equipment. Just left-click on the desired ITEM.;Сейчас вы отберете себе стартовое снаряжение. Просто нажимайте на желаемый ПРЕДМЕТ левой кнопкой мыши.
+tutorial_map_0;You see a map of a mine branch in front of you. By left-clicking and moving mouse, you can move the camera and look around.;Вы видите перед собой карту рукава шахты. Зажав ЛКМ, вы можете перемещать камеру и осмотреться.
+tutorial_map_1;Click on the 'Brigade' button.;Нажмите на кнопку 'Бригада'.
+tutorial_map_2;Here you can equip ITEMS. To do this, drag them onto any FIGHTER. Close the window when you finish.;Здесь вы можете экипировать ПРЕДМЕТЫ. Для этого перетаскивайте их на любого БОЙЦА. Когда закончите - закройте окно.
+tutorial_map_3;Use arrow keys (→←↑↓) to move the brigade. Try to find Communication Centers (CC).;Используйте стрелки (→←↑↓), чтобы перемещать бригаду. Попытайтесь найти Центры Коммуникации (ЦК).
+tutorial_cherv_meet;This is the Chervonozor camp. A tough fight awaits you there, but if you win, you will be able to liberate the next CITY you visit.;Это - лагерь Червонозорцев. Там вас ожидает тяжелый бой, но при победе вы сможете освободить следующий посещенный ГОРОД.
+tutorial_cherv_won;Now head to any CITY to liberate it!;Теперь направляйтесь в любой ГОРОД, чтобы его освободить!
+tutorial_city_meet;This is the CITY. Here you can heal FIGHTERS and exchange ITEMS.;Это - ГОРОД. Здесь вы сможете вылечить БОЙЦОВ и обменять ПРЕДМЕТЫ.
+tutorial_city_sell;Be careful - the total VALUE of sold ITEMS is not transferred from city to city!;Будьте осторожны - общая ЦЕННОСТЬ проданных ПРЕДМЕТОВ не сохраняется из города в город!
+tutorial_govnov_meet;This is a slave trader's shop. They have captured and are selling FIGHTERS.;Это - лавка работорговца. Он отловил и продает БОЙЦОВ.
+tutorial_govnov_window;The slave trader is suspicious of you. Better buy something, otherwise you'll get ambushed.;Работорговец подозрительно относится к вам. Лучше что-нибудь приобретите, иначе попадете в засаду.
+tutorial_govnov_sell;Be careful - the total VALUE of sold FIGHTERS and ITEMS will not be transferred.;Будьте осторожны - общая ЦЕННОСТЬ проданных БОЙЦОВ и ПРЕДМЕТОВ не сохранится.
+tutorial_comms_meet;This is the Communication Center. Here you can gain information.;Это - Центр Коммуникации. Здесь вы сможете получить информацию.
+tutorial_comms_window;You need to spend the number of ITEMS of a certain type indicated on the screen. The yellow number is covered by any ITEMS.;Вам необходимо потратить указанное на экране число ПРЕДМЕТОВ определенного типа. Желтое число закрывается любым ПРЕДМЕТОМ.
+tutorial_comms_repair;The previous entrance to this branch was blocked by the Chervonozor. You will have to find another exit from the mines to get out.;Прошлый вход в этот рукав загородили Червонозорцы. Вам придется найти другой выход из шахт, чтобы выбраться.
+tutorial_reptile_meet_0;This is - ?????????????????;Это - ?????????????????
+tutorial_reptile_meet_1;WARNING FROM THE ASSOCIATION OF MAGIC: DO NOT GET ANYWHERE CLOSE TO THE REPTILE.;ПРЕДУПРЕЖДЕНИЕ АССОЦИАЦИИ МАГОВ: НИ ЗА ЧТО НЕ ПРИБЛИЖАЙТЕСЬ К РЕПТИЛИИ.
+tutorial_reptile_meet_2;FEDERATION PROPOSAL: If this is the only way out of the mines, try to contact the reptile.;ПРЕДЛОЖЕНИЕ ФЕДЕРАЦИИ: В случае, если это единственный выход из шахт, попытайтесь контактировать с рептилией.
+tutorial_reptile_meet_3;ASSOCIATION OF MAGIC: APPROVED.;АССОЦИАЦИЯ МАГОВ: ОДОБРЕНО.
+tutorial_battle_0;You were ambushed!;На вас напали!
+tutorial_battle_1;The battle is played in turns, please note the turn order queue at the top.;Бой идет поочередно, обратите внимание на строку порядка хода вверху.
+tutorial_battle_2;On their turn, the FIGHTER performs an ACTION. To view the ACTIONS, right-click on the FIGHTER.;В свой ход БОЕЦ совершает ДЕЙСТВИЕ. Чтобы просмотреть ДЕЙСТВИЯ, нажмите ПКМ над БОЙЦОМ.
+tutorial_battle_3;Red bit is the WEAPON ACTION. It is used against enemies. Blue bit is the HAT ACTION. It is used on allies.;Красная строка - ДЕЙСТВИЕ ОРУЖИЯ. Оно применяется на врагов. Синяя - ДЕЙСТВИЕ ШЛЯПЫ. Оно применяется на союзников.
+tutorial_battle_4;Now hold down left-mouse button over the fighter under the arrow and drag it towards any enemy.;Теперь зажмите ЛКМ над бойцом под стрелкой и потяните ее на любого врага.
+tutorial_battle_5;You performed the WEAPON ACTION and HARMED the enemy. When their HEALTH drops to 0, the fight ends.;Вы произвели атаку ОРУЖИЕМ и нанесли ВРЕД врагу. Когда их ЗДОРОВЬЕ упадет до 0, бой закончится.
+tutorial_battle_6;Now try to do the same thing, but target an ally.;Теперь попробуйте произвести то же самое, но выберите целью союзника или самого себя.
+tutorial_battle_7;You performed the HAT ACTION and helped an ally in some way.;Вы произвели ДЕЙСТВИЕ ШЛЯПЫ и тем или иным образом помогли союзнику.
+tutorial_battle_8;Win the battle.;Выиграйте бой.
+tutorial_battle_loot_0;At the end of the battle you can pick up the enemies' ITEMS.;В конце боя вы можете забрать ПРЕДМЕТЫ врагов.
+tutorial_battle_loot_1;Simply drag the desired ITEM from the two into the INVENTORY.;Просто перетяните желаемый ПРЕДМЕТ из двух в ИНВЕНТАРЬ.
+tutorial_battle_loot_2;It is worth mentioning that only Federation FIGHTERS can use ITEMS.;Стоит сказать, что только БОЙЦЫ Федерации умеют использовать ПРЕДМЕТЫ.
+tutorial_battle_loot_3;The enemies only use them to enhance their existing capabilities.;Враги же всего лишь усиляют с помощью них свои существующие возможности.
+reptile_without_comms;FEDERATION: Don't even think about returning without receiving information from the Communication Center!;ФЕДЕРАЦИЯ: Даже не думайте возвращаться, не получив информацию из Центра Коммуникации!

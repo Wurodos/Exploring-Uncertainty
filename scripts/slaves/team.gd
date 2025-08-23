@@ -54,6 +54,8 @@ func add_slave(slave: Slave) -> void:
 			
 			boys_nodes.append(new_slave)
 			parent.add_child(new_slave)
+			
+			new_slave.start_battle()
 			return
 
 func _on_slave_death(slave_node: SlaveNode) -> void:

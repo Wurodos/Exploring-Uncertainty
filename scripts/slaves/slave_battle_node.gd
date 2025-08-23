@@ -239,9 +239,10 @@ func execute_intention():
 			Action.deal_damage(self,\
 				Battle.instance.good_team.boys_nodes[held_enemy.intention.target],\
 				held_enemy.intention.amount)
-			Action.deal_damage(self,\
-				Battle.instance.good_team.boys_nodes[held_enemy.intention.target_second],\
-				held_enemy.intention.amount)
+			if held_enemy.intention.target_second != -1:
+				Action.deal_damage(self,\
+					Battle.instance.good_team.boys_nodes[held_enemy.intention.target_second],\
+					held_enemy.intention.amount)
 		
 		Enemy.Intention.Type.DamageMultiple:
 			for slave : SlaveNode in Battle.instance.good_team.boys_nodes:
@@ -281,7 +282,15 @@ func execute_intention():
 			var star1 = SlavePool.fetch("starry")
 			var star2 = SlavePool.fetch("starry")
 			
+			for star: Enemy in [star1, star2]:
+				if randi_range(0, 2) == 0: star.equip(ItemPool.fetch_random(Item.Type.Weapon))
+				if randi_range(0, 2) == 0: star.equip(ItemPool.fetch_random(Item.Type.Hat))
+				if randi_range(0, 2) == 0: star.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
+				if randi_range(0, 2) == 0: star.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
+				
+			
 			team.cull_the_dead()
+			
 			team.add_slave(star1)
 			team.add_slave(star2)
 			

@@ -7,6 +7,7 @@ var evil_boys: Array[Slave] = []
 var inventory: Array[Item] = []
 
 var discounts : int = 0
+var is_comms_repaired : bool = false
 var messages_not_seen: Array[int] = [0,1,2,3,4,5,6,7,8,9]
 
 var state: Game.State = Game.State.Map
@@ -72,6 +73,7 @@ func save_game() -> void:
 			else: return slave.serialize()),
 		"archive_level": archive_level,
 		"discounts": discounts,
+		"is_comms_repaired": is_comms_repaired,
 		"map" : Map.instance.serialize()
 	}
 
@@ -122,6 +124,9 @@ func load_save() -> void:
 		
 		# Archive level
 		archive_level = floor(data["archive_level"])
+		
+		# Flags
+		is_comms_repaired = data["is_comms_repaired"]
 		
 		# Map
 		map_data = data["map"]
@@ -198,29 +203,33 @@ func _prepare_deck() -> void:
 func _prepare_archive() -> void:
 	archive_level += 1
 	
+	var empty_slots = clamp(6 - archive_level, 0, 3)
+	
 	var weapons = []
 	var hats = []
 	var trinkets = []
 	
-	for i in range(min(1 + archive_level, 9)):
+	for i in range(min(1 + archive_level, 12)):
 		weapons.append(ItemPool.fetch_random(Item.Type.Weapon))
 		hats.append(ItemPool.fetch_random(Item.Type.Hat))
 		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
 		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
 	
-	for i in range(max(8 - archive_level, 0)):
+	for i in range(max(11 - empty_slots - archive_level, 0)):
 		weapons.append(ItemPool.fetch("no_weapon"))
 		hats.append(ItemPool.fetch("no_hat"))
 		trinkets.append(ItemPool.fetch("no_trinket"))
 		trinkets.append(ItemPool.fetch("no_trinket"))
 	
-	for i in range(3):
+	for i in range(empty_slots):
 		evil_archive.append(null)
+	for i in range(min(4 - empty_slots, 3)):
+		evil_archive.append(SlavePool.fetch("chomper"))
+	
 	evil_archive.append_array([SlavePool.fetch("starry"), SlavePool.fetch("starry"),
 		SlavePool.fetch("starry"), SlavePool.fetch("starry"),
 		SlavePool.fetch("quagmire"), SlavePool.fetch("quagmire"),
 		SlavePool.fetch("swirly"), SlavePool.fetch("swirly"),
-		SlavePool.fetch("chomper")
 	])
 	
 	weapons.shuffle()
@@ -288,18 +297,28 @@ func arrange_difficult() -> void:
 		if evil_archive.is_empty():
 			_prepare_archive()
 	
+	var only_quagmires = true
 	for i in range(3):
-		var enemy = evil_deck.pop_back()
+		var enemy : Enemy = evil_deck.pop_back()
 		if enemy != null:
 			CurrentRun.evil_boys.append(enemy)
-	
+			if enemy.u_name != "quagmire":
+				only_quagmires = false
+			
 	if CurrentRun.evil_boys.is_empty():
 		var enemy = SlavePool.fetch("cherv")
 		enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
 		enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
-		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket))
-		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket))
+		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
+		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
 		CurrentRun.evil_boys.append(enemy)
+	elif only_quagmires:
+		var enemy = SlavePool.fetch("starry")
+		enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
+		enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
+		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
+		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
+		CurrentRun.evil_boys[0] = enemy
 
 func arrange_boss() -> void:
 	CurrentRun.evil_boys = [ReptilePool.fetch("roots_and_toots")]

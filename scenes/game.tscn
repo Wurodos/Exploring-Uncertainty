@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgylw3j3sk4da"]
+[gd_scene load_steps=12 format=3 uid="uid://cgylw3j3sk4da"]
 
 [ext_resource type="Script" uid="uid://cfsw4hc8sq20x" path="res://scripts/run/game.gd" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://tyb7waldpp30" path="res://scripts/utils/input_manager.gd" id="2_yqjtg"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://bv52qwiseqwlq" path="res://audio/sfx/heal.wav" id="8_gee14"]
 [ext_resource type="AudioStream" uid="uid://bm85yf1cg661m" path="res://audio/music/Reanimation.mp3" id="9_0tnpc"]
 [ext_resource type="AudioStream" uid="uid://dsmrrqajuq53f" path="res://audio/music/AwaitingAway.mp3" id="10_vtaks"]
+[ext_resource type="AudioStream" uid="uid://6jwkrqd1ryw8" path="res://audio/music/Roots And Toots.mp3" id="11_kvpfn"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_uwrxv")
@@ -30,6 +31,7 @@ music = Dictionary[StringName, AudioStream]({
 &"hurt": ExtResource("5_u5sy4"),
 &"map": ExtResource("10_vtaks"),
 &"powerup": ExtResource("7_0tnpc"),
+&"roots_and_toots": ExtResource("11_kvpfn"),
 &"shop": ExtResource("6_gee14")
 })
 

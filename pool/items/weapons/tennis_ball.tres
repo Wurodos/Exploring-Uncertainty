@@ -5,13 +5,16 @@
 
 [resource]
 script = ExtResource("1_7mwu7")
-u_name = &"tennis_ball"
-name = "Теннисный Мяч"
-desc = "2 ВРЕДА, +2 ЗА КАЖДУЮ РАЗНИЦУ В ИНИЦИАТИВЕ"
+base_harm = 2
+extra_harm = 2
 type = 0
 target = 0
 extra_hp = 0
 extra_speed = 0
 texture = ExtResource("2_7mwu7")
-cost = 9
+cost = 6
+keywords = Array[String]([])
+u_name = &"tennis_ball"
+name = "Теннисный Мяч"
+desc = "2 ВРЕДА, +2 ЗА КАЖДУЮ РАЗНИЦУ В ИНИЦИАТИВЕ"
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

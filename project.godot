@@ -28,8 +28,7 @@ ReptilePool="*res://scripts/reptiles/reptile_pool.gd"
 
 [display]
 
-window/stretch/mode="viewport"
-window/stretch/scale_mode="integer"
+window/stretch/mode="canvas_items"
 
 [input]
 

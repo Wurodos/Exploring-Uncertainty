@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://el10i67oqeed"]
+
+[ext_resource type="Script" uid="uid://kwyej8epft" path="res://scripts/map/popup_message.gd" id="1_xcw57"]
+[ext_resource type="Texture2D" uid="uid://ch6hg4b6lngkw" path="res://images/backdrops/found_item.png" id="2_tmeoe"]
+[ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="3_7h63o"]
+[ext_resource type="Script" uid="uid://dd2yytdivaq0j" path="res://scripts/common/label_localized.gd" id="4_jvyee"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2cfcp"]
+font = ExtResource("3_7h63o")
+font_size = 40
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Message" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_xcw57")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -193.0
+offset_top = -113.0
+offset_right = 1191.0
+offset_bottom = 636.0
+color = Color(0, 0, 0, 0.513726)
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 273.0
+offset_top = 98.0
+offset_right = 873.0
+offset_bottom = 498.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_tmeoe")
+
+[node name="Close" type="Button" parent="."]
+layout_mode = 0
+offset_left = 524.0
+offset_top = 124.0
+offset_right = 624.0
+offset_bottom = 224.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_7h63o")
+theme_override_font_sizes/font_size = 64
+text = "X"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 314.0
+offset_top = 236.0
+offset_right = 834.0
+offset_bottom = 464.0
+label_settings = SubResource("LabelSettings_2cfcp")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+script = ExtResource("4_jvyee")
+
+[connection signal="pressed" from="Close" to="." method="_on_close_pressed"]

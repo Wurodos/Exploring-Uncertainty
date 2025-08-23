@@ -19,9 +19,9 @@ func update_stats(node: SlaveNode) -> void:
 		node.add_buff(Action.SHIELD, 1)
 	if weapon.is_item(): harm += 3
 	if trinket1.is_item():
-		harm += 1
+		harm += 2
 	if trinket2.is_item():
-		harm += 1
+		harm += 2
 	localize()
 
 # attacks one target, frail, but fast

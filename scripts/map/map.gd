@@ -61,9 +61,13 @@ var party_row: int
 var party_col: int
 var is_encountering: bool = false
 var since_last_battle : int = 0
+var since_last_battle_purged: int = 0
 var since_last_item: int = 0
+var found_items: int = 0
 
-# Tutorial rooms showcase
+#======================
+# v Tutorial flags v
+#======================
 var first_govnov: Room = null
 var first_city: Room = null
 var first_cherv: Room = null
@@ -79,6 +83,9 @@ var shown_reptile: int = 0
 var shown_govnov_window: bool = false
 var shown_comms_window: bool = false
 
+#======================
+# ^ Tutorial flags ^
+#======================
 
 static var instance: Map
 
@@ -116,7 +123,12 @@ func move_player(direction: Direction) -> void:
 	if is_encountering: return
 	
 	var room: Room = room_at(party_row + _drow[direction], party_col + _dcol[direction])
-	if not room: return
+	if not room:
+		return
+	if room.type == Room.Type.Reptile and not CurrentRun.is_comms_repaired:
+		SignalBus.message_popup.emit("reptile_without_comms")
+		return
+	
 	
 	party_col += _dcol[direction]
 	party_row += _drow[direction]
@@ -140,9 +152,6 @@ func move_player(direction: Direction) -> void:
 	
 	SignalBus.advance_tutorial.emit()
 	encounter(room)
-	if room.type != Room.Type.Purged:
-		await get_tree().create_timer(0.6).timeout	
-	is_encountering = false	
 	
 	if room.type != Room.Type.City and room.type != Room.Type.Comms:
 		room.type = Room.Type.Purged
@@ -150,9 +159,27 @@ func move_player(direction: Direction) -> void:
 	
 func encounter(room: Room) -> void:
 	SignalBus.entered_room.emit(room)
+	
+	#CurrentRun.arrange_boss()
+	#$AnimationPlayer.play("battle_start")
+	#await $AnimationPlayer.animation_finished
+	#SignalBus.play_music.emit("roots_and_toots")
+	#SignalBus.battle_encounter.emit()
+	#return
+	
 	match(room.type):
+		Room.Type.Purged:
+			if since_last_battle_purged >= randi_range(6, 15):
+				CurrentRun.arrange_evil_team()
+				$AnimationPlayer.play("battle_start")
+				await $AnimationPlayer.animation_finished
+				SignalBus.play_music.emit("battle")
+				SignalBus.battle_encounter.emit()
+				since_last_battle_purged = 0
+				since_last_battle = 0
+			else: since_last_battle_purged += 1
 		Room.Type.Empty:
-			if since_last_battle >= randi_range(0,6):
+			if since_last_battle >= randi_range(1,6):
 				CurrentRun.arrange_evil_team()
 				$AnimationPlayer.play("battle_start")
 				await $AnimationPlayer.animation_finished
@@ -162,8 +189,8 @@ func encounter(room: Room) -> void:
 				since_last_item += 1
 			else: 
 				since_last_battle += 1
-				print(since_last_item)
-				if since_last_item >= randi_range(4, 8):
+				if since_last_item >= randi_range(4, 8*(found_items+1)):
+					found_items += 1
 					SignalBus.found_item.emit()
 					since_last_item = 0
 				else: since_last_item += 1
@@ -191,6 +218,7 @@ func encounter(room: Room) -> void:
 			CurrentRun.arrange_boss()
 			$AnimationPlayer.play("battle_start")
 			await $AnimationPlayer.animation_finished
+			SignalBus.play_music.emit("roots_and_toots")
 			SignalBus.battle_encounter.emit()
 		Room.Type.Comms:
 			if CurrentRun.is_tutorial and not shown_comms_window:
@@ -198,6 +226,7 @@ func encounter(room: Room) -> void:
 				SignalBus.advance_tutorial.emit("tutorial_comms_window")
 			SignalBus.enter_comms.emit(room)
 	$AnimationPlayer.play("RESET")
+	is_encountering = false
 
 func room_at(row: int, col: int) -> Room:
 	return room_parent.get_node_or_null(str(row) + "_" + str(col))
@@ -210,6 +239,8 @@ func generate_from_data(data: Dictionary) -> void:
 	
 	since_last_battle = data["since_last_battle"]
 	since_last_item = data["since_last_item"]
+	since_last_battle_purged = data["since_last_battle_purged"]
+	found_items = data["found_items"]
 	
 	party_col = data["party_col"]
 	party_row = data["party_row"]
@@ -412,7 +443,9 @@ func serialize() -> Dictionary:
 		"party_col": party_col,
 		"party_row": party_row,
 		"since_last_battle": since_last_battle,
+		"since_last_battle_purged": since_last_battle_purged,
 		"since_last_item": since_last_item,
+		"found_items": found_items,
 		"steps": steps
 	}
 

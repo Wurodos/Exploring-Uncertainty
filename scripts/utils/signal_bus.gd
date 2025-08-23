@@ -21,6 +21,7 @@ signal play_sound(track: String)
 
 signal advance_tutorial(specific_id: StringName)
 signal lost_item(item: Item)
+signal message_popup(string_id: StringName)
 
 # ====================
 # Change scene
