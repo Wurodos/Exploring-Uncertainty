@@ -159,8 +159,9 @@ func _prepare_good_boys() -> void:
 	#good_boys[0].equip(ItemPool.fetch("hammer"))
 	#good_boys[0].equip(ItemPool.fetch("crown"))
 	#good_boys[1].equip(ItemPool.fetch("crown"))
-	#good_boys[2].equip(ItemPool.fetch("crown"))
+	#good_boys[2].equip(ItemPool.fetch("cowboy_hat"))
 	#good_boys[0].hp = 1
+	#good_boys[1].hp = 1
 	#good_boys[0].speed = -3
 
 func _prepare_deck() -> void:
@@ -255,6 +256,11 @@ func _prepare_archive() -> void:
 func arrange_evil_team() -> void:
 	##	Debug
 	#CurrentRun.evil_boys = [ReptilePool.fetch("roots_and_toots")]
+	#CurrentRun.evil_boys = [SlavePool.fetch("chomper")]
+	#CurrentRun.evil_boys[0].equip(ItemPool.fetch_random(Item.Type.Weapon))
+	#CurrentRun.evil_boys[0].equip(ItemPool.fetch_random(Item.Type.Hat))
+	#CurrentRun.evil_boys[0].equip(ItemPool.fetch_random(Item.Type.Trinket),1)
+	#CurrentRun.evil_boys[0].equip(ItemPool.fetch_random(Item.Type.Trinket),2)
 	#return
 	
 	CurrentRun.evil_boys = []

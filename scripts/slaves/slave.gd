@@ -2,10 +2,17 @@ extends Resource
 
 class_name Slave
 
+enum SpriteSize {
+	Normal,
+	Big,
+	Huge
+}
+
 @export var u_name: StringName
 @export var base_maxhp: int
 @export var base_speed: int
 @export var base_cost: int = 0
+@export var sprite_size: SpriteSize
 @export var texture: Texture2D
 
 var hp : int

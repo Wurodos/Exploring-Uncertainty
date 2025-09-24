@@ -1,4 +1,4 @@
-extends ColorRect
+extends TextureRect
 
 class_name ItemEntry
 
@@ -25,21 +25,21 @@ func apply(item: Item) -> void:
 	all_targets.visible = false
 	self_target.visible = false
 	
-	match(item.target):
-		Item.Target.Single:
-			single_target.visible = true
-		Item.Target.AllTeam:
-			all_targets.visible = true
-		Item.Target.Self:
-			self_target.visible = true
+	#match(item.target):
+	#	Item.Target.Single:
+	#		single_target.visible = true
+	#	Item.Target.AllTeam:
+	#		all_targets.visible = true
+	#	Item.Target.Self:
+	#		self_target.visible = true
 	
 	match (item.type):
 		Item.Type.Weapon:
-			color = Color(1.0, 0.435, 0.498)
+			self_modulate = Color(1.0, 0.435, 0.498)
 		Item.Type.Hat:
-			color = Color(0.459, 0.596, 1.0)
+			self_modulate = Color(0.459, 0.596, 1.0)
 		Item.Type.Trinket:
-			color = Color(0.459, 1.0, 0.51)
+			self_modulate = Color(0.459, 1.0, 0.51)
 	
 	if item.extra_hp != 0:
 		$ExtraHP.visible = true
@@ -48,6 +48,9 @@ func apply(item: Item) -> void:
 	if item.extra_speed != 0:
 		$ExtraSpeed.visible = true
 		$ExtraSpeed/Label.text = str(item.extra_speed)
+	
+	$Cost.visible = true
+	$Cost/Label.text = str(item.cost)
 	
 	while keyword_row.get_child_count() > 0:
 		keyword_row.get_child(0).free()

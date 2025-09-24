@@ -160,14 +160,14 @@ _data = {
 &"spin": SubResource("Animation_lhdcv")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lhdcv"]
-bg_color = Color(4.71681e-06, 0.602702, 0.631045, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mwr4f"]
+bg_color = Color(1.13107e-06, 0.398677, 0.417649, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cgoaf"]
 bg_color = Color(1.74474e-07, 0.169159, 0.178819, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mwr4f"]
-bg_color = Color(1.13107e-06, 0.398677, 0.417649, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lhdcv"]
+bg_color = Color(4.71681e-06, 0.602702, 0.631045, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_4b7dj"]
 font = ExtResource("1_4xfga")
@@ -293,9 +293,9 @@ offset_bottom = 592.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("1_4xfga")
 theme_override_font_sizes/font_size = 48
-theme_override_styles/hover = SubResource("StyleBoxFlat_lhdcv")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_cgoaf")
 theme_override_styles/normal = SubResource("StyleBoxFlat_mwr4f")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cgoaf")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lhdcv")
 text = "Бригада"
 
 [node name="Save" type="Button" parent="Camera2D/UI"]
@@ -418,7 +418,6 @@ text = "X"
 [node name="SlaveInfo" type="Control" parent="Camera2D/UI/TeamWindow"]
 visible = false
 z_index = 5
-layout_mode = 3
 anchors_preset = 0
 offset_left = 533.0
 offset_top = -48.0
@@ -555,7 +554,6 @@ theme_override_font_sizes/font_size = 64
 text = "X"
 
 [node name="Slaves" type="Control" parent="Camera2D/UI/GovnovWindow"]
-layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -680,7 +678,6 @@ theme_override_font_sizes/font_size = 64
 text = "X"
 
 [node name="Slaves" type="Control" parent="Camera2D/UI/CityWindow"]
-layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0

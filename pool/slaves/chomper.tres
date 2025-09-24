@@ -11,5 +11,6 @@ u_name = &"chomper"
 base_maxhp = 40
 base_speed = -2
 base_cost = 0
+sprite_size = 1
 texture = ExtResource("2_2vmds")
 metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

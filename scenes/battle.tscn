@@ -488,7 +488,6 @@ text = "Lower HP to 1 on top/bottom enemies"
 
 [node name="Fail" type="Control" parent="UI"]
 z_index = 999
-layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -526,7 +525,6 @@ string_id = &"exit"
 
 [node name="Win" type="Control" parent="UI"]
 z_index = 999
-layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -556,8 +554,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TutorialBox" type="TextureRect" parent="UI"]
+visible = false
 self_modulate = Color(1, 1, 1, 0.443137)
 z_index = 10
+layout_mode = 0
 offset_left = -299.0
 offset_top = -110.0
 offset_right = 312.0

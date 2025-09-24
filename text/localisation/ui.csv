@@ -27,3 +27,7 @@ kw_blasphemy_name;Blasphemy;Кощунство
 kw_blasphemy_desc;40% of inflicted HARM is converted to HEALTH;Лечит здоровье от 40% причиняемого ВРЕДА
 kw_appetite_name;Appetite;Аппетит
 kw_appetite_desc;Inflicts 33% more HARM;Наносит на 33% ВРЕДА больше
+kw_freeze_name;Freeze;Холод
+kw_freeze_desc;Receive 50% more HARM;Получает на 50% больше ВРЕДА
+kw_dark_name;Dark;Тьма
+kw_dark_desc;Cannot help allies;Не может помогать союзникам

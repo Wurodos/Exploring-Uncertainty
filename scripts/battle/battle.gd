@@ -230,7 +230,8 @@ func _on_mouse_released():
 
 func _on_slave_mouse_entered(slave_node: SlaveNode):
 	if is_line:
-		if not slave_node.team.is_evil and slave_node != selected_sender and selected_sender.held.hat.target == Item.Target.Self:
+		if not slave_node.team.is_evil and slave_node != selected_sender \
+			and (selected_sender.held.hat.target == Item.Target.Self or selected_sender.buffs.has(Action.DARK)):
 			return
 		if CurrentRun.is_battle_tutorial and tutorial_progress == 4 and not slave_node.team.is_evil:
 			return

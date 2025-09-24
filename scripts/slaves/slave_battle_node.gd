@@ -2,6 +2,11 @@ extends Node2D
 
 class_name SlaveNode
 
+@export var hit_animation: AnimationPlayer
+@export var heal_animation: AnimationPlayer
+@export var powerup_animation: AnimationPlayer
+@export var crit_animation: AnimationPlayer
+
 signal received_damage(source: SlaveNode, dmg: int)
 signal hp_changed
 signal turn_ended
@@ -12,7 +17,7 @@ signal attacked(victim: SlaveNode)
 @onready var line_end: Vector2 = $CircleSelect/LineEnd.global_position
 @onready var ellipse: Sprite2D = $CircleSelect
 @onready var stat_parent: Control = $Stats
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 @onready var arrow: Sprite2D = $Arrow
 @onready var arrow_animation: AnimationPlayer = $ArrowAnimation
 
@@ -34,8 +39,10 @@ var buffs : Dictionary[String, int] = {}
 var power : int = 0
 var luck : int = 0
 
+var item_parent : Node2D
+
 func _ready() -> void:
-	$AnimationSprites/Label.text = tr("crit")
+	$CritLabel.text = tr("crit")
 	
 	SignalBus.mouse_up.connect(_on_mouse_up)
 	SignalBus.mouse_right_down.connect(_on_mouse_right_down)
@@ -89,7 +96,7 @@ func set_hp(new_val: int, is_delta: bool = true):
 		held.is_alive = false
 		sprite.texture = Gallery.img_dead_slave
 		$HPBar.visible = false
-		$Items.visible = false
+		item_parent.visible = false
 		$Intention.visible = false
 		arrow.visible = false
 		SignalBus.slave_death.emit(self)
@@ -113,9 +120,10 @@ func set_power(new_val: int, is_delta: bool = true):
 		SignalBus.play_sound.emit("powerup")
 	add_stat("power", Gallery.icon_power, power)
 	
-	animation_player.play("power_up")
-	await animation_player.animation_finished
-	animation_player.play("idle")
+	powerup_animation.play("powerup")
+	#animation_player.play("power_up")
+	#await animation_player.animation_finished
+	#animation_player.play("idle")
 
 func set_luck(new_val: int, is_delta: bool = true):
 	if is_delta:
@@ -126,30 +134,38 @@ func set_luck(new_val: int, is_delta: bool = true):
 			
 func apply(slave: Slave, is_evil: bool = false) -> void:
 	held = slave
-	sprite = $Sprite
+	match(held.sprite_size):
+		Slave.SpriteSize.Normal:
+			item_parent = $Parts/Visual/Items
+		Slave.SpriteSize.Big:
+			item_parent = $Parts/Visual/BigItems
+	
+	sprite = $Parts/Visual/Sprite
 	sprite.texture = slave.texture
 	
-	if is_evil: 
-		sprite.flip_h = true
-		for offset_node: Node2D in $Items.get_children():
-			offset_node.position.x *= -1
+	if is_evil:
+		#sprite.flip_h = true
+		$Parts.scale = Vector2(-1, 1)
+		$AnimationSprites.scale = Vector2(-1, 1)
+		#for offset_node: Node2D in item_parent.get_children():
+		#	offset_node.position.x *= -1
 		
 	
 	weapon_node = item_prefab.instantiate()
-	$Items/Weapon.add_child(weapon_node)
-	weapon_node.apply(held.weapon, is_evil)
+	item_parent.get_node("Weapon").add_child(weapon_node)
+	weapon_node.apply(held.weapon)
 	
 	hat_node = item_prefab.instantiate()
-	$Items/Hat.add_child(hat_node)
-	hat_node.apply(held.hat, is_evil)
+	item_parent.get_node("Hat").add_child(hat_node)
+	hat_node.apply(held.hat)
 	
 	trinket1_node = item_prefab.instantiate()
-	$Items/Trinket1.add_child(trinket1_node)
-	trinket1_node.apply(held.trinket1, is_evil)
+	item_parent.get_node("Trinket1").add_child(trinket1_node)
+	trinket1_node.apply(held.trinket1)
 	
 	trinket2_node = item_prefab.instantiate()
-	$Items/Trinket2.add_child(trinket2_node)
-	trinket2_node.apply(held.trinket2, is_evil)
+	item_parent.get_node("Trinket2").add_child(trinket2_node)
+	trinket2_node.apply(held.trinket2)
 
 func add_stat(stat_name: String, icon: Texture2D, value: int):
 	var stat_entry : StatEntry = stat_parent.find_child(stat_name, false, false)
@@ -181,7 +197,7 @@ func toggle_ellipse(visible: bool):
 	$CircleSelect.visible = visible
 
 func attack(victim: SlaveNode):
-	$AnimationPlayer.play("jump")
+	#$AnimationPlayer.play("jump")
 	match(held.weapon.target):
 		Item.Target.Single: 
 			held.weapon.use_item(self, victim)
@@ -192,7 +208,7 @@ func attack(victim: SlaveNode):
 	_on_end_turn()
 	
 func support(ally: SlaveNode):
-	$AnimationPlayer.play("jump")
+	#$AnimationPlayer.play("jump")
 	match(held.hat.target):
 		Item.Target.Self:
 			held.hat.use_item(self, self)
@@ -226,7 +242,7 @@ func remove_buff(buff_name: String):
 func execute_intention():
 	var held_enemy : Enemy = held
 	await get_tree().create_timer(1).timeout
-	$AnimationPlayer.play("jump")
+	#$AnimationPlayer.play("jump")
 	match(held_enemy.intention.type):
 		
 		
@@ -273,7 +289,7 @@ func execute_intention():
 			held.is_alive = false
 			sprite.texture = null
 			$HPBar.visible = false
-			$Items.visible = false
+			item_parent.visible = false
 			$Intention.visible = false
 			SignalBus.slave_ran.emit(self)
 		
@@ -299,7 +315,7 @@ func execute_intention():
 			
 	_on_end_turn()
 	await get_tree().create_timer(1).timeout
-	$AnimationPlayer.play("idle")
+	#$AnimationPlayer.play("idle")
 	$Intention.visible = false
 	SignalBus.new_turn.emit()
 
@@ -337,8 +353,8 @@ func _on_end_turn() -> void:
 	turn_ended.emit()
 	toggle_arrow(false)
 	
-	await $AnimationPlayer.animation_finished
-	$AnimationPlayer.play("idle")
+	#await $AnimationPlayer.animation_finished
+	#$AnimationPlayer.play("idle")
 	
 
 
