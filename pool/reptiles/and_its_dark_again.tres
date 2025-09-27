@@ -1,15 +1,14 @@
 [gd_resource type="Resource" load_steps=3 format=3 uid="uid://dypnn2dauu6xk"]
 
+[ext_resource type="PackedScene" uid="uid://bqqoibi3bnx87" path="res://prefabs/reptiles/AIDA.tscn" id="1_7bu8c"]
 [ext_resource type="Script" uid="uid://cca7erkjq2uhc" path="res://scripts/reptiles/roots_and_toots.gd" id="1_66sp2"]
-[ext_resource type="Texture2D" uid="uid://cls0fcnjw5wj4" path="res://images/reptiles/roots_and_toots.png" id="2_7bu8c"]
 
 [resource]
 script = ExtResource("1_66sp2")
+prefab = ExtResource("1_7bu8c")
 info_count = 2
 u_name = &"and_its_dark_again"
 base_maxhp = 400
 base_speed = 3
-base_cost = 0
 sprite_size = 2
-texture = ExtResource("2_7bu8c")
 metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

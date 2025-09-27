@@ -286,8 +286,17 @@ func _on_good_won() -> void:
 	CurrentRun.good_boys = CurrentRun.good_boys.filter(func(slave: Slave): return slave.is_alive)
 	SignalBus.stop_music.emit()
 	
+	# Level up items
+	
 	for slave : Slave in CurrentRun.good_boys:
 		slave.speed = slave.base_speed
+		for item : Item in [slave.weapon, slave.hat, slave.trinket1, slave.trinket2]:
+			if item.is_item() and item.level < 5:
+				item.experience += 1
+				if item.experience == Constants.exp_required[item.level-1]:
+					item.experience = 0
+					item.level += 1
+					item.on_level_up()
 	
 	loot_node.start_marauder()
 	loot_node.visible = true

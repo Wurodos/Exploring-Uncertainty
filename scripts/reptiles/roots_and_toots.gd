@@ -1,4 +1,4 @@
-extends Enemy
+extends Reptile
 
 func _init() -> void:
 	super._init()

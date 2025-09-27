@@ -21,6 +21,13 @@ func apply(item: Item) -> void:
 	$ExtraHP.visible = false
 	$ExtraSpeed.visible = false
 	
+	match(item.level):
+		1: $LevelBorder.color = Color(0.427, 0.427, 0.427, 1.0)
+		2: $LevelBorder.color = Color(0.0, 0.545, 0.57, 1.0)
+		3: $LevelBorder.color = Color(0.914, 0.682, 0.0, 1.0)
+		4: $LevelBorder.color = Color(0.0, 0.769, 0.0, 1.0)
+		5: $LevelBorder.color = Color(0.655, 0.227, 0.906, 1.0)
+	
 	single_target.visible = false
 	all_targets.visible = false
 	self_target.visible = false
