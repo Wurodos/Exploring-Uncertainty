@@ -17,16 +17,16 @@ func _init() -> void:
 var times_summoned : int = 0
 var _extra_damage: int = 0
 
-func decide_intention(node: SlaveNode) -> void:
-	super.decide_intention(node)
+func decide_intention() -> void:
+	super.decide_intention()
 	
 	var weak_slave_id : int = CurrentRun.good_boys.find_custom \
 		(func(slave: Slave): return slave.hp <= 10 + _extra_damage and slave.is_alive)
 	var faster_slave_id: int = CurrentRun.good_boys.find_custom \
-		(func(slave: Slave): return slave.speed > node.held.speed and slave.is_alive)
+		(func(slave: Slave): return slave.speed > owner.held.speed and slave.is_alive)
 	
 	
-	if node.team.boys.size() == 1 and times_summoned < 5:
+	if owner.team.boys.size() == 1 and times_summoned < 5:
 		intention = Intention.new(Intention.Type.SummonStars, 2)
 		times_summoned += 1
 	elif weak_slave_id != -1:

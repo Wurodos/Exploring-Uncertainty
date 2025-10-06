@@ -258,6 +258,7 @@ position = Vector2(481, 26)
 position = Vector2(326, 189)
 
 [node name="Line2D" type="Line2D" parent="World"]
+points = PackedVector2Array(760, -126)
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2

@@ -1,5 +1,7 @@
 extends Enemy
 
+class_name Cherv
+
 @export var harm_lower: int = 2
 @export var harm_higher: int = 5
 
@@ -17,9 +19,10 @@ func localize() -> void:
 # 	1 - +1 dmg range
 #	2 - +1 speed
 
-var _dmg_increase = 0
-
 func update_stats(node: SlaveNode) -> void:
+	super.update_stats(node)
+	owner = node
+	
 	if hat.is_item(): 
 		node.set_max_hp(3)
 		node.set_hp(3)
@@ -38,9 +41,18 @@ func update_stats(node: SlaveNode) -> void:
 	localize()
 
 # attacks randomly
+# changes target if attacked, new target is attacker
 
-func decide_intention(node: SlaveNode) -> void:
-	super.decide_intention(node)
+
+
+func on_attacked(attacker: SlaveNode) -> void:
+	super.on_attacked(attacker)
+	intention.target = _convert_node_to_target(attacker)
+	owner.update_intention()
+
+func decide_intention() -> void:
+	super.decide_intention()
+	
 	intention = Intention.new(Intention.Type.DamageSingular, randi_range(harm_lower, harm_higher))
 	
 	intention.target = _get_random_good_target()

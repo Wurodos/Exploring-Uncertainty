@@ -14,8 +14,8 @@ func _init() -> void:
 var times_summoned : int = 0
 var _extra_damage: int = 0
 
-func decide_intention(node: SlaveNode) -> void:
-	super.decide_intention(node)
+func decide_intention() -> void:
+	super.decide_intention()
 	
 
 

@@ -16,6 +16,7 @@ func localize() -> void:
 #	2 - +1 speed
 
 func update_stats(node: SlaveNode) -> void:
+	super.update_stats(node)
 	if hat.is_item():
 		harm += 1
 	if weapon.is_item(): harm += 2
@@ -29,8 +30,8 @@ func update_stats(node: SlaveNode) -> void:
 
 # attacks everyone (no other move)
 
-func decide_intention(node: SlaveNode) -> void:
-	super.decide_intention(node)
+func decide_intention() -> void:
+	super.decide_intention()
 	intention = Intention.new(Intention.Type.DamageMultiple, harm)
 
 	intention.target = Intention.Target.All

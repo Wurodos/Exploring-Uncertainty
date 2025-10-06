@@ -14,6 +14,7 @@ continue;Continue;Продолжить
 save;Save;Сохранить
 restart;Restart;Перезапуск
 exit;Power off;Выключить
+craft;Craft;Мастерить
 comms_repair;Repair;Восстановить
 kw_power_name;Power;Мощь
 kw_power_desc;Increases inflicted HARM;Увеличивает причиняемый ВРЕД

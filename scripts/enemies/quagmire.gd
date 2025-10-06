@@ -38,12 +38,12 @@ func update_stats(node: SlaveNode) -> void:
 
 # support, if only quagmires = runs
 
-func decide_intention(node: SlaveNode) -> void:
-	super.decide_intention(node)
+func decide_intention() -> void:
+	super.decide_intention()
 	
 	var alive = 0
 	var quags = 0
-	for slave in node.team.boys:
+	for slave in owner.team.boys:
 		if slave.is_alive: alive += 1
 		if slave.u_name == u_name: quags += 1
 	if alive == quags:

@@ -4,7 +4,8 @@ class_name Enemy
 
 class Intention:
 	enum Type { DamageSingular, DamageMultiple, DamageTwo,
-	 PowerUp, HealSingle, HealMultiple, Run, SummonStars }
+	 PowerUp, HealSingle, HealMultiple, Run, SummonStars,
+	 SummonCherv, OrderChervs }
 	enum Target { Middle, Bottom, Up, All, Two, None }
 		
 	var type: Type
@@ -25,6 +26,8 @@ class Intention:
 var info: Array[String] = []
 var intention: Intention
 var is_final_boss: bool = false
+
+var owner: SlaveNode
 
 func _init() -> void:
 	super._init()
@@ -57,24 +60,28 @@ static func deserialize(data: Dictionary) -> Enemy:
 	enemy.trinket2 = Item.deserialize(data["trinket2"])
 	
 	return enemy
-	
+
+func on_attacked(_attacker: SlaveNode) -> void:
+	pass
 
 # Override this
 func update_stats(node: SlaveNode) -> void:
-	pass
+	owner = node
 
 # Override this	
-func decide_intention(node: SlaveNode) -> void:
+func decide_intention() -> void:
 	pass
 
-func _get_random_good_target() -> int:
+
+
+func _get_random_good_target() -> Intention.Target:
 	var possible : Array[int] = []
 	var i = 0
 	for slave : Slave in CurrentRun.good_boys:
 		if slave.is_alive:
 			possible.append(i)
 		i += 1	
-	return possible.pick_random()
+	return possible.pick_random() as Intention.Target
 
 func _get_2_good_targets() -> Array[int]:
 	var possible : Array[int] = []
@@ -91,6 +98,15 @@ func _get_2_good_targets() -> Array[int]:
 func _get_good_target(score_func: Callable):
 	pass
 
+func _convert_node_to_target(node: SlaveNode) -> Intention.Target:
+	var i = 0
+	for slave : Slave in CurrentRun.good_boys:
+		if slave == node.held:
+			return i as Intention.Target
+		i += 1
+	
+	return 0 as Intention.Target
+
 func _get_random_evil_target(is_self_included: bool = true) -> int:
 	var possible : Array[int] = []
 	var i = 0
@@ -103,10 +119,10 @@ func _get_random_evil_target(is_self_included: bool = true) -> int:
 		i += 1	
 	return possible.pick_random()
 
-func _get_self_target() -> int:
+func _get_self_target() -> Intention.Target:
 	var i = 0
 	for slave : Slave in CurrentRun.evil_boys:
 		if slave == self:
-			return i
+			return i as Intention.Target
 		i += 1
-	return -1
+	return Intention.Target.None

@@ -201,10 +201,13 @@ func attack(victim: SlaveNode):
 	match(held.weapon.target):
 		Item.Target.Single: 
 			held.weapon.use_item(self, victim)
+			(victim.held as Enemy).on_attacked(self)
 		Item.Target.AllTeam: 
 			for slave in Battle.instance.evil_team.boys_nodes:
 				held.weapon.use_item(self, slave)
+				(slave.held as Enemy).on_attacked(self)
 	attacked.emit(victim)
+	
 	_on_end_turn()
 	
 func support(ally: SlaveNode):
@@ -309,7 +312,19 @@ func execute_intention():
 			
 			team.add_slave(star1)
 			team.add_slave(star2)
-			
+		
+		Enemy.Intention.Type.OrderChervs:
+			for enemy in Battle.instance.evil_team.boys_nodes:
+				if enemy.held.is_alive and enemy.held is Cherv:
+					Action.deal_damage(enemy,\
+					Battle.instance.good_team.boys_nodes[(held as Enemy).intention.target],
+					(enemy.held as Cherv).intention.amount)
+					
+		
+		Enemy.Intention.Type.SummonCherv:
+			var cherv = SlavePool.fetch("cherv")
+			team.cull_the_dead()
+			team.add_slave(cherv)
 	
 	held_enemy.intention.extra_effect.call()
 			
@@ -365,8 +380,12 @@ func _decide_intentions() -> void:
 	
 	$Intention.visible = true
 	var held_enemy : Enemy = held
-	held_enemy.decide_intention(self)
+	held_enemy.decide_intention()
+	update_intention()
 	
+
+func update_intention() -> void:
+	var held_enemy : Enemy = held
 	var total = held_enemy.intention.amount
 	if held_enemy.intention.type == Enemy.Intention.Type.DamageSingular\
 		or held_enemy.intention.type == Enemy.Intention.Type.DamageMultiple:
@@ -394,6 +413,10 @@ func _decide_intentions() -> void:
 			icon = Gallery.icon_run
 		Enemy.Intention.Type.SummonStars:
 			icon = Gallery.icon_summon_stars
+		Enemy.Intention.Type.OrderChervs:
+			icon = Gallery.icon_order
+		Enemy.Intention.Type.SummonCherv:
+			icon = Gallery.icon_summon_cherv
 	
 	$Intention/TargetTop.visible = false
 	$Intention/TargetMiddle.visible = false

@@ -26,6 +26,10 @@ Action="*res://scripts/battle/action.gd"
 Gallery="*res://scripts/utils/gallery.gd"
 ReptilePool="*res://scripts/reptiles/reptile_pool.gd"
 
+[debug]
+
+gdscript/warnings/integer_division=0
+
 [display]
 
 window/stretch/mode="canvas_items"

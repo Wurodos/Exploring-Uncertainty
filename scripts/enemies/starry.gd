@@ -2,6 +2,7 @@ extends Enemy
 
 @export var power_gain: int = 2
 @export var shield_turns: int = 1
+@export var heal_amount: int = 5
 @export var harm_lower: int = 5
 @export var harm_higher: int = 8
 
@@ -21,6 +22,7 @@ func localize() -> void:
 #	2 - +3 hp +1 powerup
 
 func update_stats(node: SlaveNode) -> void:
+	super.update_stats(node)
 	if hat.is_item(): 
 		shield_turns += 1
 	if weapon.is_item():
@@ -36,31 +38,60 @@ func update_stats(node: SlaveNode) -> void:
 		power_gain += 2
 	localize()
 
-# either attacks or powers and shields up (does it in groups of 2)
+# Commands troops 
+# If there are cherv(s) in the battle: will order them to attack
+# Else if there are chomper(s): will shield 1 turn and power 1 to self
+# Else rotates between:
+#	1) Attack
+#	2) Summon naked cherv if there's space, otherwise shield + power
 
 
-var previous = 0
 
-func decide_intention(node: SlaveNode) -> void:
-	super.decide_intention(node)
+var times_attacked: int = 0
+
+func on_attacked(attacker: SlaveNode) -> void:
+	super.on_attacked(attacker)
+	if intention.type == Intention.Type.DamageSingular or intention.type == Intention.Type.OrderChervs:
+		intention.target = _convert_node_to_target(attacker)
+		owner.update_intention()
+
+func decide_intention() -> void:
+	super.decide_intention()
 	
-	var current : int
+	var alive_n = 0
+	for ally : SlaveNode in owner.team.boys_nodes:
+		if ally.held.is_alive:
+			alive_n += 1
 	
-	if previous == 0:
-		current = [-1, 1].pick_random()
-		previous = current
-	else: 
-		current = -previous
-		previous = current
+	for ally : SlaveNode in owner.team.boys_nodes:
+		if ally.held.is_alive and ally.held.u_name == "cherv":
+			intention = Intention.new(Intention.Type.OrderChervs)
+			intention.target = _get_random_good_target()
+			return 	
 	
-	if current == 1:
-		intention = Intention.new(Intention.Type.DamageSingular, randi_range(harm_lower,harm_higher))
-		intention.target = _get_random_good_target()
-	elif current == -1:
+	# if no chervs
+	
+	for ally : SlaveNode in owner.team.boys_nodes:
+		if ally.held.is_alive and ally.held.u_name == "chomper":
+			intention = Intention.new(Intention.Type.HealSingle, heal_amount)
+			intention.target = _get_self_target()
+			intention.extra_effect = func() :
+				owner.add_buff(Action.SHIELD, 1)
+			return 	
+	 
+	# if no chervs nor chompers
+	if alive_n < 3 and hp > maxhp * 4 / 5:
+		intention = Intention.new(Intention.Type.SummonCherv, 1)
+	elif times_attacked % 2 == 1:
 		intention = Intention.new(Intention.Type.PowerUp, power_gain)
-		intention.extra_effect = func() :
-			node.add_buff(Action.SHIELD, shield_turns)
 		intention.target = _get_self_target()
+		intention.extra_effect = func():
+			owner.add_buff(Action.SHIELD, shield_turns)
+		times_attacked += 1
+	else:
+		intention = Intention.new(Intention.Type.DamageSingular, randi_range(harm_lower, harm_higher))
+		intention.target = _get_random_good_target()
+		times_attacked += 1
 	
-	
+		
 	

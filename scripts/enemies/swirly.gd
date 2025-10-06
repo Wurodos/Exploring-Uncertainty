@@ -15,6 +15,7 @@ func localize() -> void:
 #
 
 func update_stats(node: SlaveNode) -> void:
+	super.update_stats(node)
 	if hat.is_item(): 
 		node.add_buff(Action.SHIELD, 1)
 	if weapon.is_item(): harm += 3
@@ -24,9 +25,11 @@ func update_stats(node: SlaveNode) -> void:
 		harm += 2
 	localize()
 
-# attacks one target, frail, but fast
+# fast and deals big damage
+# but it decreases with each hit
+# tries to run when hp < 50%
 
-func decide_intention(node: SlaveNode) -> void:
-	super.decide_intention(node)
+func decide_intention() -> void:
+	super.decide_intention()
 	intention = Intention.new(Intention.Type.DamageSingular, harm)
 	intention.target = _get_random_good_target()

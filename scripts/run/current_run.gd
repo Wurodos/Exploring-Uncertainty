@@ -256,12 +256,12 @@ func _prepare_archive() -> void:
 func arrange_evil_team() -> void:
 	##	Debug
 	#CurrentRun.evil_boys = [ReptilePool.fetch("roots_and_toots")]
-	#CurrentRun.evil_boys = [SlavePool.fetch("chomper")]
+	CurrentRun.evil_boys = [SlavePool.fetch("cherv"), SlavePool.fetch("starry"), SlavePool.fetch("cherv")]
 	#CurrentRun.evil_boys[0].equip(ItemPool.fetch_random(Item.Type.Weapon))
 	#CurrentRun.evil_boys[0].equip(ItemPool.fetch_random(Item.Type.Hat))
 	#CurrentRun.evil_boys[0].equip(ItemPool.fetch_random(Item.Type.Trinket),1)
 	#CurrentRun.evil_boys[0].equip(ItemPool.fetch_random(Item.Type.Trinket),2)
-	#return
+	return
 	
 	CurrentRun.evil_boys = []
 	

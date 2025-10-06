@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://caaw5385eudd6"]
+[gd_scene load_steps=61 format=3 uid="uid://caaw5385eudd6"]
 
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="1_4xfga"]
 [ext_resource type="Script" uid="uid://bjl8be1ygje44" path="res://scripts/map/map.gd" id="1_blm8a"]
@@ -162,12 +162,75 @@ _data = {
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mwr4f"]
 bg_color = Color(1.13107e-06, 0.398677, 0.417649, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cgoaf"]
-bg_color = Color(1.74474e-07, 0.169159, 0.178819, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lhdcv"]
-bg_color = Color(4.71681e-06, 0.602702, 0.631045, 1)
+bg_color = Color(1.8049032e-07, 0.22578561, 0.23788574, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cgoaf"]
+bg_color = Color(2.695322e-06, 0.5539626, 0.5795091, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1qn5a"]
+bg_color = Color(0.23490001, 0.268245, 0.27, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_leq5k"]
+bg_color = Color(0.12504289, 0.14503306, 0.14753258, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qcc5i"]
+bg_color = Color(0.3934159, 0.43771705, 0.443249, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
 
 [sub_resource type="LabelSettings" id="LabelSettings_4b7dj"]
 font = ExtResource("1_4xfga")
@@ -286,24 +349,40 @@ offset_bottom = 314.0
 
 [node name="ShowTeam" type="Button" parent="Camera2D/UI"]
 layout_mode = 0
-offset_left = 724.0
-offset_top = 485.0
-offset_right = 1086.0
-offset_bottom = 592.0
+offset_left = 761.0
+offset_top = 531.0
+offset_right = 1123.0
+offset_bottom = 611.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("1_4xfga")
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_mwr4f")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_cgoaf")
-theme_override_styles/hover = SubResource("StyleBoxFlat_lhdcv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lhdcv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cgoaf")
 text = "Бригада"
+
+[node name="ShowCraft" type="Button" parent="Camera2D/UI"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 531.0
+offset_right = 379.0
+offset_bottom = 611.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_4xfga")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_1qn5a")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_leq5k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qcc5i")
+script = ExtResource("12_y2ir2")
+string_id = &"craft"
+metadata/_custom_type_script = "uid://bg2spyp44xpw7"
 
 [node name="Save" type="Button" parent="Camera2D/UI"]
 layout_mode = 0
-offset_left = 35.0
-offset_top = 527.0
-offset_right = 204.0
-offset_bottom = 611.0
+offset_left = 33.0
+offset_top = 379.0
+offset_right = 202.0
+offset_bottom = 463.0
 script = ExtResource("12_y2ir2")
 string_id = &"save"
 
@@ -968,13 +1047,14 @@ text = "OK"
 [node name="Fade" type="ColorRect" parent="Camera2D/UI"]
 layout_mode = 0
 offset_left = -303.0
-offset_top = -165.0
+offset_top = -173.0
 offset_right = 1472.0
-offset_bottom = 743.0
+offset_bottom = 735.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
 [connection signal="pressed" from="Camera2D/UI/ShowTeam" to="Camera2D/UI/TeamWindow" method="_on_show_team_pressed"]
+[connection signal="pressed" from="Camera2D/UI/ShowCraft" to="Camera2D/UI/TeamWindow" method="_on_show_team_pressed"]
 [connection signal="pressed" from="Camera2D/UI/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="Camera2D/UI/TeamWindow/Close" to="Camera2D/UI/TeamWindow" method="_on_close_pressed"]
 [connection signal="pressed" from="Camera2D/UI/GovnovWindow/Close" to="Camera2D/UI/GovnovWindow" method="_on_close_pressed"]

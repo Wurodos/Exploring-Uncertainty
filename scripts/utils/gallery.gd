@@ -8,6 +8,8 @@ const icon_heal_multiple = preload("res://images/icons/heal_multiple.png")
 const icon_powerup = preload("res://images/icons/power_up.png")
 const icon_run = preload("res://images/icons/run.png")
 const icon_summon_stars = preload("res://images/icons/summon.png")
+const icon_order = preload("res://images/icons/order.png")
+const icon_summon_cherv = preload("res://images/icons/summon_cherv.png")
 
 const img_dead_slave = preload("res://images/slaves/dead.png")
 
