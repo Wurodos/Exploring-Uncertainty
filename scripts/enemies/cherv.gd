@@ -47,8 +47,9 @@ func update_stats(node: SlaveNode) -> void:
 
 func on_attacked(attacker: SlaveNode) -> void:
 	super.on_attacked(attacker)
-	intention.target = _convert_node_to_target(attacker)
-	owner.update_intention()
+	if intention:
+		intention.target = _convert_node_to_target(attacker, CurrentRun.good_boys)
+		owner.update_intention()
 
 func decide_intention() -> void:
 	super.decide_intention()

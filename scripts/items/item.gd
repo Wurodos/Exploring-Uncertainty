@@ -2,6 +2,9 @@ extends Resource
 
 class_name Item
 
+enum Scrap {
+	Flesh, Gear, Shard, Tooth, Oil
+}
 enum Type { Weapon, Hat, Trinket, All}
 enum Target { Single, AllTeam, Self, None}
 enum Enchant { None, Red, Blue, Green, Yellow }
@@ -12,6 +15,7 @@ enum Enchant { None, Red, Blue, Green, Yellow }
 @export var extra_speed: int = 0 
 @export var texture: Texture2D
 @export var cost: int
+@export var craft_reqs : Dictionary[Scrap, int] = {}
 @export var keywords: Array[String] = []
 
 @export var u_name: StringName = ""
@@ -41,6 +45,33 @@ static func deserialize(data: Dictionary) -> Item:
 	item.cost = floor(data["cost"])
 	item.enchant = data["enchant"]
 	return item
+
+static func random_scrap() -> Scrap:
+	return [Scrap.Flesh, Scrap.Gear, Scrap.Shard, Scrap.Tooth, Scrap.Oil].pick_random()
+
+func get_scrap() -> Item.Scrap:
+	var r = randi_range(0, 99)
+	match(type):
+		Type.Weapon:
+			if r < 20: return Item.Scrap.Flesh
+			if r < 60: return Item.Scrap.Tooth
+			return Item.Scrap.Shard
+		Type.Hat:
+			if r < 20: return Item.Scrap.Gear
+			if r < 60: return Item.Scrap.Tooth
+			return Item.Scrap.Flesh
+		Type.Trinket:
+			if r < 20: return Item.Scrap.Oil
+			if r < 60: return Item.Scrap.Shard
+			return Item.Scrap.Gear
+			
+	# v Should never happen v
+		Type.All:
+			push_error("Item Type is ALL")
+			return Item.Scrap.Oil
+	push_error("Item Type is unrecognized")
+	return Item.Scrap.Oil
+	
 
 func is_item() -> bool:
 	return u_name != "no_weapon" and u_name != "no_hat"\

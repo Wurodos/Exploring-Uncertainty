@@ -1,0 +1,197 @@
+[gd_scene load_steps=14 format=3 uid="uid://svnijeijk20h"]
+
+[ext_resource type="Script" uid="uid://bwtdnpiyekon6" path="res://scripts/crafting/item_craftable.gd" id="1_7llan"]
+[ext_resource type="Texture2D" uid="uid://cxsnysdj5en2r" path="res://images/items/anvil.png" id="2_l1qs7"]
+[ext_resource type="Texture2D" uid="uid://cdm857fxoms7i" path="res://images/scraps/gear.png" id="3_v6jvv"]
+[ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="4_c16lq"]
+[ext_resource type="Texture2D" uid="uid://cnvix1bkpw7ha" path="res://images/scraps/flesh.png" id="5_16van"]
+[ext_resource type="Texture2D" uid="uid://154yr4da73bn" path="res://images/scraps/shard.png" id="6_k66y6"]
+[ext_resource type="Texture2D" uid="uid://py17lko5dydj" path="res://images/scraps/tooth.png" id="7_k7ktt"]
+[ext_resource type="Texture2D" uid="uid://b7h2htdmn1uad" path="res://images/scraps/oil.png" id="8_lcspu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_leq5k"]
+font = ExtResource("4_c16lq")
+font_size = 32
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_la2vj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cjpp"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6878666, 0.77, 0.15399998, 0.78431374)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_la2vj"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.7147024, 0.7703356, 0.33943805, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xcq86"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.7019608)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="ItemCraftable" type="Control"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_7llan")
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.29954746, 0.29954746, 0.29954743, 1)
+
+[node name="ItemSprite" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+texture = ExtResource("2_l1qs7")
+expand_mode = 5
+
+[node name="Gear" type="TextureRect" parent="ItemSprite"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 120.0
+offset_right = 64.0
+offset_bottom = 160.0
+texture = ExtResource("3_v6jvv")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="ItemSprite/Gear"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_leq5k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Flesh" type="TextureRect" parent="ItemSprite"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 120.0
+offset_right = 120.0
+offset_bottom = 160.0
+texture = ExtResource("5_16van")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="ItemSprite/Flesh"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_leq5k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shard" type="TextureRect" parent="ItemSprite"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 152.0
+offset_right = 64.0
+offset_bottom = 192.0
+texture = ExtResource("6_k66y6")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="ItemSprite/Shard"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_leq5k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tooth" type="TextureRect" parent="ItemSprite"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 152.0
+offset_right = 120.0
+offset_bottom = 192.0
+texture = ExtResource("7_k7ktt")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="ItemSprite/Tooth"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_leq5k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Oil" type="TextureRect" parent="ItemSprite"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 184.0
+offset_right = 88.0
+offset_bottom = 224.0
+texture = ExtResource("8_lcspu")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="ItemSprite/Oil"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_leq5k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Craft" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_la2vj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5cjpp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_la2vj")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_xcq86")
+
+[connection signal="pressed" from="Craft" to="." method="_on_craft_pressed"]

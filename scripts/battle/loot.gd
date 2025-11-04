@@ -3,6 +3,7 @@ extends Control
 class_name Loot
 
 var items : Array[Item] = [] 
+var scraps : Array[Item.Scrap] = []
 
 var right_item: ItemDraggable
 var left_item: ItemDraggable
@@ -15,14 +16,25 @@ func _ready() -> void:
 	SignalBus.hide_item_info.connect(_on_hide_item_info)
 
 func start_marauder() -> void:
+	items.shuffle()
+	
+	scraps.append_array(items.slice(items.size() / 2).map(func(item: Item): return item.get_scrap()))
+	for i in range(Battle.instance.evil_team.boys_nodes.size()-1):
+		scraps.append(Item.random_scrap())
+	
+	for scrap: Item.Scrap in scraps:
+		CurrentRun.scraps[scrap] += 1
+	
+	items = items.slice(0, items.size() / 2)
 	if items.is_empty(): 
-		SignalBus.end_battle.emit() 
+		visible = false
+		SignalBus.show_end_battle_screen.emit(scraps) 
 		return
 		
 	right_item = $RightItem
 	left_item = $LeftItem
 	extra_item = $ExtraItem
-	items.shuffle()
+	
 	_present_choice()
 
 func _present_choice() -> void:
@@ -53,8 +65,7 @@ func _on_bag_mouse_entered() -> void:
 		CurrentRun.put_item_in_inventory(ItemDraggable.selected.held)
 		if items.is_empty():
 			visible = false
-			CurrentRun.is_battle_tutorial = false
-			SignalBus.end_battle.emit()
+			SignalBus.show_end_battle_screen.emit(scraps)
 		else: _present_choice()
 
 

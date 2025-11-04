@@ -7,6 +7,8 @@ const slave_prefab = preload("res://prefabs/slaves/blob.tscn")
 @onready var slave_parents : Array[Node2D] = \
 	[$MiddleSlave, $BottomSlave, $TopSlave]
 
+@export var ropes : Array[Node2D] = []
+
 @export var is_evil: bool
 
 var boys: Array[Slave] = []
@@ -26,6 +28,12 @@ func _on_start_battle() -> void:
 		var new_slave : SlaveNode = slave_prefab.instantiate()
 		new_slave.team = self
 		new_slave.apply(slave, is_evil)
+		
+		# Ropetest
+		#if is_evil:
+		#	ropes[i].get_parent().visible = true
+		#	new_slave.apply(SlavePool.fetch("funny"), is_evil)
+		#	new_slave.follow_rope = ropes[i]
 		
 		boys_nodes.append(new_slave)
 		slave_parents[i].add_child(new_slave)

@@ -14,6 +14,7 @@ const item_shop_prefab = preload("res://prefabs/items/item_shop.tscn")
 
 func _ready() -> void:
 	visible = false
+	$Recipies.visible = false
 	
 	SignalBus.enter_city.connect(_on_enter_city)
 	SignalBus.city_heal.connect(_on_heal)
@@ -34,6 +35,15 @@ func _buy(item_node: ItemShop) -> void:
 	item_node.sell.connect(_sell)
 	item_node.get_parent().remove_child(item_node)
 	inventory_grid.add_to_grid(item_node)
+	_update_items()
+
+func _buy_recipe(recipe_node: ItemShop) -> void:
+	_change_value(-recipe_node.cost)
+	current_city.recipies.erase(recipe_node.held)
+	CurrentRun.craft_recipes.append(recipe_node.held)
+	
+	recipe_node.queue_free()
+	
 	_update_items()
 
 func _sell(item_node: ItemShop) -> void:
@@ -57,6 +67,11 @@ func _update_items() -> void:
 		if item_node.cost > value or CurrentRun.inventory.size() == 24:
 			item_node.toggle(false)
 		else: item_node.toggle(true)
+	
+	for recipe_node : ItemShop in $Recipies.get_children():
+		if recipe_node.cost > value:
+			recipe_node.toggle(false)
+		else: recipe_node.toggle(true)
 	
 	for slave_node : SlaveTeamNode in $Slaves.get_children():
 		if current_city.flag:
@@ -88,6 +103,9 @@ func _on_enter_city(city: Room) -> void:
 	while $Shop.get_child_count() > 0:
 		$Shop.get_child(0).free()
 	
+	while $Recipies.get_child_count() > 0:
+		$Recipies.get_child(0).free()
+	
 	# Inventory items
 	inventory_grid.clear()
 	for item: Item in CurrentRun.inventory:
@@ -96,13 +114,18 @@ func _on_enter_city(city: Room) -> void:
 		item_node.sell.connect(_sell)
 		inventory_grid.add_to_grid(item_node)
 	
-	# Populate Items
+	# Populate Items and Recipies
 	if not city.visited:
 		city.visited = true
 		for j in range(5):
 			var item : Item = ItemPool.fetch_random()
 			item.cost = j * 4
 			city.items.append(item)
+		for j in range(2):
+			var recipe : Item = ItemPool.fetch_random()
+			recipe.cost = (j+1)*10
+			city.recipies.append(recipe)
+			
 	
 	if not current_city.flag and CurrentRun.discounts > 0:
 		CurrentRun.discounts -= 1
@@ -111,13 +134,17 @@ func _on_enter_city(city: Room) -> void:
 		for item in city.items: item.cost = floor(item.cost * 3/4)
 		
 	
-	var j = 0
 	for item in city.items:
 		var item_node: ItemShop = item_shop_prefab.instantiate()
 		item_node.apply(item, false)
 		item_node.buy.connect(_buy)
 		$Shop.add_child(item_node)
-		j += 1
+	
+	for recipe in city.recipies:
+		var recipe_node: ItemShop = item_shop_prefab.instantiate()
+		recipe_node.apply(recipe, false)
+		recipe_node.buy.connect(_buy_recipe)
+		$Recipies.add_child(recipe_node)
 	
 	var i = 0
 	for slave in CurrentRun.good_boys:
@@ -146,3 +173,12 @@ func _on_hide_item_info() -> void:
 	_hide_info = true
 	await get_tree().create_timer(0.1).timeout
 	if _hide_info: $ItemEntry.visible = false
+
+
+func _on_shop_selected(index: int) -> void:
+	if index == 0:
+		$Shop.visible = true
+		$Recipies.visible = false
+	else: 
+		$Shop.visible = false
+		$Recipies.visible = true

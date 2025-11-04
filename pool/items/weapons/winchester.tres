@@ -5,15 +5,13 @@
 
 [resource]
 script = ExtResource("1_ib7ck")
-first_harm = 5
-second_harm = 3
-type = 0
-target = 0
-extra_hp = 0
-extra_speed = 0
 texture = ExtResource("2_yoghk")
 cost = 10
-keywords = Array[String]([])
+craft_reqs = Dictionary[int, int]({
+1: 1,
+2: 1,
+4: 3
+})
 u_name = &"winchester"
 name = "Винчестер"
 desc = "5 ВРЕДА, 3 ВРЕДА ДРУГОЙ СЛУЧАЙНОЙ ЦЕЛИ"

@@ -5,14 +5,17 @@
 
 [resource]
 script = ExtResource("1_ly2o0")
-power_gain = 1
-luck_gain = 1
 type = 2
 target = 2
 extra_hp = 1
 extra_speed = 1
 texture = ExtResource("2_ly2o0")
 cost = 4
+craft_reqs = Dictionary[int, int]({
+2: 1,
+3: 1,
+4: 1
+})
 keywords = Array[String](["power", "luck"])
 u_name = &"obsidian"
 name = "Обсидиан"

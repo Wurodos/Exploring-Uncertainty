@@ -52,7 +52,7 @@ var times_attacked: int = 0
 func on_attacked(attacker: SlaveNode) -> void:
 	super.on_attacked(attacker)
 	if intention.type == Intention.Type.DamageSingular or intention.type == Intention.Type.OrderChervs:
-		intention.target = _convert_node_to_target(attacker)
+		intention.target = _convert_node_to_target(attacker, CurrentRun.good_boys)
 		owner.update_intention()
 
 func decide_intention() -> void:
@@ -74,7 +74,7 @@ func decide_intention() -> void:
 	for ally : SlaveNode in owner.team.boys_nodes:
 		if ally.held.is_alive and ally.held.u_name == "chomper":
 			intention = Intention.new(Intention.Type.HealSingle, heal_amount)
-			intention.target = _get_self_target()
+			intention.target = _convert_node_to_target(ally, CurrentRun.evil_boys)
 			intention.extra_effect = func() :
 				owner.add_buff(Action.SHIELD, 1)
 			return 	

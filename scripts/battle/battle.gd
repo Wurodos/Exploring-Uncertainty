@@ -298,8 +298,9 @@ func _on_good_won() -> void:
 					item.level += 1
 					item.on_level_up()
 	
-	loot_node.start_marauder()
 	loot_node.visible = true
+	loot_node.start_marauder()
+	
 	
 	if CurrentRun.is_battle_tutorial:
 		tutorial_progress = 0
@@ -369,3 +370,8 @@ func _on_tutorial_ok_pressed() -> void:
 	elif tutorial_progress == 9:
 		tutorial_box.visible = false
 	tutorial_box.get_node("Text").set_string_id("tutorial_battle_" + str(tutorial_progress))
+
+
+func _on_go_back_map_pressed() -> void:
+	CurrentRun.is_battle_tutorial = false
+	SignalBus.end_battle.emit()

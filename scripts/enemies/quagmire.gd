@@ -23,6 +23,7 @@ func localize() -> void:
 #	2 = +1 speed
 
 func update_stats(node: SlaveNode) -> void:
+	owner = node
 	if hat.is_item(): 
 		node.add_buff(Action.SHIELD, 1)
 	if weapon.is_item(): 

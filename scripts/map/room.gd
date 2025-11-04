@@ -2,7 +2,7 @@ extends Node2D
 
 class_name Room
 
-enum Type {Empty, Purged, City, Cherv, Govnov, Reptile, Comms, Any}
+enum Type {Empty, Purged, City, Cherv, Govnov, Reptile, Comms, Any, Ruin}
 
 var row: int
 var col: int
@@ -43,3 +43,4 @@ func serialize() -> Dictionary:
 var heal_used: int = 0
 var data: int = 0
 var items: Array[Item] = []
+var recipies: Array[Item] = []

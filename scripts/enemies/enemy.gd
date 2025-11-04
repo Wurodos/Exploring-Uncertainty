@@ -98,9 +98,9 @@ func _get_2_good_targets() -> Array[int]:
 func _get_good_target(score_func: Callable):
 	pass
 
-func _convert_node_to_target(node: SlaveNode) -> Intention.Target:
+func _convert_node_to_target(node: SlaveNode, team: Array[Slave]) -> Intention.Target:
 	var i = 0
-	for slave : Slave in CurrentRun.good_boys:
+	for slave : Slave in team:
 		if slave == node.held:
 			return i as Intention.Target
 		i += 1

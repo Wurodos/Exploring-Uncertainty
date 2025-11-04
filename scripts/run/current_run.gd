@@ -6,6 +6,15 @@ var good_boys: Array[Slave] = []
 var evil_boys: Array[Slave] = []
 var inventory: Array[Item] = []
 
+var craft_recipes: Array[Item] = []
+var scraps: Dictionary[Item.Scrap, int] = {
+	Item.Scrap.Flesh : 0,
+	Item.Scrap.Gear : 0,
+	Item.Scrap.Shard : 0,
+	Item.Scrap.Tooth : 0,
+	Item.Scrap.Oil : 0
+}
+
 var discounts : int = 0
 var is_comms_repaired : bool = false
 var messages_not_seen: Array[int] = [0,1,2,3,4,5,6,7,8,9]
@@ -256,12 +265,11 @@ func _prepare_archive() -> void:
 func arrange_evil_team() -> void:
 	##	Debug
 	#CurrentRun.evil_boys = [ReptilePool.fetch("roots_and_toots")]
-	CurrentRun.evil_boys = [SlavePool.fetch("cherv"), SlavePool.fetch("starry"), SlavePool.fetch("cherv")]
 	#CurrentRun.evil_boys[0].equip(ItemPool.fetch_random(Item.Type.Weapon))
 	#CurrentRun.evil_boys[0].equip(ItemPool.fetch_random(Item.Type.Hat))
 	#CurrentRun.evil_boys[0].equip(ItemPool.fetch_random(Item.Type.Trinket),1)
 	#CurrentRun.evil_boys[0].equip(ItemPool.fetch_random(Item.Type.Trinket),2)
-	return
+	#return
 	
 	CurrentRun.evil_boys = []
 	

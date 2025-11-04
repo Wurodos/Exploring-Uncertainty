@@ -25,6 +25,8 @@ const item_prefab = preload("res://prefabs/items/item.tscn")
 const stat_entry_prefab = preload("res://prefabs/battle/stat_entry.tscn")
 
 var is_mouse_over: bool = false
+var follow_rope: Node2D = null
+
 var held: Slave
 var sprite: Sprite2D
 var team: Team
@@ -49,6 +51,10 @@ func _ready() -> void:
 	if held is Enemy:
 		SignalBus.new_round.connect(_decide_intentions)
 	set_hp(0)
+
+func _process(_delta: float) -> void:
+	if follow_rope:
+		global_position = follow_rope.global_position
 
 func toggle_arrow(on: bool) -> void:
 	if on:

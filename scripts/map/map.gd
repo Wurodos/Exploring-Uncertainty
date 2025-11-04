@@ -1,7 +1,5 @@
 extends Node2D
 
-
-
 #--------------------------------------------------------------------------------------------------
 #----------------------------------------- MAP GENERATION -----------------------------------------
 #--------------------------------------------------------------------------------------------------
@@ -18,6 +16,8 @@ extends Node2D
 # -- Repeat those 2 steps until all 4 orthoganal are resolved (w/ branches)
 
 class_name Map
+
+const army_prefab = preload("res://prefabs/map/liberation_army.tscn")
 
 @onready var tutorial_box: Control = $Camera2D/UI/TutorialBox
 var tutorial_progress: int = 0
@@ -55,6 +55,7 @@ const _dcol = [0,0,+1,-1]
 
 const room_prefab = preload("res://prefabs/map/room.tscn")
 
+
 var current_branch_chance : float
 var space_taken : Array[Array] = []
 var party_row: int
@@ -64,6 +65,12 @@ var since_last_battle : int = 0
 var since_last_battle_purged: int = 0
 var since_last_item: int = 0
 var found_items: int = 0
+
+#======================
+# v EOT stuff v
+#======================
+
+var chervs: Array[Room] = []
 
 #======================
 # v Tutorial flags v
@@ -105,7 +112,7 @@ func _ready() -> void:
 		steps += delta
 		$Camera2D/UI/Steps.text = str(steps))
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if CurrentRun.state != Game.State.Map: return
 	
 	if Input.is_action_just_pressed("party_up"):
@@ -156,18 +163,21 @@ func move_player(direction: Direction) -> void:
 	if room.type != Room.Type.City and room.type != Room.Type.Comms:
 		room.type = Room.Type.Purged
 		room.sprite.texture = room_sprites[Room.Type.Purged]
+	end_turn_upkeep()
 	
 func encounter(room: Room) -> void:
+	
+	for army: LiberationArmy in $World/Armies.get_children():
+		if army.col == party_col and army.row == party_row:
+			army.battle()
+			await SignalBus.end_battle
+			break
+	
 	SignalBus.entered_room.emit(room)
 	
-	#CurrentRun.arrange_boss()
-	#$AnimationPlayer.play("battle_start")
-	#await $AnimationPlayer.animation_finished
-	#SignalBus.play_music.emit("roots_and_toots")
-	#SignalBus.battle_encounter.emit()
-	#return
-	
 	match(room.type):
+		Room.Type.Ruin:
+			SignalBus.found_item.emit()
 		Room.Type.Purged:
 			if since_last_battle_purged >= randi_range(6, 15):
 				CurrentRun.arrange_evil_team()
@@ -227,6 +237,33 @@ func encounter(room: Room) -> void:
 			SignalBus.enter_comms.emit(room)
 	$AnimationPlayer.play("RESET")
 	is_encountering = false
+
+func end_turn_upkeep():
+	#if $World/Armies.get_child_count() == 0:
+	#	var army: LiberationArmy = army_prefab.instantiate()
+	#	$World/Armies.add_child(army)
+	#	army.col = party_col+1
+	#	army.row = party_row
+	#	army.position = room_at(army.row, army.col).position
+	#
+	for army: LiberationArmy in $World/Armies.get_children():
+		army.move()
+		if army.col == party_col and army.row == party_row:
+			army.battle()
+			await SignalBus.end_battle
+	
+	for cherv : Room in chervs:
+		cherv.data -= 1
+		if cherv.data == 0:
+			var army: LiberationArmy = army_prefab.instantiate()
+			$World/Armies.add_child(army)
+			army.col = cherv.col
+			army.row = cherv.row
+			army.position = cherv.position
+			army.make_path()
+			
+			cherv.data = 25
+
 
 func room_at(row: int, col: int) -> Room:
 	return room_parent.get_node_or_null(str(row) + "_" + str(col))
@@ -363,6 +400,7 @@ func _add_structures() -> void:
 	var govnov_n = floor(all_rooms.size()*govnov_rate)
 	var comms_n = floor(all_rooms.size()*comms_rate)
 	
+	var cherv_i = 1
 	
 	for room : Room in all_rooms:
 		if room.type != Room.Type.Empty: continue
@@ -372,6 +410,9 @@ func _add_structures() -> void:
 			city_n -= 1
 		elif cherv_n > 0 and not _is_adjacent_to(room.row, room.col, Room.Type.Cherv):
 			room.type = Room.Type.Cherv
+			room.data = cherv_i * 5
+			chervs.append(room)
+			cherv_i += 1
 			cherv_n -= 1
 		elif govnov_n > 0 and not _is_adjacent_to(room.row, room.col, Room.Type.Govnov):
 			room.type = Room.Type.Govnov
@@ -434,7 +475,7 @@ func _explore(row: int, col: int):
 				$World/Fog/TileMapLayer.set_cell(Vector2i(x+i,y+j))
 	
 	
-# end
+# Misc:
 
 func serialize() -> Dictionary:
 	return {

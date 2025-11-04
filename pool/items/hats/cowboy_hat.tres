@@ -11,6 +11,10 @@ extra_hp = 5
 extra_speed = 2
 texture = ExtResource("2_t8vqi")
 cost = 6
+craft_reqs = Dictionary[int, int]({
+0: 4,
+3: 1
+})
 keywords = Array[String](["shield"])
 u_name = &"cowboy_hat"
 name = "Ковбойская Шляпа"

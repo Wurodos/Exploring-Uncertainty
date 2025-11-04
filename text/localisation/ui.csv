@@ -11,6 +11,8 @@ tutorial;Tutorial;Обучение
 item_found;Item found!;Обнаружен предмет!
 item_lost;Item lost...;Предмет утерян...
 continue;Continue;Продолжить
+battle_over;Battle is over.\nArea is PURGED.;Битва окончена.\nТерритория ОЧИЩЕНА.
+back_to_map;Return to MAP;Вернуться к КАРТЕ
 save;Save;Сохранить
 restart;Restart;Перезапуск
 exit;Power off;Выключить

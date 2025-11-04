@@ -5,15 +5,11 @@
 
 [resource]
 script = ExtResource("1_m2clk")
-full_harm = 10
-weak_harm = 1
-type = 0
-target = 0
-extra_hp = 0
-extra_speed = 0
 texture = ExtResource("2_kkg5u")
 cost = 5
-keywords = Array[String]([])
+craft_reqs = Dictionary[int, int]({
+2: 4
+})
 u_name = &"pipe"
 name = "Труба"
 desc = "10 ВРЕДА, 1 ВРЕДА ЕСЛИ БЫЛО ИСПОЛЬЗОВАНО В ПРОШЛОМ ХОДУ"

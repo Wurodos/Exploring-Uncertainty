@@ -5,14 +5,14 @@
 
 [resource]
 script = ExtResource("1_oapy2")
-power_gain = 1
-health_loss = 2
 type = 2
 target = 2
-extra_hp = 0
-extra_speed = 0
 texture = ExtResource("2_wquac")
 cost = 5
+craft_reqs = Dictionary[int, int]({
+2: 1,
+4: 1
+})
 keywords = Array[String](["power"])
 u_name = &"alcohol"
 name = "Алкоголь"

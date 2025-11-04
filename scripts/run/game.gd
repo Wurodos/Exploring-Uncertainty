@@ -12,6 +12,7 @@ var battle_node: Battle
 
 
 func _ready() -> void:
+	CurrentRun.craft_recipes = [ItemPool.fetch_random(), ItemPool.fetch_random(), ItemPool.fetch_random()]
 	
 	SignalBus.battle_encounter.connect(_on_battle_encounter)
 	SignalBus.end_battle.connect(_on_end_battle)

@@ -5,13 +5,15 @@
 
 [resource]
 script = ExtResource("1_p3u7i")
-turns = 3
 type = 1
-target = 0
 extra_hp = 7
 extra_speed = 2
 texture = ExtResource("2_5t8eq")
 cost = 8
+craft_reqs = Dictionary[int, int]({
+0: 1,
+4: 3
+})
 keywords = Array[String](["blasphemy"])
 u_name = &"jester_hat"
 name = "Шляпа Шута"

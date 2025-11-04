@@ -1,4 +1,5 @@
 extends Node
+@warning_ignore_start("unused_signal")
 
 # ====================
 # Common
@@ -66,6 +67,7 @@ signal slave_ran(slave: SlaveNode)
 signal evil_won
 signal good_won
 
+signal show_end_battle_screen(scraps: Array[Item.Scrap])
 signal end_battle
 
 # ====================

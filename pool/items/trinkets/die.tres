@@ -5,13 +5,13 @@
 
 [resource]
 script = ExtResource("1_gyuj5")
-luck = 5
 type = 2
 target = 2
-extra_hp = 0
-extra_speed = 0
 texture = ExtResource("2_eaac4")
 cost = 3
+craft_reqs = Dictionary[int, int]({
+3: 3
+})
 keywords = Array[String](["luck"])
 u_name = &"die"
 name = "Кубик"

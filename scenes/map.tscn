@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://caaw5385eudd6"]
+[gd_scene load_steps=71 format=3 uid="uid://caaw5385eudd6"]
 
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="1_4xfga"]
 [ext_resource type="Script" uid="uid://bjl8be1ygje44" path="res://scripts/map/map.gd" id="1_blm8a"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bo8wxy1ul73tg" path="res://images/rooms/37.png" id="7_sq6bu"]
 [ext_resource type="Texture2D" uid="uid://k20uxq34h120" path="res://images/rooms/comms.png" id="8_5u2yt"]
 [ext_resource type="Texture2D" uid="uid://bdkbuhwojnmqq" path="res://images/rooms/fog.png" id="8_m335s"]
+[ext_resource type="Texture2D" uid="uid://ci8n274kmlk22" path="res://images/rooms/city_ruin.png" id="9_la2vj"]
 [ext_resource type="Script" uid="uid://dvl21h34uashq" path="res://scripts/map/city_window.gd" id="11_c70he"]
 [ext_resource type="Texture2D" uid="uid://ctm4vajohb528" path="res://images/shapes/arrow.png" id="11_lhdcv"]
 [ext_resource type="Script" uid="uid://ql10jr5klb8g" path="res://scripts/map/govnov_window.gd" id="12_4b7dj"]
@@ -27,10 +28,18 @@
 [ext_resource type="LabelSettings" uid="uid://34c71nyrmk01" path="res://text/labelsettings/item_name.tres" id="15_m335s"]
 [ext_resource type="Script" uid="uid://ctoap32euag0p" path="res://scripts/battle/slave_info.gd" id="19_mkblt"]
 [ext_resource type="Texture2D" uid="uid://cfowi84shmwbh" path="res://images/icons/power.svg" id="20_4o3w1"]
+[ext_resource type="Texture2D" uid="uid://cwitgcwwtiovq" path="res://images/backdrops/craft.png" id="22_cgoaf"]
+[ext_resource type="Script" uid="uid://dpnh8e5ou5u3v" path="res://scripts/map/craft_window.gd" id="22_mwr4f"]
 [ext_resource type="Script" uid="uid://db0mfu8jn8b8j" path="res://scripts/map/popups.gd" id="23_5u2yt"]
+[ext_resource type="PackedScene" uid="uid://svnijeijk20h" path="res://prefabs/items/item_craftable.tscn" id="24_vqsqp"]
+[ext_resource type="Texture2D" uid="uid://cnvix1bkpw7ha" path="res://images/scraps/flesh.png" id="25_leq5k"]
+[ext_resource type="Texture2D" uid="uid://cdm857fxoms7i" path="res://images/scraps/gear.png" id="25_qcc5i"]
 [ext_resource type="Texture2D" uid="uid://n6xuklvtiooj" path="res://images/backdrops/comms.png" id="27_4o3w1"]
 [ext_resource type="Script" uid="uid://yf2cnuqvjpkd" path="res://scripts/map/comms_window.gd" id="27_6ek7f"]
+[ext_resource type="Texture2D" uid="uid://154yr4da73bn" path="res://images/scraps/shard.png" id="27_litwm"]
+[ext_resource type="Texture2D" uid="uid://py17lko5dydj" path="res://images/scraps/tooth.png" id="28_g8nl4"]
 [ext_resource type="Texture2D" uid="uid://dgy0pujd1t2qq" path="res://images/shapes/plain-circle.png" id="29_mniao"]
+[ext_resource type="Texture2D" uid="uid://b7h2htdmn1uad" path="res://images/scraps/oil.png" id="29_vqsqp"]
 [ext_resource type="FontFile" uid="uid://hym6fbjhhg2u" path="res://text/font/Share-Tech-CYR.otf" id="31_mniao"]
 [ext_resource type="Script" uid="uid://b7a2ai83umgwf" path="res://scripts/common/typewriter.gd" id="32_yfm5w"]
 [ext_resource type="Texture2D" uid="uid://dls2t3f7lvsqx" path="res://images/shapes/tutorial_box.png" id="33_12q1p"]
@@ -264,6 +273,12 @@ font_size = 32
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_leq5k"]
+font = ExtResource("1_4xfga")
+font_size = 32
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_081xv"]
 font = ExtResource("1_4xfga")
 font_size = 64
@@ -280,7 +295,7 @@ script = ExtResource("1_blm8a")
 size = 17
 branch_chance = 0.35
 city_rate = 0.06
-cherv_rate = 0.15
+cherv_rate = 0.09
 govnov_rate = 0.05
 comms_rate = 0.04
 steps = 100
@@ -291,7 +306,8 @@ room_sprites = Dictionary[int, Texture2D]({
 3: ExtResource("5_6k6j1"),
 4: ExtResource("6_m335s"),
 5: ExtResource("7_sq6bu"),
-6: ExtResource("8_5u2yt")
+6: ExtResource("8_5u2yt"),
+8: ExtResource("9_la2vj")
 })
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -303,11 +319,14 @@ libraries = {
 
 [node name="Rooms" type="Node2D" parent="World"]
 
+[node name="Armies" type="Node2D" parent="World"]
+
 [node name="Player" type="Sprite2D" parent="World"]
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_be0no")
 
 [node name="Fog" type="Node2D" parent="World"]
+visible = false
 
 [node name="TileMapLayer" type="TileMapLayer" parent="World/Fog"]
 position = Vector2(-64, -64)
@@ -346,6 +365,7 @@ offset_left = -569.0
 offset_top = -315.0
 offset_right = 561.0
 offset_bottom = 314.0
+metadata/_edit_use_anchors_ = true
 
 [node name="ShowTeam" type="Button" parent="Camera2D/UI"]
 layout_mode = 0
@@ -360,6 +380,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_mwr4f")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_lhdcv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_cgoaf")
 text = "Бригада"
+metadata/_edit_use_anchors_ = true
 
 [node name="ShowCraft" type="Button" parent="Camera2D/UI"]
 layout_mode = 0
@@ -376,6 +397,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_qcc5i")
 script = ExtResource("12_y2ir2")
 string_id = &"craft"
 metadata/_custom_type_script = "uid://bg2spyp44xpw7"
+metadata/_edit_use_anchors_ = true
 
 [node name="Save" type="Button" parent="Camera2D/UI"]
 layout_mode = 0
@@ -385,6 +407,7 @@ offset_right = 202.0
 offset_bottom = 463.0
 script = ExtResource("12_y2ir2")
 string_id = &"save"
+metadata/_edit_use_anchors_ = true
 
 [node name="Steps" type="Label" parent="Camera2D/UI"]
 layout_mode = 0
@@ -395,6 +418,7 @@ text = "200"
 label_settings = SubResource("LabelSettings_4b7dj")
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="TeamWindow" type="Control" parent="Camera2D/UI"]
 visible = false
@@ -590,6 +614,187 @@ offset_bottom = 41.0
 scale = Vector2(0.5, 0.5)
 text = "3"
 label_settings = SubResource("LabelSettings_mniao")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CraftWindow" type="Control" parent="Camera2D/UI"]
+visible = false
+anchors_preset = 0
+offset_left = 106.0
+offset_top = 57.0
+offset_right = 1006.0
+offset_bottom = 557.0
+script = ExtResource("22_mwr4f")
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/UI/CraftWindow"]
+layout_mode = 0
+offset_left = -193.0
+offset_top = -113.0
+offset_right = 1191.0
+offset_bottom = 636.0
+color = Color(0, 0, 0, 0.513726)
+
+[node name="BG" type="TextureRect" parent="Camera2D/UI/CraftWindow"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("22_cgoaf")
+
+[node name="ItemEntry" parent="Camera2D/UI/CraftWindow" instance=ExtResource("7_nakos")]
+visible = false
+layout_mode = 0
+offset_left = 222.0
+offset_top = 334.0
+offset_right = 707.0
+offset_bottom = 454.0
+
+[node name="Close" type="Button" parent="Camera2D/UI/CraftWindow"]
+layout_mode = 0
+offset_left = 785.0
+offset_top = 19.0
+offset_right = 885.0
+offset_bottom = 119.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_4xfga")
+theme_override_font_sizes/font_size = 64
+text = "X"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Camera2D/UI/CraftWindow"]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 42.0
+offset_right = 759.0
+offset_bottom = 274.0
+
+[node name="Craftables" type="HBoxContainer" parent="Camera2D/UI/CraftWindow/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="ItemCraftable" parent="Camera2D/UI/CraftWindow/ScrollContainer/Craftables" instance=ExtResource("24_vqsqp")]
+layout_mode = 2
+
+[node name="Scraps" type="Control" parent="Camera2D/UI/CraftWindow"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -371.0
+offset_top = 56.0
+offset_right = -331.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+
+[node name="Gear" type="TextureRect" parent="Camera2D/UI/CraftWindow/Scraps"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 2.0
+offset_right = 39.0
+offset_bottom = 42.0
+texture = ExtResource("25_qcc5i")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Camera2D/UI/CraftWindow/Scraps/Gear"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_leq5k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Flesh" type="TextureRect" parent="Camera2D/UI/CraftWindow/Scraps"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 2.0
+offset_right = 95.0
+offset_bottom = 42.0
+texture = ExtResource("25_leq5k")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Camera2D/UI/CraftWindow/Scraps/Flesh"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_leq5k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shard" type="TextureRect" parent="Camera2D/UI/CraftWindow/Scraps"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 34.0
+offset_right = 39.0
+offset_bottom = 74.0
+texture = ExtResource("27_litwm")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Camera2D/UI/CraftWindow/Scraps/Shard"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_leq5k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tooth" type="TextureRect" parent="Camera2D/UI/CraftWindow/Scraps"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 34.0
+offset_right = 95.0
+offset_bottom = 74.0
+texture = ExtResource("28_g8nl4")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Camera2D/UI/CraftWindow/Scraps/Tooth"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_leq5k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Oil" type="TextureRect" parent="Camera2D/UI/CraftWindow/Scraps"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 66.0
+offset_right = 63.0
+offset_bottom = 106.0
+texture = ExtResource("29_vqsqp")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Camera2D/UI/CraftWindow/Scraps/Oil"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_leq5k")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -833,6 +1038,14 @@ offset_top = 70.0
 offset_right = 996.0
 offset_bottom = 586.0
 
+[node name="Recipies" type="VBoxContainer" parent="Camera2D/UI/CityWindow"]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 0
+offset_left = 906.0
+offset_top = 70.0
+offset_right = 996.0
+offset_bottom = 586.0
+
 [node name="ItemEntry" parent="Camera2D/UI/CityWindow" instance=ExtResource("7_nakos")]
 visible = false
 layout_mode = 0
@@ -840,6 +1053,20 @@ offset_left = 41.0
 offset_top = 244.0
 offset_right = 526.0
 offset_bottom = 364.0
+
+[node name="ShopSelect" type="OptionButton" parent="Camera2D/UI/CityWindow"]
+layout_mode = 0
+offset_left = 771.0
+offset_top = 78.0
+offset_right = 892.0
+offset_bottom = 117.0
+focus_mode = 0
+selected = 0
+item_count = 2
+popup/item_0/text = "ПРЕДМЕТЫ"
+popup/item_0/id = 0
+popup/item_1/text = "РЕЦЕПТЫ"
+popup/item_1/id = 1
 
 [node name="CommsWindow" type="Control" parent="Camera2D/UI"]
 visible = false
@@ -1009,6 +1236,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("23_5u2yt")
+metadata/_edit_use_anchors_ = true
 
 [node name="TutorialBox" type="TextureRect" parent="Camera2D/UI"]
 visible = false
@@ -1052,13 +1280,16 @@ offset_right = 1472.0
 offset_bottom = 735.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Camera2D/UI/ShowTeam" to="Camera2D/UI/TeamWindow" method="_on_show_team_pressed"]
-[connection signal="pressed" from="Camera2D/UI/ShowCraft" to="Camera2D/UI/TeamWindow" method="_on_show_team_pressed"]
+[connection signal="pressed" from="Camera2D/UI/ShowCraft" to="Camera2D/UI/CraftWindow" method="_on_show_craft_pressed"]
 [connection signal="pressed" from="Camera2D/UI/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="Camera2D/UI/TeamWindow/Close" to="Camera2D/UI/TeamWindow" method="_on_close_pressed"]
+[connection signal="pressed" from="Camera2D/UI/CraftWindow/Close" to="Camera2D/UI/CraftWindow" method="_on_close_pressed"]
 [connection signal="pressed" from="Camera2D/UI/GovnovWindow/Close" to="Camera2D/UI/GovnovWindow" method="_on_close_pressed"]
 [connection signal="pressed" from="Camera2D/UI/CityWindow/Close" to="Camera2D/UI/CityWindow" method="_on_close_pressed"]
+[connection signal="item_selected" from="Camera2D/UI/CityWindow/ShopSelect" to="Camera2D/UI/CityWindow" method="_on_shop_selected"]
 [connection signal="pressed" from="Camera2D/UI/CommsWindow/Close" to="Camera2D/UI/CommsWindow" method="_on_close_pressed"]
 [connection signal="pressed" from="Camera2D/UI/CommsWindow/Power" to="Camera2D/UI/CommsWindow" method="_on_power_pressed"]
 [connection signal="pressed" from="Camera2D/UI/TutorialBox/OK" to="." method="_on_tutorial_ok_pressed"]

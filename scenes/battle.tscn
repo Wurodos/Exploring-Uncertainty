@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bfx1ij738o32v"]
+[gd_scene load_steps=39 format=3 uid="uid://bfx1ij738o32v"]
 
 [ext_resource type="Script" uid="uid://blaomclhrxsrs" path="res://scripts/slaves/team.gd" id="1_dn72j"]
 [ext_resource type="Script" uid="uid://cukwfw80fb48e" path="res://scripts/battle/battle.gd" id="1_th188"]
@@ -11,9 +11,54 @@
 [ext_resource type="Texture2D" uid="uid://ctm4vajohb528" path="res://images/shapes/arrow.png" id="8_v7i3o"]
 [ext_resource type="Texture2D" uid="uid://dpdtec6oeuogd" path="res://images/icons/bag.png" id="10_v7i3o"]
 [ext_resource type="Script" uid="uid://bg2spyp44xpw7" path="res://scripts/common/btn_localized.gd" id="11_66ngm"]
+[ext_resource type="Script" uid="uid://4de2lnmk4fvw" path="res://scripts/battle/battle_end.gd" id="11_vceff"]
 [ext_resource type="Texture2D" uid="uid://dls2t3f7lvsqx" path="res://images/shapes/tutorial_box.png" id="12_6ni85"]
 [ext_resource type="LabelSettings" uid="uid://dhb60ypduj2te" path="res://text/labelsettings/tutorial_box.tres" id="13_vceff"]
 [ext_resource type="Script" uid="uid://dd2yytdivaq0j" path="res://scripts/common/label_localized.gd" id="14_ekamt"]
+[ext_resource type="Texture2D" uid="uid://cdm857fxoms7i" path="res://images/scraps/gear.png" id="15_61i1y"]
+[ext_resource type="Texture2D" uid="uid://cnvix1bkpw7ha" path="res://images/scraps/flesh.png" id="16_saiin"]
+[ext_resource type="Texture2D" uid="uid://154yr4da73bn" path="res://images/scraps/shard.png" id="17_dd63g"]
+[ext_resource type="Texture2D" uid="uid://py17lko5dydj" path="res://images/scraps/tooth.png" id="18_fpf3k"]
+[ext_resource type="Texture2D" uid="uid://b7h2htdmn1uad" path="res://images/scraps/oil.png" id="19_bi5l8"]
+[ext_resource type="Texture2D" uid="uid://dyb2np6bqygrc" path="res://images/shapes/rope.png" id="21_saiin"]
+
+[sub_resource type="Animation" id="Animation_dd63g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_saiin"]
+resource_name = "swing"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.2792526803190927, 0.2792526803190927]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fpf3k"]
+_data = {
+&"RESET": SubResource("Animation_dd63g"),
+&"swing": SubResource("Animation_saiin")
+}
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpir7"]
 bg_color = Color(0.301961, 0, 0, 1)
@@ -83,6 +128,12 @@ _data = {
 font = ExtResource("6_6vh42")
 font_size = 32
 outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jt4d8"]
+font = ExtResource("6_6vh42")
+font_size = 32
+outline_size = 16
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_v7i3o"]
@@ -232,6 +283,70 @@ script = ExtResource("1_th188")
 
 [node name="World" type="Node2D" parent="."]
 
+[node name="Extra" type="Node2D" parent="World"]
+
+[node name="Ropes" type="Node2D" parent="World/Extra"]
+
+[node name="TopRope" type="Node2D" parent="World/Extra/Ropes"]
+visible = false
+position = Vector2(384, -688)
+
+[node name="Sprite" type="Sprite2D" parent="World/Extra/Ropes/TopRope"]
+texture_repeat = 2
+position = Vector2(0, 264)
+texture = ExtResource("21_saiin")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 528)
+
+[node name="Bottom" type="Node2D" parent="World/Extra/Ropes/TopRope"]
+position = Vector2(0, 528)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World/Extra/Ropes/TopRope"]
+libraries = {
+&"": SubResource("AnimationLibrary_fpf3k")
+}
+autoplay = "swing"
+
+[node name="MiddleRope" type="Node2D" parent="World/Extra/Ropes"]
+visible = false
+position = Vector2(360, -504)
+
+[node name="Sprite" type="Sprite2D" parent="World/Extra/Ropes/MiddleRope"]
+texture_repeat = 2
+position = Vector2(0, 264)
+texture = ExtResource("21_saiin")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 528)
+
+[node name="Bottom" type="Node2D" parent="World/Extra/Ropes/MiddleRope"]
+position = Vector2(0, 528)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World/Extra/Ropes/MiddleRope"]
+libraries = {
+&"": SubResource("AnimationLibrary_fpf3k")
+}
+autoplay = "swing"
+
+[node name="BottomRope" type="Node2D" parent="World/Extra/Ropes"]
+visible = false
+position = Vector2(256, -336)
+
+[node name="Sprite" type="Sprite2D" parent="World/Extra/Ropes/BottomRope"]
+texture_repeat = 2
+position = Vector2(0, 264)
+texture = ExtResource("21_saiin")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 528)
+
+[node name="Bottom" type="Node2D" parent="World/Extra/Ropes/BottomRope"]
+position = Vector2(0, 528)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World/Extra/Ropes/BottomRope"]
+libraries = {
+&"": SubResource("AnimationLibrary_fpf3k")
+}
+autoplay = "swing"
+
 [node name="GoodTeam" type="Node2D" parent="World"]
 script = ExtResource("1_dn72j")
 
@@ -244,8 +359,9 @@ position = Vector2(-410, 28)
 [node name="BottomSlave" type="Node2D" parent="World/GoodTeam"]
 position = Vector2(-245, 191)
 
-[node name="EvilTeam" type="Node2D" parent="World"]
+[node name="EvilTeam" type="Node2D" parent="World" node_paths=PackedStringArray("ropes")]
 script = ExtResource("1_dn72j")
+ropes = [NodePath("../Extra/Ropes/MiddleRope/Bottom"), NodePath("../Extra/Ropes/BottomRope/Bottom"), NodePath("../Extra/Ropes/TopRope/Bottom")]
 is_evil = true
 
 [node name="TopSlave" type="Node2D" parent="World/EvilTeam"]
@@ -487,7 +603,167 @@ offset_right = 156.0
 offset_bottom = -16.0
 text = "Lower HP to 1 on top/bottom enemies"
 
+[node name="BattleEnd" type="Control" parent="UI"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("11_vceff")
+
+[node name="Dark" type="ColorRect" parent="UI/BattleEnd"]
+layout_mode = 0
+offset_left = -610.0
+offset_top = -335.0
+offset_right = 607.0
+offset_bottom = 448.0
+color = Color(0, 0, 0, 0.7764706)
+
+[node name="Label" type="Label" parent="UI/BattleEnd"]
+layout_mode = 0
+offset_left = -240.0
+offset_top = -112.0
+offset_right = 264.0
+label_settings = ExtResource("13_vceff")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("14_ekamt")
+string_id = &"battle_over"
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
+
+[node name="GoBackMap" type="Button" parent="UI/BattleEnd"]
+layout_mode = 0
+offset_left = -88.0
+offset_top = 80.0
+offset_right = 104.0
+offset_bottom = 144.0
+theme_override_fonts/font = ExtResource("6_6vh42")
+theme_override_font_sizes/font_size = 16
+script = ExtResource("11_66ngm")
+string_id = &"back_to_map"
+metadata/_custom_type_script = "uid://bg2spyp44xpw7"
+
+[node name="Scraps" type="Control" parent="UI/BattleEnd"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 204.0
+offset_top = -36.0
+offset_right = 244.0
+offset_bottom = 3.9999962
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+
+[node name="Gear" type="TextureRect" parent="UI/BattleEnd/Scraps"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 2.0
+offset_right = 39.0
+offset_bottom = 42.0
+texture = ExtResource("15_61i1y")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Gear"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_jt4d8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Flesh" type="TextureRect" parent="UI/BattleEnd/Scraps"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 2.0
+offset_right = 95.0
+offset_bottom = 42.0
+texture = ExtResource("16_saiin")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Flesh"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_jt4d8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shard" type="TextureRect" parent="UI/BattleEnd/Scraps"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 34.0
+offset_right = 39.0
+offset_bottom = 74.0
+texture = ExtResource("17_dd63g")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Shard"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_jt4d8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tooth" type="TextureRect" parent="UI/BattleEnd/Scraps"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 34.0
+offset_right = 95.0
+offset_bottom = 74.0
+texture = ExtResource("18_fpf3k")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Tooth"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_jt4d8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Oil" type="TextureRect" parent="UI/BattleEnd/Scraps"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 66.0
+offset_right = 63.0
+offset_bottom = 106.0
+texture = ExtResource("19_bi5l8")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Oil"]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_jt4d8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Fail" type="Control" parent="UI"]
+visible = false
 z_index = 999
 anchors_preset = 0
 offset_right = 40.0
@@ -525,6 +801,7 @@ script = ExtResource("11_66ngm")
 string_id = &"exit"
 
 [node name="Win" type="Control" parent="UI"]
+visible = false
 z_index = 999
 anchors_preset = 0
 offset_right = 40.0
@@ -597,5 +874,6 @@ libraries = {
 [connection signal="mouse_entered" from="UI/Loot/Bag" to="UI/Loot" method="_on_bag_mouse_entered"]
 [connection signal="pressed" from="UI/Debug/Newturn" to="." method="_on_newturn_pressed"]
 [connection signal="pressed" from="UI/Debug/LowerHP" to="." method="_on_lower_hp_pressed"]
+[connection signal="pressed" from="UI/BattleEnd/GoBackMap" to="." method="_on_go_back_map_pressed"]
 [connection signal="pressed" from="UI/Fail/Exit" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="UI/TutorialBox/OK" to="." method="_on_tutorial_ok_pressed"]

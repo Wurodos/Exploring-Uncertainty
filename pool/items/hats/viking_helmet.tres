@@ -5,15 +5,13 @@
 
 [resource]
 script = ExtResource("1_g8yak")
-turns = 2
 type = 1
-target = 0
 extra_hp = 10
 extra_speed = 1
 texture = ExtResource("2_g8yak")
 cost = 8
+craft_reqs = Dictionary[int, int]({
+3: 5
+})
 keywords = Array[String](["appetite"])
-u_name = &""
-name = ""
-desc = ""
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"
