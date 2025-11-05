@@ -49,7 +49,7 @@ const _dcol = [0,0,+1,-1]
 @export var govnov_rate: float
 @export var comms_rate: float
 @export var steps: int
-
+@export var enable_armies: bool = false
 
 @export var room_sprites : Dictionary[Room.Type, Texture2D]
 
@@ -239,6 +239,9 @@ func encounter(room: Room) -> void:
 	is_encountering = false
 
 func end_turn_upkeep():
+	
+	
+	if not enable_armies: return
 	#if $World/Armies.get_child_count() == 0:
 	#	var army: LiberationArmy = army_prefab.instantiate()
 	#	$World/Armies.add_child(army)

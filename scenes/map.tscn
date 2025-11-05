@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://caaw5385eudd6"]
+[gd_scene load_steps=74 format=3 uid="uid://caaw5385eudd6"]
 
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="1_4xfga"]
 [ext_resource type="Script" uid="uid://bjl8be1ygje44" path="res://scripts/map/map.gd" id="1_blm8a"]
@@ -205,6 +205,42 @@ corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_la2vj"]
+bg_color = Color(0.619325, 1.1358858e-05, 0.43194276, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cjpp"]
+bg_color = Color(0.33457887, 0.051840834, 0.28372052, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xcq86"]
+bg_color = Color(0.87992865, 0.59092015, 0.8376989, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.40832946, 0.40832946, 0.40832946, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1qn5a"]
 bg_color = Color(0.23490001, 0.268245, 0.27, 1)
 border_width_left = 8
@@ -380,6 +416,25 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_mwr4f")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_lhdcv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_cgoaf")
 text = "Бригада"
+metadata/_edit_use_anchors_ = true
+
+[node name="ShowRecon" type="Button" parent="Camera2D/UI"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.1399046
+anchor_bottom = -0.1399046
+offset_left = 761.0
+offset_top = 531.0
+offset_right = 1123.0
+offset_bottom = 611.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_4xfga")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_la2vj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5cjpp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xcq86")
+text = "Разведка"
 metadata/_edit_use_anchors_ = true
 
 [node name="ShowCraft" type="Button" parent="Camera2D/UI"]
@@ -1283,6 +1338,7 @@ color = Color(1, 1, 1, 0)
 metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Camera2D/UI/ShowTeam" to="Camera2D/UI/TeamWindow" method="_on_show_team_pressed"]
+[connection signal="pressed" from="Camera2D/UI/ShowRecon" to="Camera2D/UI/TeamWindow" method="_on_show_team_pressed"]
 [connection signal="pressed" from="Camera2D/UI/ShowCraft" to="Camera2D/UI/CraftWindow" method="_on_show_craft_pressed"]
 [connection signal="pressed" from="Camera2D/UI/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="Camera2D/UI/TeamWindow/Close" to="Camera2D/UI/TeamWindow" method="_on_close_pressed"]
