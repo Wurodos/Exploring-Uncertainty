@@ -93,4 +93,3 @@ func on_level_up():
 
 func on_start_battle(owner: SlaveNode):
 	owner.set_speed(extra_speed)
-	print(name)

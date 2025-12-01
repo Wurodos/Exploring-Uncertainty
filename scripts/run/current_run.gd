@@ -4,6 +4,10 @@ const save_path = "user://run.save"
 
 var good_boys: Array[Slave] = []
 var evil_boys: Array[Slave] = []
+
+# var potential_team_1: Array[Slave] = []
+# var potential_team_2: Array[Slave] = []
+
 var inventory: Array[Item] = []
 
 var craft_recipes: Array[Item] = []
@@ -262,7 +266,7 @@ func _prepare_archive() -> void:
 	#		print("NO SLAVE")
 	#	else: slave.debug()
 
-func arrange_evil_team() -> void:
+func arrange_evil_team() -> Array[Slave]:
 	##	Debug
 	#CurrentRun.evil_boys = [ReptilePool.fetch("roots_and_toots")]
 	#CurrentRun.evil_boys[0].equip(ItemPool.fetch_random(Item.Type.Weapon))
@@ -271,15 +275,15 @@ func arrange_evil_team() -> void:
 	#CurrentRun.evil_boys[0].equip(ItemPool.fetch_random(Item.Type.Trinket),2)
 	#return
 	
-	CurrentRun.evil_boys = []
+	var team : Array[Slave] = []
 	
 	for i in range(3):
 		var enemy = evil_deck.pop_back()
 		if enemy != null:
-			CurrentRun.evil_boys.append(enemy)
+			team.append(enemy)
 	
-	if CurrentRun.is_battle_tutorial and CurrentRun.evil_boys[0]:
-		CurrentRun.evil_boys[0].equip(ItemPool.fetch_random())
+	if CurrentRun.is_battle_tutorial and team[0]:
+		team[0].equip(ItemPool.fetch_random())
 	
 	for i in range(3):
 		evil_deck.append(evil_archive.pop_back())
@@ -288,13 +292,15 @@ func arrange_evil_team() -> void:
 	evil_deck.shuffle()
 	
 	# if 3 empties are in row
-	if CurrentRun.evil_boys.is_empty():
+	if team.is_empty():
 		var enemy = SlavePool.fetch("cherv")
 		enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
 		enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
 		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
 		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
-		CurrentRun.evil_boys.append(enemy)
+		team.append(enemy)
+	
+	return team
 
 # Throws random item out if at 24
 func put_item_in_inventory(item: Item) -> void:

@@ -43,6 +43,7 @@ func _on_end_battle() -> void:
 	
 	map_node.visible = true
 	map_node.camera.make_current()
+	map_node.get_node("GUI").visible = true
 	SignalBus.play_music.emit("map")
 	
 	if CurrentRun.state != State.Popup:

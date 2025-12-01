@@ -28,3 +28,9 @@ func _process(delta: float) -> void:
 		position.x = min(position.x + current_speed*delta, bound)
 	elif Input.is_action_pressed("left"):
 		position.x = max(position.x - current_speed*delta, -bound)
+	
+	if Input.is_action_just_released("zoom_in"):
+		zoom += Vector2(0.1,0.1)
+	elif Input.is_action_just_released("zoom_out"):
+		if zoom.x > 0.5:
+			zoom -= Vector2(0.1,0.1)

@@ -19,7 +19,7 @@ class_name Map
 
 const army_prefab = preload("res://prefabs/map/liberation_army.tscn")
 
-@onready var tutorial_box: Control = $Camera2D/UI/TutorialBox
+@onready var tutorial_box: Control = $GUI/UI/TutorialBox
 var tutorial_progress: int = 0
 
 
@@ -101,16 +101,16 @@ func _ready() -> void:
 	tutorial_box.get_node("Text").set_string_id("tutorial_map_0")
 	
 	instance = self
-	$Camera2D/UI/ShowTeam.text = tr("brigade")
+	$GUI/UI/ShowTeam.text = tr("brigade")
 	
 	$Camera2D.make_current()
-	$Camera2D/UI/Steps.text = str(steps)
+	$GUI/UI/Steps.text = str(steps)
 	
 	SignalBus.advance_tutorial.connect(_on_tutorial_ok_pressed)
-	
+	SignalBus.battle_encounter.connect(func(): $GUI.visible = false)
 	SignalBus.change_steps.connect(func(delta):
 		steps += delta
-		$Camera2D/UI/Steps.text = str(steps))
+		$GUI/UI/Steps.text = str(steps))
 
 func _process(_delta: float) -> void:
 	if CurrentRun.state != Game.State.Map: return
@@ -147,7 +147,7 @@ func move_player(direction: Direction) -> void:
 	
 	if steps > 0: 
 		steps -= 1
-		$Camera2D/UI/Steps.text = str(steps)
+		$GUI/UI/Steps.text = str(steps)
 	else:
 		for slave: Slave in CurrentRun.good_boys:
 			slave.hp -= 1
@@ -180,7 +180,7 @@ func encounter(room: Room) -> void:
 			SignalBus.found_item.emit()
 		Room.Type.Purged:
 			if since_last_battle_purged >= randi_range(6, 15):
-				CurrentRun.arrange_evil_team()
+				CurrentRun.evil_boys = CurrentRun.arrange_evil_team()
 				$AnimationPlayer.play("battle_start")
 				await $AnimationPlayer.animation_finished
 				SignalBus.play_music.emit("battle")
@@ -190,7 +190,7 @@ func encounter(room: Room) -> void:
 			else: since_last_battle_purged += 1
 		Room.Type.Empty:
 			if since_last_battle >= randi_range(1,6):
-				CurrentRun.arrange_evil_team()
+				CurrentRun.evil_boys = CurrentRun.arrange_evil_team()
 				$AnimationPlayer.play("battle_start")
 				await $AnimationPlayer.animation_finished
 				SignalBus.play_music.emit("battle")
@@ -286,7 +286,7 @@ func generate_from_data(data: Dictionary) -> void:
 	party_row = data["party_row"]
 	
 	steps = data["steps"]
-	$Camera2D/UI/Steps.text = str(steps)
+	$GUI/UI/Steps.text = str(steps)
 	
 	_initialize_fog()
 	

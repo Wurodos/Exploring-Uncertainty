@@ -2,7 +2,7 @@ extends Control
 
 class_name SlaveTeamNode
 
-enum Type {Brigade, City, Govnov}
+enum Type {Brigade, City, Govnov, OnlyItems}
 
 var held: Slave
 var type: Type
@@ -13,6 +13,9 @@ static var selected: SlaveTeamNode
 signal sell
 
 func apply(slave: Slave, type: Type, show_hp: bool = true):
+	if slave == null: 
+		visible = false
+		return
 	held = slave
 	self.type = type
 	$Body.texture = slave.texture
@@ -36,13 +39,18 @@ func apply(slave: Slave, type: Type, show_hp: bool = true):
 			$Undress.text = tr("heal")
 			if not $Undress.is_connected("pressed", _on_govnov_heal_pressed):
 				$Undress.pressed.connect(_on_govnov_heal_pressed)
-	
+		Type.OnlyItems:
+			$Undress.visible = false
+			$HPBar.visible = false
+		
 	if show_hp:
 		$HPBar.value = (slave.hp / float(slave.maxhp)) * 100
 		$HPBar/Label.text = str(slave.hp) + "/" + str(slave.maxhp)
 	else:
 		$Undress.visible = false
 		$HPBar.visible = false
+	
+	visible = true
 
 func update_healing_cost(heals_used: int, value: int, heal_price: int) -> void:
 	if value < heals_used * heal_price:
