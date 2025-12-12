@@ -277,7 +277,7 @@ func arrange_evil_team() -> Array[Slave]:
 	
 	var team : Array[Slave] = []
 	
-	for i in range(3):
+	for i in range(5):
 		var enemy = evil_deck.pop_back()
 		if enemy != null:
 			team.append(enemy)
@@ -285,7 +285,7 @@ func arrange_evil_team() -> Array[Slave]:
 	if CurrentRun.is_battle_tutorial and team[0]:
 		team[0].equip(ItemPool.fetch_random())
 	
-	for i in range(3):
+	for i in range(5):
 		evil_deck.append(evil_archive.pop_back())
 		if evil_archive.is_empty():
 			_prepare_archive()

@@ -9,36 +9,36 @@
 [ext_resource type="Texture2D" uid="uid://b23qmkqdemon6" path="res://images/languages/english.png" id="6_oa1go"]
 [ext_resource type="Script" uid="uid://b7a2ai83umgwf" path="res://scripts/common/typewriter.gd" id="7_oa1go"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekxnf"]
-bg_color = Color(0.352941, 0, 0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu84c"]
+bg_color = Color(0.690196, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqqt6"]
 bg_color = Color(0.145098, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu84c"]
-bg_color = Color(0.690196, 0, 0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekxnf"]
+bg_color = Color(0.352941, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtw2f"]
-bg_color = Color(0.765048, 0.747786, 3.85046e-07, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbmy8"]
+bg_color = Color(0.690196, 0.67451, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oa1go"]
 bg_color = Color(0.403743, 0.425585, 9.62615e-08, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbmy8"]
-bg_color = Color(0.690196, 0.67451, 0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtw2f"]
+bg_color = Color(0.765048, 0.747786, 3.85046e-07, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_oa1go"]
 font = ExtResource("1_l6cm7")
 font_size = 64
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jk1qb"]
-bg_color = Color(0.703105, 0.770696, 0.993789, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lgwnu"]
+bg_color = Color(0.270588, 0.262745, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5dd4i"]
 bg_color = Color(0.123761, 0.0260562, 0.525897, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lgwnu"]
-bg_color = Color(0.270588, 0.262745, 1, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jk1qb"]
+bg_color = Color(0.703105, 0.770696, 0.993789, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -58,9 +58,9 @@ offset_bottom = 446.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("1_l6cm7")
 theme_override_font_sizes/font_size = 64
-theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
 theme_override_styles/normal = SubResource("StyleBoxFlat_wu84c")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 script = ExtResource("3_tbmy8")
 string_id = &"prepare"
 
@@ -73,9 +73,9 @@ offset_bottom = 568.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("1_l6cm7")
 theme_override_font_sizes/font_size = 64
-theme_override_styles/hover = SubResource("StyleBoxFlat_rtw2f")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_oa1go")
 theme_override_styles/normal = SubResource("StyleBoxFlat_tbmy8")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_oa1go")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rtw2f")
 script = ExtResource("3_tbmy8")
 string_id = &"tutorial"
 
@@ -123,9 +123,9 @@ offset_bottom = 237.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("1_l6cm7")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/hover = SubResource("StyleBoxFlat_jk1qb")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_5dd4i")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lgwnu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5dd4i")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jk1qb")
 script = ExtResource("3_tbmy8")
 string_id = &"continue"
 

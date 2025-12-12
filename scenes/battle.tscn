@@ -348,6 +348,8 @@ libraries = {
 autoplay = "swing"
 
 [node name="GoodTeam" type="Node2D" parent="World"]
+position = Vector2(39.999992, 64)
+scale = Vector2(0.8, 0.8)
 script = ExtResource("1_dn72j")
 
 [node name="TopSlave" type="Node2D" parent="World/GoodTeam"]
@@ -359,7 +361,15 @@ position = Vector2(-410, 28)
 [node name="BottomSlave" type="Node2D" parent="World/GoodTeam"]
 position = Vector2(-245, 191)
 
+[node name="BackBottomSlave" type="Node2D" parent="World/GoodTeam"]
+position = Vector2(-489.41174, 169.41176)
+
+[node name="BackTop" type="Node2D" parent="World/GoodTeam"]
+position = Vector2(-489.41174, -131.7647)
+
 [node name="EvilTeam" type="Node2D" parent="World" node_paths=PackedStringArray("ropes")]
+position = Vector2(-96.00001, 64)
+scale = Vector2(0.8, 0.8)
 script = ExtResource("1_dn72j")
 ropes = [NodePath("../Extra/Ropes/MiddleRope/Bottom"), NodePath("../Extra/Ropes/BottomRope/Bottom"), NodePath("../Extra/Ropes/TopRope/Bottom")]
 is_evil = true
@@ -372,6 +382,12 @@ position = Vector2(481, 26)
 
 [node name="BottomSlave" type="Node2D" parent="World/EvilTeam"]
 position = Vector2(326, 189)
+
+[node name="BackBottomSlave" type="Node2D" parent="World/EvilTeam"]
+position = Vector2(583.5294, 150.58823)
+
+[node name="BackTop" type="Node2D" parent="World/EvilTeam"]
+position = Vector2(583.5294, -131.7647)
 
 [node name="Line2D" type="Line2D" parent="World"]
 points = PackedVector2Array(760, -126)

@@ -4,8 +4,8 @@ class_name Team
 
 const slave_prefab = preload("res://prefabs/slaves/blob.tscn")
 
-@onready var slave_parents : Array[Node2D] = \
-	[$MiddleSlave, $BottomSlave, $TopSlave]
+@onready var slave_parents : Array[Node] = \
+ 	get_children()
 
 @export var ropes : Array[Node2D] = []
 
