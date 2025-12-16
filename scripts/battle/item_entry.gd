@@ -4,6 +4,8 @@ class_name ItemEntry
 
 const kw_box_prefab = preload("res://prefabs/items/keyword_box.tscn")
 
+enum Type {Default, Craft}
+
 @onready var item_name : Label = $Name
 @onready var item_desc : Label = $Desc
 
@@ -13,32 +15,27 @@ const kw_box_prefab = preload("res://prefabs/items/keyword_box.tscn")
 
 @onready var keyword_row: BoxContainer = $KeywordRow
 
+@onready var req_nodes : Dictionary[Item.Scrap, Control] = {
+	Item.Scrap.Flesh: $Craft/Scraps/Flesh,
+	Item.Scrap.Gear: $Craft/Scraps/Gear,
+	Item.Scrap.Shard: $Craft/Scraps/Shard,
+	Item.Scrap.Tooth: $Craft/Scraps/Tooth,
+	Item.Scrap.Oil: $Craft/Scraps/Oil
+}
 
-func apply(item: Item) -> void:
+
+func apply(item: Item, type: Type = Type.Default) -> void:
 	item_name.text = item.name
 	item_desc.text = item.desc
 	
 	$ExtraHP.visible = false
 	$ExtraSpeed.visible = false
 	
-	match(item.level):
-		1: $LevelBorder.color = Color(0.427, 0.427, 0.427, 1.0)
-		2: $LevelBorder.color = Color(0.0, 0.545, 0.57, 1.0)
-		3: $LevelBorder.color = Color(0.914, 0.682, 0.0, 1.0)
-		4: $LevelBorder.color = Color(0.0, 0.769, 0.0, 1.0)
-		5: $LevelBorder.color = Color(0.655, 0.227, 0.906, 1.0)
+	$LevelBorder.color = Constants.level_colors[item.level]
 	
 	single_target.visible = false
 	all_targets.visible = false
 	self_target.visible = false
-	
-	#match(item.target):
-	#	Item.Target.Single:
-	#		single_target.visible = true
-	#	Item.Target.AllTeam:
-	#		all_targets.visible = true
-	#	Item.Target.Self:
-	#		self_target.visible = true
 	
 	match (item.type):
 		Item.Type.Weapon:
@@ -57,6 +54,7 @@ func apply(item: Item) -> void:
 		$ExtraSpeed/Label.text = str(item.extra_speed)
 	
 	$Cost.visible = true
+	$Craft.visible = false
 	$Cost/Label.text = str(item.cost)
 	
 	while keyword_row.get_child_count() > 0:
@@ -67,3 +65,11 @@ func apply(item: Item) -> void:
 		kw_box.get_node("Name").text = tr("kw_" + keyword + "_name")
 		kw_box.get_node("Desc").text = tr("kw_" + keyword + "_desc")
 		keyword_row.add_child(kw_box)
+		
+	if type == Type.Craft:
+		for req: Item.Scrap in [Item.Scrap.Flesh, Item.Scrap.Gear, Item.Scrap.Shard, Item.Scrap.Tooth, Item.Scrap.Oil]:
+			if item.craft_reqs.has(req):
+				req_nodes[req].get_node("Label").text = str(item.craft_reqs[req])
+				req_nodes[req].visible = true
+			else: req_nodes[req].visible = false
+		$Craft.visible = true

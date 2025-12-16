@@ -12,6 +12,7 @@ static var selected: SlaveTeamNode
 
 signal sell
 
+@warning_ignore("shadowed_variable")
 func apply(slave: Slave, type: Type, show_hp: bool = true):
 	if slave == null: 
 		visible = false
@@ -20,9 +21,13 @@ func apply(slave: Slave, type: Type, show_hp: bool = true):
 	self.type = type
 	$Body.texture = slave.texture
 	$Weapon.texture = slave.weapon.texture
+	$Weapon.set_instance_shader_parameter("outline_color", Constants.level_colors[slave.weapon.level])
 	$Hat.texture = slave.hat.texture
+	$Hat.set_instance_shader_parameter("outline_color", Constants.level_colors[slave.hat.level])
 	$Trinket1.texture = slave.trinket1.texture
+	$Trinket1.set_instance_shader_parameter("outline_color", Constants.level_colors[slave.trinket1.level])
 	$Trinket2.texture = slave.trinket2.texture
+	$Trinket2.set_instance_shader_parameter("outline_color", Constants.level_colors[slave.trinket2.level])
 	
 	match (type):
 		Type.Brigade:

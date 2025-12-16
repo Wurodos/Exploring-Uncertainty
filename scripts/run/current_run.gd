@@ -10,6 +10,7 @@ var evil_boys: Array[Slave] = []
 
 var inventory: Array[Item] = []
 
+var craft_pool: Array[Item] = []
 var craft_recipes: Array[Item] = []
 var scraps: Dictionary[Item.Scrap, int] = {
 	Item.Scrap.Flesh : 0,
@@ -154,7 +155,7 @@ func load_save() -> void:
 	
 	
 	## DEBUG
-	return
+	
 	# Deck
 	for enemy in evil_deck:
 		if not enemy: 
@@ -168,14 +169,6 @@ func load_save() -> void:
 
 func _prepare_good_boys() -> void:
 	good_boys = [SlavePool.fetch("blob"), SlavePool.fetch("blob"), SlavePool.fetch("blob")]
-	
-	#good_boys[0].equip(ItemPool.fetch("hammer"))
-	#good_boys[0].equip(ItemPool.fetch("crown"))
-	#good_boys[1].equip(ItemPool.fetch("crown"))
-	#good_boys[2].equip(ItemPool.fetch("cowboy_hat"))
-	#good_boys[0].hp = 1
-	#good_boys[1].hp = 1
-	#good_boys[0].speed = -3
 
 func _prepare_deck() -> void:
 	# items
@@ -277,7 +270,7 @@ func arrange_evil_team() -> Array[Slave]:
 	
 	var team : Array[Slave] = []
 	
-	for i in range(5):
+	for i in range(3):
 		var enemy = evil_deck.pop_back()
 		if enemy != null:
 			team.append(enemy)
@@ -285,7 +278,7 @@ func arrange_evil_team() -> Array[Slave]:
 	if CurrentRun.is_battle_tutorial and team[0]:
 		team[0].equip(ItemPool.fetch_random())
 	
-	for i in range(5):
+	for i in range(3):
 		evil_deck.append(evil_archive.pop_back())
 		if evil_archive.is_empty():
 			_prepare_archive()

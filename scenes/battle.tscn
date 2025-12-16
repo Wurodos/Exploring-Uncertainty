@@ -352,14 +352,16 @@ position = Vector2(39.999992, 64)
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_dn72j")
 
-[node name="TopSlave" type="Node2D" parent="World/GoodTeam"]
-position = Vector2(-245, -151)
-
 [node name="MiddleSlave" type="Node2D" parent="World/GoodTeam"]
-position = Vector2(-410, 28)
+position = Vector2(-409.99994, 28)
+scale = Vector2(0.99999994, 0.99999994)
 
 [node name="BottomSlave" type="Node2D" parent="World/GoodTeam"]
-position = Vector2(-245, 191)
+position = Vector2(-244.99997, 190.99997)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="TopSlave" type="Node2D" parent="World/GoodTeam"]
+position = Vector2(-245, -151)
 
 [node name="BackBottomSlave" type="Node2D" parent="World/GoodTeam"]
 position = Vector2(-489.41174, 169.41176)
@@ -374,14 +376,16 @@ script = ExtResource("1_dn72j")
 ropes = [NodePath("../Extra/Ropes/MiddleRope/Bottom"), NodePath("../Extra/Ropes/BottomRope/Bottom"), NodePath("../Extra/Ropes/TopRope/Bottom")]
 is_evil = true
 
-[node name="TopSlave" type="Node2D" parent="World/EvilTeam"]
-position = Vector2(380, -165)
-
 [node name="MiddleSlave" type="Node2D" parent="World/EvilTeam"]
 position = Vector2(481, 26)
+scale = Vector2(0.99999994, 0.99999994)
 
 [node name="BottomSlave" type="Node2D" parent="World/EvilTeam"]
-position = Vector2(326, 189)
+position = Vector2(326, 188.99997)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="TopSlave" type="Node2D" parent="World/EvilTeam"]
+position = Vector2(380, -165)
 
 [node name="BackBottomSlave" type="Node2D" parent="World/EvilTeam"]
 position = Vector2(583.5294, 150.58823)

@@ -39,6 +39,7 @@ func _buy(item_node: ItemShop) -> void:
 
 func _buy_recipe(recipe_node: ItemShop) -> void:
 	_change_value(-recipe_node.cost)
+	recipe_node.held.is_recipe = false
 	current_city.recipies.erase(recipe_node.held)
 	CurrentRun.craft_recipes.append(recipe_node.held)
 	
@@ -122,8 +123,9 @@ func _on_enter_city(city: Room) -> void:
 			item.cost = j * 4
 			city.items.append(item)
 		for j in range(2):
-			var recipe : Item = ItemPool.fetch_random()
-			recipe.cost = (j+1)*10
+			var recipe : Item = CurrentRun.craft_pool.pop_at(randi_range(0, CurrentRun.craft_pool.size()-1))
+			recipe.cost = (j)*10
+			recipe.is_recipe = true
 			city.recipies.append(recipe)
 			
 	
@@ -167,7 +169,8 @@ func _on_show_item_info(item: Item) -> void:
 	if CurrentRun.state != Game.State.Window or item == null: return
 	_hide_info = false
 	$ItemEntry.visible = true
-	$ItemEntry.apply(item)
+	if item.is_recipe: $ItemEntry.apply(item, ItemEntry.Type.Craft)
+	else: $ItemEntry.apply(item)
 
 func _on_hide_item_info() -> void:
 	_hide_info = true

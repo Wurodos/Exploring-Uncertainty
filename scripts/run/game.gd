@@ -12,8 +12,6 @@ var battle_node: Battle
 
 
 func _ready() -> void:
-	CurrentRun.craft_recipes = [ItemPool.fetch_random(), ItemPool.fetch_random(), ItemPool.fetch_random()]
-	
 	SignalBus.battle_encounter.connect(_on_battle_encounter)
 	SignalBus.end_battle.connect(_on_end_battle)
 	SignalBus.play_music.emit("map")
@@ -25,6 +23,10 @@ func _ready() -> void:
 		map_node.generate_floor()
 	else: map_node.generate_from_data(CurrentRun.map_data)
 	
+	for item: Item in ItemPool._pool.values():
+		if item.is_item():
+			CurrentRun.craft_pool.append(item.duplicate())
+	CurrentRun.inventory.append(ItemPool.fetch("sword"))
 	## DEBUG -> Inventory limit
 	#for i in range(20):
 	#	CurrentRun.inventory.append(ItemPool.fetch_random())

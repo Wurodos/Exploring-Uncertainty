@@ -454,8 +454,8 @@ func _is_adjacent_to(row: int, col: int, type: Room.Type) -> bool:
 	return false
 
 func _initialize_fog() -> void:
-	for x in range(-size/2-6, size/2+6):
-		for y in range(-size/2-4, size/2+4):
+	for x in range(-size/2-12, size/2+12):
+		for y in range(-size/2-6, size/2+7):
 			$World/Fog/TileMapLayer.set_cell(Vector2i(x,y), 0, Vector2i(0,0), 0)
 
 func _explore(row: int, col: int):

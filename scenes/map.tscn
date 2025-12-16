@@ -455,6 +455,7 @@ metadata/_custom_type_script = "uid://bg2spyp44xpw7"
 metadata/_edit_use_anchors_ = true
 
 [node name="Save" type="Button" parent="GUI/UI"]
+visible = false
 layout_mode = 0
 offset_left = 33.0
 offset_top = 379.0
@@ -673,6 +674,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ReconWindow" type="Control" parent="GUI/UI"]
+visible = false
 anchors_preset = 0
 offset_left = 106.0
 offset_top = 57.0

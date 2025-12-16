@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c7me7xco4pqg1"]
+[gd_scene load_steps=13 format=3 uid="uid://c7me7xco4pqg1"]
 
 [ext_resource type="Script" uid="uid://dmhhtjxo47pcy" path="res://scripts/map/slave_team_node.gd" id="1_6uie0"]
 [ext_resource type="Texture2D" uid="uid://brfycwyqi4ev8" path="res://images/slaves/communist.png" id="2_i0wge"]
@@ -7,6 +7,42 @@
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="5_furks"]
 [ext_resource type="Texture2D" uid="uid://braode065wy2j" path="res://images/items/lock.png" id="5_st4jw"]
 [ext_resource type="Texture2D" uid="uid://cxjgnget2f6pf" path="res://images/items/bomb.png" id="6_l0erc"]
+
+[sub_resource type="Shader" id="Shader_i0wge"]
+code = "shader_type canvas_item;
+
+uniform float outline_width = 2.0;
+instance uniform vec4 outline_color : source_color;
+
+void fragment() {
+	vec4 col = texture(TEXTURE, UV);
+	vec2 ps = TEXTURE_PIXEL_SIZE;
+	float a;
+	float maxa = col.a;
+	float mina = col.a;
+
+	a = texture(TEXTURE, UV + vec2(0.0, -outline_width) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	a = texture(TEXTURE, UV + vec2(0.0, outline_width) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	a = texture(TEXTURE, UV + vec2(-outline_width, 0.0) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	a = texture(TEXTURE, UV + vec2(outline_width, 0.0) * ps).a;
+	maxa = max(a, maxa);
+	mina = min(a, mina);
+
+	COLOR = mix(col, outline_color, maxa - mina);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ynpi"]
+shader = SubResource("Shader_i0wge")
+shader_parameter/outline_width = 16.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nrvhk"]
 bg_color = Color(0.301961, 0, 0, 1)
@@ -61,6 +97,7 @@ texture = ExtResource("2_i0wge")
 expand_mode = 1
 
 [node name="Weapon" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_6ynpi")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -78,6 +115,7 @@ texture = ExtResource("3_6ynpi")
 expand_mode = 1
 
 [node name="Hat" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_6ynpi")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -95,6 +133,7 @@ texture = ExtResource("4_furks")
 expand_mode = 1
 
 [node name="Trinket2" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_6ynpi")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -112,6 +151,7 @@ texture = ExtResource("5_st4jw")
 expand_mode = 1
 
 [node name="Trinket1" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_6ynpi")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

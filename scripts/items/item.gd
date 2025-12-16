@@ -25,6 +25,7 @@ enum Enchant { None, Red, Blue, Green, Yellow }
 var enchant : Enchant = Enchant.None
 var level : int = 1
 var experience : int = 0
+var is_recipe: bool = false
 
 func _init() -> void:
 	SignalBus.locale_changed.connect(localize)
@@ -89,7 +90,7 @@ func on_unequip(owner: Slave):
 	owner.hp -= extra_hp
 
 func on_level_up():
-	pass
+	print("level up!")
 
 func on_start_battle(owner: SlaveNode):
 	owner.set_speed(extra_speed)

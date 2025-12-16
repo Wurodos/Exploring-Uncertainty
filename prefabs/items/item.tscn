@@ -1,8 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://0vo1oa3f4mmd"]
+[gd_scene load_steps=4 format=3 uid="uid://0vo1oa3f4mmd"]
 
 [ext_resource type="Script" uid="uid://dodfrxyjxnuw0" path="res://scripts/items/item_node.gd" id="1_84lfe"]
+[ext_resource type="Shader" uid="uid://jgxqr8obt45n" path="res://shaders/sprite_outline.gdshader" id="1_m33fx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m33fx"]
+shader = ExtResource("1_m33fx")
+shader_parameter/outline_width = 8.0
 
 [node name="Item" type="Node2D"]
 script = ExtResource("1_84lfe")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_m33fx")
