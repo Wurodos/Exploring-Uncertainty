@@ -13,3 +13,8 @@ func on_start_battle(owner: SlaveNode):
 		total += item.cost
 	
 	owner.set_power(floor(total / value_per_power))
+
+func on_level_up():
+	cost += 4
+	if level == 3 or level == 5: value_per_power -= 1
+	super.on_level_up()

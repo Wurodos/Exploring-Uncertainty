@@ -91,6 +91,7 @@ func on_unequip(owner: Slave):
 
 func on_level_up():
 	print("level up!")
+	localize()
 
 func on_start_battle(owner: SlaveNode):
 	owner.set_speed(extra_speed)

@@ -23,3 +23,12 @@ func _on_received_damage(_source: SlaveNode, dmg: int):
 		total_received += dmg
 		user.set_power(+power_gain*(total_received / required_harm))
 		total_received %= required_harm
+
+func on_level_up():
+	extra_hp += 3
+	match(level):
+		2: power_gain += 1
+		3: power_gain += 1
+		4: turns += 3
+		5: required_harm -= 1
+	super.on_level_up()

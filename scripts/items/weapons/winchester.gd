@@ -15,3 +15,8 @@ func use_item(sender: SlaveNode, victim: SlaveNode):
 		.filter(func(node : SlaveNode): return node != victim and node.held.is_alive)
 	if potential_targets.size() > 0:
 		Action.deal_damage(sender, potential_targets.pick_random(), second_harm)
+
+func on_level_up():
+	first_harm += 1
+	second_harm += 1
+	super.on_level_up()

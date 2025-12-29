@@ -17,3 +17,13 @@ func on_start_battle(owner: SlaveNode):
 func _on_turn_started():
 	sender.set_power(+power_gain)
 	sender.set_hp(-health_loss)		
+
+func on_level_up():
+	match(level):
+		2: health_loss += 1
+		3: 
+			power_gain += 1 
+			health_loss += 1
+		4: health_loss -= 1
+		5: health_loss -= 1
+	super.on_level_up()

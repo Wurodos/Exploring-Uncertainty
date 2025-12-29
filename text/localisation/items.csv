@@ -6,7 +6,7 @@ no_weapon_desc;INFLICTS {} HARM;ПРИЧИНЯЕТ {} ВРЕДА
 pipe_name;Pipe;Труба
 pipe_desc;{} HARM, {} HARM INSTEAD IF USED LAST TURN;{} ВРЕДА, {} ВРЕДА ЕСЛИ БЫЛО ИСПОЛЬЗОВАНО В ПРОШЛОМ ХОДУ
 razor_name;Razor;Бритва
-razor_desc;{} HARM, +1 POWER TO SELF;{} ВРЕДА, +1 МОЩЬ СЕБЕ
+razor_desc;{} HARM, +{} POWER TO SELF;{} ВРЕДА, +{} МОЩЬ СЕБЕ
 tennis_ball_name;Tennis Ball;Теннисный Мяч
 tennis_ball_desc;{} HARM, +{} PER DIFFERENCE IN INITIATIVE;{} ВРЕДА, +{} ЗА КАЖДУЮ РАЗНИЦУ В ИНИЦИАТИВЕ
 whistle_name;Whistle;Свисток

@@ -9,3 +9,9 @@ func localize():
 func use_item(sender: SlaveNode, ally: SlaveNode):
 	super.use_item(sender, ally)
 	ally.add_buff(Action.BLASPHEMY, turns)
+
+func on_level_up():
+	extra_hp += 2
+	if level == 3: extra_speed += 1
+	if level >= 4: turns += 1
+	super.on_level_up()

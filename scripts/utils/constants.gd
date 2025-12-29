@@ -2,7 +2,7 @@ extends Node
 
 class_name Constants
 
-const exp_required = [2,4,6,8]
+const exp_required = [2,3,4,5]
 const level_colors = [
 	Color(0,0,0,0),
 	Color(0.427, 0.427, 0.427, 1.0),

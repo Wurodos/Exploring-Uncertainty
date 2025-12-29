@@ -12,5 +12,5 @@ func use_item(sender: SlaveNode, victim: SlaveNode):
 	localize()
 	
 func on_level_up():
-	super.on_level_up()
 	harm += 2
+	super.on_level_up()

@@ -26,7 +26,7 @@ func _ready() -> void:
 	for item: Item in ItemPool._pool.values():
 		if item.is_item():
 			CurrentRun.craft_pool.append(item.duplicate())
-	CurrentRun.inventory.append(ItemPool.fetch("sword"))
+
 	## DEBUG -> Inventory limit
 	#for i in range(20):
 	#	CurrentRun.inventory.append(ItemPool.fetch_random())

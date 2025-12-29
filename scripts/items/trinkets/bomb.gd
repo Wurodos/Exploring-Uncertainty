@@ -17,3 +17,7 @@ func _explode(victim: SlaveNode):
 	Action.deal_damage(sender, victim, harm)
 	sender.attacked.disconnect(_explode)
 	sender.remove_item(u_name)
+
+func on_level_up():
+	harm += roundi(harm / 2)
+	super.on_level_up()
