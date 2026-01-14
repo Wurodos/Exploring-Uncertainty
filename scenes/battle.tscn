@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bfx1ij738o32v"]
+[gd_scene load_steps=39 format=3 uid="uid://bfx1ij738o32v"]
 
 [ext_resource type="Script" uid="uid://blaomclhrxsrs" path="res://scripts/slaves/team.gd" id="1_dn72j"]
 [ext_resource type="Script" uid="uid://cukwfw80fb48e" path="res://scripts/battle/battle.gd" id="1_th188"]
@@ -783,7 +783,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Fail" type="Control" parent="UI"]
-visible = false
 z_index = 999
 anchors_preset = 0
 offset_right = 40.0

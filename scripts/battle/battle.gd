@@ -15,8 +15,7 @@ const queue_element = preload("res://prefabs/battle/queue_element.tscn")
 
 var speed_queue: Array[Slave] = []
 var current_slave_position : int = 0
-var current_slave: Slave
-var current_slave_node: SlaveNode
+var current_slaves: Array[Slave] = []
 
 var selected_sender: SlaveNode
 var selected_victim: SlaveNode
@@ -54,30 +53,6 @@ func _ready() -> void:
 	SignalBus.good_won.connect(_on_good_won)
 	
 	SignalBus.start_battle.emit()
-
-func recalculate_speed():
-	var current_slave = speed_queue[current_slave_position]
-	queue_node.get_child(current_slave_position).toggle_select(false)
-	
-	speed_queue = []
-	while queue_node.get_child_count() > 0:
-		queue_node.get_child(0).free()
-	
-	speed_queue.append_array(CurrentRun.good_boys)
-	speed_queue.append_array(CurrentRun.evil_boys)
-	
-	speed_queue = speed_queue.filter\
-		(func(boy: Slave): return boy.is_alive)	
-	
-	speed_queue.sort_custom(_compare_speeds)
-	
-	for slave : Slave in speed_queue:
-		var new_element : QueueElement = queue_element.instantiate()
-		new_element.apply(slave)
-		queue_node.add_child(new_element)
-	
-	current_slave_position = speed_queue.find(current_slave)
-	queue_node.get_child(current_slave_position).toggle_select(true)
 
 func _on_start_battle():
 	for slave: SlaveNode in evil_team.boys_nodes:
@@ -134,10 +109,12 @@ func _compare_speeds(slave_1: Slave, slave_2: Slave) -> bool:
 	return slave_1.speed > slave_2.speed
 
 func _on_new_turn() -> void:
-	if current_slave_position >= 0:
-		queue_node.get_child(current_slave_position).toggle_select(false)
+	for child in queue_node.get_children():
+		child.toggle_select(false)
 	
 	current_slave_position += 1
+	print(current_slave_position)
+	
 	
 	if current_slave_position >= queue_node.get_child_count():
 		for slave : SlaveNode in good_team.boys_nodes:
@@ -145,21 +122,33 @@ func _on_new_turn() -> void:
 		for slave : SlaveNode in evil_team.boys_nodes:
 			slave.ticker_down_buffs()
 		SignalBus.new_round.emit()
+	else:
+		if not speed_queue[current_slave_position].is_alive:
+			_on_new_turn()
+			return
 	
-	queue_node.get_child(current_slave_position).toggle_select(true)
-	current_slave = speed_queue[current_slave_position]
-	current_slave_node = _find_slave_node(current_slave)
 	
-	for slave_node in good_team.boys_nodes:
-		if slave_node.held == current_slave:
-			slave_node.start_turn()
-			break
 	
-	if current_slave is Enemy:
+	# If there are friendly slaves going in a row, player should be able to choose
+	
+	current_slaves = []
+	for i in range(current_slave_position, speed_queue.size()):
+		var slave = speed_queue[i]
+		if slave is Enemy: break
+		
+		current_slaves.append(slave)
+		queue_node.get_child(i).toggle_select(true)
+	
+	if speed_queue[current_slave_position] is Enemy:
+		queue_node.get_child(current_slave_position).toggle_select(true)
 		for slave_node in evil_team.boys_nodes:
-			if slave_node.held == current_slave:
+			if speed_queue[current_slave_position] == slave_node.held:
 				slave_node.execute_intention()
 				break
+	else:
+		for slave_node in good_team.boys_nodes:
+			if current_slaves.has(slave_node.held):
+				slave_node.start_turn()
 
 func _on_slave_death(slave_node: SlaveNode, is_loot: bool = true) -> void:
 	if slave_node.held is Enemy:
@@ -168,6 +157,8 @@ func _on_slave_death(slave_node: SlaveNode, is_loot: bool = true) -> void:
 			$AnimationPlayer.play("win")
 			SignalBus.new_turn.disconnect(_on_new_turn)
 			return
+	else:
+		current_slaves.erase(slave_node.held)
 	
 	if is_loot:
 		for item : Item in slave_node.get_all_items():
@@ -176,17 +167,9 @@ func _on_slave_death(slave_node: SlaveNode, is_loot: bool = true) -> void:
 	
 	for i in range(speed_queue.size()):
 		if speed_queue[i] == slave_node.held:
-			queue_node.get_child(i).free()
-			speed_queue.remove_at(i)
-			
-			if i < current_slave_position:
-				current_slave_position -= 1
-			elif i == current_slave_position:
+			queue_node.get_child(i).visible = false
+			if i == current_slave_position:
 				slave_node.toggle_arrow(false)
-				current_slave_position -= 1
-				
-				# dirty hack, can cause issues later
-				get_tree().create_timer(1).timeout.connect(func(): SignalBus.new_turn.emit())
 			break
 	
 	if good_team.boys.is_empty():
@@ -194,12 +177,14 @@ func _on_slave_death(slave_node: SlaveNode, is_loot: bool = true) -> void:
 	elif evil_team.boys.is_empty():
 		SignalBus.good_won.emit()
 	
-	if current_slave_position == speed_queue.size():
-		SignalBus.new_round.emit()			
+	if not slave_node.held is Enemy:
+		if current_slaves.is_empty():
+			SignalBus.new_turn.emit()
+		else: current_slave_position += 1
 
 func _on_slave_selected(slave_node: SlaveNode) -> void:
 	if is_marauder: return
-	if slave_node.held == current_slave and not slave_node.team.is_evil:
+	if current_slaves.has(slave_node.held) and not slave_node.team.is_evil:
 		slave_node.toggle_ellipse(true)
 		selected_sender = slave_node
 		is_line = true
@@ -226,7 +211,13 @@ func _on_mouse_released():
 				SignalBus.advance_tutorial.emit()
 			selected_sender.support(selected_victim)
 		selected_victim = null
-		SignalBus.new_turn.emit()
+		
+		queue_node.get_child(speed_queue.find(selected_sender.held)).toggle_select(false)
+		
+		current_slaves.erase(selected_sender.held)
+		if current_slaves.is_empty():
+			SignalBus.new_turn.emit()
+		else: current_slave_position += 1
 
 func _on_slave_mouse_entered(slave_node: SlaveNode):
 	if is_line:
@@ -263,19 +254,15 @@ func _on_slave_mouse_exited(slave_node: SlaveNode):
 		selected_victim = null
 
 func _on_speed_queue_mouse_entered(slave: Slave):
-	if slave == current_slave: return
+	if current_slaves.has(slave): return
 	
 	var slave_node = _find_slave_node(slave)
-	current_slave_node.arrow.visible = false
 	slave_node.arrow.visible = true
 	slave_node.arrow_animation.play("bounce")
 
 func _on_speed_queue_mouse_exited(slave: Slave):
-	if slave == current_slave: return
+	if current_slaves.has(slave): return
 	var slave_node = _find_slave_node(slave)
-	
-	if not current_slave_node.team.is_evil:
-		current_slave_node.arrow.visible = true
 		
 	slave_node.arrow.visible = false
 	slave_node.arrow_animation.play("RESET")
