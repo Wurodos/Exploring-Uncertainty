@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c0sctm4w3b4vk"]
+[gd_resource type="Resource" format=3 uid="uid://c0sctm4w3b4vk"]
 
 [ext_resource type="Script" uid="uid://donxfvcaxu0uo" path="res://scripts/enemies/chomper.gd" id="1_adta0"]
 [ext_resource type="Texture2D" uid="uid://bn4k7m7p68p0i" path="res://images/slaves/chomper.png" id="2_2vmds"]
@@ -10,7 +10,6 @@ info_count = 1
 u_name = &"chomper"
 base_maxhp = 40
 base_speed = -2
-base_cost = 0
 sprite_size = 1
 texture = ExtResource("2_2vmds")
 metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

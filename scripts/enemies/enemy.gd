@@ -23,6 +23,7 @@ class Intention:
 	
 @export var info_count: int = 0
 
+var info_title: Array[String] = []
 var info: Array[String] = []
 var intention: Intention
 var is_final_boss: bool = false
@@ -38,6 +39,7 @@ func localize() -> void:
 	super.localize()
 	info = []
 	for i in range(info_count):
+		info_title.append(tr(u_name + "_title_" + str(i)))
 		info.append(tr(u_name + "_info_" + str(i)))
 
 #func serialize() -> Dictionary:
@@ -95,7 +97,7 @@ func _get_2_good_targets() -> Array[int]:
 		return [possible[0], possible[1]]
 	else: return [possible[0]]
 
-func _get_good_target(score_func: Callable):
+func _get_good_target(_score_func: Callable):
 	pass
 
 func _convert_node_to_target(node: SlaveNode, team: Array[Slave]) -> Intention.Target:

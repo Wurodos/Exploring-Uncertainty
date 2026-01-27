@@ -1,5 +1,8 @@
 keys;en;ru
+cherv_title_0;Towards communism!;К коммунизму!
 cherv_info_0;INFLICTS {}-{} HARM;ПРИЧИНЯЕТ {}-{} ВРЕДА
+cherv_title_1;Narrow Mind;Узколобие
+cherv_info_1;SWITCHES TARGET WHEN HIT;МЕНЯЕТ ЦЕЛЬ ПРИ ПОЛУЧЕНИИ УРОНА
 chomper_info_0;INFLICTS {} HARM TO ALL;ПРИЧИНЯЕТ {} ВРЕДА ВСЕМ
 starry_info_0;GAINS {} POWER AND SHIELD ({} TURNS);ПОЛУЧАЕТ {} МОЩИ И ЩИТ ({} ХОД.)
 starry_info_1;INFLICTS {}-{} HARM;ПРИЧИНЯЕТ {}-{} ВРЕДА

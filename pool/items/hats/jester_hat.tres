@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c46ueq53ctqdl"]
+[gd_resource type="Resource" format=3 uid="uid://c46ueq53ctqdl"]
 
 [ext_resource type="Script" uid="uid://boi87gtv3r4vy" path="res://scripts/items/hats/jester_hat.gd" id="1_p3u7i"]
 [ext_resource type="Texture2D" uid="uid://ciesntudyd81s" path="res://images/items/jester-hat.png" id="2_5t8eq"]

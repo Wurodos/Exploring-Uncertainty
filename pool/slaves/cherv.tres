@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Cherv" load_steps=3 format=3 uid="uid://yequhwhuma5a"]
+[gd_resource type="Resource" script_class="Cherv" format=3 uid="uid://yequhwhuma5a"]
 
 [ext_resource type="Script" uid="uid://m2j12xfq61od" path="res://scripts/enemies/cherv.gd" id="1_ph071"]
 [ext_resource type="Texture2D" uid="uid://brfycwyqi4ev8" path="res://images/slaves/communist.png" id="2_lp2vr"]
@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_ph071")
 harm_lower = 3
-info_count = 1
+info_count = 2
 u_name = &"cherv"
 base_maxhp = 10
 texture = ExtResource("2_lp2vr")

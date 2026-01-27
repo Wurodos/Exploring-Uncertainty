@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://b2xjjy2k77nt3"]
+[gd_resource type="Resource" format=3 uid="uid://b2xjjy2k77nt3"]
 
 [ext_resource type="Script" uid="uid://bppdbtplvjls3" path="res://scripts/items/trinkets/alcohol.gd" id="1_oapy2"]
 [ext_resource type="Texture2D" uid="uid://dhvikf4rsfefa" path="res://images/items/beer-bottle.png" id="2_wquac"]

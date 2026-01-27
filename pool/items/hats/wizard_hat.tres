@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://do1vbb2820r22"]
+[gd_resource type="Resource" format=3 uid="uid://do1vbb2820r22"]
 
 [ext_resource type="Script" uid="uid://dltjxlvvkegng" path="res://scripts/items/hats/wizard_hat.gd" id="1_jpp2n"]
 [ext_resource type="Texture2D" uid="uid://dcprd1kuvkwce" path="res://images/items/wizard_hat.png" id="2_pmg56"]

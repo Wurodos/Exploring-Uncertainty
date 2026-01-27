@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bglmrdyj5hy03"]
+[gd_resource type="Resource" format=3 uid="uid://bglmrdyj5hy03"]
 
 [ext_resource type="Script" uid="uid://baqdastxiqocq" path="res://scripts/items/hats/viking_helmet.gd" id="1_g8yak"]
 [ext_resource type="Texture2D" uid="uid://ca3v7kxh4etl1" path="res://images/items/viking-helmet.png" id="2_g8yak"]

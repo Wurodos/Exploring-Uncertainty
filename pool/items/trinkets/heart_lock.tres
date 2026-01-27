@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cts1g16ioa6bp"]
+[gd_resource type="Resource" format=3 uid="uid://cts1g16ioa6bp"]
 
 [ext_resource type="Script" uid="uid://lg38t2jklyus" path="res://scripts/items/trinkets/heart_lock.gd" id="1_6nu6c"]
 [ext_resource type="Texture2D" uid="uid://braode065wy2j" path="res://images/items/lock.png" id="2_bs1fd"]

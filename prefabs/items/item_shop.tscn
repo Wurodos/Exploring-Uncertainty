@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dga0x3g1o5mo4"]
+[gd_scene format=3 uid="uid://dga0x3g1o5mo4"]
 
 [ext_resource type="Script" uid="uid://crhkds3xvvxxf" path="res://scripts/items/item_shop.gd" id="1_2aih4"]
 [ext_resource type="Texture2D" uid="uid://cxsnysdj5en2r" path="res://images/items/anvil.png" id="1_kbwyn"]
@@ -27,14 +27,14 @@ font_color = Color(1, 1, 0, 1)
 outline_size = 12
 outline_color = Color(0, 0, 0, 1)
 
-[node name="ItemShop" type="TextureRect"]
+[node name="ItemShop" type="TextureRect" unique_id=1759796252]
 offset_right = 52.0
 mouse_filter = 2
 texture = ExtResource("1_kbwyn")
 expand_mode = 4
 script = ExtResource("1_2aih4")
 
-[node name="Clickable" type="Button" parent="."]
+[node name="Clickable" type="Button" parent="." unique_id=1284300075]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,7 +53,7 @@ theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_3giyi"
 theme_override_styles/disabled = SubResource("StyleBoxFlat_lixqi")
 keep_pressed_outside = true
 
-[node name="Cost" type="Label" parent="."]
+[node name="Cost" type="Label" parent="." unique_id=1468329641]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0

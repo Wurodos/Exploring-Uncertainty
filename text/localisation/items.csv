@@ -30,7 +30,7 @@ wizard_hat_desc;ACTION: HEAL {} HEALTH;ДЕЙСТВИЕ: ВЫЛЕЧИТЬ {} З�
 alcohol_name;Alcohol;Алкоголь
 alcohol_desc;START TURN: +{} POWER, LOSE {} HEALTH;НАЧАЛО ХОДА: +{} МОЩЬ, ПОТЕРЯ {} ЗДРАВИЙ
 bomb_name;Bomb;Бомба
-bomb_desc;{} HARM WHEN ATTACKING, ONE-TIME USE; {} ВРЕДА ПРИ АТАКЕ, ОДНОРАЗОВОЕ
+bomb_desc;{} HARM WHEN ATTACKING, ONE-TIME USE;{} ВРЕДА ПРИ АТАКЕ, ОДНОРАЗОВОЕ
 die_name;Die;Кубик
 die_desc;START OF BATTLE: +{} LUCK;НАЧАЛО БОЯ: +{} УДАЧА
 draniki_name;Draniki;Драники

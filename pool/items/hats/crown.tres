@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://byf6o4kadh4ws"]
+[gd_resource type="Resource" format=3 uid="uid://byf6o4kadh4ws"]
 
 [ext_resource type="Script" uid="uid://d0klmekgtvnf4" path="res://scripts/items/hats/crown.gd" id="1_l8oqh"]
 [ext_resource type="Texture2D" uid="uid://d3rjcoowadyvw" path="res://images/items/crown.png" id="2_g3t71"]

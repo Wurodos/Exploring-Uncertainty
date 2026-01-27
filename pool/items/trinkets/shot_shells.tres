@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://wdbv5yjo0drs"]
+[gd_resource type="Resource" format=3 uid="uid://wdbv5yjo0drs"]
 
 [ext_resource type="Script" uid="uid://rv1go4141m2q" path="res://scripts/items/trinkets/shot_shells.gd" id="1_8nmd4"]
 [ext_resource type="Texture2D" uid="uid://dw5y7k15kbhr8" path="res://images/items/shotgun-rounds.png" id="2_eygpe"]

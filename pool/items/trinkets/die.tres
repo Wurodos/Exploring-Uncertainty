@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cwvop3phsuv7"]
+[gd_resource type="Resource" format=3 uid="uid://cwvop3phsuv7"]
 
 [ext_resource type="Script" uid="uid://1w2rcixvamqo" path="res://scripts/items/trinkets/die.gd" id="1_gyuj5"]
 [ext_resource type="Texture2D" uid="uid://dkq2cddtos38" path="res://images/items/perspective-dice-six-faces-one.png" id="2_eaac4"]

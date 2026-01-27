@@ -60,6 +60,7 @@ signal speed_queue_mouse_entered(slave: Slave)
 signal speed_queue_mouse_exit(slave: Slave)
 
 signal slave_info(slave: Slave)
+signal enemy_info(slave: Slave)
 
 signal slave_death(slave: SlaveNode)
 signal slave_ran(slave: SlaveNode)

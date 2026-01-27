@@ -25,6 +25,9 @@ var is_marauder : bool = false
 
 var tutorial_progress: int = 0
 
+func get_queue_element(id: int) -> QueueElement:
+	return queue_node.get_child(speed_queue.size() - 1 - id)
+
 func _ready() -> void:
 	instance = self
 
@@ -99,8 +102,9 @@ func _on_new_round():
 		speed_queue[br_start + j] = bracket[j]
 	
 	
-	
-	for slave : Slave in speed_queue:
+	var copy = speed_queue.duplicate()
+	copy.reverse()
+	for slave : Slave in copy:
 		var new_element : QueueElement = queue_element.instantiate()
 		new_element.apply(slave)
 		queue_node.add_child(new_element)
@@ -113,7 +117,6 @@ func _on_new_turn() -> void:
 		child.toggle_select(false)
 	
 	current_slave_position += 1
-	print(current_slave_position)
 	
 	
 	if current_slave_position >= queue_node.get_child_count():
@@ -135,14 +138,15 @@ func _on_new_turn() -> void:
 	for i in range(current_slave_position, speed_queue.size()):
 		var slave = speed_queue[i]
 		if slave is Enemy: break
-		
+		if not slave.is_alive: continue
 		current_slaves.append(slave)
-		queue_node.get_child(i).toggle_select(true)
+		get_queue_element(i).toggle_select(true)
 	
 	if speed_queue[current_slave_position] is Enemy:
-		queue_node.get_child(current_slave_position).toggle_select(true)
+		get_queue_element(current_slave_position).toggle_select(true)
 		for slave_node in evil_team.boys_nodes:
 			if speed_queue[current_slave_position] == slave_node.held:
+				slave_node.start_turn()
 				slave_node.execute_intention()
 				break
 	else:
@@ -167,7 +171,7 @@ func _on_slave_death(slave_node: SlaveNode, is_loot: bool = true) -> void:
 	
 	for i in range(speed_queue.size()):
 		if speed_queue[i] == slave_node.held:
-			queue_node.get_child(i).visible = false
+			get_queue_element(i).visible = false
 			if i == current_slave_position:
 				slave_node.toggle_arrow(false)
 			break
@@ -177,7 +181,9 @@ func _on_slave_death(slave_node: SlaveNode, is_loot: bool = true) -> void:
 	elif evil_team.boys.is_empty():
 		SignalBus.good_won.emit()
 	
-	if not slave_node.held is Enemy:
+	if current_slave_position > speed_queue.size():
+		SignalBus.new_turn.emit()
+	elif not speed_queue[current_slave_position] is Enemy and not slave_node.held is Enemy:
 		if current_slaves.is_empty():
 			SignalBus.new_turn.emit()
 		else: current_slave_position += 1
@@ -188,8 +194,7 @@ func _on_slave_selected(slave_node: SlaveNode) -> void:
 		slave_node.toggle_ellipse(true)
 		selected_sender = slave_node
 		is_line = true
-		line2d.self_modulate = Color.WHITE
-		slave_node.ellipse.self_modulate = Color.WHITE
+		_on_slave_mouse_entered(slave_node)
 
 func _on_mouse_dragged(pos: Vector2):
 	if is_line:
@@ -212,7 +217,8 @@ func _on_mouse_released():
 			selected_sender.support(selected_victim)
 		selected_victim = null
 		
-		queue_node.get_child(speed_queue.find(selected_sender.held)).toggle_select(false)
+		if selected_sender != null:
+			get_queue_element(speed_queue.find(selected_sender.held)).toggle_select(false)
 		
 		current_slaves.erase(selected_sender.held)
 		if current_slaves.is_empty():

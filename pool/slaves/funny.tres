@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Cherv" load_steps=3 format=3 uid="uid://du0ndxfffoar0"]
+[gd_resource type="Resource" script_class="Cherv" format=3 uid="uid://du0ndxfffoar0"]
 
 [ext_resource type="Script" uid="uid://m2j12xfq61od" path="res://scripts/enemies/cherv.gd" id="1_tb20j"]
 [ext_resource type="Texture2D" uid="uid://brexdlcj448eu" path="res://images/slaves/funny.png" id="2_tb20j"]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dypnn2dauu6xk"]
+[gd_resource type="Resource" format=3 uid="uid://dypnn2dauu6xk"]
 
 [ext_resource type="PackedScene" uid="uid://bqqoibi3bnx87" path="res://prefabs/reptiles/AIDA.tscn" id="1_7bu8c"]
 [ext_resource type="Script" uid="uid://cca7erkjq2uhc" path="res://scripts/reptiles/roots_and_toots.gd" id="1_66sp2"]

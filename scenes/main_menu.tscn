@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dyrtd13gpi41u"]
+[gd_scene format=3 uid="uid://dyrtd13gpi41u"]
 
 [ext_resource type="Script" uid="uid://bgtuvu7j415s5" path="res://scripts/run/main_menu.gd" id="1_ekxnf"]
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="1_l6cm7"]
@@ -40,7 +40,7 @@ bg_color = Color(0.123761, 0.0260562, 0.525897, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jk1qb"]
 bg_color = Color(0.703105, 0.770696, 0.993789, 1)
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=1145108916]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,7 +49,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ekxnf")
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=180473707]
 layout_mode = 0
 offset_left = 352.0
 offset_top = 277.0
@@ -64,7 +64,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 script = ExtResource("3_tbmy8")
 string_id = &"prepare"
 
-[node name="Tutorial" type="Button" parent="."]
+[node name="Tutorial" type="Button" parent="." unique_id=967997204]
 layout_mode = 0
 offset_left = 352.0
 offset_top = 474.0
@@ -79,7 +79,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_rtw2f")
 script = ExtResource("3_tbmy8")
 string_id = &"tutorial"
 
-[node name="Language_en" type="TextureButton" parent="."]
+[node name="Language_en" type="TextureButton" parent="." unique_id=1280763976]
 layout_mode = 0
 offset_left = 53.0
 offset_top = 502.0
@@ -92,7 +92,7 @@ texture_hover = ExtResource("6_oa1go")
 texture_disabled = ExtResource("6_oa1go")
 stretch_mode = 0
 
-[node name="Language_ru" type="TextureButton" parent="."]
+[node name="Language_ru" type="TextureButton" parent="." unique_id=879286312]
 layout_mode = 0
 offset_left = 165.0
 offset_top = 502.0
@@ -105,7 +105,7 @@ texture_hover = ExtResource("3_bqqt6")
 texture_disabled = ExtResource("3_bqqt6")
 stretch_mode = 0
 
-[node name="TestTypewriter" type="Label" parent="."]
+[node name="TestTypewriter" type="Label" parent="." unique_id=1121434438]
 layout_mode = 0
 offset_left = 216.0
 offset_top = 53.0
@@ -114,7 +114,7 @@ offset_bottom = 130.0
 label_settings = SubResource("LabelSettings_oa1go")
 script = ExtResource("7_oa1go")
 
-[node name="Continue" type="Button" parent="."]
+[node name="Continue" type="Button" parent="." unique_id=1479430516]
 layout_mode = 0
 offset_left = 433.0
 offset_top = 102.0

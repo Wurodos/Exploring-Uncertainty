@@ -6,27 +6,29 @@ const BLASPHEMY = "blasphemy"
 const FREEZE = "freeze"
 const DARK = "dark"
 
+func calculate_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, _dont_proc: bool = false) -> int:
+	var total_dmg = dmg
+	total_dmg += sender.power
+	if sender.buffs.has(APPETITE):
+		total_dmg = total_dmg * 4 / 3
+	if victim.buffs.has(FREEZE):
+		total_dmg = total_dmg * 3 / 2
+	if victim.buffs.has(SHIELD):
+		total_dmg = total_dmg * 7 / 10
+	
+	return total_dmg
+
 func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, dont_proc: bool = false):
 	SignalBus.play_sound.emit("hurt")
 	
-	var total_dmg = dmg
-	
-	total_dmg += sender.power
+	var total_dmg = calculate_damage(sender, victim, dmg, dont_proc)
 	
 	var roll = randi_range(0, 99)
 	var is_crit = roll < 4 * (sender.luck+1)
 	
-	if victim.buffs.has(SHIELD) and not is_crit:
-		total_dmg = floor(total_dmg * 0.7)
-	
-	if sender.buffs.has(APPETITE):
-		total_dmg += floor(total_dmg / 3)
-	
-	if victim.buffs.has(FREEZE):
-		total_dmg += floor(total_dmg / 2)
-	
 	if is_crit:
 		total_dmg *= 2
+		if victim.buffs.has(SHIELD): total_dmg = total_dmg * 10 / 7
 	
 	if sender.buffs.has(BLASPHEMY):
 		heal(sender, sender, floor(total_dmg*2/5))

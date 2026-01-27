@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://el10i67oqeed"]
+[gd_scene format=3 uid="uid://el10i67oqeed"]
 
 [ext_resource type="Script" uid="uid://kwyej8epft" path="res://scripts/map/popup_message.gd" id="1_xcw57"]
 [ext_resource type="Texture2D" uid="uid://ch6hg4b6lngkw" path="res://images/backdrops/found_item.png" id="2_tmeoe"]
@@ -11,12 +11,12 @@ font_size = 40
 outline_size = 16
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Message" type="Control"]
+[node name="Message" type="Control" unique_id=1723596214]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_xcw57")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1483095699]
 layout_mode = 0
 offset_left = -193.0
 offset_top = -113.0
@@ -24,7 +24,7 @@ offset_right = 1191.0
 offset_bottom = 636.0
 color = Color(0, 0, 0, 0.513726)
 
-[node name="BG" type="TextureRect" parent="."]
+[node name="BG" type="TextureRect" parent="." unique_id=881048199]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,7 +37,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_tmeoe")
 
-[node name="Close" type="Button" parent="."]
+[node name="Close" type="Button" parent="." unique_id=78982772]
 layout_mode = 0
 offset_left = 524.0
 offset_top = 124.0
@@ -48,7 +48,7 @@ theme_override_fonts/font = ExtResource("3_7h63o")
 theme_override_font_sizes/font_size = 64
 text = "X"
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=523494576]
 layout_mode = 0
 offset_left = 314.0
 offset_top = 236.0

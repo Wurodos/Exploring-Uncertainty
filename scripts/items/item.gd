@@ -81,6 +81,18 @@ func is_item() -> bool:
 func use_item(_sender: SlaveNode, _victim: SlaveNode):
 	pass
 
+
+#Override this. Irrelevant for trinkets (for now)
+#Should be called on every member of player's team
+#Higher number -> more likely to pick. Typically -3 to +3
+#-999 = never pick
+#+999 = always pick
+func get_priority(_sender: SlaveNode, _victim: SlaveNode) -> int:
+	return -999
+
+func get_intention() -> Enemy.Intention:
+	return null
+
 func on_equip(owner: Slave):
 	owner.maxhp += extra_hp
 	owner.hp += extra_hp

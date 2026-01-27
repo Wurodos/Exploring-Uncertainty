@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c13wpflbknekq"]
+[gd_scene format=3 uid="uid://c13wpflbknekq"]
 
 [ext_resource type="Script" uid="uid://p1j7xa0ecl76" path="res://scripts/run/draft.gd" id="1_ndt0q"]
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="2_abqjp"]
@@ -12,16 +12,16 @@
 font = ExtResource("2_abqjp")
 font_size = 100
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_700tk"]
-bg_color = Color(0.352941, 0, 0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjfeh"]
+bg_color = Color(0.690196, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgxk2"]
 bg_color = Color(0.145098, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjfeh"]
-bg_color = Color(0.690196, 0, 0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_700tk"]
+bg_color = Color(0.352941, 0, 0, 1)
 
-[node name="Draft" type="Control"]
+[node name="Draft" type="Control" unique_id=460030653]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,7 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ndt0q")
 
-[node name="ItemEntry" parent="." instance=ExtResource("3_700tk")]
+[node name="ItemEntry" parent="." unique_id=1751488166 instance=ExtResource("3_700tk")]
 visible = false
 layout_mode = 0
 offset_left = 195.0
@@ -38,7 +38,7 @@ offset_top = 453.0
 offset_right = 695.0
 offset_bottom = 593.0
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1097914169]
 layout_mode = 0
 offset_left = 311.0
 offset_top = 14.0
@@ -48,7 +48,7 @@ text = "Выберите 1"
 label_settings = SubResource("LabelSettings_abqjp")
 horizontal_alignment = 1
 
-[node name="ItemRow" type="HBoxContainer" parent="."]
+[node name="ItemRow" type="HBoxContainer" parent="." unique_id=1939481296]
 layout_mode = 0
 offset_left = 106.0
 offset_top = 153.0
@@ -56,19 +56,19 @@ offset_right = 1046.0
 offset_bottom = 344.0
 alignment = 1
 
-[node name="ItemShop" parent="ItemRow" instance=ExtResource("4_qgxk2")]
+[node name="ItemShop" parent="ItemRow" unique_id=347683914 instance=ExtResource("4_qgxk2")]
 layout_mode = 2
 expand_mode = 2
 
-[node name="ItemShop2" parent="ItemRow" instance=ExtResource("4_qgxk2")]
+[node name="ItemShop2" parent="ItemRow" unique_id=1843826126 instance=ExtResource("4_qgxk2")]
 layout_mode = 2
 expand_mode = 2
 
-[node name="ItemShop3" parent="ItemRow" instance=ExtResource("4_qgxk2")]
+[node name="ItemShop3" parent="ItemRow" unique_id=386429946 instance=ExtResource("4_qgxk2")]
 layout_mode = 2
 expand_mode = 2
 
-[node name="Start" type="Button" parent="."]
+[node name="Start" type="Button" parent="." unique_id=360646565]
 visible = false
 layout_mode = 0
 offset_left = 217.0
@@ -78,12 +78,12 @@ offset_bottom = 565.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("2_abqjp")
 theme_override_font_sizes/font_size = 100
-theme_override_styles/hover = SubResource("StyleBoxFlat_700tk")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_qgxk2")
 theme_override_styles/normal = SubResource("StyleBoxFlat_pjfeh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qgxk2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_700tk")
 text = "Истребить"
 
-[node name="TutorialBox" type="TextureRect" parent="."]
+[node name="TutorialBox" type="TextureRect" parent="." unique_id=2077911605]
 visible = false
 layout_mode = 0
 offset_left = 449.0
@@ -92,7 +92,7 @@ offset_right = 1060.0
 offset_bottom = 513.0
 texture = ExtResource("5_5j11b")
 
-[node name="Text" type="Label" parent="TutorialBox"]
+[node name="Text" type="Label" parent="TutorialBox" unique_id=1988885441]
 layout_mode = 0
 offset_left = 37.0
 offset_top = 21.0
@@ -105,7 +105,7 @@ autowrap_mode = 3
 script = ExtResource("5_pjfeh")
 metadata/_custom_type_script = "uid://dd2yytdivaq0j"
 
-[node name="OK" type="Button" parent="TutorialBox"]
+[node name="OK" type="Button" parent="TutorialBox" unique_id=1477535885]
 layout_mode = 0
 offset_left = 237.0
 offset_top = 269.0

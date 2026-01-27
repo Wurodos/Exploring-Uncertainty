@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://b68dwxfh1hv4u"]
+[gd_resource type="Resource" format=3 uid="uid://b68dwxfh1hv4u"]
 
 [ext_resource type="Script" uid="uid://bbkskbfv3nktm" path="res://scripts/items/trinkets/teapot.gd" id="1_bbq6f"]
 [ext_resource type="Texture2D" uid="uid://dhylb1lg3fk0t" path="res://images/items/teapot.png" id="2_53j55"]

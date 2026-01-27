@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://ot7y20rg1fqo"]
+[gd_scene format=3 uid="uid://ot7y20rg1fqo"]
 
 [ext_resource type="Script" uid="uid://de24o14tl4lyy" path="res://scripts/slaves/slave_battle_node.gd" id="1_kr451"]
 [ext_resource type="Texture2D" uid="uid://bvt0n20v88f7o" path="res://images/slaves/blob.png" id="2_r6t30"]
@@ -296,7 +296,7 @@ _data = {
 &"powerup": SubResource("Animation_r4abs")
 }
 
-[node name="Blob" type="Node2D" node_paths=PackedStringArray("hit_animation", "heal_animation", "powerup_animation", "crit_animation")]
+[node name="Blob" type="Node2D" unique_id=1822862495 node_paths=PackedStringArray("hit_animation", "heal_animation", "powerup_animation", "crit_animation")]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_kr451")
 hit_animation = NodePath("AnimationSprites/Hit/HitAnimation")
@@ -304,99 +304,95 @@ heal_animation = NodePath("AnimationSprites/Heal/HealAnimation")
 powerup_animation = NodePath("AnimationSprites/Powerup/PowerupAnimation")
 crit_animation = NodePath("CritLabel/CritAnimation")
 
-[node name="BounceAnimation" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_r6t30")
-}
-autoplay = "idle"
+[node name="BounceAnimation" type="AnimationPlayer" parent="." unique_id=409562361]
+libraries/ = SubResource("AnimationLibrary_r6t30")
+autoplay = &"idle"
 
-[node name="MovingAnimation" type="AnimationPlayer" parent="."]
+[node name="MovingAnimation" type="AnimationPlayer" parent="." unique_id=1252093294]
 
-[node name="ArrowAnimation" type="AnimationPlayer" parent="."]
+[node name="ArrowAnimation" type="AnimationPlayer" parent="." unique_id=100519294]
 root_node = NodePath("../Arrow")
-libraries = {
-&"": SubResource("AnimationLibrary_bl030")
-}
+libraries/ = SubResource("AnimationLibrary_bl030")
 
-[node name="CircleSelect" type="Sprite2D" parent="."]
+[node name="CircleSelect" type="Sprite2D" parent="." unique_id=1478936257]
 visible = false
 scale = Vector2(0.40000004, 0.40000004)
 texture = ExtResource("3_m7i15")
 
-[node name="LineStart" type="Node2D" parent="CircleSelect"]
+[node name="LineStart" type="Node2D" parent="CircleSelect" unique_id=1874645427]
 position = Vector2(125, 78.3333)
 scale = Vector2(2.5, 2.5)
 
-[node name="LineEnd" type="Node2D" parent="CircleSelect"]
+[node name="LineEnd" type="Node2D" parent="CircleSelect" unique_id=1433266562]
 position = Vector2(-125, 78.333)
 scale = Vector2(2.5, 2.5)
 
-[node name="Parts" type="Node2D" parent="."]
+[node name="Parts" type="Node2D" parent="." unique_id=2125140874]
 position = Vector2(0, 50)
 
-[node name="Visual" type="Marker2D" parent="Parts"]
+[node name="Visual" type="Marker2D" parent="Parts" unique_id=240415994]
 gizmo_extents = 66.5
 
-[node name="Sprite" type="Sprite2D" parent="Parts/Visual"]
+[node name="Sprite" type="Sprite2D" parent="Parts/Visual" unique_id=447885340]
 position = Vector2(0, -50)
 scale = Vector2(0.20000002, 0.20000002)
 texture = ExtResource("2_r6t30")
 
-[node name="Items" type="Node2D" parent="Parts/Visual"]
+[node name="Items" type="Node2D" parent="Parts/Visual" unique_id=792972197]
 position = Vector2(0, -50)
 
-[node name="Weapon" type="Node2D" parent="Parts/Visual/Items"]
+[node name="Weapon" type="Node2D" parent="Parts/Visual/Items" unique_id=5898577]
 position = Vector2(51, 3)
 scale = Vector2(0.15, 0.15)
 
-[node name="Hat" type="Node2D" parent="Parts/Visual/Items"]
+[node name="Hat" type="Node2D" parent="Parts/Visual/Items" unique_id=1765902243]
 position = Vector2(0, -56)
 scale = Vector2(0.15, 0.15)
 
-[node name="Trinket2" type="Node2D" parent="Parts/Visual/Items"]
+[node name="Trinket2" type="Node2D" parent="Parts/Visual/Items" unique_id=342478727]
 position = Vector2(-44, 21)
 scale = Vector2(0.1, 0.1)
 
-[node name="Trinket1" type="Node2D" parent="Parts/Visual/Items"]
+[node name="Trinket1" type="Node2D" parent="Parts/Visual/Items" unique_id=1908407866]
 position = Vector2(-31, 31)
 scale = Vector2(0.1, 0.1)
 
-[node name="BigItems" type="Node2D" parent="Parts/Visual"]
+[node name="BigItems" type="Node2D" parent="Parts/Visual" unique_id=331452924]
 position = Vector2(0, -50)
 
-[node name="Weapon" type="Node2D" parent="Parts/Visual/BigItems"]
+[node name="Weapon" type="Node2D" parent="Parts/Visual/BigItems" unique_id=1067439511]
 position = Vector2(74.66667, -10.666666)
 scale = Vector2(0.15, 0.15)
 
-[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/BigItems/Weapon"]
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/BigItems/Weapon" unique_id=1144024451]
 visible = false
 texture = ExtResource("3_r6t30")
 
-[node name="Hat" type="Node2D" parent="Parts/Visual/BigItems"]
+[node name="Hat" type="Node2D" parent="Parts/Visual/BigItems" unique_id=932244923]
 position = Vector2(21.999992, -98)
 scale = Vector2(0.15, 0.15)
 
-[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/BigItems/Hat"]
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/BigItems/Hat" unique_id=578580728]
 visible = false
 texture = ExtResource("4_ajk8k")
 
-[node name="Trinket2" type="Node2D" parent="Parts/Visual/BigItems"]
+[node name="Trinket2" type="Node2D" parent="Parts/Visual/BigItems" unique_id=2120876131]
 position = Vector2(-6.6666665, 34)
 scale = Vector2(0.1, 0.1)
 
-[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/BigItems/Trinket2"]
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/BigItems/Trinket2" unique_id=1781373849]
 visible = false
 texture = ExtResource("6_f4yho")
 
-[node name="Trinket1" type="Node2D" parent="Parts/Visual/BigItems"]
+[node name="Trinket1" type="Node2D" parent="Parts/Visual/BigItems" unique_id=1384457555]
 position = Vector2(-40.666664, 44)
 scale = Vector2(0.1, 0.1)
 
-[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/BigItems/Trinket1"]
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/BigItems/Trinket1" unique_id=62819612]
 visible = false
 texture = ExtResource("6_f4yho")
 
-[node name="HPBar" type="ProgressBar" parent="."]
+[node name="HPBar" type="ProgressBar" parent="." unique_id=1222666271]
 offset_left = -46.6667
 offset_top = 50.0
 offset_right = 46.3333
@@ -406,81 +402,81 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_8fbhv")
 value = 100.0
 show_percentage = false
 
-[node name="ClickableArea" type="Button" parent="."]
+[node name="ClickableArea" type="Button" parent="." unique_id=694551924]
 self_modulate = Color(1, 1, 1, 0)
 offset_left = -42.0
 offset_top = -28.0
 offset_right = 39.0
 offset_bottom = 43.0
 
-[node name="Buffs" type="Node2D" parent="."]
+[node name="Buffs" type="Node2D" parent="." unique_id=1563957371]
 
-[node name="shield" type="Sprite2D" parent="Buffs"]
+[node name="shield" type="Sprite2D" parent="Buffs" unique_id=1514086585]
 visible = false
 self_modulate = Color(1, 1, 1, 0.462745)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_lpdx8")
 
-[node name="blasphemy" type="Sprite2D" parent="Buffs"]
+[node name="blasphemy" type="Sprite2D" parent="Buffs" unique_id=1192904181]
 visible = false
 self_modulate = Color(1, 1, 1, 0.815686)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_gppif")
 
-[node name="anvil" type="Sprite2D" parent="Buffs"]
+[node name="anvil" type="Sprite2D" parent="Buffs" unique_id=284417529]
 visible = false
 self_modulate = Color(1, 1, 1, 0.462745)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_8sljb")
 
-[node name="appetite" type="Sprite2D" parent="Buffs"]
+[node name="appetite" type="Sprite2D" parent="Buffs" unique_id=2001769497]
 visible = false
 self_modulate = Color(1, 1, 1, 0.87451)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_erpc0")
 
-[node name="freeze" type="Sprite2D" parent="Buffs"]
+[node name="freeze" type="Sprite2D" parent="Buffs" unique_id=841125511]
 visible = false
 self_modulate = Color(1, 1, 1, 0.541176)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("8_bl030")
 
-[node name="dark" type="Sprite2D" parent="Buffs"]
+[node name="dark" type="Sprite2D" parent="Buffs" unique_id=371372992]
 visible = false
 self_modulate = Color(1, 1, 1, 0.87451)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("8_e010w")
 
-[node name="Intention" type="Node2D" parent="."]
+[node name="Intention" type="Node2D" parent="." unique_id=1283567876]
 z_index = 1
 position = Vector2(17.3333, -72.6667)
 
-[node name="Icon" type="Sprite2D" parent="Intention"]
+[node name="Icon" type="Sprite2D" parent="Intention" unique_id=1938130844]
 position = Vector2(-7.33333, 0)
 scale = Vector2(0.15, 0.15)
 
-[node name="TargetTop" type="Sprite2D" parent="Intention"]
+[node name="TargetTop" type="Sprite2D" parent="Intention" unique_id=698684019]
 visible = false
 position = Vector2(-47.3333, 32)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_lpdx8")
 flip_h = true
 
-[node name="TargetMiddle" type="Sprite2D" parent="Intention"]
+[node name="TargetMiddle" type="Sprite2D" parent="Intention" unique_id=509557993]
 visible = false
 position = Vector2(-47.3333, 32)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_gppif")
 flip_h = true
 
-[node name="TargetBottom" type="Sprite2D" parent="Intention"]
+[node name="TargetBottom" type="Sprite2D" parent="Intention" unique_id=275819639]
 visible = false
 position = Vector2(-47.3333, 32)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_8sljb")
 flip_h = true
 
-[node name="Label" type="Label" parent="Intention"]
+[node name="Label" type="Label" parent="Intention" unique_id=216708567]
 offset_left = -52.6667
 offset_top = -9.33333
 offset_right = 16.3333
@@ -489,21 +485,21 @@ scale = Vector2(0.5, 0.5)
 label_settings = SubResource("LabelSettings_eb1g8")
 horizontal_alignment = 1
 
-[node name="Stats" type="HBoxContainer" parent="."]
+[node name="Stats" type="HBoxContainer" parent="." unique_id=1896640002]
 offset_left = -82.6667
 offset_top = 63.3333
 offset_right = 84.3333
 offset_bottom = 81.3333
 alignment = 1
 
-[node name="Arrow" type="Sprite2D" parent="."]
+[node name="Arrow" type="Sprite2D" parent="." unique_id=1103291915]
 visible = false
 position = Vector2(70.6667, -23.3333)
 rotation = 1.16124
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("11_5t34c")
 
-[node name="CritLabel" type="Label" parent="."]
+[node name="CritLabel" type="Label" parent="." unique_id=162790623]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -521,47 +517,39 @@ size_flags_horizontal = 4
 text = "КРИТ!"
 label_settings = SubResource("LabelSettings_4thmk")
 
-[node name="CritAnimation" type="AnimationPlayer" parent="CritLabel"]
+[node name="CritAnimation" type="AnimationPlayer" parent="CritLabel" unique_id=236571716]
 root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_8htp2")
-}
+libraries/ = SubResource("AnimationLibrary_8htp2")
 
-[node name="AnimationSprites" type="Node2D" parent="."]
+[node name="AnimationSprites" type="Node2D" parent="." unique_id=220614761]
 
-[node name="Hit" type="Sprite2D" parent="AnimationSprites"]
+[node name="Hit" type="Sprite2D" parent="AnimationSprites" unique_id=994141545]
 position = Vector2(18, 3)
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("11_7y33p")
 
-[node name="HitAnimation" type="AnimationPlayer" parent="AnimationSprites/Hit"]
+[node name="HitAnimation" type="AnimationPlayer" parent="AnimationSprites/Hit" unique_id=1028944225]
 root_node = NodePath("../../..")
-libraries = {
-&"": SubResource("AnimationLibrary_f4yho")
-}
+libraries/ = SubResource("AnimationLibrary_f4yho")
 
-[node name="Heal" type="Sprite2D" parent="AnimationSprites"]
+[node name="Heal" type="Sprite2D" parent="AnimationSprites" unique_id=896804094]
 rotation = -1.0407585
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("12_82wb0")
 
-[node name="HealAnimation" type="AnimationPlayer" parent="AnimationSprites/Heal"]
+[node name="HealAnimation" type="AnimationPlayer" parent="AnimationSprites/Heal" unique_id=1943097337]
 root_node = NodePath("../../..")
-libraries = {
-&"": SubResource("AnimationLibrary_r4abs")
-}
+libraries/ = SubResource("AnimationLibrary_r4abs")
 
-[node name="Powerup" type="Sprite2D" parent="AnimationSprites"]
+[node name="Powerup" type="Sprite2D" parent="AnimationSprites" unique_id=2000062301]
 position = Vector2(2.666668, 4.7683716e-06)
 rotation = -0.785398
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("13_4thmk")
 
-[node name="PowerupAnimation" type="AnimationPlayer" parent="AnimationSprites/Powerup"]
+[node name="PowerupAnimation" type="AnimationPlayer" parent="AnimationSprites/Powerup" unique_id=1294472815]
 root_node = NodePath("../../..")
-libraries = {
-&"": SubResource("AnimationLibrary_s5n5c")
-}
+libraries/ = SubResource("AnimationLibrary_s5n5c")
 
 [connection signal="button_down" from="ClickableArea" to="." method="_on_clickable_area_button_down"]
 [connection signal="mouse_entered" from="ClickableArea" to="." method="_on_clickable_area_mouse_entered"]

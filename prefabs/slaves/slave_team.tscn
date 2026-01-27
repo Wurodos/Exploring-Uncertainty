@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c7me7xco4pqg1"]
+[gd_scene format=3 uid="uid://c7me7xco4pqg1"]
 
 [ext_resource type="Script" uid="uid://dmhhtjxo47pcy" path="res://scripts/map/slave_team_node.gd" id="1_6uie0"]
 [ext_resource type="Texture2D" uid="uid://brfycwyqi4ev8" path="res://images/slaves/communist.png" id="2_i0wge"]
@@ -64,7 +64,7 @@ font_size = 32
 outline_size = 12
 outline_color = Color(0, 0, 0, 1)
 
-[node name="SlaveTeam" type="Control"]
+[node name="SlaveTeam" type="Control" unique_id=567666077]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -79,7 +79,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6uie0")
 
-[node name="Body" type="TextureRect" parent="."]
+[node name="Body" type="TextureRect" parent="." unique_id=978885768]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -96,7 +96,7 @@ mouse_filter = 2
 texture = ExtResource("2_i0wge")
 expand_mode = 1
 
-[node name="Weapon" type="TextureRect" parent="."]
+[node name="Weapon" type="TextureRect" parent="." unique_id=937685541]
 material = SubResource("ShaderMaterial_6ynpi")
 layout_mode = 1
 anchors_preset = 8
@@ -114,7 +114,7 @@ mouse_filter = 2
 texture = ExtResource("3_6ynpi")
 expand_mode = 1
 
-[node name="Hat" type="TextureRect" parent="."]
+[node name="Hat" type="TextureRect" parent="." unique_id=1646393925]
 material = SubResource("ShaderMaterial_6ynpi")
 layout_mode = 1
 anchors_preset = 8
@@ -132,7 +132,7 @@ mouse_filter = 2
 texture = ExtResource("4_furks")
 expand_mode = 1
 
-[node name="Trinket2" type="TextureRect" parent="."]
+[node name="Trinket2" type="TextureRect" parent="." unique_id=1030841469]
 material = SubResource("ShaderMaterial_6ynpi")
 layout_mode = 1
 anchors_preset = 8
@@ -150,7 +150,7 @@ mouse_filter = 2
 texture = ExtResource("5_st4jw")
 expand_mode = 1
 
-[node name="Trinket1" type="TextureRect" parent="."]
+[node name="Trinket1" type="TextureRect" parent="." unique_id=1561202718]
 material = SubResource("ShaderMaterial_6ynpi")
 layout_mode = 1
 anchors_preset = 8
@@ -168,7 +168,7 @@ mouse_filter = 2
 texture = ExtResource("6_l0erc")
 expand_mode = 1
 
-[node name="HPBar" type="ProgressBar" parent="."]
+[node name="HPBar" type="ProgressBar" parent="." unique_id=1462134979]
 layout_mode = 0
 offset_top = -66.0
 offset_right = 93.0
@@ -179,7 +179,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_y6rnb")
 value = 100.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="HPBar"]
+[node name="Label" type="Label" parent="HPBar" unique_id=848488698]
 layout_mode = 0
 offset_right = 188.0
 offset_bottom = 48.0
@@ -188,7 +188,7 @@ label_settings = SubResource("LabelSettings_nrvhk")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Undress" type="Button" parent="."]
+[node name="Undress" type="Button" parent="." unique_id=173407164]
 layout_mode = 0
 offset_left = -12.0
 offset_top = 91.0
@@ -200,7 +200,7 @@ theme_override_fonts/font = ExtResource("5_furks")
 theme_override_font_sizes/font_size = 32
 text = "Раздеть"
 
-[node name="Sell" type="Button" parent="."]
+[node name="Sell" type="Button" parent="." unique_id=1354253593]
 visible = false
 layout_mode = 0
 offset_left = -22.0

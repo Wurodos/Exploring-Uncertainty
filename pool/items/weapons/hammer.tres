@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://yawpolmwgl6h"]
+[gd_resource type="Resource" format=3 uid="uid://yawpolmwgl6h"]
 
 [ext_resource type="Script" uid="uid://cmvh1qvl5frnr" path="res://scripts/items/weapons/hammer.gd" id="1_qljag"]
 [ext_resource type="Texture2D" uid="uid://wxkdbmkdhwql" path="res://images/items/claw-hammer.png" id="2_qljag"]

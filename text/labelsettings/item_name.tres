@@ -1,4 +1,4 @@
-[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://34c71nyrmk01"]
+[gd_resource type="LabelSettings" format=3 uid="uid://34c71nyrmk01"]
 
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="1_ghk26"]
 

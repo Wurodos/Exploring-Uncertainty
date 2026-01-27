@@ -186,12 +186,8 @@ func add_stat(stat_name: String, icon: Texture2D, value: int):
 		
 
 func start_battle() -> void:
-	if team.is_evil:
-		for item : Item in [held.weapon, held.hat, held.trinket1, held.trinket2]:
-			set_speed(item.extra_speed)
-	else:
-		for item : Item in [held.weapon, held.hat, held.trinket1, held.trinket2]:
-			item.on_start_battle(self)
+	for item : Item in [held.weapon, held.hat, held.trinket1, held.trinket2]:
+		item.on_start_battle(self)
 	if team.is_evil:
 		var enemy: Enemy = held
 		enemy.update_stats(self)
@@ -229,7 +225,7 @@ func support(ally: SlaveNode):
 	_on_end_turn()
 
 func start_turn() -> void:
-	toggle_arrow(true)
+	if not held is Enemy: toggle_arrow(true)
 	turn_started.emit()
 
 func ticker_down_buffs() -> void:
@@ -250,24 +246,27 @@ func remove_buff(buff_name: String):
 
 func execute_intention():
 	var held_enemy : Enemy = held
+	var victim: SlaveNode = Battle.instance.good_team.boys_nodes[held_enemy.intention.target] 
+	
+	var victim_second: SlaveNode = null
+	if held_enemy.intention.target_second < Battle.instance.good_team.boys_nodes.size():
+		victim_second = Battle.instance.good_team.boys_nodes[held_enemy.intention.target_second]
+	
 	await get_tree().create_timer(1).timeout
 	#$AnimationPlayer.play("jump")
 	match(held_enemy.intention.type):
 		
 		
 		Enemy.Intention.Type.DamageSingular:
-			Action.deal_damage(self,\
-				Battle.instance.good_team.boys_nodes[held_enemy.intention.target],\
-				held_enemy.intention.amount)
+			Action.deal_damage(self, victim, held_enemy.intention.amount)
+			attacked.emit(victim)
 		
 		Enemy.Intention.Type.DamageTwo:
-			Action.deal_damage(self,\
-				Battle.instance.good_team.boys_nodes[held_enemy.intention.target],\
-				held_enemy.intention.amount)
+			Action.deal_damage(self, victim, held_enemy.intention.amount)
+			attacked.emit(victim)
 			if held_enemy.intention.target_second != -1:
-				Action.deal_damage(self,\
-					Battle.instance.good_team.boys_nodes[held_enemy.intention.target_second],\
-					held_enemy.intention.amount)
+				Action.deal_damage(self, victim_second, held_enemy.intention.amount)
+			attacked.emit(victim_second)
 		
 		Enemy.Intention.Type.DamageMultiple:
 			for slave : SlaveNode in Battle.instance.good_team.boys_nodes:
@@ -363,7 +362,9 @@ func _on_mouse_up() -> void:
 
 func _on_mouse_right_down() -> void:
 	if is_mouse_over:
-		SignalBus.slave_info.emit(held)
+		if held is Enemy:
+			SignalBus.enemy_info.emit(held as Enemy)
+		else: SignalBus.slave_info.emit(held)
 
 func _on_clickable_area_button_down() -> void:
 	SignalBus.slave_selected.emit(self)

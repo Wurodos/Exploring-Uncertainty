@@ -134,7 +134,6 @@ func load_save() -> void:
 		inventory = []
 		for value in data["inventory"]:
 			inventory.append(Item.deserialize(value))
-		print(inventory.size())
 		
 		# Archive level
 		archive_level = floor(data["archive_level"])
@@ -273,6 +272,10 @@ func arrange_evil_team() -> Array[Slave]:
 	for i in range(3):
 		var enemy = evil_deck.pop_back()
 		if enemy != null:
+			# DEBUG
+			enemy.equip(ItemPool.fetch("riot_shield"))
+			enemy.equip(ItemPool.fetch("draniki"), 1)
+			enemy.equip(ItemPool.fetch("draniki"), 2)
 			team.append(enemy)
 	
 	if CurrentRun.is_battle_tutorial and team[0]:

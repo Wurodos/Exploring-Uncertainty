@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://lm6jyyixqr11"]
+[gd_resource type="Resource" format=3 uid="uid://lm6jyyixqr11"]
 
 [ext_resource type="Script" uid="uid://3u0tpphvpo8m" path="res://scripts/items/hats/helmet.gd" id="1_5ckre"]
 [ext_resource type="Texture2D" uid="uid://1loh3ru47ob5" path="res://images/items/pickelhaube.png" id="2_oc4hn"]

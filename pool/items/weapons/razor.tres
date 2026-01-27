@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://drio41rrjpaob"]
+[gd_resource type="Resource" format=3 uid="uid://drio41rrjpaob"]
 
 [ext_resource type="Script" uid="uid://kglrf65mt6ie" path="res://scripts/items/weapons/razor.gd" id="1_vvdgr"]
 [ext_resource type="Texture2D" uid="uid://brlvxqielu2xv" path="res://images/items/razor-blade.png" id="2_cbwy8"]

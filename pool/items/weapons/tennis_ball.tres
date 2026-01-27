@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://b5wshieffdwrj"]
+[gd_resource type="Resource" format=3 uid="uid://b5wshieffdwrj"]
 
 [ext_resource type="Script" uid="uid://by58yviokogg" path="res://scripts/items/weapons/tennis_ball.gd" id="1_7mwu7"]
 [ext_resource type="Texture2D" uid="uid://dufi8uttf7ael" path="res://images/items/tennis-ball.png" id="2_7mwu7"]

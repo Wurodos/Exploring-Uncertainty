@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://ctrhkjtfn0ihd"]
+[gd_resource type="Resource" format=3 uid="uid://ctrhkjtfn0ihd"]
 
 [ext_resource type="Script" uid="uid://chvxkt2yugqhh" path="res://scripts/items/hats/cowboy_hat.gd" id="1_e7sfb"]
 [ext_resource type="Texture2D" uid="uid://bbpa5iu1310bb" path="res://images/items/cowboy_hat.png" id="2_t8vqi"]

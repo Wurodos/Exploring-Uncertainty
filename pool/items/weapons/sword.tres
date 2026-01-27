@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bacsivo610sgj"]
+[gd_resource type="Resource" format=3 uid="uid://bacsivo610sgj"]
 
 [ext_resource type="Script" uid="uid://css8hwhj4km1g" path="res://scripts/items/weapons/sword.gd" id="1_1451n"]
 [ext_resource type="Texture2D" uid="uid://c102ib72qlv7l" path="res://images/items/sword.png" id="2_wbfc4"]

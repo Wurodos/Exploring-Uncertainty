@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://3sy1pcp010do"]
+[gd_resource type="Resource" format=3 uid="uid://3sy1pcp010do"]
 
 [ext_resource type="Script" uid="uid://b8opkj07sbgjm" path="res://scripts/enemies/swirly.gd" id="1_bhurc"]
 [ext_resource type="Texture2D" uid="uid://bujnjkit03mdi" path="res://images/slaves/redist.png" id="2_bhurc"]

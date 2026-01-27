@@ -15,3 +15,5 @@ dest_files=["res://text/localisation/narrative.en.translation", "res://text/loca
 
 compress=true
 delimiter=1
+unescape_keys=false
+unescape_translations=true

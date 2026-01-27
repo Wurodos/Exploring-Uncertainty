@@ -22,22 +22,6 @@ func localize() -> void:
 func update_stats(node: SlaveNode) -> void:
 	super.update_stats(node)
 	owner = node
-	
-	if hat.is_item(): 
-		node.set_max_hp(3)
-		node.set_hp(3)
-	if weapon.is_item():
-		harm_lower += 2
-		harm_higher += 2
-	if trinket1.is_item():
-		node.set_max_hp(2) 
-		node.set_hp(2)
-		harm_lower += 1
-		harm_higher += 1
-	if trinket2.is_item():
-		node.set_max_hp(2)
-		node.set_hp(2) 
-		node.set_speed(1)
 	localize()
 
 # attacks randomly

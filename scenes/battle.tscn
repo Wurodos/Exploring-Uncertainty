@@ -1,14 +1,16 @@
-[gd_scene load_steps=39 format=3 uid="uid://bfx1ij738o32v"]
+[gd_scene format=3 uid="uid://bfx1ij738o32v"]
 
 [ext_resource type="Script" uid="uid://blaomclhrxsrs" path="res://scripts/slaves/team.gd" id="1_dn72j"]
 [ext_resource type="Script" uid="uid://cukwfw80fb48e" path="res://scripts/battle/battle.gd" id="1_th188"]
 [ext_resource type="Script" uid="uid://ctoap32euag0p" path="res://scripts/battle/slave_info.gd" id="4_a12nh"]
+[ext_resource type="Texture2D" uid="uid://dv3uqakwnw0gn" path="res://images/backdrops/battle.png" id="4_dd63g"]
 [ext_resource type="PackedScene" uid="uid://dj5w5iqx004t4" path="res://prefabs/battle/item_entry.tscn" id="5_lpir7"]
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="6_6vh42"]
 [ext_resource type="Texture2D" uid="uid://cfowi84shmwbh" path="res://images/icons/power.svg" id="7_4k1nj"]
 [ext_resource type="Script" uid="uid://eixrg1y86v7e" path="res://scripts/battle/loot.gd" id="7_v7i3o"]
 [ext_resource type="PackedScene" uid="uid://jj5vyo6gkyhv" path="res://prefabs/items/item_draggable.tscn" id="7_yahae"]
 [ext_resource type="Texture2D" uid="uid://ctm4vajohb528" path="res://images/shapes/arrow.png" id="8_v7i3o"]
+[ext_resource type="Script" uid="uid://bq0xyn6n0iwi4" path="res://scripts/battle/enemy_info.gd" id="9_fpf3k"]
 [ext_resource type="Texture2D" uid="uid://dpdtec6oeuogd" path="res://images/icons/bag.png" id="10_v7i3o"]
 [ext_resource type="Script" uid="uid://bg2spyp44xpw7" path="res://scripts/common/btn_localized.gd" id="11_66ngm"]
 [ext_resource type="Script" uid="uid://4de2lnmk4fvw" path="res://scripts/battle/battle_end.gd" id="11_vceff"]
@@ -278,128 +280,135 @@ _data = {
 &"win": SubResource("Animation_66ngm")
 }
 
-[node name="Battle" type="Node2D"]
+[node name="Battle" type="Node2D" unique_id=1228727829]
 script = ExtResource("1_th188")
 
-[node name="World" type="Node2D" parent="."]
+[node name="BG" type="TextureRect" parent="." unique_id=954905245]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -691.0
+offset_top = -394.0
+offset_right = 509.0
+offset_bottom = 206.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("4_dd63g")
 
-[node name="Extra" type="Node2D" parent="World"]
+[node name="World" type="Node2D" parent="." unique_id=1235316244]
 
-[node name="Ropes" type="Node2D" parent="World/Extra"]
+[node name="Line2D" type="Line2D" parent="World" unique_id=553992146]
+points = PackedVector2Array(760, -126)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
 
-[node name="TopRope" type="Node2D" parent="World/Extra/Ropes"]
+[node name="Extra" type="Node2D" parent="World" unique_id=1067298927]
+
+[node name="Ropes" type="Node2D" parent="World/Extra" unique_id=252379257]
+
+[node name="TopRope" type="Node2D" parent="World/Extra/Ropes" unique_id=153641312]
 visible = false
 position = Vector2(384, -688)
 
-[node name="Sprite" type="Sprite2D" parent="World/Extra/Ropes/TopRope"]
+[node name="Sprite" type="Sprite2D" parent="World/Extra/Ropes/TopRope" unique_id=1500945283]
 texture_repeat = 2
 position = Vector2(0, 264)
 texture = ExtResource("21_saiin")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 528)
 
-[node name="Bottom" type="Node2D" parent="World/Extra/Ropes/TopRope"]
+[node name="Bottom" type="Node2D" parent="World/Extra/Ropes/TopRope" unique_id=1148686560]
 position = Vector2(0, 528)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="World/Extra/Ropes/TopRope"]
-libraries = {
-&"": SubResource("AnimationLibrary_fpf3k")
-}
-autoplay = "swing"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World/Extra/Ropes/TopRope" unique_id=130098810]
+libraries/ = SubResource("AnimationLibrary_fpf3k")
+autoplay = &"swing"
 
-[node name="MiddleRope" type="Node2D" parent="World/Extra/Ropes"]
+[node name="MiddleRope" type="Node2D" parent="World/Extra/Ropes" unique_id=407889374]
 visible = false
 position = Vector2(360, -504)
 
-[node name="Sprite" type="Sprite2D" parent="World/Extra/Ropes/MiddleRope"]
+[node name="Sprite" type="Sprite2D" parent="World/Extra/Ropes/MiddleRope" unique_id=2031995967]
 texture_repeat = 2
 position = Vector2(0, 264)
 texture = ExtResource("21_saiin")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 528)
 
-[node name="Bottom" type="Node2D" parent="World/Extra/Ropes/MiddleRope"]
+[node name="Bottom" type="Node2D" parent="World/Extra/Ropes/MiddleRope" unique_id=1088994220]
 position = Vector2(0, 528)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="World/Extra/Ropes/MiddleRope"]
-libraries = {
-&"": SubResource("AnimationLibrary_fpf3k")
-}
-autoplay = "swing"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World/Extra/Ropes/MiddleRope" unique_id=1312939823]
+libraries/ = SubResource("AnimationLibrary_fpf3k")
+autoplay = &"swing"
 
-[node name="BottomRope" type="Node2D" parent="World/Extra/Ropes"]
+[node name="BottomRope" type="Node2D" parent="World/Extra/Ropes" unique_id=440636467]
 visible = false
 position = Vector2(256, -336)
 
-[node name="Sprite" type="Sprite2D" parent="World/Extra/Ropes/BottomRope"]
+[node name="Sprite" type="Sprite2D" parent="World/Extra/Ropes/BottomRope" unique_id=1217768291]
 texture_repeat = 2
 position = Vector2(0, 264)
 texture = ExtResource("21_saiin")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 528)
 
-[node name="Bottom" type="Node2D" parent="World/Extra/Ropes/BottomRope"]
+[node name="Bottom" type="Node2D" parent="World/Extra/Ropes/BottomRope" unique_id=1178382267]
 position = Vector2(0, 528)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="World/Extra/Ropes/BottomRope"]
-libraries = {
-&"": SubResource("AnimationLibrary_fpf3k")
-}
-autoplay = "swing"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World/Extra/Ropes/BottomRope" unique_id=440896597]
+libraries/ = SubResource("AnimationLibrary_fpf3k")
+autoplay = &"swing"
 
-[node name="GoodTeam" type="Node2D" parent="World"]
+[node name="GoodTeam" type="Node2D" parent="World" unique_id=2065611946]
 position = Vector2(39.999992, 64)
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_dn72j")
 
-[node name="MiddleSlave" type="Node2D" parent="World/GoodTeam"]
+[node name="MiddleSlave" type="Node2D" parent="World/GoodTeam" unique_id=1498459017]
 position = Vector2(-409.99994, 28)
 scale = Vector2(0.99999994, 0.99999994)
 
-[node name="BottomSlave" type="Node2D" parent="World/GoodTeam"]
+[node name="BottomSlave" type="Node2D" parent="World/GoodTeam" unique_id=899608792]
 position = Vector2(-244.99997, 190.99997)
 scale = Vector2(0.99999994, 0.99999994)
 
-[node name="TopSlave" type="Node2D" parent="World/GoodTeam"]
+[node name="TopSlave" type="Node2D" parent="World/GoodTeam" unique_id=525716384]
 position = Vector2(-245, -151)
 
-[node name="BackBottomSlave" type="Node2D" parent="World/GoodTeam"]
+[node name="BackBottomSlave" type="Node2D" parent="World/GoodTeam" unique_id=401171193]
 position = Vector2(-489.41174, 169.41176)
 
-[node name="BackTop" type="Node2D" parent="World/GoodTeam"]
+[node name="BackTop" type="Node2D" parent="World/GoodTeam" unique_id=453659923]
 position = Vector2(-489.41174, -131.7647)
 
-[node name="EvilTeam" type="Node2D" parent="World" node_paths=PackedStringArray("ropes")]
+[node name="EvilTeam" type="Node2D" parent="World" unique_id=1453637202 node_paths=PackedStringArray("ropes")]
 position = Vector2(-96.00001, 64)
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_dn72j")
 ropes = [NodePath("../Extra/Ropes/MiddleRope/Bottom"), NodePath("../Extra/Ropes/BottomRope/Bottom"), NodePath("../Extra/Ropes/TopRope/Bottom")]
 is_evil = true
 
-[node name="MiddleSlave" type="Node2D" parent="World/EvilTeam"]
+[node name="MiddleSlave" type="Node2D" parent="World/EvilTeam" unique_id=1966106789]
 position = Vector2(481, 26)
 scale = Vector2(0.99999994, 0.99999994)
 
-[node name="BottomSlave" type="Node2D" parent="World/EvilTeam"]
+[node name="BottomSlave" type="Node2D" parent="World/EvilTeam" unique_id=1145882455]
 position = Vector2(326, 188.99997)
 scale = Vector2(0.99999994, 0.99999994)
 
-[node name="TopSlave" type="Node2D" parent="World/EvilTeam"]
+[node name="TopSlave" type="Node2D" parent="World/EvilTeam" unique_id=1358615338]
 position = Vector2(380, -165)
 
-[node name="BackBottomSlave" type="Node2D" parent="World/EvilTeam"]
+[node name="BackBottomSlave" type="Node2D" parent="World/EvilTeam" unique_id=417770327]
 position = Vector2(583.5294, 150.58823)
 
-[node name="BackTop" type="Node2D" parent="World/EvilTeam"]
+[node name="BackTop" type="Node2D" parent="World/EvilTeam" unique_id=629076756]
 position = Vector2(583.5294, -131.7647)
 
-[node name="Line2D" type="Line2D" parent="World"]
-points = PackedVector2Array(760, -126)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="." unique_id=1038733168]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -407,15 +416,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SpeedQueue" type="HBoxContainer" parent="UI"]
+[node name="SpeedQueue" type="HBoxContainer" parent="UI" unique_id=953840471]
+layout_direction = 3
 layout_mode = 0
 offset_left = -474.0
 offset_top = -280.0
 offset_right = 476.0
 offset_bottom = -198.0
+theme_override_constants/separation = 16
 alignment = 1
 
-[node name="SlaveInfo" type="Control" parent="UI"]
+[node name="SlaveInfo" type="Control" parent="UI" unique_id=1674373850]
 visible = false
 z_index = 5
 anchors_preset = 0
@@ -425,7 +436,7 @@ offset_right = 121.0
 offset_bottom = -260.0
 script = ExtResource("4_a12nh")
 
-[node name="BGOutline" type="ColorRect" parent="UI/SlaveInfo"]
+[node name="BGOutline" type="ColorRect" parent="UI/SlaveInfo" unique_id=650599348]
 layout_mode = 0
 offset_left = -26.0
 offset_top = -9.0
@@ -433,7 +444,7 @@ offset_right = 474.0
 offset_bottom = 615.0
 color = Color(0.57205, 0.391678, 0.051943, 1)
 
-[node name="BG" type="ColorRect" parent="UI/SlaveInfo/BGOutline"]
+[node name="BG" type="ColorRect" parent="UI/SlaveInfo/BGOutline" unique_id=524814382]
 layout_mode = 0
 offset_left = 26.0
 offset_top = 9.0
@@ -441,26 +452,26 @@ offset_right = 491.0
 offset_bottom = 611.0
 color = Color(0.974868, 0.699813, 0.238424, 1)
 
-[node name="Entries" type="VBoxContainer" parent="UI/SlaveInfo"]
+[node name="Entries" type="VBoxContainer" parent="UI/SlaveInfo" unique_id=570936598]
 layout_mode = 0
 offset_left = 11.0
 offset_top = 99.0
 offset_right = 450.0
 offset_bottom = 692.0
 
-[node name="ItemEntry" parent="UI/SlaveInfo/Entries" instance=ExtResource("5_lpir7")]
+[node name="ItemEntry" parent="UI/SlaveInfo/Entries" unique_id=33801804 instance=ExtResource("5_lpir7")]
 layout_mode = 2
 
-[node name="ItemEntry2" parent="UI/SlaveInfo/Entries" instance=ExtResource("5_lpir7")]
+[node name="ItemEntry2" parent="UI/SlaveInfo/Entries" unique_id=1241665346 instance=ExtResource("5_lpir7")]
 layout_mode = 2
 
-[node name="ItemEntry3" parent="UI/SlaveInfo/Entries" instance=ExtResource("5_lpir7")]
+[node name="ItemEntry3" parent="UI/SlaveInfo/Entries" unique_id=1221226073 instance=ExtResource("5_lpir7")]
 layout_mode = 2
 
-[node name="ItemEntry4" parent="UI/SlaveInfo/Entries" instance=ExtResource("5_lpir7")]
+[node name="ItemEntry4" parent="UI/SlaveInfo/Entries" unique_id=302634574 instance=ExtResource("5_lpir7")]
 layout_mode = 2
 
-[node name="HPBar" type="ProgressBar" parent="UI/SlaveInfo"]
+[node name="HPBar" type="ProgressBar" parent="UI/SlaveInfo" unique_id=1140020989]
 layout_mode = 0
 offset_left = 117.0
 offset_top = 38.0
@@ -471,7 +482,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_6vh42")
 value = 100.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="UI/SlaveInfo/HPBar"]
+[node name="Label" type="Label" parent="UI/SlaveInfo/HPBar" unique_id=807575294]
 layout_mode = 0
 offset_top = -12.0
 offset_right = 232.0
@@ -480,7 +491,7 @@ label_settings = SubResource("LabelSettings_4k1nj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Buffs" type="VBoxContainer" parent="UI/SlaveInfo"]
+[node name="Buffs" type="VBoxContainer" parent="UI/SlaveInfo" unique_id=1784042431]
 visible = false
 layout_mode = 0
 offset_left = 9.0
@@ -488,12 +499,12 @@ offset_top = 6.0
 offset_right = 110.0
 offset_bottom = 91.0
 
-[node name="BuffEntry" type="ColorRect" parent="UI/SlaveInfo/Buffs"]
+[node name="BuffEntry" type="ColorRect" parent="UI/SlaveInfo/Buffs" unique_id=1019137586]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 color = Color(0.410615, 0.178771, 0.0531023, 1)
 
-[node name="Icon" type="TextureRect" parent="UI/SlaveInfo/Buffs/BuffEntry"]
+[node name="Icon" type="TextureRect" parent="UI/SlaveInfo/Buffs/BuffEntry" unique_id=188479514]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 3.0
@@ -502,7 +513,7 @@ offset_bottom = 23.0
 texture = ExtResource("7_4k1nj")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/SlaveInfo/Buffs/BuffEntry"]
+[node name="Label" type="Label" parent="UI/SlaveInfo/Buffs/BuffEntry" unique_id=224047135]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 3.0
@@ -514,7 +525,87 @@ label_settings = SubResource("LabelSettings_f4pi3")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Loot" type="Control" parent="UI"]
+[node name="EnemyInfo" type="Control" parent="UI" unique_id=699097615]
+visible = false
+z_index = 5
+anchors_preset = 0
+offset_left = -469.0
+offset_top = -300.0
+offset_right = -429.0
+offset_bottom = -260.0
+script = ExtResource("9_fpf3k")
+
+[node name="BGOutline" type="ColorRect" parent="UI/EnemyInfo" unique_id=402934754]
+layout_mode = 0
+offset_left = -26.0
+offset_top = -9.0
+offset_right = 474.0
+offset_bottom = 615.0
+color = Color(0.57205, 0.391678, 0.051943, 1)
+
+[node name="BG" type="ColorRect" parent="UI/EnemyInfo/BGOutline" unique_id=2002012160]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 9.0
+offset_right = 491.0
+offset_bottom = 611.0
+color = Color(0.974868, 0.699813, 0.238424, 1)
+
+[node name="Entries" type="VBoxContainer" parent="UI/EnemyInfo" unique_id=1654968438]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 5.762
+anchor_right = 5.762
+offset_left = -219.48001
+offset_top = 93.0
+offset_right = 219.51999
+offset_bottom = 1081.0
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset = Vector2(226, -4)
+
+[node name="ItemEntry" parent="UI/EnemyInfo/Entries" unique_id=438051792 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry2" parent="UI/EnemyInfo/Entries" unique_id=856029881 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry3" parent="UI/EnemyInfo/Entries" unique_id=985493346 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry4" parent="UI/EnemyInfo/Entries" unique_id=1680458529 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry5" parent="UI/EnemyInfo/Entries" unique_id=1515740599 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry6" parent="UI/EnemyInfo/Entries" unique_id=149829739 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry7" parent="UI/EnemyInfo/Entries" unique_id=1673928543 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="HPBar" type="ProgressBar" parent="UI/EnemyInfo" unique_id=1797462277]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 38.0
+offset_right = 350.0
+offset_bottom = 63.0
+theme_override_styles/background = SubResource("StyleBoxFlat_lpir7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6vh42")
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="UI/EnemyInfo/HPBar" unique_id=1769251116]
+layout_mode = 0
+offset_top = -12.0
+offset_right = 232.0
+offset_bottom = 35.0
+label_settings = SubResource("LabelSettings_4k1nj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Loot" type="Control" parent="UI" unique_id=713131853]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
@@ -522,7 +613,7 @@ offset_bottom = 40.0
 mouse_filter = 2
 script = ExtResource("7_v7i3o")
 
-[node name="Dark" type="ColorRect" parent="UI/Loot"]
+[node name="Dark" type="ColorRect" parent="UI/Loot" unique_id=167107854]
 layout_mode = 0
 offset_left = -610.0
 offset_top = -335.0
@@ -530,7 +621,7 @@ offset_right = 607.0
 offset_bottom = 448.0
 color = Color(0, 0, 0, 0.470588)
 
-[node name="Arrow" type="TextureRect" parent="UI/Loot"]
+[node name="Arrow" type="TextureRect" parent="UI/Loot" unique_id=356638860]
 self_modulate = Color(1, 0, 0, 1)
 layout_mode = 0
 offset_left = -34.0
@@ -540,13 +631,11 @@ offset_bottom = 129.0
 texture = ExtResource("8_v7i3o")
 expand_mode = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Loot/Arrow"]
-libraries = {
-&"": SubResource("AnimationLibrary_6ni85")
-}
-autoplay = "arrow_bounce"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Loot/Arrow" unique_id=725979536]
+libraries/ = SubResource("AnimationLibrary_6ni85")
+autoplay = &"arrow_bounce"
 
-[node name="Label" type="Label" parent="UI/Loot"]
+[node name="Label" type="Label" parent="UI/Loot" unique_id=853322721]
 layout_mode = 0
 offset_left = -143.0
 offset_top = -117.0
@@ -557,7 +646,7 @@ label_settings = SubResource("LabelSettings_yahae")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Bag" type="TextureRect" parent="UI/Loot"]
+[node name="Bag" type="TextureRect" parent="UI/Loot" unique_id=2008257891]
 layout_mode = 0
 offset_left = -106.0
 offset_top = 131.0
@@ -566,7 +655,7 @@ offset_bottom = 282.0
 texture = ExtResource("10_v7i3o")
 expand_mode = 1
 
-[node name="RightItem" parent="UI/Loot" instance=ExtResource("7_yahae")]
+[node name="RightItem" parent="UI/Loot" unique_id=594868094 instance=ExtResource("7_yahae")]
 layout_mode = 0
 offset_left = 37.0
 offset_top = -29.0
@@ -575,7 +664,7 @@ offset_bottom = 21.0
 scale = Vector2(2, 2)
 expand_mode = 1
 
-[node name="LeftItem" parent="UI/Loot" instance=ExtResource("7_yahae")]
+[node name="LeftItem" parent="UI/Loot" unique_id=1672901349 instance=ExtResource("7_yahae")]
 layout_mode = 0
 offset_left = -124.0
 offset_top = -29.0
@@ -584,7 +673,7 @@ offset_bottom = 21.0
 scale = Vector2(2, 2)
 expand_mode = 1
 
-[node name="ExtraItem" parent="UI/Loot" instance=ExtResource("7_yahae")]
+[node name="ExtraItem" parent="UI/Loot" unique_id=681622436 instance=ExtResource("7_yahae")]
 layout_mode = 0
 offset_left = 198.0
 offset_top = -29.0
@@ -593,7 +682,7 @@ offset_bottom = 21.0
 scale = Vector2(2, 2)
 expand_mode = 1
 
-[node name="ItemInfo" parent="UI/Loot" instance=ExtResource("5_lpir7")]
+[node name="ItemInfo" parent="UI/Loot" unique_id=120226615 instance=ExtResource("5_lpir7")]
 visible = false
 layout_mode = 0
 offset_left = -299.0
@@ -601,13 +690,13 @@ offset_top = -150.0
 offset_right = 201.0
 offset_bottom = -10.0
 
-[node name="Debug" type="Control" parent="UI"]
+[node name="Debug" type="Control" parent="UI" unique_id=1836781495]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Newturn" type="Button" parent="UI/Debug"]
+[node name="Newturn" type="Button" parent="UI/Debug" unique_id=1032550854]
 layout_mode = 0
 offset_left = -138.0
 offset_top = 23.0
@@ -615,7 +704,7 @@ offset_right = 109.0
 offset_bottom = 104.0
 text = "New turn"
 
-[node name="LowerHP" type="Button" parent="UI/Debug"]
+[node name="LowerHP" type="Button" parent="UI/Debug" unique_id=596581837]
 layout_mode = 0
 offset_left = -147.0
 offset_top = -77.0
@@ -623,14 +712,14 @@ offset_right = 156.0
 offset_bottom = -16.0
 text = "Lower HP to 1 on top/bottom enemies"
 
-[node name="BattleEnd" type="Control" parent="UI"]
+[node name="BattleEnd" type="Control" parent="UI" unique_id=56380509]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("11_vceff")
 
-[node name="Dark" type="ColorRect" parent="UI/BattleEnd"]
+[node name="Dark" type="ColorRect" parent="UI/BattleEnd" unique_id=1496099450]
 layout_mode = 0
 offset_left = -610.0
 offset_top = -335.0
@@ -638,7 +727,7 @@ offset_right = 607.0
 offset_bottom = 448.0
 color = Color(0, 0, 0, 0.7764706)
 
-[node name="Label" type="Label" parent="UI/BattleEnd"]
+[node name="Label" type="Label" parent="UI/BattleEnd" unique_id=639722641]
 layout_mode = 0
 offset_left = -240.0
 offset_top = -112.0
@@ -650,7 +739,7 @@ script = ExtResource("14_ekamt")
 string_id = &"battle_over"
 metadata/_custom_type_script = "uid://dd2yytdivaq0j"
 
-[node name="GoBackMap" type="Button" parent="UI/BattleEnd"]
+[node name="GoBackMap" type="Button" parent="UI/BattleEnd" unique_id=358563084]
 layout_mode = 0
 offset_left = -88.0
 offset_top = 80.0
@@ -662,7 +751,7 @@ script = ExtResource("11_66ngm")
 string_id = &"back_to_map"
 metadata/_custom_type_script = "uid://bg2spyp44xpw7"
 
-[node name="Scraps" type="Control" parent="UI/BattleEnd"]
+[node name="Scraps" type="Control" parent="UI/BattleEnd" unique_id=1864972117]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -677,7 +766,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5, 1.5)
 
-[node name="Gear" type="TextureRect" parent="UI/BattleEnd/Scraps"]
+[node name="Gear" type="TextureRect" parent="UI/BattleEnd/Scraps" unique_id=1897817921]
 layout_mode = 0
 offset_left = -1.0
 offset_top = 2.0
@@ -686,7 +775,7 @@ offset_bottom = 42.0
 texture = ExtResource("15_61i1y")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Gear"]
+[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Gear" unique_id=757831652]
 layout_mode = 0
 offset_left = -16.0
 offset_top = 16.0
@@ -698,7 +787,7 @@ label_settings = SubResource("LabelSettings_jt4d8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Flesh" type="TextureRect" parent="UI/BattleEnd/Scraps"]
+[node name="Flesh" type="TextureRect" parent="UI/BattleEnd/Scraps" unique_id=1512208944]
 layout_mode = 0
 offset_left = 55.0
 offset_top = 2.0
@@ -707,7 +796,7 @@ offset_bottom = 42.0
 texture = ExtResource("16_saiin")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Flesh"]
+[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Flesh" unique_id=1974948753]
 layout_mode = 0
 offset_left = -16.0
 offset_top = 16.0
@@ -719,7 +808,7 @@ label_settings = SubResource("LabelSettings_jt4d8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Shard" type="TextureRect" parent="UI/BattleEnd/Scraps"]
+[node name="Shard" type="TextureRect" parent="UI/BattleEnd/Scraps" unique_id=444988513]
 layout_mode = 0
 offset_left = -1.0
 offset_top = 34.0
@@ -728,7 +817,7 @@ offset_bottom = 74.0
 texture = ExtResource("17_dd63g")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Shard"]
+[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Shard" unique_id=1085635517]
 layout_mode = 0
 offset_left = -16.0
 offset_top = 16.0
@@ -740,7 +829,7 @@ label_settings = SubResource("LabelSettings_jt4d8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Tooth" type="TextureRect" parent="UI/BattleEnd/Scraps"]
+[node name="Tooth" type="TextureRect" parent="UI/BattleEnd/Scraps" unique_id=1750822362]
 layout_mode = 0
 offset_left = 55.0
 offset_top = 34.0
@@ -749,7 +838,7 @@ offset_bottom = 74.0
 texture = ExtResource("18_fpf3k")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Tooth"]
+[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Tooth" unique_id=247377200]
 layout_mode = 0
 offset_left = -16.0
 offset_top = 16.0
@@ -761,7 +850,7 @@ label_settings = SubResource("LabelSettings_jt4d8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Oil" type="TextureRect" parent="UI/BattleEnd/Scraps"]
+[node name="Oil" type="TextureRect" parent="UI/BattleEnd/Scraps" unique_id=989853960]
 layout_mode = 0
 offset_left = 23.0
 offset_top = 66.0
@@ -770,7 +859,7 @@ offset_bottom = 106.0
 texture = ExtResource("19_bi5l8")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Oil"]
+[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Oil" unique_id=1386499527]
 layout_mode = 0
 offset_left = -16.0
 offset_top = 16.0
@@ -782,14 +871,14 @@ label_settings = SubResource("LabelSettings_jt4d8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Fail" type="Control" parent="UI"]
+[node name="Fail" type="Control" parent="UI" unique_id=1233732149]
 z_index = 999
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 
-[node name="ColorRect" type="ColorRect" parent="UI/Fail"]
+[node name="ColorRect" type="ColorRect" parent="UI/Fail" unique_id=332043105]
 layout_mode = 0
 offset_left = -970.0
 offset_top = -546.0
@@ -798,7 +887,7 @@ offset_bottom = 562.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
-[node name="Label" type="Label" parent="UI/Fail"]
+[node name="Label" type="Label" parent="UI/Fail" unique_id=1106206616]
 layout_mode = 0
 offset_left = -381.0
 offset_top = -50.0
@@ -807,7 +896,7 @@ offset_bottom = 56.0
 label_settings = SubResource("LabelSettings_v7i3o")
 vertical_alignment = 1
 
-[node name="Exit" type="Button" parent="UI/Fail"]
+[node name="Exit" type="Button" parent="UI/Fail" unique_id=137535201]
 visible = false
 layout_mode = 0
 offset_left = 94.0
@@ -819,15 +908,14 @@ theme_override_font_sizes/font_size = 24
 script = ExtResource("11_66ngm")
 string_id = &"exit"
 
-[node name="Win" type="Control" parent="UI"]
-visible = false
+[node name="Win" type="Control" parent="UI" unique_id=682184190]
 z_index = 999
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 
-[node name="ColorRect" type="ColorRect" parent="UI/Win"]
+[node name="ColorRect" type="ColorRect" parent="UI/Win" unique_id=1337844483]
 layout_mode = 0
 offset_left = -1069.0
 offset_top = -616.0
@@ -836,7 +924,7 @@ offset_bottom = 492.0
 mouse_filter = 2
 color = Color(0.227451, 0.403922, 0, 0)
 
-[node name="Label" type="Label" parent="UI/Win"]
+[node name="Label" type="Label" parent="UI/Win" unique_id=1808683545]
 visible = false
 layout_mode = 0
 offset_left = -461.0
@@ -850,7 +938,7 @@ label_settings = SubResource("LabelSettings_v7i3o")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TutorialBox" type="TextureRect" parent="UI"]
+[node name="TutorialBox" type="TextureRect" parent="UI" unique_id=117890652]
 visible = false
 self_modulate = Color(1, 1, 1, 0.443137)
 z_index = 10
@@ -862,7 +950,7 @@ offset_bottom = 154.0
 mouse_filter = 2
 texture = ExtResource("12_6ni85")
 
-[node name="Text" type="Label" parent="UI/TutorialBox"]
+[node name="Text" type="Label" parent="UI/TutorialBox" unique_id=1623868209]
 layout_mode = 0
 offset_left = 37.0
 offset_top = 21.0
@@ -875,7 +963,7 @@ autowrap_mode = 3
 script = ExtResource("14_ekamt")
 metadata/_custom_type_script = "uid://dd2yytdivaq0j"
 
-[node name="OK" type="Button" parent="UI/TutorialBox"]
+[node name="OK" type="Button" parent="UI/TutorialBox" unique_id=886626026]
 layout_mode = 0
 offset_left = 237.0
 offset_top = 269.0
@@ -885,10 +973,8 @@ theme_override_fonts/font = ExtResource("6_6vh42")
 theme_override_font_sizes/font_size = 32
 text = "OK"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_66ngm")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=355412054]
+libraries/ = SubResource("AnimationLibrary_66ngm")
 
 [connection signal="mouse_entered" from="UI/Loot/Bag" to="UI/Loot" method="_on_bag_mouse_entered"]
 [connection signal="pressed" from="UI/Debug/Newturn" to="." method="_on_newturn_pressed"]
