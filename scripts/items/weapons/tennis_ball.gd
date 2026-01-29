@@ -20,3 +20,19 @@ func on_level_up():
 		4: base_harm += 2
 		5: extra_harm += 1
 	super.on_level_up()
+
+func get_priority(_sender: SlaveNode, _victim: SlaveNode) -> int:
+	return 0
+
+func get_harm() -> int:
+	return base_harm + extra_harm * randi_range(0, 4)
+
+func get_displayed_harm(sender: SlaveNode, victim: SlaveNode) -> int:
+	var dmg = base_harm + extra_harm * abs(sender.held.speed - victim.held.speed)
+	return Action.calculate_damage(sender, victim, dmg)
+
+func get_intention(sender: SlaveNode) -> Enemy.Intention:
+	var intention = Enemy.Intention.new(Enemy.Intention.Type.DamageSingular)
+	intention.effect = func(v):
+		use_item(sender, v)
+	return intention

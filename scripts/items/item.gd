@@ -90,7 +90,15 @@ func use_item(_sender: SlaveNode, _victim: SlaveNode):
 func get_priority(_sender: SlaveNode, _victim: SlaveNode) -> int:
 	return -999
 
-func get_intention() -> Enemy.Intention:
+# Purely used for weapons by enemies
+# Yields average/potential harm for non-standard weapons
+func get_harm() -> int:
+	return 0
+
+func get_displayed_harm(_sender: SlaveNode, _victim: SlaveNode) -> int:
+	return get_harm()
+
+func get_intention(_sender: SlaveNode) -> Enemy.Intention:
 	return null
 
 func on_equip(owner: Slave):

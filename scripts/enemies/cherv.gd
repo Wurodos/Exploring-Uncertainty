@@ -13,12 +13,6 @@ func localize() -> void:
 	super.localize()
 	info[0] = info[0].format([harm_lower, harm_higher], "{}")
 
-# weapon = +2 dmg range
-# hat = +3 hp
-# trinket = +2 hp
-# 	1 - +1 dmg range
-#	2 - +1 speed
-
 func update_stats(node: SlaveNode) -> void:
 	super.update_stats(node)
 	owner = node
@@ -26,18 +20,26 @@ func update_stats(node: SlaveNode) -> void:
 
 # attacks randomly
 # changes target if attacked, new target is attacker
-
-
-
 func on_attacked(attacker: SlaveNode) -> void:
 	super.on_attacked(attacker)
 	if intention:
-		intention.target = _convert_node_to_target(attacker, CurrentRun.good_boys)
+		intention.targets = [CurrentRun.good_boys.find(attacker.held)]
 		owner.update_intention()
 
 func decide_intention() -> void:
 	super.decide_intention()
+	var burning_road_dmg = randi_range(harm_lower, harm_higher)
 	
-	intention = Intention.new(Intention.Type.DamageSingular, randi_range(harm_lower, harm_higher))
+	var target = _get_random_good_target()
+	var victim = Battle.instance.good_team.boys_nodes[target]
 	
-	intention.target = _get_random_good_target()
+	if burning_road_dmg <= owner.held.weapon.get_harm():
+		intention = owner.held.weapon.get_intention(owner)
+		intention.amount = owner.held.weapon.get_displayed_harm(owner, victim)
+	else:
+		intention.type = Intention.Type.DamageSingular
+		intention.amount = Action.calculate_damage(owner, victim, burning_road_dmg)
+		intention.effect = func(v: SlaveNode):
+			Action.deal_damage(owner, v, burning_road_dmg)
+	
+	intention.targets = [target]

@@ -62,7 +62,6 @@ func decide_intention() -> void:
 				for slave : SlaveNode in Battle.instance.evil_team.boys_nodes:
 					if slave.held.is_alive:
 						slave.add_buff(Action.SHIELD, shield_team_turns)
-			intention.target = Intention.Target.All
 		2:
 			intention = Intention.new(Intention.Type.PowerUp, power_grant)
 			intention.target = _get_random_evil_target(false)

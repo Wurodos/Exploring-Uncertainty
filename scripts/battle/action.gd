@@ -44,7 +44,7 @@ func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, dont_proc: bool
 	#await victim.animation_player.animation_finished
 	#victim.animation_player.play("idle")
 
-func heal(sender: SlaveNode, ally: SlaveNode, amount: int):
+func heal(_sender: SlaveNode, ally: SlaveNode, amount: int):
 	SignalBus.play_sound.emit("heal")
 	
 	if not ally.held.is_alive: return

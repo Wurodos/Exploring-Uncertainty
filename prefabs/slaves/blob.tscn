@@ -59,6 +59,14 @@ _data = {
 &"idle": SubResource("Animation_bl030")
 }
 
+[sub_resource type="Animation" id="Animation_8htp2"]
+resource_name = "jump"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pc5ow"]
+_data = {
+&"jump": SubResource("Animation_8htp2")
+}
+
 [sub_resource type="Animation" id="Animation_e010w"]
 length = 0.001
 tracks/0/type = "value"
@@ -309,6 +317,7 @@ libraries/ = SubResource("AnimationLibrary_r6t30")
 autoplay = &"idle"
 
 [node name="MovingAnimation" type="AnimationPlayer" parent="." unique_id=1252093294]
+libraries/ = SubResource("AnimationLibrary_pc5ow")
 
 [node name="ArrowAnimation" type="AnimationPlayer" parent="." unique_id=100519294]
 root_node = NodePath("../Arrow")

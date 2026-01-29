@@ -5,21 +5,18 @@ class_name Enemy
 class Intention:
 	enum Type { DamageSingular, DamageMultiple, DamageTwo,
 	 PowerUp, HealSingle, HealMultiple, Run, SummonStars,
-	 SummonCherv, OrderChervs }
-	enum Target { Middle, Bottom, Up, All, Two, None }
+	 SummonCherv, OrderChervs, None }
 		
 	var type: Type
-	var amount: int
-	var target: Target
-	var target_second: Target
-	var extra_effect: Callable
+	var amount: int = -1
+	var targets: Array[int] = []
+	var effect: Callable
 	
-	func _init(type: Type, amount: int = 0) -> void:
+	@warning_ignore("shadowed_variable")
+	func _init(type: Type, amount: int = -1) -> void:
 		self.type = type
-		self.target = Target.None
-		self.target_second = Target.None
 		self.amount = amount
-		self.extra_effect = func() : return
+		self.effect = func(_victim) : return
 	
 @export var info_count: int = 0
 
@@ -69,21 +66,21 @@ func on_attacked(_attacker: SlaveNode) -> void:
 # Override this
 func update_stats(node: SlaveNode) -> void:
 	owner = node
-
-# Override this	
+	
 func decide_intention() -> void:
-	pass
+	intention = Intention.new(Intention.Type.None)
+	intention.targets = []
 
 
 
-func _get_random_good_target() -> Intention.Target:
+func _get_random_good_target() -> int:
 	var possible : Array[int] = []
 	var i = 0
 	for slave : Slave in CurrentRun.good_boys:
 		if slave.is_alive:
 			possible.append(i)
 		i += 1	
-	return possible.pick_random() as Intention.Target
+	return possible.pick_random()
 
 func _get_2_good_targets() -> Array[int]:
 	var possible : Array[int] = []
@@ -100,14 +97,14 @@ func _get_2_good_targets() -> Array[int]:
 func _get_good_target(_score_func: Callable):
 	pass
 
-func _convert_node_to_target(node: SlaveNode, team: Array[Slave]) -> Intention.Target:
+func _convert_node_to_target(node: SlaveNode, team: Array[Slave]) -> int:
 	var i = 0
 	for slave : Slave in team:
 		if slave == node.held:
-			return i as Intention.Target
+			return i
 		i += 1
 	
-	return 0 as Intention.Target
+	return 0
 
 func _get_random_evil_target(is_self_included: bool = true) -> int:
 	var possible : Array[int] = []
@@ -121,10 +118,10 @@ func _get_random_evil_target(is_self_included: bool = true) -> int:
 		i += 1	
 	return possible.pick_random()
 
-func _get_self_target() -> Intention.Target:
+func _get_self_target() -> int:
 	var i = 0
 	for slave : Slave in CurrentRun.evil_boys:
 		if slave == self:
-			return i as Intention.Target
+			return i 
 		i += 1
-	return Intention.Target.None
+	return 0

@@ -29,3 +29,19 @@ func on_level_up():
 	if level >= 4: full_harm += 1
 	weak_harm += 2
 	super.on_level_up()
+
+func get_priority(_sender: SlaveNode, _victim: SlaveNode) -> int:
+	return 0
+
+func get_harm() -> int:
+	if counter > 0: return weak_harm
+	else: return full_harm
+
+func get_displayed_harm(sender: SlaveNode, victim: SlaveNode) -> int:
+	return Action.calculate_damage(sender, victim, get_harm())
+
+func get_intention(sender: SlaveNode) -> Enemy.Intention:
+	var intention = Enemy.Intention.new(Enemy.Intention.Type.DamageSingular)
+	intention.effect = func(v):
+		use_item(sender, v)
+	return intention

@@ -246,93 +246,12 @@ func remove_buff(buff_name: String):
 
 func execute_intention():
 	var held_enemy : Enemy = held
-	var victim: SlaveNode = Battle.instance.good_team.boys_nodes[held_enemy.intention.target] 
-	
-	var victim_second: SlaveNode = null
-	if held_enemy.intention.target_second < Battle.instance.good_team.boys_nodes.size():
-		victim_second = Battle.instance.good_team.boys_nodes[held_enemy.intention.target_second]
 	
 	await get_tree().create_timer(1).timeout
-	#$AnimationPlayer.play("jump")
-	match(held_enemy.intention.type):
-		
-		
-		Enemy.Intention.Type.DamageSingular:
-			Action.deal_damage(self, victim, held_enemy.intention.amount)
-			attacked.emit(victim)
-		
-		Enemy.Intention.Type.DamageTwo:
-			Action.deal_damage(self, victim, held_enemy.intention.amount)
-			attacked.emit(victim)
-			if held_enemy.intention.target_second != -1:
-				Action.deal_damage(self, victim_second, held_enemy.intention.amount)
-			attacked.emit(victim_second)
-		
-		Enemy.Intention.Type.DamageMultiple:
-			for slave : SlaveNode in Battle.instance.good_team.boys_nodes:
-				Action.deal_damage(self, slave, held_enemy.intention.amount)
-		
-		
-		
-		Enemy.Intention.Type.HealSingle:
-			Action.heal(self,\
-				Battle.instance.evil_team.boys_nodes[held_enemy.intention.target],\
-				held_enemy.intention.amount)
-		
-		
-		
-		Enemy.Intention.Type.HealMultiple:
-			for slave : SlaveNode in Battle.instance.evil_team.boys_nodes:
-				Action.heal(self, slave, held_enemy.intention.amount)
-		
-		
-		
-		Enemy.Intention.Type.PowerUp:
-			Battle.instance.evil_team.boys_nodes[held_enemy.intention.target]\
-				.set_power(held_enemy.intention.amount)
-		
-		
-		
-		Enemy.Intention.Type.Run:
-			held.is_alive = false
-			sprite.texture = null
-			$HPBar.visible = false
-			item_parent.visible = false
-			$Intention.visible = false
-			SignalBus.slave_ran.emit(self)
-		
-		
-		Enemy.Intention.Type.SummonStars:
-			var star1 = SlavePool.fetch("starry")
-			var star2 = SlavePool.fetch("starry")
-			
-			for star: Enemy in [star1, star2]:
-				if randi_range(0, 2) == 0: star.equip(ItemPool.fetch_random(Item.Type.Weapon))
-				if randi_range(0, 2) == 0: star.equip(ItemPool.fetch_random(Item.Type.Hat))
-				if randi_range(0, 2) == 0: star.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
-				if randi_range(0, 2) == 0: star.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
-				
-			
-			team.cull_the_dead()
-			
-			team.add_slave(star1)
-			team.add_slave(star2)
-		
-		Enemy.Intention.Type.OrderChervs:
-			for enemy in Battle.instance.evil_team.boys_nodes:
-				if enemy.held.is_alive and enemy.held is Cherv:
-					Action.deal_damage(enemy,\
-					Battle.instance.good_team.boys_nodes[(held as Enemy).intention.target],
-					(enemy.held as Cherv).intention.amount)
-					
-		
-		Enemy.Intention.Type.SummonCherv:
-			var cherv = SlavePool.fetch("cherv")
-			team.cull_the_dead()
-			team.add_slave(cherv)
-	
-	held_enemy.intention.extra_effect.call()
-			
+	for target_id in held_enemy.intention.targets:
+		var victim: SlaveNode = Battle.instance.good_team.boys_nodes[target_id]
+		held_enemy.intention.effect.call(victim)
+		attacked.emit(victim)
 	_on_end_turn()
 	await get_tree().create_timer(1).timeout
 	#$AnimationPlayer.play("idle")
@@ -394,9 +313,6 @@ func _decide_intentions() -> void:
 func update_intention() -> void:
 	var held_enemy : Enemy = held
 	var total = held_enemy.intention.amount
-	if held_enemy.intention.type == Enemy.Intention.Type.DamageSingular\
-		or held_enemy.intention.type == Enemy.Intention.Type.DamageMultiple:
-		total += power
 	
 	if total == 0: $Intention/Label.text = ""
 	else: $Intention/Label.text = str(total)
@@ -429,15 +345,11 @@ func update_intention() -> void:
 	$Intention/TargetMiddle.visible = false
 	$Intention/TargetBottom.visible = false
 	
-	for target in [held_enemy.intention.target, held_enemy.intention.target_second]:
+	for target in held_enemy.intention.targets:
 		match(target):
-			Enemy.Intention.Target.Up: $Intention/TargetTop.visible = true
-			Enemy.Intention.Target.Middle: $Intention/TargetMiddle.visible = true
-			Enemy.Intention.Target.Bottom: $Intention/TargetBottom.visible = true
-			Enemy.Intention.Target.All:
-				$Intention/TargetTop.visible = true
-				$Intention/TargetMiddle.visible = true
-				$Intention/TargetBottom.visible = true
+			0: $Intention/TargetMiddle.visible = true
+			1: $Intention/TargetBottom.visible = true
+			2: $Intention/TargetTop.visible = true
 	
 	
 	$Intention/Icon.texture = icon

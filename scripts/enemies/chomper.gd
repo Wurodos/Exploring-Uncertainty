@@ -33,5 +33,3 @@ func update_stats(node: SlaveNode) -> void:
 func decide_intention() -> void:
 	super.decide_intention()
 	intention = Intention.new(Intention.Type.DamageMultiple, harm)
-
-	intention.target = Intention.Target.All

@@ -18,9 +18,17 @@ func on_level_up():
 	super.on_level_up()
 
 # If faster than at least 2 fighters and hp > 50% +1 OR has shield +1
-func get_priority(sender: SlaveNode, victim: SlaveNode) -> int:
+func get_priority(_sender: SlaveNode, _victim: SlaveNode) -> int:
 	return 0
 
-func get_intention() -> Enemy.Intention:
+func get_harm() -> int:
+	return harm
+
+func get_displayed_harm(sender: SlaveNode, victim: SlaveNode) -> int:
+	return Action.calculate_damage(sender, victim, harm)
+
+func get_intention(sender: SlaveNode) -> Enemy.Intention:
 	var intention = Enemy.Intention.new(Enemy.Intention.Type.DamageSingular)
+	intention.effect = func(v):
+		use_item(sender, v)
 	return intention
