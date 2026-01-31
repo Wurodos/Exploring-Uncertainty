@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cva36ucmiyxwf"
+path="res://.godot/imported/LETS ROLL.mp3-71724966002e92416450ec39abfe1d4d.mp3str"
+
+[deps]
+
+source_file="res://audio/music/LETS ROLL.mp3"
+dest_files=["res://.godot/imported/LETS ROLL.mp3-71724966002e92416450ec39abfe1d4d.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

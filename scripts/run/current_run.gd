@@ -273,9 +273,10 @@ func arrange_evil_team() -> Array[Slave]:
 		var enemy = evil_deck.pop_back()
 		if enemy != null:
 			# DEBUG
-			enemy.equip(ItemPool.fetch("sword"))
-			enemy.equip(ItemPool.fetch("obsidian"), 1)
-			#enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
+			enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
+			enemy.equip(ItemPool.fetch("anvil"))
+			enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
+			enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
 			team.append(enemy)
 	
 	if CurrentRun.is_battle_tutorial and team[0]:

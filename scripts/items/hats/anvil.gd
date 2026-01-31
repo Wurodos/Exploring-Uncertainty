@@ -11,18 +11,22 @@ func localize():
 	super.localize()
 	desc = desc.format([required_harm, power_gain, turns], "{}")
 
+func on_start_battle(owner: SlaveNode):
+	super.on_start_battle(owner)
+	owner.received_damage.connect(_on_received_damage)
+	total_received = 0
+	user = owner
+
 func use_item(sender: SlaveNode, ally: SlaveNode):
 	super.use_item(sender, ally)
-	total_received = 0
-	user = sender
-	sender.add_buff("anvil", turns)
-	sender.received_damage.connect(_on_received_damage)
+	var half : int = sender.power / 2 + sender.power % 2
+	sender.set_power(-half)
+	ally.set_power(+half)
 
 func _on_received_damage(_source: SlaveNode, dmg: int):
-	if user.buffs.has("anvil"):
-		total_received += dmg
-		user.set_power(+power_gain*(total_received / required_harm))
-		total_received %= required_harm
+	total_received += dmg
+	user.set_power(+power_gain*(total_received / required_harm))
+	total_received %= required_harm
 
 func on_level_up():
 	extra_hp += 3
@@ -32,3 +36,17 @@ func on_level_up():
 		4: turns += 3
 		5: required_harm -= 1
 	super.on_level_up()
+
+func get_priority(sender: SlaveNode, ally: SlaveNode) -> int:
+	if sender == ally: return -999
+	if sender.power < 3: return -3
+	if ally.held.hp > sender.held.hp:
+		return round(float(ally.held.hp) / sender.held.hp)
+	return 0
+
+func get_intention(sender: SlaveNode) -> Enemy.Intention:
+	var intention = Enemy.Intention.new(Enemy.Intention.Type.PowerUp, sender.power / 2 + sender.power % 2)
+	intention.is_support = true
+	intention.effect = func(v):
+		use_item(sender, v)
+	return intention

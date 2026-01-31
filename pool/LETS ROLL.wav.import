@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bboj6wa5482kx"
+path="res://.godot/imported/LETS ROLL.wav-3b7151d400750cec1f61456ca71c4aa8.sample"
+
+[deps]
+
+source_file="res://pool/LETS ROLL.wav"
+dest_files=["res://.godot/imported/LETS ROLL.wav-3b7151d400750cec1f61456ca71c4aa8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

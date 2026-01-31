@@ -22,24 +22,46 @@ func update_stats(node: SlaveNode) -> void:
 # changes target if attacked, new target is attacker
 func on_attacked(attacker: SlaveNode) -> void:
 	super.on_attacked(attacker)
-	if intention:
+	if intention and intention.targets.size() == 1:
+		if intention.is_support: decide_weapon_intention()
 		intention.targets = [CurrentRun.good_boys.find(attacker.held)]
 		owner.update_intention()
 
+
+
+# Ignores hats if their priority is less than +1
+# Chooses targets for weapons randomly
 func decide_intention() -> void:
 	super.decide_intention()
-	var burning_road_dmg = randi_range(harm_lower, harm_higher)
+	var hat_target: int = -1
+	var max_priority: int = 0
+	for i in range(Battle.instance.evil_team.boys_nodes.size()):
+		var slave = Battle.instance.evil_team.boys_nodes[i]
+		var priority = owner.held.hat.get_priority(owner, slave)
+		if priority > max_priority:
+			max_priority = priority
+			hat_target = i
 	
+	if hat_target > -1:
+		intention = owner.held.hat.get_intention(owner)
+		intention.targets = [hat_target]
+	else:
+		decide_weapon_intention()
+
+func decide_weapon_intention() -> void:
+	var burning_road_dmg = randi_range(harm_lower, harm_higher)
 	var target = _get_random_good_target()
 	var victim = Battle.instance.good_team.boys_nodes[target]
 	
-	if burning_road_dmg <= owner.held.weapon.get_harm():
+	if owner.held.weapon.is_item() and burning_road_dmg <= owner.held.weapon.get_harm():
 		intention = owner.held.weapon.get_intention(owner)
 		intention.amount = owner.held.weapon.get_displayed_harm(owner, victim)
 	else:
 		intention.type = Intention.Type.DamageSingular
+		intention.is_support = false
 		intention.amount = Action.calculate_damage(owner, victim, burning_road_dmg)
 		intention.effect = func(v: SlaveNode):
 			Action.deal_damage(owner, v, burning_road_dmg)
 	
-	intention.targets = [target]
+	if intention.targets.is_empty():
+		intention.targets = [target]

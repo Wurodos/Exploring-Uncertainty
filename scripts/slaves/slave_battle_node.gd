@@ -248,10 +248,17 @@ func execute_intention():
 	var held_enemy : Enemy = held
 	
 	await get_tree().create_timer(1).timeout
-	for target_id in held_enemy.intention.targets:
-		var victim: SlaveNode = Battle.instance.good_team.boys_nodes[target_id]
-		held_enemy.intention.effect.call(victim)
-		attacked.emit(victim)
+	if not held_enemy.intention.is_support:
+		for target_id in held_enemy.intention.targets:
+			var victim: SlaveNode = Battle.instance.good_team.boys_nodes[target_id]
+			held_enemy.intention.effect.call(victim)
+			attacked.emit(victim)
+	else:
+		for target_id in held_enemy.intention.targets:
+			var victim: SlaveNode = Battle.instance.evil_team.boys_nodes[target_id]
+			held_enemy.intention.effect.call(victim)
+			attacked.emit(victim)
+	
 	_on_end_turn()
 	await get_tree().create_timer(1).timeout
 	#$AnimationPlayer.play("idle")

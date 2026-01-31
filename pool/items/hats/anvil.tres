@@ -6,7 +6,6 @@
 [resource]
 script = ExtResource("1_fm67b")
 type = 1
-target = 2
 extra_hp = 10
 texture = ExtResource("2_i7h4p")
 cost = 6

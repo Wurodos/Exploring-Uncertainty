@@ -11,9 +11,9 @@ func calculate_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, _dont_proc
 	total_dmg += sender.power
 	if sender.buffs.has(APPETITE):
 		total_dmg = total_dmg * 4 / 3
-	if victim.buffs.has(FREEZE):
+	if victim and victim.buffs.has(FREEZE):
 		total_dmg = total_dmg * 3 / 2
-	if victim.buffs.has(SHIELD):
+	if victim and victim.buffs.has(SHIELD):
 		total_dmg = total_dmg * 7 / 10
 	
 	return total_dmg
