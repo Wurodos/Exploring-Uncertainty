@@ -38,6 +38,9 @@ var trinket2_node: ItemNode
 
 # name -> turns left
 var buffs : Dictionary[String, int] = {}
+# tags are simillar to buffs, but dont have a timer
+var tags: Array[String] = []
+
 var power : int = 0
 var luck : int = 0
 
@@ -124,9 +127,10 @@ func set_power(new_val: int, is_delta: bool = true):
 	
 	if power > old_val:
 		SignalBus.play_sound.emit("powerup")
-	add_stat("power", Gallery.icon_power, power)
+		powerup_animation.play("powerup")
+	if power != 0:
+		add_stat("power", Gallery.icon_power, power)
 	
-	powerup_animation.play("powerup")
 	#animation_player.play("power_up")
 	#await animation_player.animation_finished
 	#animation_player.play("idle")
@@ -257,7 +261,6 @@ func execute_intention():
 		for target_id in held_enemy.intention.targets:
 			var victim: SlaveNode = Battle.instance.evil_team.boys_nodes[target_id]
 			held_enemy.intention.effect.call(victim)
-			attacked.emit(victim)
 	
 	_on_end_turn()
 	await get_tree().create_timer(1).timeout

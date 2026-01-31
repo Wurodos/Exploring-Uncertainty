@@ -6,6 +6,8 @@ const BLASPHEMY = "blasphemy"
 const FREEZE = "freeze"
 const DARK = "dark"
 
+const TAG_BETTER_SHIELD = "tag_better_shield"
+
 func calculate_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, _dont_proc: bool = false) -> int:
 	var total_dmg = dmg
 	total_dmg += sender.power
@@ -14,7 +16,9 @@ func calculate_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, _dont_proc
 	if victim and victim.buffs.has(FREEZE):
 		total_dmg = total_dmg * 3 / 2
 	if victim and victim.buffs.has(SHIELD):
-		total_dmg = total_dmg * 7 / 10
+		if victim.tags.has(TAG_BETTER_SHIELD):
+			total_dmg = total_dmg * 2 / 5
+		else: total_dmg = total_dmg * 7 / 10
 	
 	return total_dmg
 

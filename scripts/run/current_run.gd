@@ -274,7 +274,7 @@ func arrange_evil_team() -> Array[Slave]:
 		if enemy != null:
 			# DEBUG
 			enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
-			enemy.equip(ItemPool.fetch("anvil"))
+			enemy.equip(ItemPool.fetch("helmet"))
 			enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
 			enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
 			team.append(enemy)
