@@ -1,14 +1,14 @@
 [gd_resource type="Resource" format=3 uid="uid://do1vbb2820r22"]
 
-[ext_resource type="Script" uid="uid://dltjxlvvkegng" path="res://scripts/items/hats/wizard_hat.gd" id="1_jpp2n"]
-[ext_resource type="Texture2D" uid="uid://dcprd1kuvkwce" path="res://images/items/wizard_hat.png" id="2_pmg56"]
+[ext_resource type="Script" uid="uid://dltjxlvvkegng" path="res://scripts/items/hats/chef.gd" id="1_4ew48"]
+[ext_resource type="Texture2D" uid="uid://dgv5c4mpwmv2n" path="res://images/items/chef-toque.png" id="2_4kb48"]
 
 [resource]
-script = ExtResource("1_jpp2n")
+script = ExtResource("1_4ew48")
 type = 1
 extra_hp = 8
 extra_speed = 1
-texture = ExtResource("2_pmg56")
+texture = ExtResource("2_4kb48")
 cost = 8
 craft_reqs = Dictionary[int, int]({
 0: 2,

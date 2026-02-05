@@ -25,7 +25,7 @@ func _on_hp_changed():
 	if not _proc_once and sender.held.hp * (100.0 / hp_threshold_percent) <= sender.held.maxhp:
 		_proc_once = true
 		Action.heal(sender, sender, sender.held.maxhp / (100.0 / hp_heal_percent))
-		sender.remove_item(u_name)
+		consume(sender)
 
 func on_level_up():
 	hp_heal_percent += 10

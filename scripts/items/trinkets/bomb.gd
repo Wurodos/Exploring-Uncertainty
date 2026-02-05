@@ -16,7 +16,7 @@ func on_start_battle(owner: SlaveNode):
 func _explode(victim: SlaveNode):
 	Action.deal_damage(sender, victim, harm)
 	sender.attacked.disconnect(_explode)
-	sender.remove_item(u_name)
+	consume(sender)
 
 func on_level_up():
 	harm += roundi(harm / 2)

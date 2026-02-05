@@ -6,7 +6,10 @@ cherv_info_1;SWITCHES TARGET WHEN HIT;МЕНЯЕТ ЦЕЛЬ ПРИ ПОЛУЧЕ�
 chomper_info_0;INFLICTS {} HARM TO ALL;ПРИЧИНЯЕТ {} ВРЕДА ВСЕМ
 starry_info_0;GAINS {} POWER AND SHIELD ({} TURNS);ПОЛУЧАЕТ {} МОЩИ И ЩИТ ({} ХОД.)
 starry_info_1;INFLICTS {}-{} HARM;ПРИЧИНЯЕТ {}-{} ВРЕДА
-swirly_info_0;INFLICTS {} HARM;ПРИЧИНЯЕТ {} ВРЕДА
+swirly_title_0;Slippery type;Скользкий тип
+swirly_info_0;END OF TURN: +1 SPEED;КОНЕЦ ХОДА: +1 СКОРОСТИ
+swirly_title_1;Hit and Run;Бей и беги
+swirly_info_1;RUNS WHEN IN DANGER;БЕЖИТ ОТ ОПАСНОСТИ
 quagmire_info_0;HEALS {}-{} HEALTH TO ALLY;ЛЕЧИТ {}-{} ЗДОРОВЬЯ СОЮЗНИКУ
 quagmire_info_1;HEALS {} HEALTH TO EVERYONE, SHIELD {} TURNS;ЛЕЧИТ {} ЗДОРОВЬЯ ВСЕМ, ЩИТ {} ХОД.
 quagmire_info_2;GRANTS {} POWER TO ALLY;ДАЕТ {} МОЩИ СОЮЗНИКУ

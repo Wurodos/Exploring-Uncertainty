@@ -22,6 +22,7 @@ var selected_victim: SlaveNode
 
 var is_line : bool = false
 var is_marauder : bool = false
+var is_first_round : bool = true
 
 var tutorial_progress: int = 0
 
@@ -69,6 +70,16 @@ func _on_start_battle():
 
 # Create speed queueasass
 func _on_new_round():
+	# Vigilance
+	for boy in good_team.boys_nodes: 
+		if boy.held.is_alive:
+			boy.vigilance = boy.viable_for_vigilance
+			boy.viable_for_vigilance = true
+	for boy in evil_team.boys_nodes: 
+		if boy.held.is_alive:
+			boy.vigilance = boy.viable_for_vigilance
+			boy.viable_for_vigilance = true
+	
 	current_slave_position = 0
 	speed_queue = []
 	while queue_node.get_child_count() > 0:
@@ -284,6 +295,7 @@ func _on_good_won() -> void:
 	for slave : Slave in CurrentRun.good_boys:
 		slave.speed = slave.base_speed
 		for item : Item in [slave.weapon, slave.hat, slave.trinket1, slave.trinket2]:
+			item.on_end_battle(slave)
 			if item.is_item() and item.level < 5:
 				item.experience += 1
 				if item.experience == Constants.exp_required[item.level-1]:

@@ -9,5 +9,9 @@ func localize() -> void:
 func use_item(sender: SlaveNode, victim: SlaveNode):
 	super.use_item(sender, victim)
 	Action.deal_damage(sender, victim, harm)
-	
-	
+
+func get_harm() -> int:
+	return harm
+
+func get_displayed_harm(sender: SlaveNode, victim: SlaveNode) -> int:
+	return Action.calculate_damage(sender, victim, harm)

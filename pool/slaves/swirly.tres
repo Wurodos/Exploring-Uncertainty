@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_x217g")
 harm = 8
-info_count = 1
+info_count = 2
 u_name = &"swirly"
 base_maxhp = 10
 base_speed = 2

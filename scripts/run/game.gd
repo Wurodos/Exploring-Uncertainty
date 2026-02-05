@@ -28,7 +28,7 @@ func _ready() -> void:
 			CurrentRun.craft_pool.append(item.duplicate())
 
 	## DEBUG -> Inventory 
-	#CurrentRun.inventory.append(ItemPool.fetch("alcohol"))
+	#CurrentRun.inventory.append(ItemPool.fetch("viking_helmet"))
 	#CurrentRun.inventory.append(ItemPool.fetch("alcohol"))
 	#for i in range(20):
 	#	CurrentRun.inventory.append(ItemPool.fetch_random())

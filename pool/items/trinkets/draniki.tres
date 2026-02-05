@@ -8,6 +8,7 @@ script = ExtResource("1_05lb1")
 hp_heal_percent = 30
 type = 2
 target = 2
+one_time_use = true
 texture = ExtResource("2_okbog")
 cost = 3
 craft_reqs = Dictionary[int, int]({

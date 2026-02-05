@@ -50,6 +50,10 @@ static func deserialize(data: Dictionary) -> Item:
 static func random_scrap() -> Scrap:
 	return [Scrap.Flesh, Scrap.Gear, Scrap.Shard, Scrap.Tooth, Scrap.Oil].pick_random()
 
+func consume(sender: SlaveNode) -> void:
+	sender.remove_item(u_name)
+	sender.consumed.emit(self)
+
 func get_scrap() -> Item.Scrap:
 	var r = randi_range(0, 99)
 	match(type):
@@ -115,3 +119,6 @@ func on_level_up():
 
 func on_start_battle(owner: SlaveNode):
 	owner.set_speed(extra_speed)
+
+func on_end_battle(owner: Slave):
+	pass

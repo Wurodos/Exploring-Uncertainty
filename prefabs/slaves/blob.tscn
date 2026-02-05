@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://ctm4vajohb528" path="res://images/shapes/arrow.png" id="11_5t34c"]
 [ext_resource type="Texture2D" uid="uid://ds35lotmqbcya" path="res://images/icons/harm.png" id="11_7y33p"]
 [ext_resource type="Texture2D" uid="uid://bsxa2pqrugam1" path="res://images/icons/heal.png" id="12_82wb0"]
+[ext_resource type="Texture2D" uid="uid://d0rkhaggbott0" path="res://images/tags/vigilance.svg" id="12_f4yho"]
 [ext_resource type="Texture2D" uid="uid://hlcx8brhdh8g" path="res://images/icons/power_up.png" id="13_4thmk"]
 
 [sub_resource type="Animation" id="Animation_bm25f"]
@@ -346,6 +347,14 @@ gizmo_extents = 66.5
 position = Vector2(0, -50)
 scale = Vector2(0.20000002, 0.20000002)
 texture = ExtResource("2_r6t30")
+
+[node name="Vigilance" type="Sprite2D" parent="Parts/Visual" unique_id=746944608]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(1, 1, 1, 0.80784315)
+position = Vector2(-41.999996, -80)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("12_f4yho")
 
 [node name="Items" type="Node2D" parent="Parts/Visual" unique_id=792972197]
 position = Vector2(0, -50)

@@ -7,8 +7,7 @@ func localize():
 	desc = desc.format([turns], "{}")
 
 func on_start_battle(owner: SlaveNode):
-	if not owner.tags.has(Action.TAG_BETTER_SHIELD):
-		owner.tags.append(Action.TAG_BETTER_SHIELD)
+	owner.tags.append(Action.TAG_BETTER_SHIELD)
 
 func use_item(sender: SlaveNode, ally: SlaveNode):
 	super.use_item(sender, ally)

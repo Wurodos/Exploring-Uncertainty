@@ -11,6 +11,7 @@ signal received_damage(source: SlaveNode, dmg: int)
 signal hp_changed
 signal turn_ended
 signal turn_started
+signal consumed
 signal attacked(victim: SlaveNode)
 
 @onready var line_start: Vector2 = $CircleSelect/LineStart.global_position
@@ -43,6 +44,12 @@ var tags: Array[String] = []
 
 var power : int = 0
 var luck : int = 0
+
+var vigilance: bool = false:
+	set(val):
+		vigilance = val
+		%Vigilance.visible = val
+var viable_for_vigilance: bool = false
 
 var item_parent : Node2D
 
@@ -204,6 +211,8 @@ func toggle_ellipse(visible: bool):
 
 func attack(victim: SlaveNode):
 	#$AnimationPlayer.play("jump")
+	if not tags.has(Action.TAG_VIGILANCE_KEEP_ATTACK) and vigilance:
+		viable_for_vigilance = false
 	match(held.weapon.target):
 		Item.Target.Single: 
 			held.weapon.use_item(self, victim)
@@ -253,6 +262,8 @@ func execute_intention():
 	
 	await get_tree().create_timer(1).timeout
 	if not held_enemy.intention.is_support:
+		if not tags.has(Action.TAG_VIGILANCE_KEEP_ATTACK) and vigilance:
+			viable_for_vigilance = false
 		for target_id in held_enemy.intention.targets:
 			var victim: SlaveNode = Battle.instance.good_team.boys_nodes[target_id]
 			held_enemy.intention.effect.call(victim)

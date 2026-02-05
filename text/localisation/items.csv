@@ -25,8 +25,8 @@ jester_hat_name;Jester Hat;Шляпа Шута
 jester_hat_desc;ACTION: BLASPHEMY {} TURNS;ДЕЙСТВИЕ: КОЩУНСТВО {} ХОД.
 no_hat_name;Head Empty;Пустоголовие
 no_hat_desc;ACTION: +{} INITIATIVE, HEAL {} HEALTH;ДЕЙСТВИЕ: +{} ИНИЦИАТИВЫ, ЛЕЧИТЬ {} ЗДОРОВЬЯ
-wizard_hat_name;Wizard Hat;Шляпа Колдуна
-wizard_hat_desc;ACTION: HEAL {} HEALTH;ДЕЙСТВИЕ: ВЫЛЕЧИТЬ {} ЗДОРОВЬЯ
+chef_name;Chef;Повар
+chef_desc;ACTION: HEAL {} HEALTH;ДЕЙСТВИЕ: ВЫЛЕЧИТЬ {} ЗДОРОВЬЯ
 alcohol_name;Alcohol;Алкоголь
 alcohol_desc;START TURN: +{} POWER, LOSE {} HEALTH;НАЧАЛО ХОДА: +{} МОЩЬ, ПОТЕРЯ {} ЗДРАВИЙ
 bomb_name;Bomb;Бомба

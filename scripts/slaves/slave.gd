@@ -30,6 +30,9 @@ var trinket2 : Item
 var is_evil : bool
 var is_alive : bool
 
+signal item_equipped(item: Item)
+signal item_unequipped(item: Item)
+
 func localize() -> void:
 	pass
 
@@ -115,8 +118,10 @@ func equip(item: Item, trinket_id: int = 1) -> Item:
 				old_item = trinket2
 				trinket2 = item
 				
-	old_item.on_unequip(self)	
+	old_item.on_unequip(self)
 	item.on_equip(self)
+	item_equipped.emit(item)
+	item_unequipped.emit(old_item)
 	
 	return old_item
 

@@ -40,14 +40,6 @@ func localize() -> void:
 		info_title.append(tr(u_name + "_title_" + str(i)))
 		info.append(tr(u_name + "_info_" + str(i)))
 
-#func serialize() -> Dictionary:
-#	var data = super.serialize()
-#	data.merge({
-#		
-#	})
-#	return data
-#
-
 static func deserialize(data: Dictionary) -> Enemy:
 	var enemy : Enemy = SlavePool.fetch(data["u_name"])
 	
