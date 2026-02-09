@@ -168,6 +168,7 @@ func load_save() -> void:
 
 func _prepare_good_boys() -> void:
 	good_boys = [SlavePool.fetch("blob"), SlavePool.fetch("blob"), SlavePool.fetch("blob")]
+	good_boys[0].hp = 1
 
 func _prepare_deck() -> void:
 	# items
@@ -271,11 +272,11 @@ func arrange_evil_team() -> Array[Slave]:
 	
 	for i in range(3):
 		var enemy = evil_deck.pop_back()
-		#enemy = SlavePool.fetch("swirly")
+		enemy = SlavePool.fetch("swirly")
 		if enemy != null:
 			# DEBUG
 			#enemy.equip(ItemPool.fetch("viking_helmet"))
-			#enemy.equip(ItemPool.fetch("jester_hat"))
+			enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
 			#enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
 			#enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
 			team.append(enemy)

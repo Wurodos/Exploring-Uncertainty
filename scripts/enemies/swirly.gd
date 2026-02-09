@@ -1,9 +1,19 @@
 extends Enemy
 
 @export var harm: int = 5
+var turn := 0
 
 func _init() -> void:
 	super._init()
+	
+
+func _speedup() -> void:
+	turn += 1
+	if turn == 1:
+		return
+	
+	owner.set_speed(+1)
+	
 
 func localize() -> void:
 	super.localize()
@@ -12,6 +22,7 @@ func localize() -> void:
 func update_stats(node: SlaveNode) -> void:
 	super.update_stats(node)
 	owner = node
+	SignalBus.new_round.connect(_speedup)
 	localize()
 
 # STRATEGY: HIT AND RUN
@@ -22,27 +33,10 @@ func update_stats(node: SlaveNode) -> void:
 func decide_intention() -> void:
 	super.decide_intention()
 	
-	if not owner.held.weapon.is_item():
-		intention = Intention.new(Intention.Type.Run)
+	if turn >= 4 or not owner.held.weapon.is_item() or owner.held.hp <= owner.held.maxhp / 2:
+		_intention_run()
 		return
 	
-	var hat_target: int = -1
-	var max_priority: int = 0
-	for i in range(Battle.instance.evil_team.boys_nodes.size()):
-		var slave = Battle.instance.evil_team.boys_nodes[i]
-		var priority = owner.held.hat.get_priority(owner, slave)
-		if owner.held.hat.target == Item.Target.Self and owner != slave: continue
-		if priority > max_priority:
-			max_priority = priority
-			hat_target = i
-	decide_weapon_intention()
-
-func decide_weapon_intention() -> void:
 	var target = _get_random_good_target()
-	var victim = Battle.instance.good_team.boys_nodes[target]
-	
-	intention = owner.held.weapon.get_intention(owner)
-	intention.amount = owner.held.weapon.get_displayed_harm(owner, victim)
-	
-	if intention.targets.is_empty():
-		intention.targets = [target]
+	var victim = Battle.instance.good_team.boys_nodes[target]	
+	_intention_weapon(target, victim)

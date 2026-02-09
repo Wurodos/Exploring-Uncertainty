@@ -39,7 +39,6 @@ func _ready() -> void:
 		SignalBus.advance_tutorial.connect(_on_tutorial_ok_pressed)
 	
 	SignalBus.start_battle.connect(_on_start_battle)
-	SignalBus.new_round.connect(_on_new_round)
 	SignalBus.new_turn.connect(_on_new_turn)
 	SignalBus.mouse_dragged.connect(_on_mouse_dragged)
 	SignalBus.mouse_up.connect(_on_mouse_released)
@@ -64,12 +63,13 @@ func _on_start_battle():
 	for slave: SlaveNode in good_team.boys_nodes:
 		slave.start_battle()
 	
-	SignalBus.new_round.emit()
+	_on_new_round()
 	current_slave_position = -1
 	SignalBus.new_turn.emit()
 
 # Create speed queueasass
 func _on_new_round():
+	SignalBus.new_round.emit()
 	# Vigilance
 	for boy in good_team.boys_nodes: 
 		if boy.held.is_alive:
@@ -135,7 +135,7 @@ func _on_new_turn() -> void:
 			slave.ticker_down_buffs()
 		for slave : SlaveNode in evil_team.boys_nodes:
 			slave.ticker_down_buffs()
-		SignalBus.new_round.emit()
+		_on_new_round()
 	else:
 		if not speed_queue[current_slave_position].is_alive:
 			_on_new_turn()
@@ -146,10 +146,13 @@ func _on_new_turn() -> void:
 	# If there are friendly slaves going in a row, player should be able to choose
 	
 	current_slaves = []
+	var dead: int = 0
 	for i in range(current_slave_position, speed_queue.size()):
 		var slave = speed_queue[i]
 		if slave is Enemy: break
-		if not slave.is_alive: continue
+		if not slave.is_alive:
+			dead += 1 
+			continue
 		current_slaves.append(slave)
 		get_queue_element(i).toggle_select(true)
 	
@@ -164,6 +167,9 @@ func _on_new_turn() -> void:
 		for slave_node in good_team.boys_nodes:
 			if current_slaves.has(slave_node.held):
 				slave_node.start_turn()
+	
+	current_slave_position += dead
+
 
 func _on_slave_death(slave_node: SlaveNode, is_loot: bool = true) -> void:
 	if slave_node.held is Enemy:
@@ -234,7 +240,8 @@ func _on_mouse_released():
 		current_slaves.erase(selected_sender.held)
 		if current_slaves.is_empty():
 			SignalBus.new_turn.emit()
-		else: current_slave_position += 1
+		else:
+			current_slave_position += 1
 
 func _on_slave_mouse_entered(slave_node: SlaveNode):
 	if is_line:

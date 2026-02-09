@@ -60,14 +60,14 @@ func decide_weapon_intention() -> void:
 	var victim = Battle.instance.good_team.boys_nodes[target]
 	
 	if owner.held.weapon.is_item() and burning_road_dmg <= owner.held.weapon.get_harm():
-		intention = owner.held.weapon.get_intention(owner)
-		intention.amount = owner.held.weapon.get_displayed_harm(owner, victim)
+		_intention_weapon(target, victim)
 	else:
 		intention.type = Intention.Type.DamageSingular
 		intention.is_support = false
 		intention.amount = Action.calculate_damage(owner, victim, burning_road_dmg)
 		intention.effect = func(v: SlaveNode):
 			Action.deal_damage(owner, v, burning_road_dmg)
+		if intention.targets.is_empty():
+			intention.targets = [target]
 	
-	if intention.targets.is_empty():
-		intention.targets = [target]
+	

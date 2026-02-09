@@ -64,7 +64,15 @@ func decide_intention() -> void:
 	intention = Intention.new(Intention.Type.None)
 	intention.targets = []
 
+func _intention_run() -> void:
+	intention = Intention.new(Intention.Type.Run)
+	intention.is_support = true
 
+func _intention_weapon(target: int, victim: SlaveNode) -> void:
+	intention = owner.held.weapon.get_intention(owner)
+	intention.amount = owner.held.weapon.get_displayed_harm(owner, victim)
+	if intention.targets.is_empty():
+		intention.targets = [target]
 
 func _get_random_good_target() -> int:
 	var possible : Array[int] = []

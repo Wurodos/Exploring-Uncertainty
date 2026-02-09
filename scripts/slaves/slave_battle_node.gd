@@ -211,7 +211,7 @@ func toggle_ellipse(visible: bool):
 
 func attack(victim: SlaveNode):
 	#$AnimationPlayer.play("jump")
-	if not tags.has(Action.TAG_VIGILANCE_KEEP_ATTACK) and vigilance:
+	if not tags.has(Action.TAG_VIGILANCE_KEEP_ATTACK):
 		viable_for_vigilance = false
 	match(held.weapon.target):
 		Item.Target.Single: 
@@ -262,17 +262,22 @@ func execute_intention():
 	
 	await get_tree().create_timer(1).timeout
 	if not held_enemy.intention.is_support:
-		if not tags.has(Action.TAG_VIGILANCE_KEEP_ATTACK) and vigilance:
+		if not tags.has(Action.TAG_VIGILANCE_KEEP_ATTACK):
 			viable_for_vigilance = false
 		for target_id in held_enemy.intention.targets:
 			var victim: SlaveNode = Battle.instance.good_team.boys_nodes[target_id]
 			held_enemy.intention.effect.call(victim)
 			attacked.emit(victim)
 	else:
-		for target_id in held_enemy.intention.targets:
-			var victim: SlaveNode = Battle.instance.evil_team.boys_nodes[target_id]
-			held_enemy.intention.effect.call(victim)
-	
+		match(held_enemy.intention.type):
+			Enemy.Intention.Type.Run:
+				visible = false
+				held.is_alive = false
+				SignalBus.slave_ran.emit(self)
+			_:
+				for target_id in held_enemy.intention.targets:
+					var victim: SlaveNode = Battle.instance.evil_team.boys_nodes[target_id]
+					held_enemy.intention.effect.call(victim)
 	_on_end_turn()
 	await get_tree().create_timer(1).timeout
 	#$AnimationPlayer.play("idle")
@@ -335,7 +340,7 @@ func update_intention() -> void:
 	var held_enemy : Enemy = held
 	var total = held_enemy.intention.amount
 	
-	if total == 0: $Intention/Label.text = ""
+	if total <= 0: $Intention/Label.text = ""
 	else: $Intention/Label.text = str(total)
 	
 	var icon: Texture2D 
