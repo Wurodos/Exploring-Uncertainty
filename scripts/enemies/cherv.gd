@@ -6,6 +6,7 @@ class_name Cherv
 @export var harm_higher: int = 5
 
 var used_hat: bool = false
+var dont_change_target: bool = false
 
 func _init() -> void:
 	super._init()
@@ -23,6 +24,7 @@ func update_stats(node: SlaveNode) -> void:
 # changes target if attacked, new target is attacker
 func on_attacked(attacker: SlaveNode) -> void:
 	super.on_attacked(attacker)
+	if dont_change_target: return
 	if intention and intention.targets.size() == 1:
 		if intention.is_support: decide_weapon_intention()
 		intention.targets = [CurrentRun.good_boys.find(attacker.held)]
@@ -34,6 +36,7 @@ func on_attacked(attacker: SlaveNode) -> void:
 # Chooses targets for weapons randomly
 func decide_intention() -> void:
 	super.decide_intention()
+	dont_change_target = false
 	
 	var hat_target: int = -1
 	var max_priority: int = 0

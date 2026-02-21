@@ -160,7 +160,7 @@ func _on_close_pressed() -> void:
 	if _transaction_made:
 		CurrentRun.state = Game.State.Map
 	else:
-		CurrentRun.arrange_difficult()
+		CurrentRun.arrange_difficult(Map.instance.zone_id)
 		SignalBus.battle_encounter.emit()
 	
 	SignalBus.end_encounter.emit()

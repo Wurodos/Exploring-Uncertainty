@@ -5,9 +5,10 @@
 
 [resource]
 script = ExtResource("1_6irpt")
-info_count = 4
+info_count = 2
 u_name = &"quagmire"
 base_maxhp = 15
 base_speed = 1
+sprite_size = 3
 texture = ExtResource("2_gfinq")
 metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

@@ -2,9 +2,31 @@
 
 [ext_resource type="Script" uid="uid://dg0wgkr3k67vm" path="res://scripts/map/room.gd" id="1_gam1e"]
 [ext_resource type="Texture2D" uid="uid://w3ytklewie86" path="res://images/rooms/tile.png" id="1_s8gc4"]
+[ext_resource type="FontFile" uid="uid://hym6fbjhhg2u" path="res://text/font/Share-Tech-CYR.otf" id="3_nl2et"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_130mn"]
+font = ExtResource("3_nl2et")
+font_size = 48
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Room" type="Node2D" unique_id=1995894429]
 script = ExtResource("1_gam1e")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=570137812]
 texture = ExtResource("1_s8gc4")
+
+[node name="Label" type="Label" parent="." unique_id=1971627312]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+label_settings = SubResource("LabelSettings_130mn")
+horizontal_alignment = 1
+vertical_alignment = 1

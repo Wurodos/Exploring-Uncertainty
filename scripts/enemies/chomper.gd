@@ -9,27 +9,20 @@ func localize() -> void:
 	super.localize()
 	info[0] = info[0].format([harm], "{}")
 
-# weapon = +1 dmg
-# hat = +1 luck
-# trinket = 
-# 	1 - +1 speed
-#	2 - +1 speed
-
 func update_stats(node: SlaveNode) -> void:
 	super.update_stats(node)
-	if hat.is_item():
-		harm += 1
-	if weapon.is_item(): harm += 2
-	if trinket1.is_item():
-		harm += 1
-		node.set_speed(+1)
-	if trinket2.is_item():
-		harm += 1
-		node.set_speed(+1)
 	localize()
 
-# attacks everyone (no other move)
+# Attacks everyone
+# Can never wield weapons
 
 func decide_intention() -> void:
 	super.decide_intention()
 	intention = Intention.new(Intention.Type.DamageMultiple, harm)
+	intention.type = Intention.Type.DamageSingular
+	intention.amount = Action.calculate_damage(owner, null, harm)
+	intention.is_support = false
+	intention.effect = func(v: SlaveNode):
+		Action.deal_damage(owner, v, harm)
+	for i in range(Battle.instance.good_team.boys_nodes.size()):
+		intention.targets.append(i)

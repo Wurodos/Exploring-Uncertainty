@@ -23,20 +23,33 @@ var scraps: Dictionary[Item.Scrap, int] = {
 var discounts : int = 0
 var is_comms_repaired : bool = false
 var messages_not_seen: Array[int] = [0,1,2,3,4,5,6,7,8,9]
+var elevators_repaired: int = 0
 
 var state: Game.State = Game.State.Map
 
 # deck will consist of 'cards' = enemy slaves or empty slots
-# when card is removed, another is shuffled from archive 
-# tough battles are basically 3 next cards from archive
+# cherv camp =  3 (2 in 1st zone) battles back to back (waves)
+# items are also in a deck, so no repeats until reshuffle
 #
-# starting deck:
-# 	16 cherv, 8 empty
-# 	4 hats, 4 weapons, 8 trinkets
-#
-# archive:
-#	x4 starry, x2 quagmire, x2 swirly, x1 chomper, 3 empty shuffled
-#	4 hats, 4 weapons, 8 trinkets
+# ====== Zone 0 ======
+# Only Chervs. Draw 4 cards
+# DECK: CCCCCC--
+# ITEM LVL: 1
+# 3 weapons, 3 hats, 6 trinkets
+# ====== Zone 1 ======
+# Add Starrys (S) and Swirlys (W). Draw 3 cards
+# DECK: CCCCSSSWW--
+# ITEM LVL: Half lvl 1, half lvl 2
+# Swirlys always have a weapon (2) + 4 weapons
+# 6 hats, 10 trinkets
+# ====== Zone 2 ======
+# Add the rest of enemies. 5 cards
+# DECK: 
+# ITEM LVL: Half lvl 2, half lvl 3
+# ====== Zone 3 ======
+# All enemies have full equipment. 5 cards.
+# DECK: 
+# ITEM LVL: all lvl 4
 
 
 var evil_deck: Array[Slave] = []
@@ -168,7 +181,7 @@ func load_save() -> void:
 
 func _prepare_good_boys() -> void:
 	good_boys = [SlavePool.fetch("blob"), SlavePool.fetch("blob"), SlavePool.fetch("blob")]
-	good_boys[0].hp = 1
+	#good_boys[0].hp = 1
 
 func _prepare_deck() -> void:
 	# items
@@ -259,26 +272,14 @@ func _prepare_archive() -> void:
 	#		print("NO SLAVE")
 	#	else: slave.debug()
 
-func arrange_evil_team() -> Array[Slave]:
-	##	Debug
-	#CurrentRun.evil_boys = [ReptilePool.fetch("roots_and_toots")]
-	#CurrentRun.evil_boys[0].equip(ItemPool.fetch_random(Item.Type.Weapon))
-	#CurrentRun.evil_boys[0].equip(ItemPool.fetch_random(Item.Type.Hat))
-	#CurrentRun.evil_boys[0].equip(ItemPool.fetch_random(Item.Type.Trinket),1)
-	#CurrentRun.evil_boys[0].equip(ItemPool.fetch_random(Item.Type.Trinket),2)
-	#return
+
+func arrange_evil_team(zone: int) -> Array[Slave]:
 	
 	var team : Array[Slave] = []
 	
 	for i in range(3):
 		var enemy = evil_deck.pop_back()
-		enemy = SlavePool.fetch("swirly")
 		if enemy != null:
-			# DEBUG
-			#enemy.equip(ItemPool.fetch("viking_helmet"))
-			enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
-			#enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
-			#enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
 			team.append(enemy)
 	
 	if CurrentRun.is_battle_tutorial and team[0]:
@@ -309,7 +310,7 @@ func put_item_in_inventory(item: Item) -> void:
 	
 	CurrentRun.inventory.append(item)
 
-func arrange_difficult() -> void:
+func arrange_difficult(zone: int) -> void:
 	CurrentRun.evil_boys = []
 	for i in range(3):
 		evil_deck.append(evil_archive.pop_back())

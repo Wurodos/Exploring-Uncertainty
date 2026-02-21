@@ -12,8 +12,6 @@ func _init() -> void:
 
 func localize() -> void:
 	super.localize()
-	info[0] = info[0].format([power_gain, shield_turns], "{}")
-	info[1] = info[1].format([harm_lower, harm_higher], "{}")
 
 # weapon = +2 dmg range
 # hat = shield gain increase
@@ -23,75 +21,98 @@ func localize() -> void:
 
 func update_stats(node: SlaveNode) -> void:
 	super.update_stats(node)
-	if hat.is_item(): 
-		shield_turns += 1
-	if weapon.is_item():
-		harm_lower += 4
-		harm_higher += 4
-	if trinket1.is_item():
-		node.set_max_hp(+2) 
-		node.set_hp(+2) 
-		node.set_speed(+1)
-	if trinket2.is_item():
-		node.set_max_hp(+3)
-		node.set_hp(+3) 
-		power_gain += 2
 	localize()
 
-# Commands troops 
-# If there are cherv(s) in the battle: will order them to attack
-# Else if there are chomper(s): will shield 1 turn and power 1 to self
-# Else rotates between:
-#	1) Attack
-#	2) Summon naked cherv if there's space, otherwise shield + power
-
-
+# Commands chervs 
+# If <2 chervs and didnt do this last turn, summons 1 with random items 
+#		(max x3 per battle)
+# 1.	There is someone chervs can kill with collective damage:
+#		Every cherv receives +1 power, focuses specific target (no narrowmind)
+# 		Only if no other starrys do this
+# 2.	Uses hat on self/not cherv if priority is at least +2
+# 3.	Uses hat on cherv that is attacking. They attack instantly 
+# 4. 	Uses weapon
 
 var times_attacked: int = 0
 
 func on_attacked(attacker: SlaveNode) -> void:
 	super.on_attacked(attacker)
-	if intention.type == Intention.Type.DamageSingular or intention.type == Intention.Type.OrderChervs:
-		intention.target = _convert_node_to_target(attacker, CurrentRun.good_boys)
-		owner.update_intention()
+
+var reinforced_last_turn := false
+var summons_left := 3
 
 func decide_intention() -> void:
 	super.decide_intention()
 	
-	var alive_n = 0
-	for ally : SlaveNode in owner.team.boys_nodes:
-		if ally.held.is_alive:
-			alive_n += 1
+	var cherv_count := Battle.instance.evil_team.boys.filter(func(boy: Slave): return boy.u_name == "cherv").size()
+	if summons_left > 0 and cherv_count < 2 and not reinforced_last_turn:
+		summons_left -= 1
+		intention.type = Intention.Type.Reinforcement
+		intention.is_support = true
+		reinforced_last_turn = true
+		return
 	
-	for ally : SlaveNode in owner.team.boys_nodes:
-		if ally.held.is_alive and ally.held.u_name == "cherv":
-			intention = Intention.new(Intention.Type.OrderChervs)
-			intention.target = _get_random_good_target()
-			return 	
+	reinforced_last_turn = false
+	var hat_target: int = -1
+	var max_priority: int = -1
+	var extra_action := false
+	var starry_order := false
+	var chervs: Array[Cherv] = []
 	
-	# if no chervs
-	
-	for ally : SlaveNode in owner.team.boys_nodes:
-		if ally.held.is_alive and ally.held.u_name == "chomper":
-			intention = Intention.new(Intention.Type.HealSingle, heal_amount)
-			intention.target = _convert_node_to_target(ally, CurrentRun.evil_boys)
-			intention.extra_effect = func() :
-				owner.add_buff(Action.SHIELD, 1)
-			return 	
-	 
-	# if no chervs nor chompers
-	if alive_n < 3 and hp > maxhp * 4 / 5:
-		intention = Intention.new(Intention.Type.SummonCherv, 1)
-	elif times_attacked % 2 == 1:
-		intention = Intention.new(Intention.Type.PowerUp, power_gain)
-		intention.target = _get_self_target()
-		intention.extra_effect = func():
-			owner.add_buff(Action.SHIELD, shield_turns)
-		times_attacked += 1
-	else:
-		intention = Intention.new(Intention.Type.DamageSingular, randi_range(harm_lower, harm_higher))
-		intention.target = _get_random_good_target()
-		times_attacked += 1
-	
+	for i in range(Battle.instance.evil_team.boys_nodes.size()):
+		var slave = Battle.instance.evil_team.boys_nodes[i]
+		var priority = owner.held.hat.get_priority(owner, slave)
 		
+		if (slave.held as Enemy).intention.type == Intention.Type.OrderChervs:
+			starry_order = true
+		if slave.held is Cherv: chervs.append(slave.held)
+		
+		if owner.held.hat.target == Item.Target.Self and owner != slave: continue
+		if priority < +2 and (not slave.held is Cherv or (slave.held as Enemy).intention.is_support):
+			continue
+		if priority > max_priority:
+			max_priority = priority
+			extra_action = slave.held.u_name == "cherv"
+			hat_target = i
+	if not starry_order:
+		var order_victim := -1
+		
+		for i in range(Battle.instance.good_team.boys_nodes.size()):
+			var victim = Battle.instance.good_team.boys_nodes[i]
+			if not victim.held.is_alive: continue
+			var cherv_total_damage := 0
+			for cherv in chervs:
+				cherv_total_damage += 1 + cherv.weapon.get_displayed_harm(cherv.owner, victim)
+			if victim.held.hp <= cherv_total_damage:
+				order_victim = i
+		
+		if order_victim != -1:
+			intention.type = Intention.Type.OrderChervs
+			intention.is_support = true
+			intention.targets = [order_victim]
+			return	
+	
+	if hat_target > -1:
+		intention = owner.held.hat.get_intention(owner)
+		
+		if extra_action:
+			var fun := intention.effect
+			var cherv = Battle.instance.evil_team.boys_nodes[hat_target]
+			intention.effect = func(v):
+				fun.call(v)
+				var victim : SlaveNode = Battle.instance.good_team.boys_nodes.filter(func(enemy: SlaveNode): return enemy.held.is_alive).pick_random()
+				cherv.held.weapon.get_intention(cherv).effect.call(victim)
+				cherv.attacked.emit(victim)
+				cherv.turn_ended.emit()
+						
+		if intention.targets.is_empty():
+			intention.targets = [hat_target]
+	else:
+		if weapon.is_item():
+			var target = _get_random_good_target()
+			var victim = Battle.instance.good_team.boys_nodes[target]	
+			_intention_weapon(target, victim)
+		else:
+			intention.type = Intention.Type.Reinforcement
+			intention.is_support = true
 	

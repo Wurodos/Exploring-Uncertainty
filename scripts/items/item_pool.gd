@@ -9,11 +9,11 @@ var _actual_items : Array[Item] = []
 
 func _ready() -> void:
 	for subfolder in ["weapons", "trinkets", "hats"]:
-		var dir_access : DirAccess = DirAccess.open("res://pool/items/"+subfolder)
+		var dir_access : DirAccess = DirAccess.open("res://pool/items/tier1/"+subfolder)
 		var files : PackedStringArray = dir_access.get_files()
 		
 		for file_name : String in files:
-			var loaded : Item = load(("res://pool/items/" + subfolder + "/" + file_name).trim_suffix(".remap"))
+			var loaded : Item = load(("res://pool/items/tier1/" + subfolder + "/" + file_name).trim_suffix(".remap"))
 			loaded.u_name = file_name.trim_suffix(".remap")
 			loaded.u_name = loaded.u_name.trim_suffix(".tres")
 			

@@ -363,6 +363,7 @@ libraries/ = SubResource("AnimationLibrary_fpf3k")
 autoplay = &"swing"
 
 [node name="GoodTeam" type="Node2D" parent="World" unique_id=2065611946]
+y_sort_enabled = true
 position = Vector2(39.999992, 64)
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_dn72j")
@@ -385,6 +386,7 @@ position = Vector2(-489.41174, 169.41176)
 position = Vector2(-489.41174, -131.7647)
 
 [node name="EvilTeam" type="Node2D" parent="World" unique_id=1453637202 node_paths=PackedStringArray("ropes")]
+y_sort_enabled = true
 position = Vector2(-96.00001, 64)
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_dn72j")

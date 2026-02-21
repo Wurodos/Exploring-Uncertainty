@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ot7y20rg1fqo"]
 
 [ext_resource type="Script" uid="uid://de24o14tl4lyy" path="res://scripts/slaves/slave_battle_node.gd" id="1_kr451"]
-[ext_resource type="Texture2D" uid="uid://bvt0n20v88f7o" path="res://images/slaves/blob.png" id="2_r6t30"]
+[ext_resource type="Texture2D" uid="uid://c0s374bsgkkra" path="res://images/slaves/quagmire.png" id="3_f4yho"]
 [ext_resource type="Texture2D" uid="uid://csw6m50jq853n" path="res://images/shapes/ellipse.png" id="3_m7i15"]
 [ext_resource type="Texture2D" uid="uid://c102ib72qlv7l" path="res://images/items/sword.png" id="3_r6t30"]
 [ext_resource type="Texture2D" uid="uid://dcprd1kuvkwce" path="res://images/items/wizard_hat.png" id="4_ajk8k"]
@@ -346,7 +346,7 @@ gizmo_extents = 66.5
 [node name="Sprite" type="Sprite2D" parent="Parts/Visual" unique_id=447885340]
 position = Vector2(0, -50)
 scale = Vector2(0.20000002, 0.20000002)
-texture = ExtResource("2_r6t30")
+texture = ExtResource("3_f4yho")
 
 [node name="Vigilance" type="Sprite2D" parent="Parts/Visual" unique_id=746944608]
 unique_name_in_owner = true
@@ -387,7 +387,7 @@ visible = false
 texture = ExtResource("3_r6t30")
 
 [node name="Hat" type="Node2D" parent="Parts/Visual/BigItems" unique_id=932244923]
-position = Vector2(21.999992, -98)
+position = Vector2(21.777775, -43.77778)
 scale = Vector2(0.15, 0.15)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/BigItems/Hat" unique_id=578580728]
@@ -395,7 +395,7 @@ visible = false
 texture = ExtResource("4_ajk8k")
 
 [node name="Trinket2" type="Node2D" parent="Parts/Visual/BigItems" unique_id=2120876131]
-position = Vector2(-6.6666665, 34)
+position = Vector2(-43.555553, 15.777778)
 scale = Vector2(0.1, 0.1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/BigItems/Trinket2" unique_id=1781373849]
@@ -403,10 +403,53 @@ visible = false
 texture = ExtResource("6_f4yho")
 
 [node name="Trinket1" type="Node2D" parent="Parts/Visual/BigItems" unique_id=1384457555]
-position = Vector2(-40.666664, 44)
+position = Vector2(-22.222221, 6.4444447)
 scale = Vector2(0.1, 0.1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/BigItems/Trinket1" unique_id=62819612]
+visible = false
+texture = ExtResource("6_f4yho")
+
+[node name="TwoHeads" type="Node2D" parent="Parts/Visual" unique_id=1674196508]
+position = Vector2(0, -50)
+
+[node name="Weapon" type="Node2D" parent="Parts/Visual/TwoHeads" unique_id=1999808745]
+position = Vector2(51.333336, 0.6666651)
+scale = Vector2(0.15, 0.15)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/TwoHeads/Weapon" unique_id=169141644]
+visible = false
+texture = ExtResource("3_r6t30")
+
+[node name="Extra" type="Node2D" parent="Parts/Visual/TwoHeads" unique_id=184015143]
+position = Vector2(-22.666666, -48)
+scale = Vector2(0.13, 0.13)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/TwoHeads/Extra" unique_id=1427534276]
+visible = false
+texture = ExtResource("4_ajk8k")
+
+[node name="Hat" type="Node2D" parent="Parts/Visual/TwoHeads" unique_id=703186280]
+position = Vector2(21.777775, -43.77778)
+scale = Vector2(0.15, 0.15)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/TwoHeads/Hat" unique_id=616619239]
+visible = false
+texture = ExtResource("4_ajk8k")
+
+[node name="Trinket2" type="Node2D" parent="Parts/Visual/TwoHeads" unique_id=1686447016]
+position = Vector2(-43.555553, 15.777778)
+scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/TwoHeads/Trinket2" unique_id=803985509]
+visible = false
+texture = ExtResource("6_f4yho")
+
+[node name="Trinket1" type="Node2D" parent="Parts/Visual/TwoHeads" unique_id=716068758]
+position = Vector2(-19.333334, 22.666668)
+scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/TwoHeads/Trinket1" unique_id=1757522092]
 visible = false
 texture = ExtResource("6_f4yho")
 

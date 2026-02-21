@@ -15,3 +15,9 @@ func get_harm() -> int:
 
 func get_displayed_harm(sender: SlaveNode, victim: SlaveNode) -> int:
 	return Action.calculate_damage(sender, victim, harm)
+
+func get_intention(sender: SlaveNode) -> Enemy.Intention:
+	var intention = Enemy.Intention.new(Enemy.Intention.Type.DamageSingular)
+	intention.effect = func(v):
+		use_item(sender, v)
+	return intention

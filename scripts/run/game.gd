@@ -30,8 +30,8 @@ func _ready() -> void:
 	## DEBUG -> Inventory 
 	#CurrentRun.inventory.append(ItemPool.fetch("viking_helmet"))
 	#CurrentRun.inventory.append(ItemPool.fetch("alcohol"))
-	#for i in range(20):
-	#	CurrentRun.inventory.append(ItemPool.fetch_random())
+	for i in range(20):
+		CurrentRun.inventory.append(ItemPool.fetch_random())
 	
 
 func _on_battle_encounter() -> void:

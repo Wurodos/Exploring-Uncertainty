@@ -25,7 +25,7 @@ func _on_slave_info(slave: Enemy):
 	
 	var i = slave.info_count
 	var actual_entries = slave.info_count
-	for item : Item in [slave.weapon, slave.hat, slave.trinket1, slave.trinket2]:
+	for item : Item in slave.get_all_items():
 		var entry: ItemEntry = $Entries.get_child(i)
 		entry.item_name.text = item.name
 		entry.item_desc.text = item.desc

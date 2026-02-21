@@ -16,12 +16,14 @@
 [ext_resource type="PackedScene" uid="uid://dj5w5iqx004t4" path="res://prefabs/battle/item_entry.tscn" id="7_nakos"]
 [ext_resource type="Texture2D" uid="uid://bo8wxy1ul73tg" path="res://images/rooms/37.png" id="7_sq6bu"]
 [ext_resource type="Texture2D" uid="uid://k20uxq34h120" path="res://images/rooms/comms.png" id="8_5u2yt"]
-[ext_resource type="Texture2D" uid="uid://bdkbuhwojnmqq" path="res://images/rooms/fog.png" id="8_m335s"]
 [ext_resource type="Texture2D" uid="uid://ci8n274kmlk22" path="res://images/rooms/city_ruin.png" id="9_la2vj"]
+[ext_resource type="Texture2D" uid="uid://d16g0ecde2caq" path="res://images/rooms/elevator.png" id="10_7s432"]
 [ext_resource type="Script" uid="uid://dvl21h34uashq" path="res://scripts/map/city_window.gd" id="11_c70he"]
 [ext_resource type="Texture2D" uid="uid://ctm4vajohb528" path="res://images/shapes/arrow.png" id="11_lhdcv"]
 [ext_resource type="Script" uid="uid://ql10jr5klb8g" path="res://scripts/map/govnov_window.gd" id="12_4b7dj"]
+[ext_resource type="Texture2D" uid="uid://dpngkq6qgoes6" path="res://images/rooms/highlight.png" id="12_7s432"]
 [ext_resource type="Texture2D" uid="uid://dhfpnnlwg86d" path="res://images/backdrops/city.png" id="12_mo32q"]
+[ext_resource type="Texture2D" uid="uid://bdkbuhwojnmqq" path="res://images/rooms/fog.png" id="12_s2dh3"]
 [ext_resource type="Script" uid="uid://bg2spyp44xpw7" path="res://scripts/common/btn_localized.gd" id="12_y2ir2"]
 [ext_resource type="Texture2D" uid="uid://jhgrrel3ox4a" path="res://images/backdrops/govnov.png" id="13_sq6bu"]
 [ext_resource type="Texture2D" uid="uid://bs1oxtclo4qgp" path="res://images/icons/coin.png" id="14_6k6j1"]
@@ -47,6 +49,7 @@
 [ext_resource type="Texture2D" uid="uid://dls2t3f7lvsqx" path="res://images/shapes/tutorial_box.png" id="33_12q1p"]
 [ext_resource type="LabelSettings" uid="uid://dhb60ypduj2te" path="res://text/labelsettings/tutorial_box.tres" id="34_lhdcv"]
 [ext_resource type="Script" uid="uid://dd2yytdivaq0j" path="res://scripts/common/label_localized.gd" id="35_cgoaf"]
+[ext_resource type="Script" uid="uid://c8rdumvdrdg4e" path="res://scripts/map/elevator_window.gd" id="45_baix8"]
 
 [sub_resource type="Animation" id="Animation_5u2yt"]
 length = 0.001
@@ -85,15 +88,21 @@ _data = {
 &"battle_start": SubResource("Animation_y2ir2")
 }
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sq6bu"]
-texture = ExtResource("8_m335s")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8kgjo"]
+texture = ExtResource("12_s2dh3")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_baix8"]
+texture = ExtResource("12_7s432")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_6k6j1"]
 resource_name = "fog"
 tile_size = Vector2i(128, 128)
-sources/0 = SubResource("TileSetAtlasSource_sq6bu")
+sources/2 = SubResource("TileSetAtlasSource_baix8")
+sources/0 = SubResource("TileSetAtlasSource_8kgjo")
 
 [sub_resource type="Animation" id="Animation_2cfcp"]
 length = 0.001
@@ -330,7 +339,7 @@ font_color = Color(0, 0.788235, 0, 1)
 
 [node name="Map" type="Node2D" unique_id=5666962]
 script = ExtResource("1_blm8a")
-size = 18
+size = 38
 branch_chance = 0.35
 city_rate = 0.06
 cherv_rate = 0.09
@@ -345,7 +354,8 @@ room_sprites = Dictionary[int, Texture2D]({
 4: ExtResource("6_m335s"),
 5: ExtResource("7_sq6bu"),
 6: ExtResource("8_5u2yt"),
-8: ExtResource("9_la2vj")
+8: ExtResource("9_la2vj"),
+9: ExtResource("10_7s432")
 })
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=289759729]
@@ -360,6 +370,16 @@ libraries/ = SubResource("AnimationLibrary_30iet")
 [node name="Player" type="Sprite2D" parent="World" unique_id=1584799164]
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_be0no")
+
+[node name="Highlight" type="Node2D" parent="World" unique_id=2041734289]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="World/Highlight" unique_id=1177760279]
+position = Vector2(-64, -64)
+tile_set = SubResource("TileSet_6k6j1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World/Highlight" unique_id=1012278190]
+libraries/ = SubResource("AnimationLibrary_y2ir2")
+autoplay = &"fog"
 
 [node name="Fog" type="Node2D" parent="World" unique_id=1289513290]
 visible = false
@@ -388,7 +408,7 @@ autoplay = &"spin"
 script = ExtResource("3_blm8a")
 speed = 600.0
 drag_multiplier = 2.0
-bound = 1100.0
+bound = 2200.0
 
 [node name="GUI" type="CanvasLayer" parent="." unique_id=1990985239]
 
@@ -1163,6 +1183,7 @@ offset_right = 526.0
 offset_bottom = 364.0
 
 [node name="CityWindow" type="Control" parent="GUI/UI" unique_id=86512069]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -1469,6 +1490,172 @@ label_settings = SubResource("LabelSettings_yfm5w")
 autowrap_mode = 3
 script = ExtResource("32_yfm5w")
 
+[node name="ElevatorWindow" type="Control" parent="GUI/UI" unique_id=2041142128]
+anchors_preset = 0
+offset_left = 575.0
+offset_top = 320.0
+offset_right = 615.0
+offset_bottom = 360.0
+script = ExtResource("45_baix8")
+required_points = 4
+
+[node name="ColorRect" type="ColorRect" parent="GUI/UI/ElevatorWindow" unique_id=911538930]
+layout_mode = 0
+offset_left = -726.0
+offset_top = -398.0
+offset_right = 658.0
+offset_bottom = 351.0
+color = Color(0, 0, 0, 0.513726)
+
+[node name="BG" type="TextureRect" parent="GUI/UI/ElevatorWindow" unique_id=1259596775]
+self_modulate = Color(1, 0.7137255, 0.078431375, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -416.0
+offset_top = -226.0
+offset_right = 444.0
+offset_bottom = 234.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("27_4o3w1")
+
+[node name="Close" type="Button" parent="GUI/UI/ElevatorWindow" unique_id=1459037464]
+layout_mode = 0
+offset_left = -395.0
+offset_top = -206.0
+offset_right = -295.0
+offset_bottom = -106.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_4xfga")
+theme_override_font_sizes/font_size = 64
+text = "X"
+
+[node name="Power" type="Button" parent="GUI/UI/ElevatorWindow" unique_id=1076419981]
+layout_mode = 0
+offset_left = 155.0
+offset_top = 161.0
+offset_right = 445.0
+offset_bottom = 237.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_4xfga")
+theme_override_font_sizes/font_size = 36
+script = ExtResource("12_y2ir2")
+string_id = &"comms_repair"
+metadata/_custom_type_script = "uid://bg2spyp44xpw7"
+
+[node name="ItemGrid" type="VBoxContainer" parent="GUI/UI/ElevatorWindow" unique_id=1012174327]
+z_index = 1
+layout_mode = 0
+offset_left = -380.0
+offset_top = 72.0
+offset_right = 139.0
+offset_bottom = 236.0
+mouse_filter = 2
+script = ExtResource("4_2klcf")
+row_capacity = 8
+
+[node name="Row1" type="HBoxContainer" parent="GUI/UI/ElevatorWindow/ItemGrid" unique_id=1603129230]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Row2" type="HBoxContainer" parent="GUI/UI/ElevatorWindow/ItemGrid" unique_id=2065315581]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Row3" type="HBoxContainer" parent="GUI/UI/ElevatorWindow/ItemGrid" unique_id=1858352632]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Required" type="HBoxContainer" parent="GUI/UI/ElevatorWindow" unique_id=1300015055]
+visible = false
+layout_mode = 0
+offset_left = -267.0
+offset_top = -109.0
+offset_right = 327.0
+offset_bottom = -5.0
+alignment = 1
+
+[node name="Weapons" type="TextureRect" parent="GUI/UI/ElevatorWindow/Required" unique_id=1621721244]
+self_modulate = Color(1, 0, 0, 0.627451)
+layout_mode = 2
+texture = ExtResource("29_mniao")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="GUI/UI/ElevatorWindow/Required/Weapons" unique_id=2123756253]
+layout_mode = 0
+offset_right = 101.0
+offset_bottom = 103.0
+text = "0"
+label_settings = SubResource("LabelSettings_081xv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Hats" type="TextureRect" parent="GUI/UI/ElevatorWindow/Required" unique_id=1256077279]
+self_modulate = Color(0, 0, 1, 0.627451)
+layout_mode = 2
+texture = ExtResource("29_mniao")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="GUI/UI/ElevatorWindow/Required/Hats" unique_id=793123425]
+layout_mode = 0
+offset_right = 101.0
+offset_bottom = 103.0
+text = "0"
+label_settings = SubResource("LabelSettings_081xv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Trinkets" type="TextureRect" parent="GUI/UI/ElevatorWindow/Required" unique_id=421242955]
+self_modulate = Color(0, 1, 0, 0.627451)
+layout_mode = 2
+texture = ExtResource("29_mniao")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="GUI/UI/ElevatorWindow/Required/Trinkets" unique_id=1357136516]
+layout_mode = 0
+offset_right = 101.0
+offset_bottom = 103.0
+text = "0"
+label_settings = SubResource("LabelSettings_081xv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Any" type="TextureRect" parent="GUI/UI/ElevatorWindow/Required" unique_id=326766542]
+self_modulate = Color(1, 1, 0, 0.627451)
+layout_mode = 2
+texture = ExtResource("29_mniao")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="GUI/UI/ElevatorWindow/Required/Any" unique_id=2128225012]
+layout_mode = 0
+offset_right = 101.0
+offset_bottom = 103.0
+text = "0"
+label_settings = SubResource("LabelSettings_081xv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Scroll" type="ScrollContainer" parent="GUI/UI/ElevatorWindow" unique_id=1545596879]
+layout_mode = 0
+offset_left = -285.0
+offset_top = -127.0
+offset_right = 365.0
+offset_bottom = 22.0
+
+[node name="TeleportOptions" type="HBoxContainer" parent="GUI/UI/ElevatorWindow/Scroll" unique_id=609646460]
+custom_minimum_size = Vector2(0, 149)
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
 [node name="Popups" type="Control" parent="GUI/UI" unique_id=728568135]
 z_index = 10
 anchors_preset = 0
@@ -1533,4 +1720,6 @@ metadata/_edit_use_anchors_ = true
 [connection signal="item_selected" from="GUI/UI/CityWindow/ShopSelect" to="GUI/UI/CityWindow" method="_on_shop_selected"]
 [connection signal="pressed" from="GUI/UI/CommsWindow/Close" to="GUI/UI/CommsWindow" method="_on_close_pressed"]
 [connection signal="pressed" from="GUI/UI/CommsWindow/Power" to="GUI/UI/CommsWindow" method="_on_power_pressed"]
+[connection signal="pressed" from="GUI/UI/ElevatorWindow/Close" to="GUI/UI/ElevatorWindow" method="_on_close_pressed"]
+[connection signal="pressed" from="GUI/UI/ElevatorWindow/Power" to="GUI/UI/ElevatorWindow" method="_on_power_pressed"]
 [connection signal="pressed" from="GUI/UI/TutorialBox/OK" to="." method="_on_tutorial_ok_pressed"]

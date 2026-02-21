@@ -5,7 +5,7 @@ class_name Enemy
 class Intention:
 	enum Type { DamageSingular, DamageMultiple, DamageTwo,
 	 PowerUp, HealSingle, HealMultiple, Run, SummonStars,
-	 SummonCherv, OrderChervs, None }
+	 Reinforcement, OrderChervs, Support, None }
 		
 	var type: Type
 	var amount: int = -1
@@ -30,6 +30,7 @@ var owner: SlaveNode
 
 func _init() -> void:
 	super._init()
+	intention = Intention.new(Intention.Type.None)
 	is_evil = true
 	info = []
 
@@ -63,6 +64,7 @@ func update_stats(node: SlaveNode) -> void:
 func decide_intention() -> void:
 	intention = Intention.new(Intention.Type.None)
 	intention.targets = []
+	intention.is_support = false
 
 func _intention_run() -> void:
 	intention = Intention.new(Intention.Type.Run)
@@ -94,9 +96,6 @@ func _get_2_good_targets() -> Array[int]:
 	if possible.size() > 1:
 		return [possible[0], possible[1]]
 	else: return [possible[0]]
-
-func _get_good_target(_score_func: Callable):
-	pass
 
 func _convert_node_to_target(node: SlaveNode, team: Array[Slave]) -> int:
 	var i = 0

@@ -39,11 +39,12 @@ func _on_start_battle() -> void:
 		slave_parents[i].add_child(new_slave)
 		i += 1
 
-func cull_the_dead() -> void:
+func cull_the_dead(all: bool = true) -> void:
 	for slave_node : SlaveNode in boys_nodes:
 		if not slave_node.held.is_alive:
 			CurrentRun.evil_boys.erase(slave_node.held)
 			slave_node.free()
+			if not all: break
 	
 	boys_nodes = boys_nodes.filter(func(node): return is_instance_valid(node))\
 		 as Array[SlaveNode]

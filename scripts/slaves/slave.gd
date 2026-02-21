@@ -5,7 +5,8 @@ class_name Slave
 enum SpriteSize {
 	Normal,
 	Big,
-	Huge
+	Huge,
+	TwoHead
 }
 
 @export var u_name: StringName
@@ -91,13 +92,19 @@ func get_item(item_type: Item.Type, trinket_id: int = 1) -> Item:
 			else: return trinket2
 	return weapon
 
+func get_extra_item() -> Item:
+	return null	
+
+func get_all_items() -> Array[Item]:
+	return [weapon, hat, trinket1, trinket2]
+
 # base_cost = 5 + base_hp/2
 # + costs of items
 # 70%-100% price depending on percentage of health
 
 func get_cost() -> int:
 	var total : int = base_cost + 5 + base_maxhp / 2
-	for item: Item in [weapon, hat, trinket1, trinket2]:
+	for item: Item in get_all_items():
 		total += item.cost	
 	return floor(total * lerp(0.7, 1.0, (hp / float(maxhp))))
 
@@ -126,7 +133,7 @@ func equip(item: Item, trinket_id: int = 1) -> Item:
 	return old_item
 
 func unequip(item: Item) -> void:
-	var id = [weapon, hat, trinket1, trinket2].find(item)
+	var id = get_all_items().find(item)
 	match(id):
 		0: equip(ItemPool.fetch("no_weapon"))
 		1: equip(ItemPool.fetch("no_hat"))

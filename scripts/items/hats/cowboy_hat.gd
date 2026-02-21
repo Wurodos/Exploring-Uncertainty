@@ -29,7 +29,7 @@ func get_priority(sender: SlaveNode, _ally: SlaveNode) -> int:
 	return faster_than - Battle.instance.good_team.boys.size() / 2
 
 func get_intention(sender: SlaveNode) -> Enemy.Intention:
-	var intention = Enemy.Intention.new(Enemy.Intention.Type.HealMultiple)
+	var intention = Enemy.Intention.new(Enemy.Intention.Type.Support)
 	intention.is_support = true
 	intention.effect = func(v):
 		use_item(sender, v)

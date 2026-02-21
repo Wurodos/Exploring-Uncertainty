@@ -10,10 +10,12 @@ const icon_run = preload("res://images/icons/run.png")
 const icon_summon_stars = preload("res://images/icons/summon.png")
 const icon_order = preload("res://images/icons/order.png")
 const icon_summon_cherv = preload("res://images/icons/summon_cherv.png")
+const icon_support = preload("res://images/icons/support.png")
 
 const img_dead_slave = preload("res://images/slaves/dead.png")
 
 const img_free_city = preload("res://images/rooms/free_city.png")
+const img_elevator_repaired = preload("res://images/rooms/elevator_repaired.png")
 
 const icon_power = preload("res://images/icons/power.svg")
 const icon_luck = preload("res://images/icons/clover.svg")

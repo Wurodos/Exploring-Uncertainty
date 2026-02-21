@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_ry55x")
-info_count = 2
+info_count = 3
 u_name = &"starry"
 base_maxhp = 20
 texture = ExtResource("2_a3iwr")

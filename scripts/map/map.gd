@@ -39,6 +39,7 @@ const _dcol = [0,0,+1,-1]
 
 @onready var room_parent : Node2D = $World/Rooms
 @onready var player_node : Node2D = $World/Player
+@onready var highlight: TileMapLayer= $World/Highlight/TileMapLayer
 @onready var arrow_axis: Node2D = $World/ArrowAxis
 @onready var camera : Camera2D = $Camera2D
 
@@ -66,11 +67,14 @@ var since_last_battle_purged: int = 0
 var since_last_item: int = 0
 var found_items: int = 0
 
+var zone_id: int = 0
+
 #======================
 # v EOT stuff v
 #======================
 
 var chervs: Array[Room] = []
+var elevators: Array[Room] = []
 
 #======================
 # v Tutorial flags v
@@ -96,6 +100,9 @@ var shown_comms_window: bool = false
 
 static var instance: Map
 
+static func dist(room1: Room, room2: Room) -> int:
+	return round(sqrt((room1.row - room2.row) ** 2 + (room1.col - room2.col) ** 2))
+
 func _ready() -> void:
 	tutorial_box.visible = CurrentRun.is_tutorial
 	tutorial_box.get_node("Text").set_string_id("tutorial_map_0")
@@ -106,11 +113,22 @@ func _ready() -> void:
 	$Camera2D.make_current()
 	$GUI/UI/Steps.text = str(steps)
 	
+	SignalBus.teleport.connect(_teleport)
 	SignalBus.advance_tutorial.connect(_on_tutorial_ok_pressed)
 	SignalBus.battle_encounter.connect(func(): $GUI.visible = false)
 	SignalBus.change_steps.connect(func(delta):
 		steps += delta
 		$GUI/UI/Steps.text = str(steps))
+
+
+func _teleport(to: int) -> void:
+	for elevator: Room in elevators:
+		if elevator.flag and floor(elevator.data / 10000) == to:
+			party_col = elevator.col
+			party_row = elevator.row
+			player_node.global_position = elevator.global_position
+			return
+
 
 func _process(_delta: float) -> void:
 	if CurrentRun.state != Game.State.Map: return
@@ -124,6 +142,7 @@ func _process(_delta: float) -> void:
 	elif Input.is_action_just_pressed("party_right"):
 		move_player(Direction.Right)
 	elif Input.is_action_just_pressed("stay"):
+		is_encountering = true
 		encounter(room_at(party_row, party_col))
 
 func move_player(direction: Direction) -> void:
@@ -140,6 +159,8 @@ func move_player(direction: Direction) -> void:
 	party_col += _dcol[direction]
 	party_row += _drow[direction]
 	player_node.global_position = room.global_position
+	
+	zone_id = room.area_level
 	
 	is_encountering = true
 	_explore(party_row, party_col)
@@ -158,12 +179,37 @@ func move_player(direction: Direction) -> void:
 	
 	
 	SignalBus.advance_tutorial.emit()
-	encounter(room)
+	var adj_cherv = _find_adjacent(room.row, room.col, Room.Type.Cherv)
+	if adj_cherv:
+		encounter(adj_cherv)
+		
+		adj_cherv.type = Room.Type.Purged
+		adj_cherv.sprite.texture = room_sprites[Room.Type.Purged]
+		
+		if not _is_adjacent_to(adj_cherv.row+1, adj_cherv.col, Room.Type.Cherv):
+			unhighlight(adj_cherv.row+1, adj_cherv.col)
+		if not _is_adjacent_to(adj_cherv.row-1, adj_cherv.col, Room.Type.Cherv):
+			unhighlight(adj_cherv.row-1, adj_cherv.col)
+		if not _is_adjacent_to(adj_cherv.row, adj_cherv.col+1, Room.Type.Cherv):
+			unhighlight(adj_cherv.row, adj_cherv.col+1)
+		if not _is_adjacent_to(adj_cherv.row, adj_cherv.col-1, Room.Type.Cherv):
+			unhighlight(adj_cherv.row, adj_cherv.col-1)
+		
+		if room.type == Room.Type.Empty:
+			purge(room)
+	else:
+		encounter(room)
+		if room.type != Room.Type.City and room.type != Room.Type.Comms and room.type != Room.Type.Elevator:
+			purge(room)
 	
-	if room.type != Room.Type.City and room.type != Room.Type.Comms:
-		room.type = Room.Type.Purged
-		room.sprite.texture = room_sprites[Room.Type.Purged]
+	
+		
+	
 	end_turn_upkeep()
+
+func purge(room: Room) -> void:
+	room.type = Room.Type.Purged
+	room.sprite.texture = room_sprites[Room.Type.Purged]
 	
 func encounter(room: Room) -> void:
 	
@@ -180,7 +226,7 @@ func encounter(room: Room) -> void:
 			SignalBus.found_item.emit()
 		Room.Type.Purged:
 			if since_last_battle_purged >= randi_range(6, 15):
-				CurrentRun.evil_boys = CurrentRun.arrange_evil_team()
+				CurrentRun.evil_boys = CurrentRun.arrange_evil_team(zone_id)
 				$AnimationPlayer.play("battle_start")
 				await $AnimationPlayer.animation_finished
 				SignalBus.play_music.emit("battle")
@@ -190,7 +236,7 @@ func encounter(room: Room) -> void:
 			else: since_last_battle_purged += 1
 		Room.Type.Empty:
 			if since_last_battle >= randi_range(1,6):
-				CurrentRun.evil_boys = CurrentRun.arrange_evil_team()
+				CurrentRun.evil_boys = CurrentRun.arrange_evil_team(zone_id)
 				$AnimationPlayer.play("battle_start")
 				await $AnimationPlayer.animation_finished
 				SignalBus.play_music.emit("battle")
@@ -214,7 +260,7 @@ func encounter(room: Room) -> void:
 		Room.Type.Cherv:
 			since_last_battle = 0
 			CurrentRun.discounts += 1
-			CurrentRun.arrange_difficult()
+			CurrentRun.arrange_difficult(zone_id)
 			$AnimationPlayer.play("battle_start")
 			await $AnimationPlayer.animation_finished
 			
@@ -235,8 +281,19 @@ func encounter(room: Room) -> void:
 				shown_comms_window = true
 				SignalBus.advance_tutorial.emit("tutorial_comms_window")
 			SignalBus.enter_comms.emit(room)
+		Room.Type.Elevator:
+			#TODO TUTORIAL
+			#if CurrentRun.is_tutorial and not shown_comms_window:
+			#	shown_comms_window = true
+			#	SignalBus.advance_tutorial.emit("tutorial_comms_window")
+			SignalBus.enter_elevator.emit(room)
 	$AnimationPlayer.play("RESET")
 	is_encountering = false
+
+func unhighlight(row: int, col: int) -> void:
+	var x = col - size/2
+	var y = row - size/2
+	highlight.set_cell(Vector2i(x,y), -1)
 
 func end_turn_upkeep():
 	
@@ -337,8 +394,9 @@ func generate_floor() -> void:
 	
 	# Add central room
 	var central_room = add_room(mid, mid)
-	central_room.type = Room.Type.Purged
-	central_room.sprite.texture = room_sprites[Room.Type.Purged]
+	central_room.type = Room.Type.Elevator
+	central_room.sprite.texture = room_sprites[Room.Type.Elevator]
+	elevators.append(central_room)
 	
 	# Go in every direction
 	for direction in [Direction.Up,
@@ -349,7 +407,7 @@ func generate_floor() -> void:
 		_go_in_direction(mid + _drow[direction], mid + _dcol[direction],\
 		 	direction, randi_range(size/4, size/2))
 	
-	_add_structures()
+	_divide_by_area()
 	_add_boss()
 	_initialize_fog()
 	_explore(party_row, party_col)
@@ -394,16 +452,20 @@ func _go_in_direction(row: int, col: int, direction : Direction, remain: int):
 
 # Same structures can't be adjacent
 
-func _add_structures() -> void:
-	var all_rooms = room_parent.get_children()
+func _add_structures(all_rooms: Array[Room], area_id: int) -> void:
 	all_rooms.shuffle()
 	
 	var city_n = floor(all_rooms.size()*city_rate)
 	var cherv_n = floor(all_rooms.size()*cherv_rate)
 	var govnov_n = floor(all_rooms.size()*govnov_rate)
 	var comms_n = floor(all_rooms.size()*comms_rate)
+	if area_id < 2: comms_n = 0
+	var elevator_n = 0
+	if area_id > 0 and area_id < 4:
+		elevator_n = 3
 	
 	var cherv_i = 1
+	var start_room: Room = room_at(party_row, party_col)
 	
 	for room : Room in all_rooms:
 		if room.type != Room.Type.Empty: continue
@@ -411,18 +473,29 @@ func _add_structures() -> void:
 		if city_n > 0 and not _is_adjacent_to(room.row, room.col, Room.Type.City):
 			room.type = Room.Type.City
 			city_n -= 1
-		elif cherv_n > 0 and not _is_adjacent_to(room.row, room.col, Room.Type.Cherv):
+		elif cherv_n > 0 and not _is_adjacent_to(room.row, room.col, Room.Type.Cherv) and dist(room, start_room) > 1:
 			room.type = Room.Type.Cherv
 			room.data = cherv_i * 5
 			chervs.append(room)
 			cherv_i += 1
 			cherv_n -= 1
+			
+			var x = room.col - size/2
+			var y = room.row - size/2
+			if room_at(room.row+1, room.col): highlight.set_cell(Vector2i(x,y+1), 2, Vector2i(0,0), 0)
+			if room_at(room.row, room.col+1): highlight.set_cell(Vector2i(x+1,y), 2, Vector2i(0,0), 0)
+			if room_at(room.row, room.col-1): highlight.set_cell(Vector2i(x-1,y), 2, Vector2i(0,0), 0)
+			if room_at(room.row-1, room.col): highlight.set_cell(Vector2i(x,y-1), 2, Vector2i(0,0), 0)
 		elif govnov_n > 0 and not _is_adjacent_to(room.row, room.col, Room.Type.Govnov):
 			room.type = Room.Type.Govnov
 			govnov_n -= 1
 		elif comms_n > 0 and not _is_adjacent_to(room.row, room.col, Room.Type.Comms):
 			room.type = Room.Type.Comms
 			comms_n -= 1
+		elif elevator_n > 0 and not _is_adjacent_to(room.row, room.col, Room.Type.Elevator):
+			room.type = Room.Type.Elevator
+			elevators.append(room)
+			elevator_n -= 1
 		
 		room.sprite.texture = room_sprites[room.type]
 
@@ -433,7 +506,7 @@ func _add_boss() -> void:
 	for row in range(-1, size+2):
 		for col in range(-1, size+2):
 			if not room_at(row, col) and _is_adjacent_to(row, col, Room.Type.Any):
-				if max(abs(row - party_row), abs(col - party_col)) > 4:
+				if max(abs(row - party_row), abs(col - party_col)) > 8:
 					all_coords.append(Vector2i(row, col))
 	
 	var coords : Vector2i = all_coords.pick_random()
@@ -442,8 +515,39 @@ func _add_boss() -> void:
 	room.type = Room.Type.Reptile
 	room.sprite.texture = room_sprites[room.type]
 		
-
+func _divide_by_area() -> void:
+	var start_room: Room = room_at(party_row, party_col)
+	var area_0: Array[Room] = []
+	var area_1: Array[Room] = []
+	var area_2: Array[Room] = []
+	var area_3: Array[Room] = []
+	var area_4: Array[Room] = []
+	for room: Room in room_parent.get_children():
+		if dist(room, start_room) > 16:
+			room.modulate = Color.INDIAN_RED
+			room.area_level = 4
+			area_4.append(room)
+		elif dist(room, start_room) > 12:
+			room.modulate = Color.SLATE_GRAY
+			room.area_level = 3
+			area_3.append(room)
+		elif dist(room, start_room) > 7:
+			room.modulate = Color.GREEN_YELLOW
+			room.area_level = 2
+			area_2.append(room)
+		elif dist(room, start_room) > 3:
+			room.modulate = Color.BURLYWOOD
+			room.area_level = 1
+			area_1.append(room)
+		else:
+			area_0.append(room)
+	_add_structures(area_0, 0)
+	_add_structures(area_1, 1)
+	_add_structures(area_2, 2)
+	_add_structures(area_3, 3)
+	_add_structures(area_4, 4)
 		
+			
 func _is_adjacent_to(row: int, col: int, type: Room.Type) -> bool:
 	for direction in [Direction.Up,
 					Direction.Down,
@@ -452,6 +556,15 @@ func _is_adjacent_to(row: int, col: int, type: Room.Type) -> bool:
 			var room = room_at(row + _drow[direction], col + _dcol[direction])
 			if room and (room.type == type or type == Room.Type.Any): return true
 	return false
+
+func _find_adjacent(row: int, col: int, type: Room.Type) -> Room:
+	for direction in [Direction.Up,
+					Direction.Down,
+					Direction.Right,
+					Direction.Left]:
+			var room = room_at(row + _drow[direction], col + _dcol[direction])
+			if room and (room.type == type or type == Room.Type.Any): return room
+	return null
 
 func _initialize_fog() -> void:
 	for x in range(-size/2-12, size/2+12):

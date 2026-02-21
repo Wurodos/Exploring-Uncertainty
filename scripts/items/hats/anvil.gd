@@ -2,14 +2,13 @@ extends Item
 
 @export var required_harm: int = 3
 @export var power_gain: int = 1
-@export var turns: int = 3
 
 var total_received : int = 0
 var user: SlaveNode
 
 func localize():
 	super.localize()
-	desc = desc.format([required_harm, power_gain, turns], "{}")
+	desc = desc.format([required_harm, power_gain], "{}")
 
 func on_start_battle(owner: SlaveNode):
 	super.on_start_battle(owner)
@@ -31,9 +30,9 @@ func _on_received_damage(_source: SlaveNode, dmg: int):
 func on_level_up():
 	extra_hp += 3
 	match(level):
-		2: power_gain += 1
+		2: extra_hp += 4
 		3: power_gain += 1
-		4: turns += 3
+		4: extra_hp += 6
 		5: required_harm -= 1
 	super.on_level_up()
 

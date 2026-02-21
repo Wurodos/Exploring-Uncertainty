@@ -2,16 +2,18 @@ extends Node2D
 
 class_name Room
 
-enum Type {Empty, Purged, City, Cherv, Govnov, Reptile, Comms, Any, Ruin}
+enum Type {Empty, Purged, City, Cherv, Govnov, Reptile, Comms, Any, Ruin, Elevator}
 
 var row: int
 var col: int
 var visited: bool = false
 var type: Type
 
+var area_level: int = 0
 var flag: bool = false
 
 @onready var sprite : Sprite2D = $Sprite
+@onready var label : Label = $Label
 
 func serialize() -> Dictionary:
 	var data = {

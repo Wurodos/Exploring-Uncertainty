@@ -46,7 +46,7 @@ func move() -> void:
 	if path.is_empty(): make_path()
 
 func battle() -> void:
-	CurrentRun.arrange_evil_team()
+	#CurrentRun.arrange_evil_team()
 	SignalBus.play_music.emit("battle")
 	SignalBus.battle_encounter.emit()
 	queue_free()

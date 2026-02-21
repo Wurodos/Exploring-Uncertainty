@@ -14,19 +14,19 @@ whistle_desc;{} HARM TO ALL ENEMIES;{} ВРЕДА ВСЕМ ВРАГАМ
 winchester_name;Winchester;Винчестер
 winchester_desc;{} HARM, {} HARM TO OTHER RANDOM TARGET;{} ВРЕДА, {} ВРЕДА ДРУГОЙ СЛУЧАЙНОЙ ЦЕЛИ
 anvil_name;Anvil;Наковальня
-anvil_desc;ACTION: EACH {} RECEIVED HARM WILL GRANT {} POWER (LASTS {} TURNS);ДЕЙСТВИЕ: КАЖДЫЕ ПОЛУЧЕННЫЕ {} ВРЕДА ПРИНЕСУТ {} МОЩЬ (ДЛИТСЯ {} ХОД.)
+anvil_desc;EACH {} RECEIVED HARM GRANTS {} POWER\nACTION:TRANSFER 1/2 POWER;КАЖДЫЕ ПОЛУЧЕННЫЕ {} ВРЕДА ПРИНЕСУТ {} МОЩЬ.\nДЕЙСТВИЕ: ПЕРЕДАТЬ 1/2 МОЩИ
 cowboy_hat_name;Cowboy Hat;Ковбойская Шляпа
-cowboy_hat_desc;ACTION: SHIELD 1 TURN TO ALL;ДЕЙСТВИЕ: ЩИТ 1 ХОД ВСЕМ
+cowboy_hat_desc;+1 SPEED WHEN ATTACKING NON-SLOWER TARGETS\nACTION: SHIELD 1 TURN TO ALL;+1 СКОРОСТЬ ПРИ АТАКЕ ЦЕЛЕЙ С НЕ МЕНЬШЕЙ СКОРОСТЬЮ\nДЕЙСТВИЕ: ЩИТ 1 ХОД ВСЕМ
 crown_name;Crown;Корона
-crown_desc;ACTION: -{} INITIATIVE;ДЕЙСТВИЕ: -{} ИНИЦИАТИВЫ
+crown_desc;DOUBLE EXTRA HP FROM TRINKETS\nACTION: -{} INITIATIVE;УДВОЙТЕ ЗДРАВИЕ ОТ БЕЗДЕЛУШЕК\nДЕЙСТВИЕ: -{} ИНИЦИАТИВЫ
 helmet_name;Helmet;Каска
-helmet_desc;ACTION: SHIELD {} TURNS;ДЕЙСТВИЕ: ЩИТ {} ХОД.
+helmet_desc;SHIELD ABSORBS 60% DAMAGE\nACTION: SHIELD {} TURNS;ЩИТ ПОГЛОЩАЕТ 60% УРОНА\nДЕЙСТВИЕ: ЩИТ {} ХОД.
 jester_hat_name;Jester Hat;Шляпа Шута
-jester_hat_desc;ACTION: BLASPHEMY {} TURNS;ДЕЙСТВИЕ: КОЩУНСТВО {} ХОД.
+jester_hat_desc;EVERY TURN OF EVERY STATUS INCREASES HARM\nACTION: BLASPHEMY {} TURNS;КАЖДЫЙ ХОД КАЖДОГО СТАТУСА УВЕЛИЧИВАЕТ ВРЕД\nДЕЙСТВИЕ: КОЩУНСТВО {} ХОД.
 no_hat_name;Head Empty;Пустоголовие
 no_hat_desc;ACTION: +{} INITIATIVE, HEAL {} HEALTH;ДЕЙСТВИЕ: +{} ИНИЦИАТИВЫ, ЛЕЧИТЬ {} ЗДОРОВЬЯ
 chef_name;Chef;Повар
-chef_desc;ACTION: HEAL {} HEALTH;ДЕЙСТВИЕ: ВЫЛЕЧИТЬ {} ЗДОРОВЬЯ
+chef_desc;END OF BATTLE: RETAIN ALL ONE-TIME USE ITEMS\nACTION: HEAL {} HEALTH;КОНЕЦ БОЯ: СОХРАНИТЕ ОДНОРАЗОВЫЕ ПРЕДМЕТЫ\nДЕЙСТВИЕ: ВЫЛЕЧИТЬ {} ЗДОРОВЬЯ
 alcohol_name;Alcohol;Алкоголь
 alcohol_desc;START TURN: +{} POWER, LOSE {} HEALTH;НАЧАЛО ХОДА: +{} МОЩЬ, ПОТЕРЯ {} ЗДРАВИЙ
 bomb_name;Bomb;Бомба
@@ -48,7 +48,7 @@ riot_shield_desc;INFLICTS {} HARM, SHIELD {} TURN TO SELF;ПРИЧИНЯЕТ {} 
 hammer_name;Hammer;Молоток
 hammer_desc;BREAKS SHIELD, INFLICTS {} HARM;ЛОМАЕТ ЩИТ, ПРИЧИНЯЕТ {} ВРЕДА
 viking_helmet_name;Viking Helmet;Шлем Викинга
-viking_helmet_desc;ACTION: APPETITE {} TURNS TO ALLY AND SELF;ДЕЙСТВИЕ: АППЕТИТ {} ХОД. СЕБЕ И СОЮЗНИКУ
+viking_helmet_desc;WHEN ATTACKING: DONT LOSE VIGILANCE\nACTION: APPETITE {} TURNS TO ALLY AND SELF;ПРИ АТАКЕ: НЕ ТЕРЯЙТЕ БДИТЕЛЬНОСТЬ\nДЕЙСТВИЕ: АППЕТИТ {} ХОД. СЕБЕ И СОЮЗНИКУ
 boot_name;Boot;Сапог
 boot_desc;OUT OF BATTLE: {} HEALTH FOR ENTERING EMPTY ROOM.\nACTION: {} HARM TO ALLY, THEY ATTACK.;ВНЕ БИТВЫ: {} ЗДОРОВЬЯ В ПУСТОЙ КОМНАТЕ.\nДЕЙСТВИЕ: {} ВРЕДА СОЮЗНИКУ, ТОТ АТАКУЕТ
 shot_shells_name;Shot Shells;Стреляные Гильзы

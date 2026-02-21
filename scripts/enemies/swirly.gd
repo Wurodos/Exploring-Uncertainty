@@ -8,6 +8,10 @@ func _init() -> void:
 	
 
 func _speedup() -> void:
+	if not is_instance_valid(owner):
+		SignalBus.new_round.disconnect(_speedup)
+		return
+	
 	turn += 1
 	if turn == 1:
 		return

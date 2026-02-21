@@ -49,6 +49,8 @@ func _ready() -> void:
 	SignalBus.slave_selected.connect(_on_slave_selected)
 	SignalBus.slave_mouse_entered.connect(_on_slave_mouse_entered)
 	SignalBus.slave_mouse_exited.connect(_on_slave_mouse_exited)
+	SignalBus.reinforcement.connect(_on_reinforcement)
+	
 	SignalBus.slave_death.connect(_on_slave_death)
 	SignalBus.slave_ran.connect(func(slave): _on_slave_death(slave, false))
 	
@@ -169,7 +171,6 @@ func _on_new_turn() -> void:
 				slave_node.start_turn()
 	
 	current_slave_position += dead
-
 
 func _on_slave_death(slave_node: SlaveNode, is_loot: bool = true) -> void:
 	if slave_node.held is Enemy:
@@ -301,7 +302,7 @@ func _on_good_won() -> void:
 	
 	for slave : Slave in CurrentRun.good_boys:
 		slave.speed = slave.base_speed
-		for item : Item in [slave.weapon, slave.hat, slave.trinket1, slave.trinket2]:
+		for item : Item in slave.get_all_items():
 			item.on_end_battle(slave)
 			if item.is_item() and item.level < 5:
 				item.experience += 1
@@ -340,6 +341,23 @@ func _find_slave_node(slave: Slave) -> SlaveNode:
 		id = evil_team.boys_nodes.find_custom(func(node): return node.held == slave)
 		slave_node = evil_team.boys_nodes[id]
 	return slave_node
+
+
+# If any dead: replaces them
+# If any empty: gets there
+# Else sender runs, replaces them
+func _on_reinforcement(sender: SlaveNode) -> void:
+	var team = sender.team
+	if team.boys.size() == 5:
+		sender.run()
+	team.cull_the_dead(false)
+	
+	var enemy = SlavePool.fetch("cherv")
+	if randi_range(0, 1): enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
+	if randi_range(0, 1): enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
+	if randi_range(0, 1): enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
+	if randi_range(0, 1): enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
+	team.add_slave(enemy)
 
 # ====================
 # Debug panel

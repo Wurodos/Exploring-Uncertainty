@@ -26,7 +26,7 @@ func get_priority(sender: SlaveNode, _ally: SlaveNode) -> int:
 		return 0
 
 func get_intention(sender: SlaveNode) -> Enemy.Intention:
-	var intention = Enemy.Intention.new(Enemy.Intention.Type.PowerUp, sender.power / 2 + sender.power % 2)
+	var intention = Enemy.Intention.new(Enemy.Intention.Type.Support, sender.power / 2 + sender.power % 2)
 	intention.is_support = true
 	intention.effect = func(v):
 		use_item(sender, v)

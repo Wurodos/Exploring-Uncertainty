@@ -62,6 +62,7 @@ signal speed_queue_mouse_exit(slave: Slave)
 signal slave_info(slave: Slave)
 signal enemy_info(slave: Slave)
 
+signal reinforcement(enemy: Enemy)
 signal slave_death(slave: SlaveNode)
 signal slave_ran(slave: SlaveNode)
 
@@ -88,10 +89,13 @@ signal entered_room(room: Room)
 
 signal battle_encounter
 
+signal teleport(to: int)
+
 signal found_item
 signal enter_city(city: Room)
 signal enter_govnov
 signal enter_comms(comms: Room)
+signal enter_elevator(elevator: Room)
 signal change_steps(delta: int)
 signal city_heal
 signal govnov_heal

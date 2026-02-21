@@ -11,11 +11,15 @@ func localize():
 
 func on_equip(owner: Slave):
 	super.on_equip(owner)
+	if owner is Enemy: return
+	
 	sender = owner
 	SignalBus.entered_room.connect(_check_and_heal)
 
 func on_unequip(owner: Slave):
 	super.on_unequip(owner)
+	if owner is Enemy: return
+	
 	SignalBus.entered_room.disconnect(_check_and_heal)
 
 func _check_and_heal(room: Room):
@@ -25,16 +29,35 @@ func _check_and_heal(room: Room):
 
 func use_item(sender: SlaveNode, ally: SlaveNode):
 	super.use_item(sender, ally)
-	Action.deal_damage(sender, ally, harm)
-	
-	var victim : SlaveNode = Battle.instance.evil_team.boys_nodes.filter(func(enemy: SlaveNode): return enemy.held.is_alive).pick_random()
-	ally.held.weapon.use_item(ally, victim)
-	ally.attacked.emit(victim)
-	ally.turn_ended.emit()
+	if sender.held is Enemy:
+		Action.deal_damage(sender, ally, harm)
+		var victim : SlaveNode = Battle.instance.good_team.boys_nodes.filter(func(enemy: SlaveNode): return enemy.held.is_alive).pick_random()
+		ally.held.weapon.get_intention(ally).effect.call(victim)
+		ally.attacked.emit(victim)
+		ally.turn_ended.emit()
+	else:
+		Action.deal_damage(sender, ally, harm)
+		var victim : SlaveNode = Battle.instance.evil_team.boys_nodes.filter(func(enemy: SlaveNode): return enemy.held.is_alive).pick_random()
+		ally.held.weapon.use_item(ally, victim)
+		ally.attacked.emit(victim)
+		ally.turn_ended.emit()
 
 func on_level_up():
 	heal += 1
 	extra_hp += 1
-	if level == 3: extra_speed += 1
+	if level == 3 or level == 5: extra_speed += 1
 	if level >= 4: harm -= 2
 	super.on_level_up()
+
+func get_priority(sender: SlaveNode, ally: SlaveNode) -> int:
+	if ally.held.hp <= harm: return -3
+	if ally.held.weapon.get_harm() > sender.held.weapon.get_harm():
+		return +1 + ally.held.weapon.get_harm() / sender.held.weapon.get_harm()
+	return -1
+
+func get_intention(sender: SlaveNode) -> Enemy.Intention:
+	var intention = Enemy.Intention.new(Enemy.Intention.Type.Support)
+	intention.is_support = true
+	intention.effect = func(v):
+		use_item(sender, v)
+	return intention

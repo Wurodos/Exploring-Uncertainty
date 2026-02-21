@@ -74,6 +74,9 @@ func toggle_arrow(on: bool) -> void:
 		$Arrow.visible = false
 		$ArrowAnimation.play("RESET")
 
+func reapply() -> void:
+	apply(held, held.is_evil)
+
 func remove_item(u_name: StringName) -> void:
 	var i = 0
 	for item : Item in get_all_items():
@@ -151,38 +154,53 @@ func set_luck(new_val: int, is_delta: bool = true):
 			
 func apply(slave: Slave, is_evil: bool = false) -> void:
 	held = slave
+	visible = true
 	match(held.sprite_size):
 		Slave.SpriteSize.Normal:
+			$Parts.scale = Vector2(1, 1)
 			item_parent = $Parts/Visual/Items
 		Slave.SpriteSize.Big:
+			$Parts.scale = Vector2(1.5, 1.5)
 			item_parent = $Parts/Visual/BigItems
+		Slave.SpriteSize.TwoHead:
+			$Parts.scale = Vector2(1, 1)
+			item_parent = $Parts/Visual/TwoHeads
 	
 	sprite = $Parts/Visual/Sprite
 	sprite.texture = slave.texture
 	
 	if is_evil:
 		#sprite.flip_h = true
-		$Parts.scale = Vector2(-1, 1)
+		$Parts.scale.x *= -1
 		$AnimationSprites.scale = Vector2(-1, 1)
 		#for offset_node: Node2D in item_parent.get_children():
 		#	offset_node.position.x *= -1
 		
-	
-	weapon_node = item_prefab.instantiate()
-	item_parent.get_node("Weapon").add_child(weapon_node)
+	if weapon_node == null:
+		weapon_node = item_prefab.instantiate()
+		item_parent.get_node("Weapon").add_child(weapon_node)
 	weapon_node.apply(held.weapon)
 	
-	hat_node = item_prefab.instantiate()
-	item_parent.get_node("Hat").add_child(hat_node)
+	if hat_node == null:
+		hat_node = item_prefab.instantiate()
+		item_parent.get_node("Hat").add_child(hat_node)
 	hat_node.apply(held.hat)
 	
-	trinket1_node = item_prefab.instantiate()
-	item_parent.get_node("Trinket1").add_child(trinket1_node)
+	if trinket1_node == null:
+		trinket1_node = item_prefab.instantiate()
+		item_parent.get_node("Trinket1").add_child(trinket1_node)
 	trinket1_node.apply(held.trinket1)
 	
-	trinket2_node = item_prefab.instantiate()
-	item_parent.get_node("Trinket2").add_child(trinket2_node)
+	if trinket2_node == null:
+		trinket2_node = item_prefab.instantiate()
+		item_parent.get_node("Trinket2").add_child(trinket2_node)
 	trinket2_node.apply(held.trinket2)
+	
+	var extra_item = held.get_extra_item()
+	if extra_item:
+		var extra_node = item_prefab.instantiate()
+		item_parent.get_node("Extra").add_child(extra_node)
+		extra_node.apply(extra_item)
 
 func add_stat(stat_name: String, icon: Texture2D, value: int):
 	var stat_entry : StatEntry = stat_parent.find_child(stat_name, false, false)
@@ -197,14 +215,15 @@ func add_stat(stat_name: String, icon: Texture2D, value: int):
 		
 
 func start_battle() -> void:
-	for item : Item in [held.weapon, held.hat, held.trinket1, held.trinket2]:
-		item.on_start_battle(self)
 	if team.is_evil:
 		var enemy: Enemy = held
 		enemy.update_stats(self)
+	for item : Item in held.get_all_items():
+		item.on_start_battle(self)
+	
 	
 func get_all_items() -> Array[Item]:
-	return [held.weapon, held.hat, held.trinket1, held.trinket2]
+	return held.get_all_items()
 
 func toggle_ellipse(visible: bool):
 	$CircleSelect.visible = visible
@@ -271,9 +290,22 @@ func execute_intention():
 	else:
 		match(held_enemy.intention.type):
 			Enemy.Intention.Type.Run:
-				visible = false
-				held.is_alive = false
-				SignalBus.slave_ran.emit(self)
+				run()
+			Enemy.Intention.Type.OrderChervs:
+				for boy in team.boys_nodes:
+					if boy.held is Cherv:
+						if boy.get_node("Intention").visible:
+							if (boy.held as Cherv).intention.is_support:
+								(boy.held as Cherv).decide_weapon_intention()
+							(boy.held as Cherv).intention.targets = [held_enemy.intention.targets[0]]
+							(boy.held as Cherv).dont_change_target = true
+						boy.set_power(+1)
+						boy.update_intention()
+			Enemy.Intention.Type.Reinforcement:
+				SignalBus.reinforcement.emit(self)
+				if not is_instance_valid(self): 
+					SignalBus.new_turn.emit()
+					return
 			_:
 				for target_id in held_enemy.intention.targets:
 					var victim: SlaveNode = Battle.instance.evil_team.boys_nodes[target_id]
@@ -283,6 +315,11 @@ func execute_intention():
 	#$AnimationPlayer.play("idle")
 	$Intention.visible = false
 	SignalBus.new_turn.emit()
+
+func run() -> void:
+	visible = false
+	held.is_alive = false
+	SignalBus.slave_ran.emit(self)
 
 func add_buff(buff_name: String, turns: int):
 	if buffs.has(buff_name):
@@ -348,6 +385,8 @@ func update_intention() -> void:
 	match(held_enemy.intention.type):
 		Enemy.Intention.Type.DamageSingular: 
 			icon = Gallery.icon_harm_single
+		Enemy.Intention.Type.Support:
+			icon = Gallery.icon_support
 		Enemy.Intention.Type.DamageTwo: 
 			icon = Gallery.icon_harm_two
 		Enemy.Intention.Type.DamageMultiple:
@@ -364,7 +403,7 @@ func update_intention() -> void:
 			icon = Gallery.icon_summon_stars
 		Enemy.Intention.Type.OrderChervs:
 			icon = Gallery.icon_order
-		Enemy.Intention.Type.SummonCherv:
+		Enemy.Intention.Type.Reinforcement:
 			icon = Gallery.icon_summon_cherv
 	
 	$Intention/TargetTop.visible = false

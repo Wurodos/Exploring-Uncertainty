@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cqvxwuuvjebur"]
+
+[ext_resource type="FontFile" uid="uid://hym6fbjhhg2u" path="res://text/font/Share-Tech-CYR.otf" id="1_exdbj"]
+
+[node name="TeleportOption" type="Button" unique_id=1819917300]
+custom_minimum_size = Vector2(149, 0)
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_exdbj")
+theme_override_font_sizes/font_size = 100
+text = "N"
