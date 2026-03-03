@@ -23,6 +23,8 @@
 [ext_resource type="Texture2D" uid="uid://py17lko5dydj" path="res://images/scraps/tooth.png" id="18_fpf3k"]
 [ext_resource type="Texture2D" uid="uid://b7h2htdmn1uad" path="res://images/scraps/oil.png" id="19_bi5l8"]
 [ext_resource type="Texture2D" uid="uid://dyb2np6bqygrc" path="res://images/shapes/rope.png" id="21_saiin"]
+[ext_resource type="Texture2D" uid="uid://bei3mmvex0vl3" path="res://images/icons/no_loot.png" id="24_bi5l8"]
+[ext_resource type="Script" uid="uid://bfsf7pluc6nmc" path="res://scripts/minor/no_loot.gd" id="24_jt4d8"]
 
 [sub_resource type="Animation" id="Animation_dd63g"]
 length = 0.001
@@ -280,6 +282,57 @@ _data = {
 &"win": SubResource("Animation_66ngm")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_fpf3k"]
+font = ExtResource("6_6vh42")
+font_size = 36
+font_color = Color(1, 0, 0, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_bi5l8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.22352941)]
+}
+
+[sub_resource type="Animation" id="Animation_jt4d8"]
+resource_name = "glow"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.22352941), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kl6ie"]
+_data = {
+&"RESET": SubResource("Animation_bi5l8"),
+&"glow": SubResource("Animation_jt4d8")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_kl6ie"]
+font = ExtResource("6_6vh42")
+font_size = 14
+font_color = Color(1, 1, 0.3254902, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Battle" type="Node2D" unique_id=1228727829]
 script = ExtResource("1_th188")
 
@@ -287,13 +340,13 @@ script = ExtResource("1_th188")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -691.0
-offset_top = -394.0
-offset_right = 509.0
-offset_bottom = 206.0
+offset_left = -756.00006
+offset_top = -441.00003
+offset_right = 443.99994
+offset_bottom = 158.99997
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.2, 1.2)
+scale = Vector2(1.3, 1.3)
 texture = ExtResource("4_dd63g")
 
 [node name="World" type="Node2D" parent="." unique_id=1235316244]
@@ -978,9 +1031,119 @@ text = "OK"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=355412054]
 libraries/ = SubResource("AnimationLibrary_66ngm")
 
+[node name="CLayer" type="CanvasLayer" parent="." unique_id=1372389089]
+layer = 2
+
+[node name="GUI" type="Control" parent="CLayer" unique_id=31885440]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Wave" type="Control" parent="CLayer/GUI" unique_id=1812729134]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -135.5
+offset_right = 135.5
+offset_bottom = 177.0
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(1, 0)
+mouse_filter = 2
+
+[node name="WaveLabel" type="Label" parent="CLayer/GUI/Wave" unique_id=1995894940]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_fpf3k")
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("14_ekamt")
+string_id = &"wave"
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
+
+[node name="NoLoot" type="Control" parent="CLayer/GUI" unique_id=837586115 node_paths=PackedStringArray("animation")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("24_jt4d8")
+animation = NodePath("TextureRect/AnimationPlayer")
+
+[node name="TextureRect" type="TextureRect" parent="CLayer/GUI/NoLoot" unique_id=1817267883]
+self_modulate = Color(1, 1, 1, 0.22352941)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -6.0
+offset_right = 128.0
+offset_bottom = 122.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("24_bi5l8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CLayer/GUI/NoLoot/TextureRect" unique_id=904988348]
+libraries/ = SubResource("AnimationLibrary_kl6ie")
+
+[node name="Reminder" type="ColorRect" parent="CLayer/GUI/NoLoot" unique_id=1120403662]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 162.0
+offset_right = 100.0
+offset_bottom = 268.0
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0)
+color = Color(0.16862746, 0.3137255, 1, 0.5254902)
+
+[node name="Label" type="Label" parent="CLayer/GUI/NoLoot/Reminder" unique_id=1909223143]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "ПРЕДМЕТЫ не получат опыта в конце боя.
+Никакого мародерства.
+(ПКМ, чтобы скрыть)"
+label_settings = SubResource("LabelSettings_kl6ie")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+script = ExtResource("14_ekamt")
+string_id = &"no_loot_reminder"
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
+
 [connection signal="mouse_entered" from="UI/Loot/Bag" to="UI/Loot" method="_on_bag_mouse_entered"]
 [connection signal="pressed" from="UI/Debug/Newturn" to="." method="_on_newturn_pressed"]
 [connection signal="pressed" from="UI/Debug/LowerHP" to="." method="_on_lower_hp_pressed"]
 [connection signal="pressed" from="UI/BattleEnd/GoBackMap" to="." method="_on_go_back_map_pressed"]
 [connection signal="pressed" from="UI/Fail/Exit" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="UI/TutorialBox/OK" to="." method="_on_tutorial_ok_pressed"]
+[connection signal="mouse_entered" from="CLayer/GUI/NoLoot/TextureRect" to="CLayer/GUI/NoLoot" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CLayer/GUI/NoLoot/TextureRect" to="CLayer/GUI/NoLoot" method="_on_mouse_exited"]

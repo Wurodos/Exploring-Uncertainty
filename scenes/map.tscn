@@ -49,6 +49,7 @@
 [ext_resource type="Texture2D" uid="uid://dls2t3f7lvsqx" path="res://images/shapes/tutorial_box.png" id="33_12q1p"]
 [ext_resource type="LabelSettings" uid="uid://dhb60ypduj2te" path="res://text/labelsettings/tutorial_box.tres" id="34_lhdcv"]
 [ext_resource type="Script" uid="uid://dd2yytdivaq0j" path="res://scripts/common/label_localized.gd" id="35_cgoaf"]
+[ext_resource type="Texture2D" uid="uid://bf5hkbhmtbyi4" path="res://images/shapes/arrow_green.png" id="43_8kgjo"]
 [ext_resource type="Script" uid="uid://c8rdumvdrdg4e" path="res://scripts/map/elevator_window.gd" id="45_baix8"]
 
 [sub_resource type="Animation" id="Animation_5u2yt"]
@@ -87,6 +88,31 @@ _data = {
 &"RESET": SubResource("Animation_5u2yt"),
 &"battle_start": SubResource("Animation_y2ir2")
 }
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8kgjo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ogd7i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogd7i"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 0.62352943, 0.34901962)
+draw_center = false
+border_width_left = 32
+border_width_top = 32
+border_width_right = 32
+border_width_bottom = 32
+border_color = Color(0.89411765, 0.92941177, 0, 1)
+border_blend = true
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+corner_detail = 16
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fq3dv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8kgjo"]
 texture = ExtResource("12_s2dh3")
@@ -326,6 +352,12 @@ font_size = 32
 outline_size = 16
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_8kgjo"]
+font = ExtResource("1_4xfga")
+font_size = 24
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_081xv"]
 font = ExtResource("1_4xfga")
 font_size = 64
@@ -365,11 +397,93 @@ libraries/ = SubResource("AnimationLibrary_30iet")
 
 [node name="Rooms" type="Node2D" parent="World" unique_id=1402312943]
 
-[node name="Armies" type="Node2D" parent="World" unique_id=146738126]
+[node name="Player" type="Node2D" parent="World" unique_id=1969357584]
 
-[node name="Player" type="Sprite2D" parent="World" unique_id=1584799164]
+[node name="Sprite" type="Sprite2D" parent="World/Player" unique_id=1584799164]
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_be0no")
+
+[node name="Left" type="Button" parent="World/Player" unique_id=1038635545]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -64.0
+offset_right = -64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8kgjo")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ogd7i")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ogd7i")
+
+[node name="Right" type="Button" parent="World/Player" unique_id=1254631118]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 64.0
+offset_top = -64.0
+offset_right = 192.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fq3dv")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ogd7i")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ogd7i")
+
+[node name="Up" type="Button" parent="World/Player" unique_id=601532660]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -192.0
+offset_right = 64.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8kgjo")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ogd7i")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ogd7i")
+
+[node name="Down" type="Button" parent="World/Player" unique_id=477460496]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = 64.0
+offset_right = 64.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8kgjo")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ogd7i")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ogd7i")
+
+[node name="Armies" type="Node2D" parent="World" unique_id=146738126]
 
 [node name="Highlight" type="Node2D" parent="World" unique_id=2041734289]
 
@@ -382,7 +496,6 @@ libraries/ = SubResource("AnimationLibrary_y2ir2")
 autoplay = &"fog"
 
 [node name="Fog" type="Node2D" parent="World" unique_id=1289513290]
-visible = false
 
 [node name="TileMapLayer" type="TileMapLayer" parent="World/Fog" unique_id=727550495]
 position = Vector2(-64, -64)
@@ -417,6 +530,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1130.0
 offset_bottom = 629.0
+mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="ShowTeam" type="Button" parent="GUI/UI" unique_id=694016968]
@@ -435,6 +549,7 @@ text = "Бригада"
 metadata/_edit_use_anchors_ = true
 
 [node name="ShowRecon" type="Button" parent="GUI/UI" unique_id=576399517]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = -0.1399046
@@ -1383,6 +1498,44 @@ script = ExtResource("12_y2ir2")
 string_id = &"comms_repair"
 metadata/_custom_type_script = "uid://bg2spyp44xpw7"
 
+[node name="Hint" type="Control" parent="GUI/UI/CommsWindow" unique_id=1862258255]
+visible = false
+anchors_preset = 0
+offset_left = 305.0
+offset_top = 100.0
+offset_right = 345.0
+offset_bottom = 140.0
+
+[node name="Arrow" type="TextureRect" parent="GUI/UI/CommsWindow/Hint" unique_id=780250961]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -25.0
+offset_right = 92.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("43_8kgjo")
+
+[node name="Label" type="Label" parent="GUI/UI/CommsWindow/Hint" unique_id=1066283649]
+layout_mode = 0
+offset_left = -269.0
+offset_top = -45.0
+offset_right = 27.0
+offset_bottom = 58.0
+text = "ОБНАРУЖЕНА РЕПТИЛИЯ. ПРИМЕРНОЕ НАПРАВЛЕНИЕ:"
+label_settings = SubResource("LabelSettings_8kgjo")
+horizontal_alignment = 1
+autowrap_mode = 3
+script = ExtResource("35_cgoaf")
+string_id = &"reptile_hint"
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
+
 [node name="ItemGrid" type="VBoxContainer" parent="GUI/UI/CommsWindow" unique_id=544806176]
 z_index = 1
 layout_mode = 0
@@ -1491,6 +1644,7 @@ autowrap_mode = 3
 script = ExtResource("32_yfm5w")
 
 [node name="ElevatorWindow" type="Control" parent="GUI/UI" unique_id=2041142128]
+visible = false
 anchors_preset = 0
 offset_left = 575.0
 offset_top = 320.0
@@ -1708,6 +1862,10 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0)
 metadata/_edit_use_anchors_ = true
 
+[connection signal="pressed" from="World/Player/Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="World/Player/Right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="World/Player/Up" to="." method="_on_up_pressed"]
+[connection signal="pressed" from="World/Player/Down" to="." method="_on_down_pressed"]
 [connection signal="pressed" from="GUI/UI/ShowTeam" to="GUI/UI/TeamWindow" method="_on_show_team_pressed"]
 [connection signal="pressed" from="GUI/UI/ShowRecon" to="GUI/UI/ReconWindow" method="_on_show_recon_pressed"]
 [connection signal="pressed" from="GUI/UI/ShowCraft" to="GUI/UI/CraftWindow" method="_on_show_craft_pressed"]

@@ -75,6 +75,7 @@ var zone_id: int = 0
 
 var chervs: Array[Room] = []
 var elevators: Array[Room] = []
+var reptile: Room
 
 #======================
 # v Tutorial flags v
@@ -115,7 +116,7 @@ func _ready() -> void:
 	
 	SignalBus.teleport.connect(_teleport)
 	SignalBus.advance_tutorial.connect(_on_tutorial_ok_pressed)
-	SignalBus.battle_encounter.connect(func(): $GUI.visible = false)
+	SignalBus.battle_encounter.connect(func(_w: int = 0): $GUI.visible = false)
 	SignalBus.change_steps.connect(func(delta):
 		steps += delta
 		$GUI/UI/Steps.text = str(steps))
@@ -142,7 +143,6 @@ func _process(_delta: float) -> void:
 	elif Input.is_action_just_pressed("party_right"):
 		move_player(Direction.Right)
 	elif Input.is_action_just_pressed("stay"):
-		is_encountering = true
 		encounter(room_at(party_row, party_col))
 
 func move_player(direction: Direction) -> void:
@@ -158,11 +158,10 @@ func move_player(direction: Direction) -> void:
 	
 	party_col += _dcol[direction]
 	party_row += _drow[direction]
+	_update_move_buttons()
 	player_node.global_position = room.global_position
 	
 	zone_id = room.area_level
-	
-	is_encountering = true
 	_explore(party_row, party_col)
 	
 	
@@ -202,9 +201,6 @@ func move_player(direction: Direction) -> void:
 		if room.type != Room.Type.City and room.type != Room.Type.Comms and room.type != Room.Type.Elevator:
 			purge(room)
 	
-	
-		
-	
 	end_turn_upkeep()
 
 func purge(room: Room) -> void:
@@ -212,7 +208,9 @@ func purge(room: Room) -> void:
 	room.sprite.texture = room_sprites[Room.Type.Purged]
 	
 func encounter(room: Room) -> void:
-	
+	if is_encountering: return
+	SignalBus.focus_camera.emit(room.global_position)
+	is_encountering = true
 	for army: LiberationArmy in $World/Armies.get_children():
 		if army.col == party_col and army.row == party_row:
 			army.battle()
@@ -221,11 +219,12 @@ func encounter(room: Room) -> void:
 	
 	SignalBus.entered_room.emit(room)
 	
+	CurrentRun.is_in_purged = room.type == Room.Type.Purged	
 	match(room.type):
 		Room.Type.Ruin:
 			SignalBus.found_item.emit()
 		Room.Type.Purged:
-			if since_last_battle_purged >= randi_range(6, 15):
+			if since_last_battle_purged >= randi_range(12, 20):
 				CurrentRun.evil_boys = CurrentRun.arrange_evil_team(zone_id)
 				$AnimationPlayer.play("battle_start")
 				await $AnimationPlayer.animation_finished
@@ -260,7 +259,7 @@ func encounter(room: Room) -> void:
 		Room.Type.Cherv:
 			since_last_battle = 0
 			CurrentRun.discounts += 1
-			CurrentRun.arrange_difficult(zone_id)
+			CurrentRun.evil_boys = CurrentRun.arrange_evil_team(zone_id)
 			$AnimationPlayer.play("battle_start")
 			await $AnimationPlayer.animation_finished
 			
@@ -269,7 +268,9 @@ func encounter(room: Room) -> void:
 				SignalBus.advance_tutorial.emit("tutorial_cherv_won")
 				
 			SignalBus.play_music.emit("battle_difficult")
-			SignalBus.battle_encounter.emit()
+			if zone_id < 2:
+				SignalBus.battle_encounter.emit(2)
+			else: SignalBus.battle_encounter.emit(3)
 		Room.Type.Reptile:
 			CurrentRun.arrange_boss()
 			$AnimationPlayer.play("battle_start")
@@ -411,6 +412,7 @@ func generate_floor() -> void:
 	_add_boss()
 	_initialize_fog()
 	_explore(party_row, party_col)
+	_update_move_buttons()
 
 func add_room(row: int, col: int) -> Room:
 	var room_node : Room = room_prefab.instantiate()
@@ -426,7 +428,6 @@ func add_room(row: int, col: int) -> Room:
 	return room_node
 
 func _go_in_direction(row: int, col: int, direction : Direction, remain: int):
-	#print(str(row) + "/" + str(col) + "/" + str(remain))
 	if remain == 0 or space_taken[row][col] \
 	 	or row < 0 or col < 0 or row > size or col > size: return
 	
@@ -434,14 +435,12 @@ func _go_in_direction(row: int, col: int, direction : Direction, remain: int):
 	add_room(row, col)
 	
 	if randf() < current_branch_chance:
-		#print("Branch!")
 		current_branch_chance -= 0.02
 		var all_dir = [Direction.Up, Direction.Down, Direction.Right, Direction.Left]
 		all_dir.erase(direction)
 		all_dir.erase(opposite(direction))
 		
 		var new_dir = all_dir.pick_random()
-		#print("Direction: " + str(new_dir))
 		var branch_remain = randi_range(size/4, size/2)
 		
 		_go_in_direction(row + _drow[new_dir], col + _dcol[new_dir], \
@@ -510,10 +509,11 @@ func _add_boss() -> void:
 					all_coords.append(Vector2i(row, col))
 	
 	var coords : Vector2i = all_coords.pick_random()
-	#for coords in all_coords:
 	var room = add_room(coords.x, coords.y)
 	room.type = Room.Type.Reptile
 	room.sprite.texture = room_sprites[room.type]
+	
+	reptile = room
 		
 func _divide_by_area() -> void:
 	var start_room: Room = room_at(party_row, party_col)
@@ -657,4 +657,26 @@ func _on_tutorial_ok_pressed(specific_id: StringName = "") -> void:
 			tutorial_box.visible = false
 	else:
 		tutorial_box.get_node("Text").set_string_id("tutorial_map_"+str(tutorial_progress))
+
+
 	
+func _update_move_buttons() -> void:
+	$World/Player/Down.visible = is_instance_valid(room_at(party_row+1, party_col))
+	$World/Player/Up.visible = is_instance_valid(room_at(party_row-1, party_col))
+	$World/Player/Right.visible = is_instance_valid(room_at(party_row, party_col+1))
+	$World/Player/Left.visible = is_instance_valid(room_at(party_row, party_col-1))
+
+func _on_left_pressed() -> void:
+	move_player(Direction.Left)
+
+
+func _on_right_pressed() -> void:
+	move_player(Direction.Right)
+
+
+func _on_up_pressed() -> void:
+	move_player(Direction.Up)
+
+
+func _on_down_pressed() -> void:
+	move_player(Direction.Down)

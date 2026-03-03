@@ -28,6 +28,6 @@ func _on_hp_changed():
 		consume(sender)
 
 func on_level_up():
+	super.on_level_up()
 	hp_heal_percent += 10
 	hp_threshold_percent -= 5
-	super.on_level_up()		

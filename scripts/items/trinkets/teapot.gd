@@ -17,5 +17,5 @@ func _revenge(source: SlaveNode, _dmg: int):
 	Action.deal_damage(sender, source, harm, true)
 
 func on_level_up():
-	harm += 2
 	super.on_level_up()
+	harm += 2

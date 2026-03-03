@@ -19,6 +19,7 @@ func _on_turn_started():
 	sender.set_hp(-health_loss)		
 
 func on_level_up():
+	super.on_level_up()
 	match(level):
 		2: health_loss += 1
 		3: 
@@ -26,4 +27,3 @@ func on_level_up():
 			health_loss += 1
 		4: health_loss -= 1
 		5: health_loss -= 1
-	super.on_level_up()

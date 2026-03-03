@@ -43,11 +43,11 @@ func use_item(sender: SlaveNode, ally: SlaveNode):
 		ally.turn_ended.emit()
 
 func on_level_up():
+	super.on_level_up()
 	heal += 1
 	extra_hp += 1
 	if level == 3 or level == 5: extra_speed += 1
 	if level >= 4: harm -= 2
-	super.on_level_up()
 
 func get_priority(sender: SlaveNode, ally: SlaveNode) -> int:
 	if ally.held.hp <= harm: return -3

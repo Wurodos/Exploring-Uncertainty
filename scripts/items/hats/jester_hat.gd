@@ -15,10 +15,10 @@ func use_item(sender: SlaveNode, ally: SlaveNode):
 	ally.add_buff(Action.BLASPHEMY, turns)
 
 func on_level_up():
+	super.on_level_up()
 	extra_hp += 2
 	if level == 3: extra_speed += 1
 	if level >= 4: turns += 1
-	super.on_level_up()
 
 func get_priority(_sender: SlaveNode, ally: SlaveNode) -> int:
 	var prio = 0

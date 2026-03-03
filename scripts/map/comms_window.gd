@@ -11,6 +11,8 @@ var required_trinkets: int = 0
 var required_any: int = 0
 
 @onready var item_grid: Grid = $ItemGrid
+@onready var hint: Control = $Hint
+@onready var arrow: Control = $Hint/Arrow
 
 func _ready() -> void:
 	visible = false
@@ -58,11 +60,11 @@ func _on_enter_comms(comms: Room) -> void:
 	$Power.visible = not comms.flag
 	$Required.visible = not comms.flag
 	$Power.disabled = true
-	
+	hint.visible = false
 	
 	if comms.flag:
 		$Message.set_string_id("comms_"+str(current_comms.heal_used))
-		
+		_enable_hint()
 		$Message.type()
 	else: $Message.text = ""
 	
@@ -115,6 +117,18 @@ func _on_close_pressed() -> void:
 	$Message.is_typing = false
 	visible = false
 
+func _enable_hint() -> void:
+	hint.visible = true
+	var horizontal := Map.instance.reptile.col - current_comms.col
+	var vertical := current_comms.row - Map.instance.reptile.row
+	var angle = 0
+	if abs(horizontal) >= abs(vertical):
+		if horizontal >= 0: angle = 90
+		else: angle = -90
+	else:
+		if vertical >= 0: angle = 0
+		else: angle = 180
+	arrow.rotation_degrees = angle
 
 func _on_power_pressed() -> void:
 	current_comms.flag = true
@@ -122,6 +136,7 @@ func _on_power_pressed() -> void:
 	$Required.visible = false
 	CurrentRun.is_comms_repaired = true
 	SignalBus.change_steps.emit(+100)
+	_enable_hint()
 	
 	
 	if CurrentRun.messages_not_seen.is_empty():

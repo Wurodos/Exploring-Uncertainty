@@ -27,7 +27,7 @@ func on_attacked(attacker: SlaveNode) -> void:
 	if dont_change_target: return
 	if intention and intention.targets.size() == 1:
 		if intention.is_support: decide_weapon_intention()
-		intention.targets = [CurrentRun.good_boys.find(attacker.held)]
+		intention.targets = [Battle.instance.good_team.boys_nodes.find(attacker)]
 		owner.update_intention()
 
 

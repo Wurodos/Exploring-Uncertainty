@@ -16,10 +16,10 @@ func on_start_battle(owner: SlaveNode):
 	owner.tags.append(Action.TAG_VIGILANCE_KEEP_ATTACK)
 
 func on_level_up():
+	super.on_level_up()
 	extra_hp += 3
 	if level >= 3: turns += 1
 	if level >= 4: extra_speed += 1
-	super.on_level_up()
 
 func get_priority(sender: SlaveNode, ally: SlaveNode) -> int:
 	if sender == ally and sender.team.boys.size() > 1: return -2

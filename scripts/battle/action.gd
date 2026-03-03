@@ -5,6 +5,7 @@ const SHIELD = "shield"
 const BLASPHEMY = "blasphemy"
 const FREEZE = "freeze"
 const DARK = "dark"
+const STUN = "stun"
 
 const TAG_BETTER_SHIELD = "tag_better_shield"
 const TAG_STATUS_DAMAGE = "tag_status_damage"
@@ -17,13 +18,13 @@ func calculate_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, _dont_proc
 		for turns: int in sender.buffs.values():
 			if turns > 0: total_dmg += turns 
 	if sender.buffs.has(APPETITE):
-		total_dmg = total_dmg * 4 / 3
+		total_dmg = ceil(float(total_dmg) * 3. / 2.)
 	if victim and victim.buffs.has(FREEZE):
-		total_dmg = total_dmg * 3 / 2
+		total_dmg = ceil(float(total_dmg) * 3. / 2.)
 	if victim and victim.buffs.has(SHIELD):
 		if victim.tags.has(TAG_BETTER_SHIELD):
-			total_dmg = total_dmg * 2 / 5
-		else: total_dmg = total_dmg * 7 / 10
+			total_dmg = ceil(float(total_dmg) * 2. / 5.)
+		else: total_dmg = ceil(float(total_dmg) * 7. / 10.)
 	
 	return total_dmg
 
@@ -45,7 +46,10 @@ func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, dont_proc: bool
 	
 	if is_crit:
 		total_dmg *= 2
-		if victim.buffs.has(SHIELD): total_dmg = total_dmg * 10 / 7
+		if victim.buffs.has(SHIELD): 
+			if victim.tags.has(TAG_BETTER_SHIELD):
+				total_dmg = total_dmg * 5 / 2
+			else: total_dmg = total_dmg * 10 / 7
 	
 	if sender.buffs.has(BLASPHEMY):
 		heal(sender, sender, floor(total_dmg*2/5))

@@ -14,10 +14,11 @@ func on_start_battle(owner: SlaveNode):
 	sender = owner
 
 func _explode(victim: SlaveNode):
-	Action.deal_damage(sender, victim, harm)
+	if not victim.buffs.has(Action.SHIELD):
+		Action.deal_damage(sender, victim, harm)
 	sender.attacked.disconnect(_explode)
 	consume(sender)
 
 func on_level_up():
-	harm += roundi(harm / 2)
 	super.on_level_up()
+	harm += roundi(harm / 2)

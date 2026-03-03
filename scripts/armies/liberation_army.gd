@@ -58,9 +58,6 @@ func make_path() -> void:
 	while target.prev != null:
 		path.append(target)
 		target = target.prev
-	
-	for node: PathNode in path:
-		print(node.row, " ", node.col)
 
 # ====================
 # v   PATHFINDING    v

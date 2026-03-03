@@ -28,19 +28,20 @@ func _ready() -> void:
 			CurrentRun.craft_pool.append(item.duplicate())
 
 	## DEBUG -> Inventory 
-	#CurrentRun.inventory.append(ItemPool.fetch("viking_helmet"))
+	#CurrentRun.inventory.append(ItemPool.fetch("ice_cube"))
 	#CurrentRun.inventory.append(ItemPool.fetch("alcohol"))
-	for i in range(20):
-		CurrentRun.inventory.append(ItemPool.fetch_random())
+	#for i in range(20):
+	#	CurrentRun.inventory.append(ItemPool.fetch_random())
 	
 
-func _on_battle_encounter() -> void:
+func _on_battle_encounter(wave_count: int = 1) -> void:
 	CurrentRun.state = State.Battle
 	
 	map_node.visible = false
 	$Camera2D.make_current()
 	battle_node = battle_scene.instantiate()
 	add_child(battle_node)
+	battle_node.wave_count = wave_count
 
 func _on_end_battle() -> void:
 	battle_node.queue_free()

@@ -28,13 +28,13 @@ func _on_received_damage(_source: SlaveNode, dmg: int):
 	total_received %= required_harm
 
 func on_level_up():
+	super.on_level_up()
 	extra_hp += 3
 	match(level):
 		2: extra_hp += 4
 		3: power_gain += 1
 		4: extra_hp += 6
 		5: required_harm -= 1
-	super.on_level_up()
 
 func get_priority(sender: SlaveNode, ally: SlaveNode) -> int:
 	if sender == ally: return -999

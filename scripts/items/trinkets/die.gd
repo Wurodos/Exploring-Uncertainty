@@ -11,5 +11,5 @@ func on_start_battle(owner: SlaveNode):
 	owner.set_luck(+luck)
 
 func on_level_up():
-	luck += 1
 	super.on_level_up()
+	luck += 1

@@ -18,6 +18,9 @@ restart;Restart;Перезапуск
 exit;Power off;Выключить
 craft;Craft;Мастерить
 comms_repair;Repair;Восстановить
+wave;Wave;Волна
+no_loot_reminder;ITEMS don't receive experience.\nNo maraudering.\n(Right-click to remove);ПРЕДМЕТЫ не получат опыта в конце боя.\nНикакого мародерства.\n(ПКМ, чтобы скрыть)
+reptile_hint;REPTILE DETECTED. POSSIBLE DIRECTION:;ОБНАРУЖЕНА РЕПТИЛИЯ. ПРИМЕРНОЕ НАПРАВЛЕНИЕ:
 kw_power_name;Power;Мощь
 kw_power_desc;Increases inflicted HARM;Увеличивает причиняемый ВРЕД
 kw_luck_name;Luck;Удача
@@ -29,8 +32,8 @@ kw_shield_desc;Ignore 30% of received HARM;Получает только 70% В�
 kw_blasphemy_name;Blasphemy;Кощунство
 kw_blasphemy_desc;40% of inflicted HARM is converted to HEALTH;Лечит здоровье от 40% причиняемого ВРЕДА
 kw_appetite_name;Appetite;Аппетит
-kw_appetite_desc;Inflicts 33% more HARM;Наносит на 33% ВРЕДА больше
-kw_freeze_name;Freeze;Холод
+kw_appetite_desc;Inflicts 50% more HARM;Наносит на 50% ВРЕДА больше
+kw_freeze_name;Freeze;Мороз
 kw_freeze_desc;Receive 50% more HARM;Получает на 50% больше ВРЕДА
 kw_dark_name;Dark;Тьма
 kw_dark_desc;Cannot help allies;Не может помогать союзникам

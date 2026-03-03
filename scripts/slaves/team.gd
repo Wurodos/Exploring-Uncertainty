@@ -20,8 +20,8 @@ func _ready() -> void:
 	SignalBus.slave_ran.connect(_on_slave_death)
 
 func _on_start_battle() -> void:
-	if is_evil: boys.append_array(CurrentRun.evil_boys)
-	else: boys.append_array(CurrentRun.good_boys)
+	if is_evil: boys = CurrentRun.evil_boys
+	else: boys = CurrentRun.good_boys
 	
 	var i : int = 0
 	for slave in boys:
@@ -69,4 +69,5 @@ func add_slave(slave: Slave) -> void:
 
 func _on_slave_death(slave_node: SlaveNode) -> void:
 	boys.erase(slave_node.held)
+	CurrentRun.evil_boys.erase(slave_node.held)
 	

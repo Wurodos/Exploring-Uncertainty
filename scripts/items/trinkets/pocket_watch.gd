@@ -26,9 +26,9 @@ func _on_turn_ended():
 		Action.heal(sender, sender, sender.held.maxhp / (100.0 / heal_hp_percent))		
 
 func on_level_up():
+	super.on_level_up()
 	match(level):
 		2: heal_hp_percent *= 2
 		3: turns -= 1
 		4: power_gain *= 2
 		5: turns -= 1
-	super.on_level_up()

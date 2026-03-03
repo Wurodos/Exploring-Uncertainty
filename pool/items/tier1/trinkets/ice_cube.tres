@@ -1,0 +1,17 @@
+[gd_resource type="Resource" format=3 uid="uid://dw1spi1llycju"]
+
+[ext_resource type="Script" uid="uid://8bbl2wbkxq4t" path="res://scripts/items/trinkets/ice_cube.gd" id="1_skm64"]
+[ext_resource type="Texture2D" uid="uid://boxo3gtaq18nl" path="res://images/items/ice-cube.png" id="2_onbe8"]
+
+[resource]
+script = ExtResource("1_skm64")
+type = 2
+texture = ExtResource("2_onbe8")
+cost = 2
+craft_reqs = Dictionary[int, int]({
+2: 2
+})
+keywords = Array[String](["freeze"])
+name = "ice cube"
+desc = "on attack: freeze 1 turn"
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

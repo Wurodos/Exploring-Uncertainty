@@ -12,8 +12,8 @@ func use_item(sender: SlaveNode, victim: SlaveNode):
 	localize()
 	
 func on_level_up():
-	harm += 2
 	super.on_level_up()
+	harm += 2
 
 func get_priority(_sender: SlaveNode, _victim: SlaveNode) -> int:
 	return 0

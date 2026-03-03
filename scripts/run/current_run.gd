@@ -22,6 +22,7 @@ var scraps: Dictionary[Item.Scrap, int] = {
 
 var discounts : int = 0
 var is_comms_repaired : bool = false
+var is_in_purged: bool = false
 var messages_not_seen: Array[int] = [0,1,2,3,4,5,6,7,8,9]
 var elevators_repaired: int = 0
 
@@ -35,26 +36,35 @@ var state: Game.State = Game.State.Map
 # Only Chervs. Draw 4 cards
 # DECK: CCCCCC--
 # ITEM LVL: 1
-# 3 weapons, 3 hats, 6 trinkets
+# 2 weapons, 2 hats, 4 trinkets
 # ====== Zone 1 ======
 # Add Starrys (S) and Swirlys (W). Draw 3 cards
-# DECK: CCCCSSSWW--
+# DECK: CCCCCSSSWW--
 # ITEM LVL: Half lvl 1, half lvl 2
 # Swirlys always have a weapon (2) + 4 weapons
-# 6 hats, 10 trinkets
+# 6 hats, 12 trinkets
 # ====== Zone 2 ======
-# Add the rest of enemies. 5 cards
-# DECK: 
+# Add Chomper (H) and Quagmire (Q). 4 cards
+# DECK: CCCCSSSWWQQHH---
 # ITEM LVL: Half lvl 2, half lvl 3
+# Chompers dont have a weapon
+# 8 weapons, 8 hats, 16 trinkets
 # ====== Zone 3 ======
+# TODO New enemies. 4 cards.
+# DECK: CCCSSSSSWWWQQHH
+# ITEM LVL: Half lvl 3, half lvl 4
+# 8 weapons, 8 hats, 16 trinkets
+# ====== Zone 4 ======
 # All enemies have full equipment. 5 cards.
-# DECK: 
-# ITEM LVL: all lvl 4
+# DECK IS ENTIRELY RANDOM
+# ITEM LVL: All lvl 4
 
 
-var evil_deck: Array[Slave] = []
-var evil_archive: Array[Slave] = []
-var archive_level: int = 0
+var deck_0: Array[Slave] = []
+var deck_1: Array[Slave] = []
+var deck_2: Array[Slave] = []
+var deck_3: Array[Slave] = []
+var deck_4: Array[Slave] = []
 
 var is_saved_game: bool = false
 var is_tutorial: bool = false
@@ -71,8 +81,10 @@ func _ready() -> void:
 	
 	randomize()
 	_prepare_good_boys.call_deferred()
-	_prepare_deck.call_deferred()
-	_prepare_archive.call_deferred()
+	_prepare_deck_0.call_deferred()
+	_prepare_deck_1.call_deferred()
+	_prepare_deck_2.call_deferred()
+	_prepare_deck_3.call_deferred()
 	
 	
 func _load_config() -> void:
@@ -92,13 +104,6 @@ func save_game() -> void:
 			return slave.serialize()),
 		"inventory": inventory.map(func(item: Item):
 			return item.serialize()),
-		"evil_deck": evil_deck.map(func(slave : Enemy):
-			if not slave: return null
-			else: return slave.serialize()),
-		"evil_archive": evil_archive.map(func(slave : Enemy):
-			if not slave: return null
-			else: return slave.serialize()),
-		"archive_level": archive_level,
 		"discounts": discounts,
 		"is_comms_repaired": is_comms_repaired,
 		"map" : Map.instance.serialize()
@@ -123,18 +128,6 @@ func load_save() -> void:
 		
 		var data = json.data
 		
-		# Evil deck
-		evil_deck = []
-		for value in data["evil_deck"]:
-			if value == null: evil_deck.append(null)
-			else: evil_deck.append(Enemy.deserialize(value))
-		
-		# Evil archive
-		evil_archive = []
-		for value in data["evil_archive"]:
-			if value == null: evil_archive.append(null)
-			else: evil_archive.append(Enemy.deserialize(value))
-		
 		# Good boys
 		good_boys = []
 		for value in data["good_boys"]:
@@ -147,9 +140,6 @@ func load_save() -> void:
 		inventory = []
 		for value in data["inventory"]:
 			inventory.append(Item.deserialize(value))
-		
-		# Archive level
-		archive_level = floor(data["archive_level"])
 		
 		# Flags
 		is_comms_repaired = data["is_comms_repaired"]
@@ -164,39 +154,31 @@ func load_save() -> void:
 				for element in value:
 					print(element)
 			else: print(value)
-	
-	
-	## DEBUG
-	
-	# Deck
-	for enemy in evil_deck:
-		if not enemy: 
-			print("\n EMPTY SLOT")
-			continue
-		print("\n" + enemy.u_name)
-		print(enemy.weapon.name)
-		print(enemy.hat.name)
-		print(enemy.trinket1.name)
-		print(enemy.trinket2.name)
 
 func _prepare_good_boys() -> void:
 	good_boys = [SlavePool.fetch("blob"), SlavePool.fetch("blob"), SlavePool.fetch("blob")]
 	#good_boys[0].hp = 1
 
-func _prepare_deck() -> void:
+# FIXME pls no ugly code
+# Here goes deck preparation
+# If I find a more sophisticated and generalized method of doing this
+# I'll fix it
+# For now it's here and it's here to stay
+
+func _prepare_deck_0() -> void:
 	# items
 	
 	var weapons = []
 	var hats = []
 	var trinkets = []
 	
-	for i in range(4):
+	for i in range(2):
 		weapons.append(ItemPool.fetch_random(Item.Type.Weapon))
 		hats.append(ItemPool.fetch_random(Item.Type.Hat))
 		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
 		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
 	
-	for i in range(12):
+	for i in range(4):
 		weapons.append(ItemPool.fetch("no_weapon"))
 		hats.append(ItemPool.fetch("no_hat"))
 		trinkets.append(ItemPool.fetch("no_trinket"))
@@ -207,99 +189,334 @@ func _prepare_deck() -> void:
 	trinkets.shuffle()
 	
 	# slaves
-	for i in range(16):
+	for i in range(6):
 		var enemy = SlavePool.fetch("cherv")
 		enemy.equip(weapons.pop_back())
 		enemy.equip(hats.pop_back())
 		enemy.equip(trinkets.pop_back(), 1)
 		enemy.equip(trinkets.pop_back(), 2)
 		
-		evil_deck.append(enemy)
-	for i in range(8):
-		evil_deck.append(null)
+		deck_0.append(enemy)
+	for i in range(2):
+		deck_0.append(null)
 
-	evil_deck.shuffle()
+	deck_0.shuffle()
 
-func _prepare_archive() -> void:
-	archive_level += 1
+func _prepare_deck_1() -> void:
 	
-	var empty_slots = clamp(6 - archive_level, 0, 3)
+	const chervs = 3
+	const starrys = 5
+	const swirlys = 2
+	const all = chervs + starrys + swirlys
+	const items = 4
+	
+	# items
 	
 	var weapons = []
 	var hats = []
 	var trinkets = []
 	
-	for i in range(min(1 + archive_level, 12)):
+	for i in range(items):
 		weapons.append(ItemPool.fetch_random(Item.Type.Weapon))
 		hats.append(ItemPool.fetch_random(Item.Type.Hat))
 		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
 		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
+		
+		if i < items / 2:
+			(weapons[i] as Item).on_level_up()
+			(hats[i] as Item).on_level_up()
+			(trinkets[i*2] as Item).on_level_up()
+			(trinkets[i*2+1] as Item).on_level_up()
 	
-	for i in range(max(11 - empty_slots - archive_level, 0)):
+	for i in range(all - items):
 		weapons.append(ItemPool.fetch("no_weapon"))
 		hats.append(ItemPool.fetch("no_hat"))
 		trinkets.append(ItemPool.fetch("no_trinket"))
 		trinkets.append(ItemPool.fetch("no_trinket"))
 	
-	for i in range(empty_slots):
-		evil_archive.append(null)
-	for i in range(min(4 - empty_slots, 3)):
-		evil_archive.append(SlavePool.fetch("chomper"))
+	weapons.shuffle()
+	hats.shuffle()
+	trinkets.shuffle()
 	
-	evil_archive.append_array([SlavePool.fetch("starry"), SlavePool.fetch("starry"),
-		SlavePool.fetch("starry"), SlavePool.fetch("starry"),
-		SlavePool.fetch("quagmire"), SlavePool.fetch("quagmire"),
-		SlavePool.fetch("swirly"), SlavePool.fetch("swirly"),
-	])
+	# slaves
+	for i in range(10):
+		var enemy : Slave
+		var weapon: Item
+		if i < 2:
+			enemy = SlavePool.fetch("swirly")
+			weapon = weapons.pop_at(weapons.find_custom(func(it: Item) : return it.is_item())) 
+		elif i < 5+2: 
+			enemy = SlavePool.fetch("starry")
+			weapon = weapons.pop_back()
+		else: 
+			enemy = SlavePool.fetch("cherv")
+			weapon = weapons.pop_back()
+			
+		enemy.equip(weapon)
+		enemy.equip(hats.pop_back())
+		enemy.equip(trinkets.pop_back(), 1)
+		enemy.equip(trinkets.pop_back(), 2)
+		deck_1.append(enemy)
+	for i in range(2):
+		deck_1.append(null)
+
+	deck_1.shuffle()
+
+func _prepare_deck_2() -> void:
+	
+	const chervs := 4
+	const starrys := 3
+	const quagmires := 2
+	const chompers := 2
+	const swirlys := 2
+	const empty := 3
+	const all := chervs + starrys + quagmires + chompers + swirlys
+	const items := 8
+	
+	# items
+	
+	var weapons = []
+	var hats = []
+	var trinkets = []
+	
+	for i in range(items):
+		weapons.append(ItemPool.fetch_random(Item.Type.Weapon))
+		hats.append(ItemPool.fetch_random(Item.Type.Hat))
+		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
+		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
+		
+		
+		(weapons[i] as Item).on_level_up()
+		(hats[i] as Item).on_level_up()
+		(trinkets[i*2] as Item).on_level_up()
+		(trinkets[i*2+1] as Item).on_level_up()
+		if i < items / 2:
+			(weapons[i] as Item).on_level_up()
+			(hats[i] as Item).on_level_up()
+			(trinkets[i*2] as Item).on_level_up()
+			(trinkets[i*2+1] as Item).on_level_up()
+	
+	for i in range(all - items):
+		weapons.append(ItemPool.fetch("no_weapon"))
+		hats.append(ItemPool.fetch("no_hat"))
+		trinkets.append(ItemPool.fetch("no_trinket"))
+		trinkets.append(ItemPool.fetch("no_trinket"))
 	
 	weapons.shuffle()
 	hats.shuffle()
 	trinkets.shuffle()
 	
-	for slave : Slave in evil_archive:
-		if slave == null: continue
-		
-		slave.equip(weapons.pop_back())
-		slave.equip(hats.pop_back())
-		slave.equip(trinkets.pop_back(), 1)
-		slave.equip(trinkets.pop_back(), 2)
-	
-	evil_archive.shuffle()
-	
-	#for slave : Slave in evil_archive:
-	#	if slave == null:
-	#		print("-------")
-	#		print("NO SLAVE")
-	#	else: slave.debug()
+	# slaves
+	for i in range(13):
+		var enemy : Slave
+		var weapon: Item
+		if i < swirlys:
+			enemy = SlavePool.fetch("swirly")
+			weapon = weapons.pop_at(weapons.find_custom(func(it: Item) : return it.is_item())) 
+		elif i < swirlys+chompers: 
+			enemy = SlavePool.fetch("chomper")
+			weapon = weapons.pop_at(weapons.find_custom(func(it: Item) : return not it.is_item())) 
+		elif i < swirlys+chompers+quagmires: 
+			enemy = SlavePool.fetch("quagmire")
+			weapon = weapons.pop_back()
+		elif i < swirlys+chompers+quagmires+starrys: 
+			enemy = SlavePool.fetch("starry")
+			weapon = weapons.pop_back()
+		else: 
+			enemy = SlavePool.fetch("cherv")
+			weapon = weapons.pop_back()
+			
+		enemy.equip(weapon)
+		enemy.equip(hats.pop_back())
+		enemy.equip(trinkets.pop_back(), 1)
+		enemy.equip(trinkets.pop_back(), 2)
+		deck_2.append(enemy)
+	for i in range(empty):
+		deck_2.append(null)
 
+	deck_2.shuffle()
+	
+func _prepare_deck_3() -> void:
+	
+	const chervs := 3
+	const starrys := 5
+	const quagmires := 2
+	const chompers := 2
+	const swirlys := 3
+	const empty := 0
+	const all := chervs + starrys + quagmires + chompers + swirlys
+	const items := 8
+	
+	# items
+	var weapons = []
+	var hats = []
+	var trinkets = []
+	
+	for i in range(items):
+		weapons.append(ItemPool.fetch_random(Item.Type.Weapon))
+		hats.append(ItemPool.fetch_random(Item.Type.Hat))
+		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
+		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
+		
+		for k in range(2):
+			(weapons[i] as Item).on_level_up()
+			(hats[i] as Item).on_level_up()
+			(trinkets[i*2] as Item).on_level_up()
+			(trinkets[i*2+1] as Item).on_level_up()
+		if i < items / 2:
+			(weapons[i] as Item).on_level_up()
+			(hats[i] as Item).on_level_up()
+			(trinkets[i*2] as Item).on_level_up()
+			(trinkets[i*2+1] as Item).on_level_up()
+	
+	for i in range(all - items):
+		weapons.append(ItemPool.fetch("no_weapon"))
+		hats.append(ItemPool.fetch("no_hat"))
+		trinkets.append(ItemPool.fetch("no_trinket"))
+		trinkets.append(ItemPool.fetch("no_trinket"))
+	
+	weapons.shuffle()
+	hats.shuffle()
+	trinkets.shuffle()
+	
+	# slaves
+	for i in range(all):
+		var enemy : Slave
+		var weapon: Item
+		if i < swirlys:
+			enemy = SlavePool.fetch("swirly")
+			weapon = weapons.pop_at(weapons.find_custom(func(it: Item) : return it.is_item())) 
+		elif i < swirlys + chompers: 
+			enemy = SlavePool.fetch("chomper")
+			weapon = weapons.pop_at(weapons.find_custom(func(it: Item) : return not it.is_item())) 
+		elif i < swirlys + chompers + quagmires: 
+			enemy = SlavePool.fetch("quagmire")
+			weapon = weapons.pop_back()
+		elif i < swirlys + chompers + quagmires + starrys: 
+			enemy = SlavePool.fetch("starry")
+			weapon = weapons.pop_back()
+		else: 
+			enemy = SlavePool.fetch("cherv")
+			weapon = weapons.pop_back()
+			
+		enemy.equip(weapon)
+		enemy.equip(hats.pop_back())
+		enemy.equip(trinkets.pop_back(), 1)
+		enemy.equip(trinkets.pop_back(), 2)
+		deck_3.append(enemy)
+	for i in range(empty):
+		deck_3.append(null)
+
+	deck_3.shuffle()
+
+func _prepare_deck_4() -> void:
+	
+	const chervs := 3
+	const starrys := 5
+	const quagmires := 2
+	const chompers := 2
+	const swirlys := 3
+	const empty := 0
+	const all := chervs + starrys + quagmires + chompers + swirlys
+	const items := 8
+	
+	# items
+	var weapons = []
+	var hats = []
+	var trinkets = []
+	
+	for i in range(items):
+		weapons.append(ItemPool.fetch_random(Item.Type.Weapon))
+		hats.append(ItemPool.fetch_random(Item.Type.Hat))
+		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
+		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
+		
+		
+		for k in range(3):
+			(weapons[i] as Item).on_level_up()
+			(hats[i] as Item).on_level_up()
+			(trinkets[i*2] as Item).on_level_up()
+			(trinkets[i*2+1] as Item).on_level_up()
+	
+	for i in range(all - items):
+		weapons.append(ItemPool.fetch("no_weapon"))
+		hats.append(ItemPool.fetch("no_hat"))
+		trinkets.append(ItemPool.fetch("no_trinket"))
+		trinkets.append(ItemPool.fetch("no_trinket"))
+	
+	weapons.shuffle()
+	hats.shuffle()
+	trinkets.shuffle()
+	
+	# slaves
+	for i in range(all):
+		var enemy : Slave
+		var weapon: Item
+		if i < swirlys:
+			enemy = SlavePool.fetch("swirly")
+			weapon = weapons.pop_at(weapons.find_custom(func(it: Item) : return it.is_item())) 
+		elif i < swirlys + chompers: 
+			enemy = SlavePool.fetch("chomper")
+			weapon = weapons.pop_at(weapons.find_custom(func(it: Item) : return not it.is_item())) 
+		elif i < swirlys + chompers + quagmires: 
+			enemy = SlavePool.fetch("quagmire")
+			weapon = weapons.pop_back()
+		elif i < swirlys + chompers + quagmires + starrys: 
+			enemy = SlavePool.fetch("starry")
+			weapon = weapons.pop_back()
+		else: 
+			enemy = SlavePool.fetch("cherv")
+			weapon = weapons.pop_back()
+			
+		enemy.equip(weapon)
+		enemy.equip(hats.pop_back())
+		enemy.equip(trinkets.pop_back(), 1)
+		enemy.equip(trinkets.pop_back(), 2)
+		deck_4.append(enemy)
+	for i in range(empty):
+		deck_4.append(null)
+
+	deck_4.shuffle()
 
 func arrange_evil_team(zone: int) -> Array[Slave]:
 	
+	var deck: Array[Slave]
+	var draw_count: int = 0
+	match(zone):
+		0: 
+			deck = deck_0
+			draw_count = 4
+		1: 
+			deck = deck_1
+			draw_count = 3
+		2: 
+			deck = deck_2
+			draw_count = 4
+		3: 
+			deck = deck_3
+			draw_count = 4
+		4: 
+			deck = deck_4
+			draw_count = 5
+	
 	var team : Array[Slave] = []
 	
-	for i in range(3):
-		var enemy = evil_deck.pop_back()
+	for i in range(draw_count):
+		var enemy = deck.pop_back()
 		if enemy != null:
+			#enemy.hp = 1
 			team.append(enemy)
+	if deck.is_empty():
+		match (zone): 
+			0: _prepare_deck_0()
+			1: _prepare_deck_1()
+			2: _prepare_deck_2()
+			3: _prepare_deck_3()
+			4: _prepare_deck_4()
+	
 	
 	if CurrentRun.is_battle_tutorial and team[0]:
 		team[0].equip(ItemPool.fetch_random())
-	
-	for i in range(3):
-		evil_deck.append(evil_archive.pop_back())
-		if evil_archive.is_empty():
-			_prepare_archive()
-	evil_deck.shuffle()
-	
-	# if 3 empties are in row
-	if team.is_empty():
-		var enemy = SlavePool.fetch("cherv")
-		enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
-		enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
-		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
-		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
-		team.append(enemy)
-	
 	return team
 
 # Throws random item out if at 24
@@ -309,36 +526,6 @@ func put_item_in_inventory(item: Item) -> void:
 		SignalBus.lost_item.emit(CurrentRun.inventory.pop_at(id))
 	
 	CurrentRun.inventory.append(item)
-
-func arrange_difficult(zone: int) -> void:
-	CurrentRun.evil_boys = []
-	for i in range(3):
-		evil_deck.append(evil_archive.pop_back())
-		if evil_archive.is_empty():
-			_prepare_archive()
-	
-	var only_quagmires = true
-	for i in range(3):
-		var enemy : Enemy = evil_deck.pop_back()
-		if enemy != null:
-			CurrentRun.evil_boys.append(enemy)
-			if enemy.u_name != "quagmire":
-				only_quagmires = false
-			
-	if CurrentRun.evil_boys.is_empty():
-		var enemy = SlavePool.fetch("cherv")
-		enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
-		enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
-		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
-		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
-		CurrentRun.evil_boys.append(enemy)
-	elif only_quagmires:
-		var enemy = SlavePool.fetch("starry")
-		enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
-		enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
-		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
-		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
-		CurrentRun.evil_boys[0] = enemy
 
 func arrange_boss() -> void:
 	CurrentRun.evil_boys = [ReptilePool.fetch("roots_and_toots")]

@@ -13,9 +13,9 @@ func on_start_battle(owner: SlaveNode):
 	owner.set_luck(+luck_gain)
 	
 func on_level_up():
+	super.on_level_up()
 	extra_hp += 1
 	if level >= 4:
 		extra_speed += 1
 		power_gain += 1
 		luck_gain += 1
-	super.on_level_up()

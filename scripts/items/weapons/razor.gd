@@ -13,9 +13,9 @@ func use_item(sender: SlaveNode, victim: SlaveNode):
 	sender.set_power(+1)
 
 func on_level_up():
+	super.on_level_up()
 	harm += 2
 	if level >= 3: power += 1
-	super.on_level_up()
 
 func get_priority(_sender: SlaveNode, _victim: SlaveNode) -> int:
 	return 0

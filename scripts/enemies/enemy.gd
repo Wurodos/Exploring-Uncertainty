@@ -79,8 +79,8 @@ func _intention_weapon(target: int, victim: SlaveNode) -> void:
 func _get_random_good_target() -> int:
 	var possible : Array[int] = []
 	var i = 0
-	for slave : Slave in CurrentRun.good_boys:
-		if slave.is_alive:
+	for slave : SlaveNode in Battle.instance.good_team.boys_nodes:
+		if slave.held.is_alive:
 			possible.append(i)
 		i += 1	
 	return possible.pick_random()
@@ -88,8 +88,8 @@ func _get_random_good_target() -> int:
 func _get_2_good_targets() -> Array[int]:
 	var possible : Array[int] = []
 	var i = 0
-	for slave : Slave in CurrentRun.good_boys:
-		if slave.is_alive:
+	for slave : SlaveNode in Battle.instance.good_team.boys_nodes:
+		if slave.held.is_alive:
 			possible.append(i)
 		i += 1	
 	possible.shuffle()

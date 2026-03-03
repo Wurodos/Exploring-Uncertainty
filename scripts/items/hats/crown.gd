@@ -40,9 +40,9 @@ func use_item(_sender: SlaveNode, ally: SlaveNode):
 	ally.set_speed(-speed_loss)
 
 func on_level_up():
+	super.on_level_up()
 	extra_hp += 5
 	extra_speed -= 1
-	super.on_level_up()
 
 func get_priority(_sender: SlaveNode, _ally: SlaveNode) -> int:
 	return -999

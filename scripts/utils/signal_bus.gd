@@ -5,6 +5,8 @@ extends Node
 # Common
 # ====================
 
+signal focus_camera(pos: Vector2)
+
 signal locale_changed
 signal exit_game
 
@@ -28,7 +30,7 @@ signal message_popup(string_id: StringName)
 # Change scene
 # ====================
 
-signal start_battle
+signal start_battle(wave_count: int)
 signal end_encounter
 
 signal refresh

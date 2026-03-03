@@ -25,5 +25,5 @@ func _hit_everyone(victim: SlaveNode):
 	sender.attacked.disconnect(_hit_everyone)
 
 func on_level_up():
-	extra_speed += 1
 	super.on_level_up()
+	extra_speed += 1

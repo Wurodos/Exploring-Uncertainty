@@ -12,8 +12,8 @@ func use_item(sender: SlaveNode, victim: SlaveNode):
 	Action.deal_damage(sender, victim, harm)
 
 func on_level_up():
-	harm += 1
 	super.on_level_up()
+	harm += level
 
 # +2 if target has shield
 func get_priority(_sender: SlaveNode, victim: SlaveNode) -> int:

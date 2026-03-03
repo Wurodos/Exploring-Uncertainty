@@ -7,10 +7,7 @@ func _ready() -> void:
 	visible = false
 	
 func _update() -> void:
-	var back: int = CurrentRun.evil_deck.size() - 1
-	for i in range(3):
-		(recon_1[i] as SlaveTeamNode).apply(CurrentRun.evil_deck[back - i], SlaveTeamNode.Type.OnlyItems)
-		(recon_2[i] as SlaveTeamNode).apply(CurrentRun.evil_deck[back - i - 3], SlaveTeamNode.Type.OnlyItems)
+	pass
 		
 
 func _on_show_recon_pressed() -> void:

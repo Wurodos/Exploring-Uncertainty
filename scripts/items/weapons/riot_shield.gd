@@ -13,9 +13,9 @@ func use_item(sender: SlaveNode, victim: SlaveNode):
 	sender.add_buff(Action.SHIELD, shield_turns)
 
 func on_level_up():
+	super.on_level_up()
 	harm += 2
 	if level == 3 or level == 5: shield_turns += 1
-	super.on_level_up()
 
 # If faster than at least 2 fighters and hp > 50% +1 OR has shield +1
 func get_priority(_sender: SlaveNode, _victim: SlaveNode) -> int:

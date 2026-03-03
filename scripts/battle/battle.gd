@@ -13,6 +13,17 @@ static var instance: Battle
 
 const queue_element = preload("res://prefabs/battle/queue_element.tscn")
 
+var wave: int = 1:
+	set(val):
+		wave = val
+		%WaveLabel.text = tr("wave") + ": {}/{}".format([wave, wave_count], "{}")
+var wave_count: int = 1:
+	set(val):
+		wave_count = val
+		if wave_count > 1:
+			%WaveLabel.text = tr("wave") + ": {}/{}".format([wave, wave_count], "{}")
+		else: %WaveLabel.text = ""
+
 var speed_queue: Array[Slave] = []
 var current_slave_position : int = 0
 var current_slaves: Array[Slave] = []
@@ -23,6 +34,7 @@ var selected_victim: SlaveNode
 var is_line : bool = false
 var is_marauder : bool = false
 var is_first_round : bool = true
+var new_wave_on_new_round: bool = false
 
 var tutorial_progress: int = 0
 
@@ -65,13 +77,25 @@ func _on_start_battle():
 	for slave: SlaveNode in good_team.boys_nodes:
 		slave.start_battle()
 	
+	%NoLoot.visible = CurrentRun.is_in_purged
+	
 	_on_new_round()
 	current_slave_position = -1
 	SignalBus.new_turn.emit()
 
 # Create speed queueasass
 func _on_new_round():
+	if new_wave_on_new_round:
+		wave += 1
+		CurrentRun.evil_boys = CurrentRun.arrange_evil_team(Map.instance.zone_id)
+		evil_team.cull_the_dead()
+		evil_team._on_start_battle()
+		for slave: SlaveNode in evil_team.boys_nodes:
+			slave.start_battle()
+		new_wave_on_new_round = false
+	
 	SignalBus.new_round.emit()
+	
 	# Vigilance
 	for boy in good_team.boys_nodes: 
 		if boy.held.is_alive:
@@ -197,7 +221,11 @@ func _on_slave_death(slave_node: SlaveNode, is_loot: bool = true) -> void:
 	if good_team.boys.is_empty():
 		SignalBus.evil_won.emit()
 	elif evil_team.boys.is_empty():
-		SignalBus.good_won.emit()
+		if wave == wave_count:
+			SignalBus.good_won.emit()
+		else:
+			new_wave_on_new_round = true
+			
 	
 	if current_slave_position > speed_queue.size():
 		SignalBus.new_turn.emit()
@@ -293,10 +321,15 @@ func _on_speed_queue_mouse_exited(slave: Slave):
 	slave_node.arrow_animation.play("RESET")
 
 func _on_good_won() -> void:
-	print("Good won!")
 	is_marauder = true
 	CurrentRun.good_boys = CurrentRun.good_boys.filter(func(slave: Slave): return slave.is_alive)
 	SignalBus.stop_music.emit()
+	
+	if CurrentRun.is_in_purged:
+		%NoLoot.visible = false
+		var fake : Array[Item.Scrap] = []
+		SignalBus.show_end_battle_screen.emit(fake) 
+		return
 	
 	# Level up items
 	
@@ -307,9 +340,9 @@ func _on_good_won() -> void:
 			if item.is_item() and item.level < 5:
 				item.experience += 1
 				if item.experience == Constants.exp_required[item.level-1]:
-					item.experience = 0
-					item.level += 1
+					slave.unequip(item)
 					item.on_level_up()
+					slave.equip(item)
 	
 	loot_node.visible = true
 	loot_node.start_marauder()
@@ -327,7 +360,6 @@ func _on_good_won() -> void:
 	
 
 func _on_evil_won() -> void:
-	print("Evil won!")
 	SignalBus.new_turn.disconnect(_on_new_turn)
 	$AnimationPlayer.play("fail")
 

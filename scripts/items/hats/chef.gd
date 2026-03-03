@@ -26,11 +26,13 @@ func use_item(sender: SlaveNode, victim: SlaveNode):
 	Action.heal(sender, victim, heal)
 
 func on_level_up():
+	super.on_level_up()
 	extra_hp += 2
 	heal += 2
-	super.on_level_up()
 
 func get_priority(_sender: SlaveNode, ally: SlaveNode) -> int:
+	if not ally.held.is_alive:
+		return -999
 	if ally.held.hp < ally.held.maxhp / 2:
 		return +1
 	return 0

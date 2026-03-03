@@ -16,9 +16,9 @@ func use_item(sender: SlaveNode, ally: SlaveNode):
 	ally.add_buff(Action.SHIELD, 1)
 
 func on_level_up():
+	super.on_level_up()
 	extra_hp += 1
 	extra_speed += 1
-	super.on_level_up()
 	
 
 func get_priority(sender: SlaveNode, _ally: SlaveNode) -> int:

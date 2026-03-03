@@ -14,13 +14,13 @@ func use_item(sender: SlaveNode, victim: SlaveNode):
 	Action.deal_damage(sender, victim, dmg)
 
 func on_level_up():
+	super.on_level_up()
 	match(level):
 		2: base_harm += 2 
 		3: extra_harm += 1
 		4: 
 			base_harm += 4 
 		5: extra_harm += 1
-	super.on_level_up()
 
 func get_priority(_sender: SlaveNode, _victim: SlaveNode) -> int:
 	return 0

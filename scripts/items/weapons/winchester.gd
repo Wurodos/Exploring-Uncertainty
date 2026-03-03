@@ -23,9 +23,9 @@ func use_item(sender: SlaveNode, victim: SlaveNode):
 		Action.deal_damage(sender, potential_targets.pick_random(), second_harm)
 
 func on_level_up():
+	super.on_level_up()
 	first_harm += 1
 	second_harm += 1
-	super.on_level_up()
 
 func get_priority(_sender: SlaveNode, _victim: SlaveNode) -> int:
 	return 0

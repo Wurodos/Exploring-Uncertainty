@@ -15,14 +15,14 @@ func _ready() -> void:
 		$TutorialBox/Text.set_string_id("tutorial_intro_0")
 		tutorial_progress += 1
 	
-	for i in range(3):
+	for i in range(4):
 		deck.append(ItemPool.fetch_random(Item.Type.Weapon))
 		deck.append(ItemPool.fetch_random(Item.Type.Hat))
 		
 	for i in range(3):
 		$ItemRow.get_child(i).buy.connect(_buy)
 	
-	for i in range(6):
+	for i in range(7):
 		deck.append(ItemPool.fetch_random(Item.Type.Trinket))
 	
 	SignalBus.show_item_info.connect(_on_show_item_info)

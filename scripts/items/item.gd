@@ -9,6 +9,7 @@ enum Type { Weapon, Hat, Trinket, All}
 enum Target { Single, AllTeam, Self, None}
 enum Enchant { None, Red, Blue, Green, Yellow }
 
+@export var tier : int = 1
 @export var type : Type
 @export var target: Target
 @export var extra_hp : int
@@ -16,6 +17,7 @@ enum Enchant { None, Red, Blue, Green, Yellow }
 @export var texture: Texture2D
 @export var cost: int
 @export var craft_reqs : Dictionary[Scrap, int] = {}
+@export var craft_items: Array[Item] = []
 @export var keywords: Array[String] = []
 
 @export var u_name: StringName = ""
@@ -114,8 +116,9 @@ func on_unequip(owner: Slave):
 	owner.hp -= extra_hp
 
 func on_level_up():
-	print("level up!")
-	localize()
+	experience = 0
+	level += 1
+	localize.call_deferred()
 
 func on_start_battle(owner: SlaveNode):
 	owner.set_speed(extra_speed)
