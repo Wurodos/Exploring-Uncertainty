@@ -21,6 +21,8 @@ func on_level_up():
 	if level >= 4: turns += 1
 
 func get_priority(_sender: SlaveNode, ally: SlaveNode) -> int:
+	if not ally.held.is_alive: return -999
+	
 	var prio = 0
 	if ally.buffs.has(Action.BLASPHEMY): 
 		prio -= 1

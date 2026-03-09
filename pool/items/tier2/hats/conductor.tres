@@ -1,0 +1,18 @@
+[gd_resource type="Resource" format=3 uid="uid://bg3jlp64rewhj"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_pifa4"]
+[ext_resource type="Texture2D" uid="uid://ct08ixjjcstkq" path="res://images/items/wire.png" id="2_1mvsg"]
+[ext_resource type="Resource" uid="uid://cwm8a7o3brd4q" path="res://pool/items/tier1/weapons/wire.tres" id="2_3es2i"]
+[ext_resource type="Script" uid="uid://uwx0ox4fpwua" path="res://scripts/items/hats/conductor.gd" id="2_pdln0"]
+
+[resource]
+script = ExtResource("2_pdln0")
+static_per_power = 5
+tier = 2
+type = 1
+extra_hp = 4
+extra_speed = 3
+texture = ExtResource("2_1mvsg")
+cost = 7
+craft_items = Array[ExtResource("1_pifa4")]([ExtResource("2_3es2i"), ExtResource("2_3es2i")])
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

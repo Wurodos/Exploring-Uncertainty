@@ -37,3 +37,9 @@ kw_freeze_name;Freeze;Мороз
 kw_freeze_desc;Receive 50% more HARM;Получает на 50% больше ВРЕДА
 kw_dark_name;Dark;Тьма
 kw_dark_desc;Cannot help allies;Не может помогать союзникам
+kw_stun_name;Stun;Паралич
+kw_stun_desc;Skips turn;Пропуск хода
+kw_static_name;Static;Статичность
+kw_static_desc;Deals direct damage when hit, cuts in half;Наносит прямой урон при получении урона, снижается вдвое
+kw_vigilance_name;Vigilance;Бдительность
+kw_vigilance_desc;Guarantees crit.\n50% chance to dodge;Гарантирует крит.\n50% шанс уворота

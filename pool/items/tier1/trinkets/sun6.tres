@@ -1,0 +1,16 @@
+[gd_resource type="Resource" format=3 uid="uid://bpoex5ppxx44a"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_cx3s4"]
+[ext_resource type="Script" uid="uid://cvglrt4womskb" path="res://scripts/items/trinkets/sun6.gd" id="2_wa2oj"]
+[ext_resource type="Texture2D" uid="uid://dqnxc45epn8ui" path="res://images/items/sun-6.png" id="3_okx14"]
+
+[resource]
+script = ExtResource("2_wa2oj")
+type = 2
+texture = ExtResource("3_okx14")
+cost = 10
+craft_reqs = Dictionary[int, int]({
+0: 1,
+3: 1
+})
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

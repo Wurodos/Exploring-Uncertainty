@@ -4,15 +4,24 @@ extends Item
 @export var weak_harm : int = 1
 
 var counter: int = 0
+var is_reset_counter: bool = false
 
 func localize():
 	super.localize()
 	desc = desc.format([full_harm, weak_harm], "{}")
 
+
+
 func on_start_battle(owner: SlaveNode):
 	super.on_start_battle(owner)
 	counter = 0
-	owner.turn_ended.connect(func(): counter -= 1)
+	owner.turn_ended.connect(func(): _on_turn_end())
+
+func _on_turn_end() -> void:
+	if is_reset_counter: 
+		counter = 1
+		is_reset_counter = false
+	else: counter -= 1
 
 func use_item(sender: SlaveNode, victim: SlaveNode):
 	super.use_item(sender, victim)
@@ -21,8 +30,7 @@ func use_item(sender: SlaveNode, victim: SlaveNode):
 		Action.deal_damage(sender, victim, weak_harm)
 	else:
 		Action.deal_damage(sender, victim, full_harm)
-	
-	counter = 2
+	is_reset_counter = true
 
 func on_level_up():
 	super.on_level_up()

@@ -9,6 +9,12 @@ var evil_boys: Array[Slave] = []
 # var potential_team_2: Array[Slave] = []
 
 var inventory: Array[Item] = []
+func find_item(item: Item) -> int:
+	return inventory.find_custom(func(it): return it.u_name == item.u_name)
+func find_all_items(item: Item) -> Array[Item]:
+	var result: Array[Item] = []
+	for it in inventory: if it.u_name == item.u_name: result.append(it)
+	return result
 
 var craft_pool: Array[Item] = []
 var craft_recipes: Array[Item] = []
@@ -505,6 +511,7 @@ func arrange_evil_team(zone: int) -> Array[Slave]:
 		var enemy = deck.pop_back()
 		if enemy != null:
 			#enemy.hp = 1
+			#enemy.equip(ItemPool.fetch("ice_bomb"))
 			team.append(enemy)
 	if deck.is_empty():
 		match (zone): 

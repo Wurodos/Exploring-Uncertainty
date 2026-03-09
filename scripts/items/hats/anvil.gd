@@ -37,6 +37,7 @@ func on_level_up():
 		5: required_harm -= 1
 
 func get_priority(sender: SlaveNode, ally: SlaveNode) -> int:
+	if not ally.held.is_alive: return -999
 	if sender == ally: return -999
 	if sender.power < 3: return -3
 	if ally.held.hp > sender.held.hp:

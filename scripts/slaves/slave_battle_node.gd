@@ -44,6 +44,7 @@ var tags: Array[String] = []
 
 var power : int = 0
 var luck : int = 0
+var static_stat: int = 0
 
 var vigilance: bool = false:
 	set(val):
@@ -138,12 +139,7 @@ func set_power(new_val: int, is_delta: bool = true):
 	if power > old_val:
 		SignalBus.play_sound.emit("powerup")
 		powerup_animation.play("powerup")
-	if power != 0:
-		add_stat("power", Gallery.icon_power, power)
-	
-	#animation_player.play("power_up")
-	#await animation_player.animation_finished
-	#animation_player.play("idle")
+	add_stat("power", Gallery.icon_power, power)
 
 func set_luck(new_val: int, is_delta: bool = true):
 	if is_delta:
@@ -151,6 +147,19 @@ func set_luck(new_val: int, is_delta: bool = true):
 	else: luck = new_val
 	
 	add_stat("luck", Gallery.icon_luck, luck)
+
+func set_static(new_val: int, is_delta: bool = true):
+	var old_val: int = static_stat
+	
+	if is_delta:
+		static_stat += new_val
+	else: static_stat = new_val
+	
+	if static_stat > old_val:
+		pass
+		#SignalBus.play_sound.emit("powerup")
+		#powerup_animation.play("powerup")
+	add_stat("static", Gallery.icon_static, static_stat)
 			
 func apply(slave: Slave, is_evil: bool = false) -> void:
 	held = slave
@@ -211,6 +220,7 @@ func add_stat(stat_name: String, icon: Texture2D, value: int):
 		stat_entry.init()
 		stat_parent.add_child(stat_entry)
 	
+	stat_entry.visible = value != 0 or stat_name == "speed"
 	stat_entry.label.text = str(value)
 		
 
@@ -230,22 +240,33 @@ func toggle_ellipse(visible: bool):
 
 func attack(victim: SlaveNode):
 	#$AnimationPlayer.play("jump")
-	if not tags.has(Action.TAG_VIGILANCE_KEEP_ATTACK):
+	if buffs.has(Action.STUN):
+		_on_end_turn()
+		return
+		
+	if not (vigilance and tags.has(Action.TAG_VIGILANCE_KEEP_ATTACK)):
 		viable_for_vigilance = false
 	match(held.weapon.target):
 		Item.Target.Single: 
 			held.weapon.use_item(self, victim)
 			(victim.held as Enemy).on_attacked(self)
+			attacked.emit(victim)
 		Item.Target.AllTeam: 
 			for slave in Battle.instance.evil_team.boys_nodes:
 				held.weapon.use_item(self, slave)
 				(slave.held as Enemy).on_attacked(self)
-	attacked.emit(victim)
+				attacked.emit(slave)
+	
 	
 	_on_end_turn()
 	
 func support(ally: SlaveNode):
 	#$AnimationPlayer.play("jump")
+	
+	if buffs.has(Action.STUN):
+		_on_end_turn()
+		return
+	
 	match(held.hat.target):
 		Item.Target.Self:
 			held.hat.use_item(self, self)
@@ -265,6 +286,7 @@ func ticker_down_buffs() -> void:
 	
 	for key: String in buffs.keys():
 		buffs[key] -= 1
+		add_stat(key, Gallery.icon_status[key], buffs[key])
 		if buffs[key] == 0: to_be_erased.append(key)
 	
 	for key in to_be_erased:
@@ -280,7 +302,9 @@ func execute_intention():
 	var held_enemy : Enemy = held
 	
 	await get_tree().create_timer(1).timeout
-	if not held_enemy.intention.is_support:
+	if buffs.has(Action.STUN):
+		pass
+	elif not held_enemy.intention.is_support:
 		if not tags.has(Action.TAG_VIGILANCE_KEEP_ATTACK):
 			viable_for_vigilance = false
 		for target_id in held_enemy.intention.targets:
@@ -329,6 +353,7 @@ func add_buff(buff_name: String, turns: int):
 	var visual : Node2D = $Buffs.find_child(buff_name)
 	if visual:
 		visual.visible = true
+		add_stat(buff_name, Gallery.icon_status[buff_name], buffs[buff_name])
 
 func _on_clickable_area_mouse_entered() -> void:
 	SignalBus.slave_mouse_entered.emit(self)

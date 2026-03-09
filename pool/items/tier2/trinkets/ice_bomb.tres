@@ -8,10 +8,13 @@
 
 [resource]
 script = ExtResource("4_7ww1n")
+harm = 15
+freeze = 3
+stun = 1
 tier = 2
 type = 2
 texture = ExtResource("2_me01b")
 cost = 9
 craft_items = Array[ExtResource("1_xy4w1")]([ExtResource("2_ipifd"), ExtResource("3_6wel6")])
-keywords = Array[String](["freeze", "shield"])
+keywords = Array[String](["freeze", "stun"])
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

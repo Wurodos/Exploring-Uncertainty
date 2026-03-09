@@ -1,17 +1,20 @@
 [gd_scene format=3 uid="uid://ot7y20rg1fqo"]
 
 [ext_resource type="Script" uid="uid://de24o14tl4lyy" path="res://scripts/slaves/slave_battle_node.gd" id="1_kr451"]
-[ext_resource type="Texture2D" uid="uid://c0s374bsgkkra" path="res://images/slaves/quagmire.png" id="3_f4yho"]
 [ext_resource type="Texture2D" uid="uid://csw6m50jq853n" path="res://images/shapes/ellipse.png" id="3_m7i15"]
 [ext_resource type="Texture2D" uid="uid://c102ib72qlv7l" path="res://images/items/sword.png" id="3_r6t30"]
+[ext_resource type="Texture2D" uid="uid://bvt0n20v88f7o" path="res://images/slaves/blob.png" id="3_xc2og"]
 [ext_resource type="Texture2D" uid="uid://dcprd1kuvkwce" path="res://images/items/wizard_hat.png" id="4_ajk8k"]
 [ext_resource type="Texture2D" uid="uid://cu8nq4toon8uj" path="res://images/buffs/shield.png" id="4_lpdx8"]
 [ext_resource type="Texture2D" uid="uid://18md1xgdubcr" path="res://images/buffs/blasphemy.png" id="5_gppif"]
 [ext_resource type="Texture2D" uid="uid://6225b313atq2" path="res://images/icons/top.png" id="5_lpdx8"]
+[ext_resource type="Texture2D" uid="uid://cmay462tc18ol" path="res://images/items/magnet_accelerator.png" id="5_r4abs"]
+[ext_resource type="Texture2D" uid="uid://brioik3i463qe" path="res://images/items/wire_branches.png" id="5_s5n5c"]
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="5_ttqg8"]
 [ext_resource type="Texture2D" uid="uid://dxa7wr6gumrrb" path="res://images/buffs/anvil.png" id="6_8sljb"]
 [ext_resource type="Texture2D" uid="uid://bm0hs7cpm2sfy" path="res://images/items/pocket-watch.png" id="6_f4yho"]
 [ext_resource type="Texture2D" uid="uid://dhmqbwahk027p" path="res://images/icons/middle.png" id="6_gppif"]
+[ext_resource type="Texture2D" uid="uid://cshgykfna0grm" path="res://images/items/power-generator.png" id="6_s5n5c"]
 [ext_resource type="Texture2D" uid="uid://orgdll7utn86" path="res://images/icons/bottom.png" id="7_8sljb"]
 [ext_resource type="Texture2D" uid="uid://nknu23hrvind" path="res://images/buffs/appetite.png" id="7_erpc0"]
 [ext_resource type="Texture2D" uid="uid://8sgoeg1sj6ga" path="res://images/buffs/freeze.png" id="8_bl030"]
@@ -21,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://bsxa2pqrugam1" path="res://images/icons/heal.png" id="12_82wb0"]
 [ext_resource type="Texture2D" uid="uid://d0rkhaggbott0" path="res://images/tags/vigilance.svg" id="12_f4yho"]
 [ext_resource type="Texture2D" uid="uid://hlcx8brhdh8g" path="res://images/icons/power_up.png" id="13_4thmk"]
+[ext_resource type="Texture2D" uid="uid://q3f5thafmlge" path="res://images/buffs/stun.png" id="14_xc2og"]
 
 [sub_resource type="Animation" id="Animation_bm25f"]
 length = 0.001
@@ -346,7 +350,7 @@ gizmo_extents = 66.5
 [node name="Sprite" type="Sprite2D" parent="Parts/Visual" unique_id=447885340]
 position = Vector2(0, -50)
 scale = Vector2(0.20000002, 0.20000002)
-texture = ExtResource("3_f4yho")
+texture = ExtResource("3_xc2og")
 
 [node name="Vigilance" type="Sprite2D" parent="Parts/Visual" unique_id=746944608]
 unique_name_in_owner = true
@@ -363,9 +367,17 @@ position = Vector2(0, -50)
 position = Vector2(51, 3)
 scale = Vector2(0.15, 0.15)
 
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/Items/Weapon" unique_id=1805203382]
+visible = false
+texture = ExtResource("5_s5n5c")
+
 [node name="Hat" type="Node2D" parent="Parts/Visual/Items" unique_id=1765902243]
 position = Vector2(0, -56)
 scale = Vector2(0.15, 0.15)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/Items/Hat" unique_id=1368219549]
+visible = false
+texture = ExtResource("6_s5n5c")
 
 [node name="Trinket2" type="Node2D" parent="Parts/Visual/Items" unique_id=342478727]
 position = Vector2(-44, 21)
@@ -384,7 +396,7 @@ scale = Vector2(0.15, 0.15)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/BigItems/Weapon" unique_id=1144024451]
 visible = false
-texture = ExtResource("3_r6t30")
+texture = ExtResource("5_r4abs")
 
 [node name="Hat" type="Node2D" parent="Parts/Visual/BigItems" unique_id=932244923]
 position = Vector2(21.777775, -43.77778)
@@ -507,6 +519,12 @@ visible = false
 self_modulate = Color(1, 1, 1, 0.87451)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("8_e010w")
+
+[node name="stun" type="Sprite2D" parent="Buffs" unique_id=1442274073]
+visible = false
+self_modulate = Color(1, 1, 1, 0.5019608)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("14_xc2og")
 
 [node name="Intention" type="Node2D" parent="." unique_id=1283567876]
 z_index = 1

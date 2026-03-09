@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://154yr4da73bn" path="res://images/scraps/shard.png" id="6_k66y6"]
 [ext_resource type="Texture2D" uid="uid://py17lko5dydj" path="res://images/scraps/tooth.png" id="7_k7ktt"]
 [ext_resource type="Texture2D" uid="uid://b7h2htdmn1uad" path="res://images/scraps/oil.png" id="8_lcspu"]
+[ext_resource type="Texture2D" uid="uid://boxo3gtaq18nl" path="res://images/items/ice-cube.png" id="9_2qpqu"]
+[ext_resource type="Texture2D" uid="uid://c102ib72qlv7l" path="res://images/items/sword.png" id="9_dgo2t"]
+[ext_resource type="Texture2D" uid="uid://cxjgnget2f6pf" path="res://images/items/bomb.png" id="10_u48t4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_leq5k"]
 font = ExtResource("4_c16lq")
@@ -76,16 +79,32 @@ grow_horizontal = 2
 texture = ExtResource("2_l1qs7")
 expand_mode = 5
 
-[node name="Gear" type="TextureRect" parent="ItemSprite" unique_id=1823287388]
+[node name="Scraps" type="Control" parent="ItemSprite" unique_id=919640150]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Gear" type="TextureRect" parent="ItemSprite/Scraps" unique_id=1823287388]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 24.0
-offset_top = 120.0
-offset_right = 64.0
-offset_bottom = 160.0
+offset_left = -20.0
+offset_top = 32.0
+offset_right = 20.0
+offset_bottom = 72.0
 texture = ExtResource("3_v6jvv")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="ItemSprite/Gear" unique_id=1398050214]
+[node name="Label" type="Label" parent="ItemSprite/Scraps/Gear" unique_id=1398050214]
 layout_mode = 0
 offset_left = -16.0
 offset_top = 16.0
@@ -97,16 +116,17 @@ label_settings = SubResource("LabelSettings_leq5k")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Flesh" type="TextureRect" parent="ItemSprite" unique_id=201750904]
+[node name="Flesh" type="TextureRect" parent="ItemSprite/Scraps" unique_id=201750904]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 80.0
-offset_top = 120.0
-offset_right = 120.0
-offset_bottom = 160.0
+offset_left = 36.0
+offset_top = 32.0
+offset_right = 76.0
+offset_bottom = 72.0
 texture = ExtResource("5_16van")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="ItemSprite/Flesh" unique_id=1238129287]
+[node name="Label" type="Label" parent="ItemSprite/Scraps/Flesh" unique_id=1238129287]
 layout_mode = 0
 offset_left = -16.0
 offset_top = 16.0
@@ -118,16 +138,17 @@ label_settings = SubResource("LabelSettings_leq5k")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Shard" type="TextureRect" parent="ItemSprite" unique_id=659891212]
+[node name="Shard" type="TextureRect" parent="ItemSprite/Scraps" unique_id=659891212]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 24.0
-offset_top = 152.0
-offset_right = 64.0
-offset_bottom = 192.0
+offset_left = -20.0
+offset_top = 64.0
+offset_right = 20.0
+offset_bottom = 104.0
 texture = ExtResource("6_k66y6")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="ItemSprite/Shard" unique_id=1134100450]
+[node name="Label" type="Label" parent="ItemSprite/Scraps/Shard" unique_id=1134100450]
 layout_mode = 0
 offset_left = -16.0
 offset_top = 16.0
@@ -139,16 +160,17 @@ label_settings = SubResource("LabelSettings_leq5k")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Tooth" type="TextureRect" parent="ItemSprite" unique_id=152560586]
+[node name="Tooth" type="TextureRect" parent="ItemSprite/Scraps" unique_id=152560586]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 80.0
-offset_top = 152.0
-offset_right = 120.0
-offset_bottom = 192.0
+offset_left = 36.0
+offset_top = 64.0
+offset_right = 76.0
+offset_bottom = 104.0
 texture = ExtResource("7_k7ktt")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="ItemSprite/Tooth" unique_id=835261581]
+[node name="Label" type="Label" parent="ItemSprite/Scraps/Tooth" unique_id=835261581]
 layout_mode = 0
 offset_left = -16.0
 offset_top = 16.0
@@ -160,16 +182,17 @@ label_settings = SubResource("LabelSettings_leq5k")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Oil" type="TextureRect" parent="ItemSprite" unique_id=17102596]
+[node name="Oil" type="TextureRect" parent="ItemSprite/Scraps" unique_id=17102596]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 48.0
-offset_top = 184.0
-offset_right = 88.0
-offset_bottom = 224.0
+offset_left = 4.0
+offset_top = 96.0
+offset_right = 44.0
+offset_bottom = 136.0
 texture = ExtResource("8_lcspu")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="ItemSprite/Oil" unique_id=631294679]
+[node name="Label" type="Label" parent="ItemSprite/Scraps/Oil" unique_id=631294679]
 layout_mode = 0
 offset_left = -16.0
 offset_top = 16.0
@@ -180,6 +203,48 @@ text = "0"
 label_settings = SubResource("LabelSettings_leq5k")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Items" type="Control" parent="ItemSprite" unique_id=1992066392]
+unique_name_in_owner = true
+modulate = Color(1, 0.8509804, 0.49803922, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Item1" type="TextureRect" parent="ItemSprite/Items" unique_id=1252640472]
+layout_mode = 0
+offset_left = -36.0
+offset_top = 37.0
+offset_right = 14.0
+offset_bottom = 87.0
+texture = ExtResource("9_2qpqu")
+expand_mode = 1
+
+[node name="Item2" type="TextureRect" parent="ItemSprite/Items" unique_id=1840635908]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 37.0
+offset_right = 75.0
+offset_bottom = 87.0
+texture = ExtResource("10_u48t4")
+expand_mode = 1
+
+[node name="Item3" type="TextureRect" parent="ItemSprite/Items" unique_id=1499792864]
+layout_mode = 0
+offset_left = -10.0
+offset_top = 78.0
+offset_right = 40.0
+offset_bottom = 128.0
+texture = ExtResource("9_dgo2t")
+expand_mode = 1
 
 [node name="Craft" type="Button" parent="." unique_id=2102094434]
 layout_mode = 1

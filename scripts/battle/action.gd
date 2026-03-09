@@ -1,5 +1,7 @@
 extends Node
 
+var crit_multiplier: int = 2
+
 const APPETITE = "appetite"
 const SHIELD = "shield"
 const BLASPHEMY = "blasphemy"
@@ -10,6 +12,9 @@ const STUN = "stun"
 const TAG_BETTER_SHIELD = "tag_better_shield"
 const TAG_STATUS_DAMAGE = "tag_status_damage"
 const TAG_VIGILANCE_KEEP_ATTACK = "tag_vigilance_keep_attack"
+const TAG_LOW_PRIORITY = "tag_low_priority"
+const TAG_PERMANENT_STATIC = "tag_permanent_static"
+const TAG_STATIC_HEALTH = "tag_static_health"
 
 func calculate_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, _dont_proc: bool = false) -> int:
 	var total_dmg = dmg
@@ -45,7 +50,7 @@ func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, dont_proc: bool
 	victim.vigilance = false
 	
 	if is_crit:
-		total_dmg *= 2
+		total_dmg *= crit_multiplier
 		if victim.buffs.has(SHIELD): 
 			if victim.tags.has(TAG_BETTER_SHIELD):
 				total_dmg = total_dmg * 5 / 2
@@ -54,7 +59,18 @@ func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, dont_proc: bool
 	if sender.buffs.has(BLASPHEMY):
 		heal(sender, sender, floor(total_dmg*2/5))
 	
+	if victim.tags.has(TAG_STATIC_HEALTH):
+		var absorbed : int = min(total_dmg, victim.static_stat)
+		total_dmg -= absorbed
+		victim.set_static(-absorbed)
+		
 	victim.set_hp(-total_dmg)
+	if victim.held.is_alive and victim.static_stat > 0:
+		var back : int = ceil(float(victim.static_stat) / 2.0)
+		if not victim.tags.has(TAG_PERMANENT_STATIC):
+			victim.set_static(-back)
+		sender.set_hp(-back)
+	
 	
 	if not dont_proc:
 		victim.received_damage.emit(sender, total_dmg)

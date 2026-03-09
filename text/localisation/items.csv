@@ -38,7 +38,7 @@ draniki_desc;WHEN HEALTH LOWER THAN {}%, HEALS {}%, ONE-TIME USE;КОГДА ЗД
 heart_lock_name;Heart Lock;Сердечный Замок
 heart_lock_desc;START OF BATTLE: SHIELD {} TURNS;НАЧАЛО БОЯ: ЩИТ {} ХОД.
 obsidian_name;Obsidian;Обсидиан
-obsidian_desc;START OF BATTLE: +{} POWER, +{} LUCK;НАЧАЛО БОЯ: +{} МОЩЬ, +{} УДАЧА
+obsidian_desc;START OF BATTLE: +{} POWER, +{} LUCK, +{} STATIC;НАЧАЛО БОЯ: +{} МОЩЬ, +{} УДАЧА, +{} СТАТИЧНОСТЬ
 pocket_watch_name;Pocket Watch;Карманные Часы
 pocket_watch_desc;END OF {} TURN: +{} POWER, SHIELD {} TURNS, HEAL {}% HEALTH;КОНЕЦ {} ХОД: +{} МОЩИ, ЩИТ {} ХОДА, ВОССТАНОВИТЬ {}% ЗДРАВИЯ
 teapot_name;Teapot;Чайник
@@ -59,3 +59,23 @@ ice_cube_name;Ice Cube;Кубик Льда
 ice_cube_desc;ON ATTACK: FREEZE 1 TURN;ПРИ АТАКЕ: МОРОЗ 1 ХОД
 ice_bomb_name;Ice Bomb;Ледяная Бомба
 ice_bomb_desc;ON ATTACK: {} DAMAGE, FREEZE {} TURN, STUN {} TURN, ONE-TIME USE;ПРИ АТАКЕ: {} ВРЕДА, МОРОЗ {} ХОД, ПАРАЛИЧ {} ХОД, ОДНОРАЗОВОЕ
+pencil_name;Pencil;Карандаш
+pencil_desc;INFLICTS {} HARM. EXECUTION: RECEIVE TRINKET;ПРИЧИНЯЕТ {} ВРЕДА. КАЗНЬ: ПОЛУЧИТЕ БЕЗДЕЛУШКУ
+turbine_name;Turbine;Турбина
+turbine_desc;END TURN: +{} SPEED;КОНЕЦ ХОДА: +{} СКОРОСТЬ
+battery_name;Battery;Батарейка
+battery_desc;START OF BATTLE: +{} STATIC;НАЧАЛО БОЯ: +{} СТАТИЧНОСТИ
+sun6_name;Sun-6;Солнце-6
+sun6_desc;LOW PRIORITY TARGET FOR ENEMIES;НИЗКИЙ ПРИОРИТЕТ ЦЕЛИ ДЛЯ ВРАГОВ
+unbearable_sin_name;Unbearable Sin;Непосильный Грех
+unbearable_sin_desc;INFLICTS {} HARM. CRITS INFLICT x{} HARM;ПРИЧИНЯЕТ {} ВРЕДА. КРИТЫ ПРИЧИНЯЮТ x{} ВРЕДА.
+ship_wheel_name;Ship Wheel;Штурвал
+ship_wheel_desc;START OF BATTLE: GAIN VIGILANCE;НАЧАЛО БОЯ: ПОЛУЧИТЕ БДИТЕЛЬНОСТЬ
+magnet_accelerator_name;MAGNET ACCELERATOR;МАГНИТНЫЙ УСКОРИТЕЛЬ
+magnet_accelerator_desc;INFLICTS {} HARM TO ALL. FIRST {} SHOTS INFLICT STUN;ПРИЧИНЯЕТ {} ВРЕДА ВСЕМ. ПЕРВЫЕ {} ВЫСТРЕЛОВ ДАЮТ ПАРАЛИЧ
+conductor_name;Conductor;Проводник
+conductor_desc;WHEN HIT: LOSE STATIC INSTEAD OF HEALTH\nACTION: +1 POWER FOR EACH {} STATIC;ПРИ ПОЛУЧЕНИИ УРОНА: ТЕРЯЙТЕ СТАТИЧНОСТЬ ВМЕСТО ЗДРАВИЯ\nДЕЙСТВИЕ: +1 МОЩЬ ЗА КАЖДЫЕ {} СТАТИЧНОСТИ
+wire_name;Wire;Проволока
+wire_desc;INFLICT {} HARM, {} DAMAGE TO OTHER ENEMIES FOR EACH STATIC;ПРИЧИНЯЕТ {} ВРЕДА, {} УРОН ОСТАЛЬНЫМ ВРАГАМ ЗА КАЖДУЮ СТАТИЧНОСТЬ
+generator_name;Generator;Генератор
+generator_desc;DON'T LOSE STATIC WHEN HIT. ACTION: +{} STATIC;НЕ ТЕРЯЙТЕ СТАТИЧНОСТЬ ПРИ УРОНЕ. ДЕЙСТВИЕ: +{} СТАТИЧНОСТИ

@@ -190,11 +190,11 @@ func _on_new_turn() -> void:
 				slave_node.execute_intention()
 				break
 	else:
+		current_slave_position += dead
 		for slave_node in good_team.boys_nodes:
 			if current_slaves.has(slave_node.held):
 				slave_node.start_turn()
 	
-	current_slave_position += dead
 
 func _on_slave_death(slave_node: SlaveNode, is_loot: bool = true) -> void:
 	if slave_node.held is Enemy:

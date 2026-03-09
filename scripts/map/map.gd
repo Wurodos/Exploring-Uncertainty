@@ -234,7 +234,7 @@ func encounter(room: Room) -> void:
 				since_last_battle = 0
 			else: since_last_battle_purged += 1
 		Room.Type.Empty:
-			if since_last_battle >= randi_range(1,6):
+			if since_last_battle >= randi_range(4,8):
 				CurrentRun.evil_boys = CurrentRun.arrange_evil_team(zone_id)
 				$AnimationPlayer.play("battle_start")
 				await $AnimationPlayer.animation_finished
@@ -458,7 +458,7 @@ func _add_structures(all_rooms: Array[Room], area_id: int) -> void:
 	var cherv_n = floor(all_rooms.size()*cherv_rate)
 	var govnov_n = floor(all_rooms.size()*govnov_rate)
 	var comms_n = floor(all_rooms.size()*comms_rate)
-	if area_id < 2: comms_n = 0
+	if area_id == 0: comms_n = 0
 	var elevator_n = 0
 	if area_id > 0 and area_id < 4:
 		elevator_n = 3
@@ -491,10 +491,17 @@ func _add_structures(all_rooms: Array[Room], area_id: int) -> void:
 		elif comms_n > 0 and not _is_adjacent_to(room.row, room.col, Room.Type.Comms):
 			room.type = Room.Type.Comms
 			comms_n -= 1
-		elif elevator_n > 0 and not _is_adjacent_to(room.row, room.col, Room.Type.Elevator):
-			room.type = Room.Type.Elevator
-			elevators.append(room)
-			elevator_n -= 1
+		elif elevator_n > 0:
+			var valid = true
+			for elevator: Room in elevators:
+				if dist(elevator, room) < 5:
+					valid = false
+					break
+			
+			if valid:
+				room.type = Room.Type.Elevator
+				elevators.append(room)
+				elevator_n -= 1
 		
 		room.sprite.texture = room_sprites[room.type]
 
@@ -680,3 +687,7 @@ func _on_up_pressed() -> void:
 
 func _on_down_pressed() -> void:
 	move_player(Direction.Down)
+
+
+func _on_stay_pressed() -> void:
+	encounter(room_at(party_row, party_col))

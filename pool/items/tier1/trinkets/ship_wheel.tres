@@ -1,0 +1,18 @@
+[gd_resource type="Resource" format=3 uid="uid://c3ecw0tybnjl8"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_adc3c"]
+[ext_resource type="Script" uid="uid://db57dft3tx5sa" path="res://scripts/items/trinkets/ship_wheel.gd" id="2_adc3c"]
+[ext_resource type="Texture2D" uid="uid://cullcge6dityp" path="res://images/items/ship-wheel.png" id="3_adc3c"]
+
+[resource]
+script = ExtResource("2_adc3c")
+type = 2
+texture = ExtResource("3_adc3c")
+cost = 4
+craft_reqs = Dictionary[int, int]({
+0: 1,
+1: 1,
+2: 1
+})
+keywords = Array[String](["vigilance"])
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

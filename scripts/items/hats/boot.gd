@@ -29,6 +29,8 @@ func _check_and_heal(room: Room):
 
 func use_item(sender: SlaveNode, ally: SlaveNode):
 	super.use_item(sender, ally)
+	if not ally.held.is_alive: return
+	
 	if sender.held is Enemy:
 		Action.deal_damage(sender, ally, harm)
 		var victim : SlaveNode = Battle.instance.good_team.boys_nodes.filter(func(enemy: SlaveNode): return enemy.held.is_alive).pick_random()
@@ -51,6 +53,7 @@ func on_level_up():
 
 func get_priority(sender: SlaveNode, ally: SlaveNode) -> int:
 	if ally.held.hp <= harm: return -3
+	if not ally.held.is_alive: return -999
 	if ally.held.weapon.get_harm() > sender.held.weapon.get_harm():
 		return +1 + ally.held.weapon.get_harm() / sender.held.weapon.get_harm()
 	return -1

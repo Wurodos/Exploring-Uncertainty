@@ -1,0 +1,17 @@
+[gd_resource type="Resource" format=3 uid="uid://cee2ipedt0i5p"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_pp61h"]
+[ext_resource type="Script" uid="uid://cfisvduvvam1j" path="res://scripts/items/trinkets/battery.gd" id="2_pp61h"]
+[ext_resource type="Texture2D" uid="uid://cij5n5oatk8x2" path="res://images/items/battery.png" id="3_pp61h"]
+
+[resource]
+script = ExtResource("2_pp61h")
+type = 2
+target = 2
+texture = ExtResource("3_pp61h")
+cost = 3
+craft_reqs = Dictionary[int, int]({
+3: 3
+})
+keywords = Array[String](["static"])
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" format=3 uid="uid://dyuopl01kawsp"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_17h0d"]
+[ext_resource type="Resource" uid="uid://cee2ipedt0i5p" path="res://pool/items/tier1/trinkets/battery.tres" id="2_17h0d"]
+[ext_resource type="Script" uid="uid://cc5p5v3dswnnt" path="res://scripts/items/hats/generator.gd" id="3_17h0d"]
+[ext_resource type="Texture2D" uid="uid://cshgykfna0grm" path="res://images/items/power-generator.png" id="4_17h0d"]
+
+[resource]
+script = ExtResource("3_17h0d")
+static_gain = 5
+tier = 2
+type = 1
+extra_hp = 10
+extra_speed = -1
+texture = ExtResource("4_17h0d")
+cost = 10
+craft_items = Array[ExtResource("1_17h0d")]([ExtResource("2_17h0d"), ExtResource("2_17h0d")])
+keywords = Array[String](["static"])
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

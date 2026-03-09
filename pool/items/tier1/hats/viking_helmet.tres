@@ -1,5 +1,6 @@
 [gd_resource type="Resource" format=3 uid="uid://bglmrdyj5hy03"]
 
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_078rx"]
 [ext_resource type="Script" uid="uid://baqdastxiqocq" path="res://scripts/items/hats/viking_helmet.gd" id="1_g8yak"]
 [ext_resource type="Texture2D" uid="uid://ca3v7kxh4etl1" path="res://images/items/viking-helmet.png" id="2_g8yak"]
 
@@ -13,5 +14,5 @@ cost = 8
 craft_reqs = Dictionary[int, int]({
 3: 5
 })
-keywords = Array[String](["appetite"])
+keywords = Array[String](["appetite", "vigilance"])
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

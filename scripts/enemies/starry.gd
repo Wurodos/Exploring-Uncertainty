@@ -96,10 +96,12 @@ func decide_intention() -> void:
 		intention = owner.held.hat.get_intention(owner)
 		
 		if extra_action:
-			var fun := intention.effect
+			var fun := owner.held.hat.get_intention(owner).effect
 			var cherv = Battle.instance.evil_team.boys_nodes[hat_target]
 			intention.effect = func(v):
 				fun.call(v)
+				if not v.held.is_alive: return
+				
 				var victim : SlaveNode = Battle.instance.good_team.boys_nodes.filter(func(enemy: SlaveNode): return enemy.held.is_alive).pick_random()
 				cherv.held.weapon.get_intention(cherv).effect.call(victim)
 				cherv.attacked.emit(victim)

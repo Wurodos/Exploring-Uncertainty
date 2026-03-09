@@ -458,10 +458,10 @@ scale = Vector2(0.99999994, 0.99999994)
 position = Vector2(380, -165)
 
 [node name="BackBottomSlave" type="Node2D" parent="World/EvilTeam" unique_id=417770327]
-position = Vector2(583.5294, 150.58823)
+position = Vector2(710, 150.58823)
 
 [node name="BackTop" type="Node2D" parent="World/EvilTeam" unique_id=629076756]
-position = Vector2(583.5294, -131.7647)
+position = Vector2(678.75, -131.7647)
 
 [node name="UI" type="Control" parent="." unique_id=1038733168]
 layout_mode = 3

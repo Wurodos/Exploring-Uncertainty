@@ -1,0 +1,18 @@
+[gd_resource type="Resource" format=3 uid="uid://b526w4n6i7w03"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_4048x"]
+[ext_resource type="Script" uid="uid://cprpvujsab2dm" path="res://scripts/items/weapons/magnet_accelerator.gd" id="2_e1vvl"]
+[ext_resource type="Resource" uid="uid://bb350nj3is2lk" path="res://pool/items/tier1/weapons/winchester.tres" id="2_gugvr"]
+[ext_resource type="Texture2D" uid="uid://cmay462tc18ol" path="res://images/items/magnet_accelerator.png" id="2_kbisp"]
+[ext_resource type="Resource" uid="uid://bg3jlp64rewhj" path="res://pool/items/tier2/hats/conductor.tres" id="3_5crpd"]
+[ext_resource type="Resource" uid="uid://dyuopl01kawsp" path="res://pool/items/tier2/hats/generator.tres" id="4_x4u82"]
+
+[resource]
+script = ExtResource("2_e1vvl")
+harm = 20
+stuns = 1
+tier = 3
+target = 1
+texture = ExtResource("2_kbisp")
+craft_items = Array[ExtResource("1_4048x")]([ExtResource("2_gugvr"), ExtResource("3_5crpd"), ExtResource("4_x4u82")])
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

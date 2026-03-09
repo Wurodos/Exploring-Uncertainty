@@ -1,0 +1,16 @@
+[gd_resource type="Resource" format=3 uid="uid://lq2sdj4ufe35"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_majid"]
+[ext_resource type="Texture2D" uid="uid://54gtdr8642cq" path="res://images/items/pencil.png" id="2_bc53f"]
+[ext_resource type="Script" uid="uid://cpww1jnwm0c7f" path="res://scripts/items/weapons/pencil.gd" id="2_nigb6"]
+
+[resource]
+script = ExtResource("2_nigb6")
+harm = 2
+texture = ExtResource("2_bc53f")
+cost = 5
+craft_reqs = Dictionary[int, int]({
+2: 2,
+3: 2
+})
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" format=3 uid="uid://cndeqrgrlpuxe"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_067oq"]
+[ext_resource type="Texture2D" uid="uid://b5tmipd0kyjc5" path="res://images/items/sin.png" id="2_n6ufh"]
+[ext_resource type="Resource" uid="uid://bacsivo610sgj" path="res://pool/items/tier1/weapons/sword.tres" id="2_ppjg0"]
+[ext_resource type="Resource" uid="uid://bpoex5ppxx44a" path="res://pool/items/tier1/trinkets/sun6.tres" id="3_2xuls"]
+[ext_resource type="Script" uid="uid://dbksc0a555g2d" path="res://scripts/items/weapons/unbearable_sin.gd" id="4_2xuls"]
+
+[resource]
+script = ExtResource("4_2xuls")
+harm = 1
+tier = 2
+texture = ExtResource("2_n6ufh")
+cost = 14
+craft_items = Array[ExtResource("1_067oq")]([ExtResource("2_ppjg0"), ExtResource("3_2xuls")])
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

@@ -1,5 +1,6 @@
 [gd_resource type="Resource" format=3 uid="uid://c1vam5j7gbycv"]
 
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_2dufh"]
 [ext_resource type="Script" uid="uid://c67owh4jw4kvi" path="res://scripts/items/weapons/pipe.gd" id="1_m2clk"]
 [ext_resource type="Texture2D" uid="uid://bm043kxoks57r" path="res://images/items/lead-pipe.png" id="2_kkg5u"]
 

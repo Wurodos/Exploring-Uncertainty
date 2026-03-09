@@ -1,0 +1,16 @@
+[gd_resource type="Resource" format=3 uid="uid://cwcqe6ew1ogxe"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_xr00a"]
+[ext_resource type="Script" uid="uid://v6o3ql738od0" path="res://scripts/items/weapons/crucifix.gd" id="2_xr00a"]
+[ext_resource type="Texture2D" uid="uid://bhea04di3lei1" path="res://images/items/crucifix.png" id="3_xr00a"]
+
+[resource]
+script = ExtResource("2_xr00a")
+texture = ExtResource("3_xr00a")
+cost = 7
+craft_reqs = Dictionary[int, int]({
+0: 1,
+3: 1,
+4: 1
+})
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

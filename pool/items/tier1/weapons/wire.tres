@@ -1,0 +1,12 @@
+[gd_resource type="Resource" format=3 uid="uid://cwm8a7o3brd4q"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_8cxp5"]
+[ext_resource type="Script" uid="uid://df5c1owbf1m8t" path="res://scripts/items/weapons/wire.gd" id="2_2h0aj"]
+[ext_resource type="Texture2D" uid="uid://brioik3i463qe" path="res://images/items/wire_branches.png" id="3_2h0aj"]
+
+[resource]
+script = ExtResource("2_2h0aj")
+harm = 6
+harm_per_static = 1
+texture = ExtResource("3_2h0aj")
+cost = 2

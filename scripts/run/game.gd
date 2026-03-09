@@ -28,8 +28,15 @@ func _ready() -> void:
 			CurrentRun.craft_pool.append(item.duplicate())
 
 	## DEBUG -> Inventory 
+	CurrentRun.craft_recipes.append(ItemPool.fetch("magnet_accelerator"))
+	CurrentRun.inventory.append(ItemPool.fetch("generator"))
+	CurrentRun.inventory.append(ItemPool.fetch("crucifix"))
+	#CurrentRun.inventory.append(ItemPool.fetch("wire"))
+	#CurrentRun.inventory.append(ItemPool.fetch("bomb"))
+	#CurrentRun.inventory.back().on_level_up()
 	#CurrentRun.inventory.append(ItemPool.fetch("ice_cube"))
-	#CurrentRun.inventory.append(ItemPool.fetch("alcohol"))
+	#CurrentRun.inventory.back().on_level_up()
+	#CurrentRun.inventory.append(ItemPool.fetch("shot_shells"))
 	#for i in range(20):
 	#	CurrentRun.inventory.append(ItemPool.fetch_random())
 	

@@ -23,7 +23,7 @@ func _on_turn_ended():
 	if _timer == turns:
 		sender.set_power(+power_gain)
 		sender.add_buff("shield", shield_turns)
-		Action.heal(sender, sender, sender.held.maxhp / (100.0 / heal_hp_percent))		
+		Action.heal(sender, sender, ceil(sender.held.maxhp / (100.0 / float(heal_hp_percent))))	
 
 func on_level_up():
 	super.on_level_up()

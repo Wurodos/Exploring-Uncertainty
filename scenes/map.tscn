@@ -376,7 +376,7 @@ branch_chance = 0.35
 city_rate = 0.06
 cherv_rate = 0.09
 govnov_rate = 0.05
-comms_rate = 0.04
+comms_rate = 0.05
 steps = 100
 room_sprites = Dictionary[int, Texture2D]({
 0: ExtResource("2_p7tei"),
@@ -483,6 +483,26 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_8kgjo")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_ogd7i")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ogd7i")
 
+[node name="Stay" type="Button" parent="World/Player" unique_id=1589141850]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8kgjo")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ogd7i")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ogd7i")
+
 [node name="Armies" type="Node2D" parent="World" unique_id=146738126]
 
 [node name="Highlight" type="Node2D" parent="World" unique_id=2041734289]
@@ -496,6 +516,7 @@ libraries/ = SubResource("AnimationLibrary_y2ir2")
 autoplay = &"fog"
 
 [node name="Fog" type="Node2D" parent="World" unique_id=1289513290]
+visible = false
 
 [node name="TileMapLayer" type="TileMapLayer" parent="World/Fog" unique_id=727550495]
 position = Vector2(-64, -64)
@@ -993,7 +1014,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CraftWindow" type="Control" parent="GUI/UI" unique_id=486858543]
-visible = false
 anchors_preset = 0
 offset_left = 106.0
 offset_top = 57.0
@@ -1866,6 +1886,7 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="World/Player/Right" to="." method="_on_right_pressed"]
 [connection signal="pressed" from="World/Player/Up" to="." method="_on_up_pressed"]
 [connection signal="pressed" from="World/Player/Down" to="." method="_on_down_pressed"]
+[connection signal="pressed" from="World/Player/Stay" to="." method="_on_stay_pressed"]
 [connection signal="pressed" from="GUI/UI/ShowTeam" to="GUI/UI/TeamWindow" method="_on_show_team_pressed"]
 [connection signal="pressed" from="GUI/UI/ShowRecon" to="GUI/UI/ReconWindow" method="_on_show_recon_pressed"]
 [connection signal="pressed" from="GUI/UI/ShowCraft" to="GUI/UI/CraftWindow" method="_on_show_craft_pressed"]

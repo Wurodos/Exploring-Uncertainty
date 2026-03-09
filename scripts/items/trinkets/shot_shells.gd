@@ -21,6 +21,9 @@ func _hit_everyone(victim: SlaveNode):
 		for enemy in victim.team.boys_nodes:
 			if enemy != victim:
 				weapon.use_item(sender, enemy)
+				if victim.team.is_evil:
+					(enemy.held as Enemy).on_attacked(sender)
+				sender.attacked.emit(enemy)
 	
 	sender.attacked.disconnect(_hit_everyone)
 
