@@ -1,0 +1,19 @@
+[gd_resource type="Resource" format=3 uid="uid://w36x23i1apxs"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_p7wit"]
+[ext_resource type="Script" uid="uid://dqfpvbfp4wg30" path="res://scripts/items/weapons/broom.gd" id="2_p7wit"]
+[ext_resource type="Texture2D" uid="uid://blgvyf5tf0fx4" path="res://images/items/broom.png" id="3_p7wit"]
+
+[resource]
+script = ExtResource("2_p7wit")
+harm = 4
+scrap_received = 1
+texture = ExtResource("3_p7wit")
+cost = 5
+craft_reqs = Dictionary[int, int]({
+1: 1,
+2: 2,
+3: 2
+})
+possible_enemy_item = false
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

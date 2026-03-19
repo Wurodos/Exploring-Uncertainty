@@ -20,6 +20,11 @@ enum Enchant { None, Red, Blue, Green, Yellow }
 @export var craft_items: Array[Item] = []
 @export var keywords: Array[String] = []
 
+@export_category("Flags")
+@export var is_melee: bool = true
+@export var possible_enemy_item: bool = true
+
+@export_category("Outdated")
 @export var u_name: StringName = ""
 @export var name: String = ""
 @export var desc: String = ""
@@ -79,6 +84,17 @@ func get_scrap() -> Item.Scrap:
 	push_error("Item Type is unrecognized")
 	return Item.Scrap.Oil
 	
+# Slave is needed if item is currently equipped
+func gain_exp(slave: Slave = null) -> void:
+	if is_item() and level < 5:
+		experience += 1
+		if experience == Constants.exp_required[level-1]:
+			level_up(slave)
+
+func level_up(slave: Slave = null) -> void:
+	if slave: slave.unequip(self)
+	on_level_up()
+	if slave: slave.equip(self)
 
 func is_item() -> bool:
 	return u_name != "no_weapon" and u_name != "no_hat"\

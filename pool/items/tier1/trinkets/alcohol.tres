@@ -16,6 +16,6 @@ craft_reqs = Dictionary[int, int]({
 })
 keywords = Array[String](["power"])
 u_name = &"alcohol"
-name = "Алкоголь"
+name = "Алкогольld"
 desc = "НАЧАЛО ХОДА: +1 МОЩЬ, ПОТЕРЯ 2 ХП"
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

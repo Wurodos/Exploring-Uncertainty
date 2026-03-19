@@ -20,7 +20,7 @@ func _ready() -> void:
 func apply(item: Item):
 	held = item
 	$ItemSprite.texture = item.texture
-	if item.tier == 1:
+	if item.craft_items.is_empty():
 		%Scraps.visible = true
 		%Items.visible = false
 		for req: Item.Scrap in [Item.Scrap.Flesh, Item.Scrap.Gear, Item.Scrap.Shard, Item.Scrap.Tooth, Item.Scrap.Oil]:

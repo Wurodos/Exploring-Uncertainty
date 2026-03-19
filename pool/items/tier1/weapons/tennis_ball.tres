@@ -1,6 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://b5wshieffdwrj"]
 
 [ext_resource type="Script" uid="uid://by58yviokogg" path="res://scripts/items/weapons/tennis_ball.gd" id="1_7mwu7"]
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_dl638"]
 [ext_resource type="Texture2D" uid="uid://dufi8uttf7ael" path="res://images/items/tennis-ball.png" id="2_7mwu7"]
 
 [resource]
@@ -11,6 +12,7 @@ craft_reqs = Dictionary[int, int]({
 0: 3,
 4: 1
 })
+is_melee = false
 u_name = &"tennis_ball"
 name = "Теннисный Мяч"
 desc = "2 ВРЕДА, +2 ЗА КАЖДУЮ РАЗНИЦУ В ИНИЦИАТИВЕ"

@@ -79,15 +79,23 @@ func _intention_weapon(target: int, victim: SlaveNode) -> void:
 func _get_random_good_target() -> int:
 	var possible : Array[int] = []
 	var i = 0
-	var only_high_priority: bool = false
+	var only_normal_priority: bool = false
+	
+	for slave : SlaveNode in Battle.instance.good_team.boys_nodes:
+		if slave.held.is_alive and slave.tags.has(Action.TAG_HIGH_PRIORITY):
+			possible.append(i)
+		i += 1
+	if not possible.is_empty():
+		return possible.pick_random()
 	
 	for slave : SlaveNode in Battle.instance.good_team.boys_nodes:
 		if slave.held.is_alive and not slave.tags.has(Action.TAG_LOW_PRIORITY):
-			only_high_priority = true
+			only_normal_priority = true
 			break
 	
+	i = 0
 	for slave : SlaveNode in Battle.instance.good_team.boys_nodes:
-		if slave.held.is_alive and (not only_high_priority or not slave.tags.has(Action.TAG_LOW_PRIORITY)):
+		if slave.held.is_alive and (not only_normal_priority or not slave.tags.has(Action.TAG_LOW_PRIORITY)):
 			possible.append(i)
 		i += 1	
 	return possible.pick_random()

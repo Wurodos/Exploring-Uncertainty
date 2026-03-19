@@ -1,5 +1,5 @@
 extends Enemy
-
+class_name Starry
 @export var power_gain: int = 2
 @export var shield_turns: int = 1
 @export var heal_amount: int = 5

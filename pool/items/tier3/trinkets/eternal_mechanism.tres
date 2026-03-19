@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3 uid="uid://cfj2n8jqmuged"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_m47ep"]
+[ext_resource type="Texture2D" uid="uid://bkc8yafl3x68b" path="res://images/items/eternal_mechanism.png" id="2_oojny"]
+[ext_resource type="Script" uid="uid://d10k5mlk3f6kl" path="res://scripts/items/trinkets/eternal_mechanism.gd" id="2_xsrm8"]
+
+[resource]
+script = ExtResource("2_xsrm8")
+tier = 3
+type = 2
+texture = ExtResource("2_oojny")
+cost = 37
+craft_reqs = Dictionary[int, int]({
+0: 10,
+1: 10,
+2: 10,
+3: 10,
+4: 10
+})
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

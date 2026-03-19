@@ -1,6 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://dxax18f4v6svy"]
 
 [ext_resource type="Script" uid="uid://c6oix4nvngkyo" path="res://scripts/items/weapons/whistle.gd" id="1_bd8j0"]
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_orfn5"]
 [ext_resource type="Texture2D" uid="uid://bryk05qfox2u8" path="res://images/items/whistle.png" id="2_1nmqh"]
 
 [resource]
@@ -12,6 +13,7 @@ craft_reqs = Dictionary[int, int]({
 0: 1,
 2: 4
 })
+is_melee = false
 u_name = &"whistle"
 name = "Свисток"
 desc = "3 ВРЕДА"

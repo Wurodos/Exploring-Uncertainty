@@ -1,0 +1,18 @@
+[gd_resource type="Resource" format=3 uid="uid://dknncvfadh0ax"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_yuhly"]
+[ext_resource type="Resource" uid="uid://cvpahuhyjqth6" path="res://pool/items/tier1/trinkets/obsidian.tres" id="2_jb78b"]
+[ext_resource type="Script" uid="uid://bme56155q62pq" path="res://scripts/items/weapons/obsidian_knife.gd" id="3_jb78b"]
+[ext_resource type="Texture2D" uid="uid://ca7ohxf1x5862" path="res://images/items/bowie-knife.png" id="5_yuhly"]
+
+[resource]
+script = ExtResource("3_jb78b")
+harm = 16
+tier = 2
+extra_hp = 1
+extra_speed = 1
+texture = ExtResource("5_yuhly")
+cost = 10
+craft_items = Array[ExtResource("1_yuhly")]([ExtResource("2_jb78b"), ExtResource("2_jb78b")])
+possible_enemy_item = false
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

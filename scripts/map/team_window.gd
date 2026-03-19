@@ -55,13 +55,15 @@ func _on_mouse_up() -> void:
 	
 	if item_node and slave_node:
 		var trinket_id = 1
-		if item_node.held.type == Item.Type.Trinket \
-			and slave_node.held.trinket1.is_item():
+		if item_node.held.type == Item.Type.Trinket and slave_node.held.trinket1.is_item():
+			if slave_node.held.trinket2.is_item() and slave_node.held.allow_3_trinkets:
+				trinket_id = 3
+			else:
 				trinket_id = 2
 		
 		# Don't allow equipping an item if it leads to <= 0 HP!
 		
-		if slave_node.held.hp - slave_node.held.get_item(item_node.held.type).extra_hp\
+		if slave_node.held.hp - slave_node.held.get_item(item_node.held.type, trinket_id).extra_hp\
 			+ item_node.held.extra_hp <= 0: return
 		
 		var old_item : Item = slave_node.held.equip(item_node.held, trinket_id)

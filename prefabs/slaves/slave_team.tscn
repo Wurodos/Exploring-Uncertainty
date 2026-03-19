@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dmhhtjxo47pcy" path="res://scripts/map/slave_team_node.gd" id="1_6uie0"]
 [ext_resource type="Texture2D" uid="uid://brfycwyqi4ev8" path="res://images/slaves/communist.png" id="2_i0wge"]
 [ext_resource type="Texture2D" uid="uid://c102ib72qlv7l" path="res://images/items/sword.png" id="3_6ynpi"]
-[ext_resource type="Texture2D" uid="uid://ca3v7kxh4etl1" path="res://images/items/viking-helmet.png" id="4_furks"]
+[ext_resource type="Texture2D" uid="uid://dgsxfssutl5vj" path="res://images/items/holder.png" id="4_i0wge"]
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="5_furks"]
 [ext_resource type="Texture2D" uid="uid://braode065wy2j" path="res://images/items/lock.png" id="5_st4jw"]
 [ext_resource type="Texture2D" uid="uid://cxjgnget2f6pf" path="res://images/items/bomb.png" id="6_l0erc"]
@@ -129,7 +129,7 @@ offset_bottom = -29.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("4_furks")
+texture = ExtResource("4_i0wge")
 expand_mode = 1
 
 [node name="Trinket2" type="TextureRect" parent="." unique_id=1030841469]
@@ -168,11 +168,29 @@ mouse_filter = 2
 texture = ExtResource("6_l0erc")
 expand_mode = 1
 
+[node name="Trinket3" type="TextureRect" parent="." unique_id=1480751149]
+material = SubResource("ShaderMaterial_6ynpi")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -113.0
+offset_right = 28.5
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_st4jw")
+expand_mode = 1
+
 [node name="HPBar" type="ProgressBar" parent="." unique_id=1462134979]
 layout_mode = 0
-offset_top = -66.0
+offset_top = -101.0
 offset_right = 93.0
-offset_bottom = -41.0
+offset_bottom = -76.0
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_nrvhk")
 theme_override_styles/fill = SubResource("StyleBoxFlat_y6rnb")

@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("2_xr00a")
+harm = 6
 texture = ExtResource("3_xr00a")
 cost = 7
 craft_reqs = Dictionary[int, int]({
@@ -13,4 +14,5 @@ craft_reqs = Dictionary[int, int]({
 3: 1,
 4: 1
 })
+possible_enemy_item = false
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

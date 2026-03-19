@@ -69,6 +69,8 @@ var found_items: int = 0
 
 var zone_id: int = 0
 
+var encounter_room: Room
+
 #======================
 # v EOT stuff v
 #======================
@@ -217,6 +219,8 @@ func encounter(room: Room) -> void:
 			await SignalBus.end_battle
 			break
 	
+	
+	encounter_room = room
 	SignalBus.entered_room.emit(room)
 	
 	CurrentRun.is_in_purged = room.type == Room.Type.Purged	
@@ -414,13 +418,18 @@ func generate_floor() -> void:
 	_explore(party_row, party_col)
 	_update_move_buttons()
 
-func add_room(row: int, col: int) -> Room:
+func add_room(row: int, col: int, type: Room.Type = Room.Type.Empty) -> Room:
 	var room_node : Room = room_prefab.instantiate()
 	room_parent.add_child(room_node)
 	room_node.row = row
 	room_node.col = col
-	room_node.type = Room.Type.Empty
+	room_node.type = type
 	room_node.name = str(row) + "_" + str(col)
+	room_node.sprite.texture = room_sprites[type]
+	
+	match(type):
+		Room.Type.Elevator:
+			elevators.append(room_node)
 	
 	space_taken[row][col] = true
 	

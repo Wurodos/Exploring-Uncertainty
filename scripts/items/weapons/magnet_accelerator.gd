@@ -24,9 +24,7 @@ func use_item(sender: SlaveNode, victim: SlaveNode):
 	
 func on_level_up():
 	super.on_level_up()
-	harm += 5
-	extra_speed += 1
-	if level >= 4: stuns += 1
+	stuns += 1
 
 func get_priority(_sender: SlaveNode, _victim: SlaveNode) -> int:
 	return +3

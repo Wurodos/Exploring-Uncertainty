@@ -1,0 +1,17 @@
+[gd_resource type="Resource" format=3 uid="uid://cywgqmtmdqmj1"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_3rqwm"]
+[ext_resource type="Resource" uid="uid://yawpolmwgl6h" path="res://pool/items/tier1/weapons/hammer.tres" id="2_3rqwm"]
+[ext_resource type="Resource" uid="uid://ma3vadbm6tok" path="res://pool/items/tier1/weapons/sickle.tres" id="3_0m0i8"]
+[ext_resource type="Script" uid="uid://bsp4ol5cu6xj5" path="res://scripts/items/weapons/ideology.gd" id="4_3rqwm"]
+[ext_resource type="Texture2D" uid="uid://doarnkwm1j385" path="res://images/items/hammer-sickle.png" id="5_3rqwm"]
+
+[resource]
+script = ExtResource("4_3rqwm")
+harm = 10
+tier = 2
+texture = ExtResource("5_3rqwm")
+cost = 7
+craft_items = Array[ExtResource("1_3rqwm")]([ExtResource("2_3rqwm"), ExtResource("3_0m0i8")])
+possible_enemy_item = false
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

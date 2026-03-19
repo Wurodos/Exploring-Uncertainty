@@ -15,13 +15,13 @@ winchester_name;Winchester;Винчестер
 winchester_desc;{} HARM, {} HARM TO OTHER RANDOM TARGET;{} ВРЕДА, {} ВРЕДА ДРУГОЙ СЛУЧАЙНОЙ ЦЕЛИ
 anvil_name;Anvil;Наковальня
 anvil_desc;EACH {} RECEIVED HARM GRANTS {} POWER\nACTION:TRANSFER 1/2 POWER;КАЖДЫЕ ПОЛУЧЕННЫЕ {} ВРЕДА ПРИНЕСУТ {} МОЩЬ.\nДЕЙСТВИЕ: ПЕРЕДАТЬ 1/2 МОЩИ
-cowboy_hat_name;Cowboy Hat;Ковбойская Шляпа
+cowboy_hat_name;Cowboy;Ковбой
 cowboy_hat_desc;+1 SPEED WHEN ATTACKING NON-SLOWER TARGETS\nACTION: SHIELD 1 TURN TO ALL;+1 СКОРОСТЬ ПРИ АТАКЕ ЦЕЛЕЙ С НЕ МЕНЬШЕЙ СКОРОСТЬЮ\nДЕЙСТВИЕ: ЩИТ 1 ХОД ВСЕМ
 crown_name;Crown;Корона
 crown_desc;DOUBLE EXTRA HP FROM TRINKETS\nACTION: -{} INITIATIVE;УДВОЙТЕ ЗДРАВИЕ ОТ БЕЗДЕЛУШЕК\nДЕЙСТВИЕ: -{} ИНИЦИАТИВЫ
 helmet_name;Helmet;Каска
 helmet_desc;SHIELD ABSORBS 60% DAMAGE\nACTION: SHIELD {} TURNS;ЩИТ ПОГЛОЩАЕТ 60% УРОНА\nДЕЙСТВИЕ: ЩИТ {} ХОД.
-jester_hat_name;Jester Hat;Шляпа Шута
+jester_hat_name;Jester;Шут
 jester_hat_desc;EVERY TURN OF EVERY STATUS INCREASES HARM\nACTION: BLASPHEMY {} TURNS;КАЖДЫЙ ХОД КАЖДОГО СТАТУСА УВЕЛИЧИВАЕТ ВРЕД\nДЕЙСТВИЕ: КОЩУНСТВО {} ХОД.
 no_hat_name;Head Empty;Пустоголовие
 no_hat_desc;ACTION: +{} INITIATIVE, HEAL {} HEALTH;ДЕЙСТВИЕ: +{} ИНИЦИАТИВЫ, ЛЕЧИТЬ {} ЗДОРОВЬЯ
@@ -47,7 +47,7 @@ riot_shield_name;Riot Shield;Мятежный Щит
 riot_shield_desc;INFLICTS {} HARM, SHIELD {} TURN TO SELF;ПРИЧИНЯЕТ {} ВРЕДА, ЩИТ {} ХОД СЕБЕ
 hammer_name;Hammer;Молоток
 hammer_desc;BREAKS SHIELD, INFLICTS {} HARM;ЛОМАЕТ ЩИТ, ПРИЧИНЯЕТ {} ВРЕДА
-viking_helmet_name;Viking Helmet;Шлем Викинга
+viking_helmet_name;Viking;Викинг
 viking_helmet_desc;WHEN ATTACKING: DONT LOSE VIGILANCE\nACTION: APPETITE {} TURNS TO ALLY AND SELF;ПРИ АТАКЕ: НЕ ТЕРЯЙТЕ БДИТЕЛЬНОСТЬ\nДЕЙСТВИЕ: АППЕТИТ {} ХОД. СЕБЕ И СОЮЗНИКУ
 boot_name;Boot;Сапог
 boot_desc;OUT OF BATTLE: {} HEALTH FOR ENTERING EMPTY ROOM.\nACTION: {} HARM TO ALLY, THEY ATTACK.;ВНЕ БИТВЫ: {} ЗДОРОВЬЯ В ПУСТОЙ КОМНАТЕ.\nДЕЙСТВИЕ: {} ВРЕДА СОЮЗНИКУ, ТОТ АТАКУЕТ
@@ -79,3 +79,41 @@ wire_name;Wire;Проволока
 wire_desc;INFLICT {} HARM, {} DAMAGE TO OTHER ENEMIES FOR EACH STATIC;ПРИЧИНЯЕТ {} ВРЕДА, {} УРОН ОСТАЛЬНЫМ ВРАГАМ ЗА КАЖДУЮ СТАТИЧНОСТЬ
 generator_name;Generator;Генератор
 generator_desc;DON'T LOSE STATIC WHEN HIT. ACTION: +{} STATIC;НЕ ТЕРЯЙТЕ СТАТИЧНОСТЬ ПРИ УРОНЕ. ДЕЙСТВИЕ: +{} СТАТИЧНОСТИ
+crucifix_name;Crucifix;Крест
+crucifix_desc;INFLICTS {} HARM. IF TARGET - GRAVE: +{} MAX HEALTH, REMOVE GRAVE;ПРИЧИНЯЕТ {} ВРЕДА. ЕСЛИ ЦЕЛЬ - МОГИЛА: +{} МАКС. ЗДРАВИЯ, УБЕРИТЕ МОГИЛУ. 
+cap_name;Cap;Кепка
+cap_desc;END OF BATTLE: +{} EXP TO ALL ITEMS\nACTION: SWAP HATS;КОНЕЦ БОЯ: +{} ОПЫТ ВСЕМ ПРЕДМЕТАМ\nДЕЙСТВИЕ: ПОМЕНЯТЬСЯ ШЛЯПАМИ
+sickle_name;Sickle;Серп
+sickle_desc;INFLICTS {} HARM ON ALL ENEMIES, x{} IF THEIR HEALTH IS FULL;ПРИЧИНЯЕТ {} ВРЕДА ВСЕМ ВРАГАМ, x{} ЕСЛИ ИХ ЗДОРОВЬЕ ПОЛНОЕ
+sold_money_name;Sold Money;Проданные Деньги
+sold_money_desc;START OF BATTLE: BLASPHEMY {} TURNS;НАЧАЛО БОЯ: КОЩУНСТВО {} ХОДОВ
+broom_name;Broom;Метла
+broom_desc;INFLICTS {} HARM. EXECUTION: RECEIVE {} SCRAPS OF TYPE THAT YOU HAVE LEAST OF;ПРИЧИНЯЕТ {} ВРЕДА. КАЗНЬ: ПОЛУЧИТЕ {} ХЛАМ, КОТОРОГО У ВАС МЕНЬШЕ ВСЕГО
+cigarettes_name;Cigarettes;Сигареты
+cigarettes_desc;START TURN: LOSE {} HEALTH. END OF BATTLE: +{} EXPERIENCE TO WEAPON;НАЧАЛО ХОДА: ПОТЕРЯ {} ЗДРАВИЙ. КОНЕЦ БОЯ: +{} ОПЫТ ОРУЖИЮ
+claw_name;Claw;Клешня
+claw_desc;INFLICTS {} HARM, REDUCES TARGET'S HAT LEVEL;ПРИЧИНЯЕТ {} ВРЕДА, ПОНИЖАЕТ УРОВЕНЬ ШЛЯПЫ У ЦЕЛИ
+disk_name;Disk;Диск
+disk_desc;END OF BATTLE: SAVE POWER, SPEED, LUCK, STATIC, STATUSES;КОНЕЦ БОЯ: СОХРАНИТЬ МОЩЬ, СКОРОСТЬ, УДАЧУ, СТАТИЧНОСТЬ И СТАТУСЫ
+disk_loaded_name;Loaded Disk;Загруженный Диск
+disk_loaded_desc;ONE-TIME USE. START OF BATTLE: GAIN {} POWER, {} SPEED, {} LUCK, {} STATIC;ОДНОРАЗОВОЕ. НАЧАЛО БОЯ: ПОЛУЧИТЕ {} МОЩИ, {} СКОРОСТИ, {} УДАЧИ, {} СТАТИЧНОСТИ
+ideology_name;IDEOLOGY;ИДЕОЛОГИЯ
+ideology_desc;INFLICTS {} HARM. EXECUTES CHERVS, x2 DAMAGE TO ZORTS;ПРИЧИНЯЕТ {} ВРЕДА. КАЗНИТ ЧЕРВОВ, x2 УРОН ПО ЗОРЦАМ
+obsidian_knife_name;Obsidian Knife;Обсидиановый Нож
+obsidian_knife_desc;INFLICTS 16 HARM. END OF BATTLE: DESTROYS ITSELF, RECEIVE OBSIDIAN OF SAME LEVEL;ПРИЧИНЯЕТ 16 ВРЕДА. КОНЕЦ БОЯ: УНИЧТОЖАЕТСЯ, ПОЛУЧИТЕ ОБСИДИАН ТОГО ЖЕ УРОВНЯ
+pope_name;Pope;Папа Римский
+pope_desc;START OF TURN: ABSORB {} HEALTH FROM ALL FIGHTERS\nACTION: RESURRECT FIGHTER WITH {}% HEALTH;НАЧАЛО ХОДА: ПОГЛОЩАЕТ {} ЗДОРОВЬЕ СО ВСЕХ БОЙЦОВ\nДЕЙСТВИЕ: ВОСКРЕСИТЕ БОЙЦА С {}% ЗДОРОВЬЕМ
+cutter_name;Cutter;Коситель
+cutter_desc;EXECUTES ALL ENEMIES WITH {}% HEALTH OR LESS, OTHERWISE INFLICTS {} HARM;КАЗНИТ ВСЕХ ВРАГОВ С {}% ЗДОРОВЬЯ ИЛИ МЕНЬШЕ, ИНАЧЕ ПРИЧИНЯЕТ {} ВРЕДА
+holder_name;«Holder»;«Держатель»
+holder_desc;CAN HOLD 3rd TRINKET. ACTION: USE TARGET'S HAT ON SELF;МОЖНО ДЕРЖАТЬ 3-ю БЕЗДЕЛУШКУ. ДЕЙСТВИЕ: ПРИМЕНИТЕ ШЛЯПУ ЦЕЛИ НА СЕБЯ
+grave_reason_name;GRAVE REASON;ВЕСКАЯ ПРИЧИНА
+grave_reason_desc;HIGH PRIORITY TARGET;ЦЕЛЬ С ВЫСОКИМ ПРИОРИТЕТОМ
+hypercutter_name;HYPER-Cutter;ГИПЕР-Коситель
+hypercutter_desc;INFLICTS {} HARM. EXECUTION: RECEIVE POWER EQUAL TO {}% HEALTH OF EXECUTED ENEMY;ПРИЧИНЯЕТ {} ВРЕДА. КАЗНЬ: ПОЛУЧИТЕ МОЩЬ В РАЗМЕРЕ {}% МАКС. ЗДОРОВЬЯ КАЗНЕННОГО ВРАГА
+eternal_mechanism_name;ETERNAL Mechanism;ВЕЧНЫЙ Механизм
+eternal_mechanism_desc;END OF BATTLE: UPGRADE A RANDOM ITEM TO LEVEL 5;КОНЕЦ БОЯ: УЛУЧШИТЕ СЛУЧАЙНЫЙ ПРЕДМЕТ ДО 5 УРОВНЯ
+prudence_name;PRUDENCE;БЛАГОРАЗУМИЕ
+prudence_desc;END OF BATTLE: GRAB ALL ITEMS IN MARADEURING. ACTION: VIGILANCE TO ALL ALLIES;КОНЕЦ БОЯ: ЗАБИРАЙТЕ ВСЕ ПРЕДМЕТЫ ВО ВРЕМЯ МАРОДЕРСТВА. ДЕЙСТВИЕ: БДИТЕЛЬНОСТЬ ВСЕМ СОЮЗНИКАМ
+regime_change_name;REGIME CHANGE;СМЕНА РЕЖИМА
+regime_change_desc;END OF BATTLE IN CAMP: CONSTRUCT CITY, CC OR ELEVATOR;КОНЕЦ БОЯ В ЛАГЕРЕ: ВОЗВЕДИТЕ ЗДЕСЬ ГОРОД, ЦК ИЛИ ЛИФТ

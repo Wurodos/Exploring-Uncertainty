@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dxa7wr6gumrrb" path="res://images/buffs/anvil.png" id="6_8sljb"]
 [ext_resource type="Texture2D" uid="uid://bm0hs7cpm2sfy" path="res://images/items/pocket-watch.png" id="6_f4yho"]
 [ext_resource type="Texture2D" uid="uid://dhmqbwahk027p" path="res://images/icons/middle.png" id="6_gppif"]
-[ext_resource type="Texture2D" uid="uid://cshgykfna0grm" path="res://images/items/power-generator.png" id="6_s5n5c"]
+[ext_resource type="Texture2D" uid="uid://dgsxfssutl5vj" path="res://images/items/holder.png" id="6_s5n5c"]
 [ext_resource type="Texture2D" uid="uid://orgdll7utn86" path="res://images/icons/bottom.png" id="7_8sljb"]
 [ext_resource type="Texture2D" uid="uid://nknu23hrvind" path="res://images/buffs/appetite.png" id="7_erpc0"]
 [ext_resource type="Texture2D" uid="uid://8sgoeg1sj6ga" path="res://images/buffs/freeze.png" id="8_bl030"]
@@ -383,6 +383,14 @@ texture = ExtResource("6_s5n5c")
 position = Vector2(-44, 21)
 scale = Vector2(0.1, 0.1)
 
+[node name="Trinket3" type="Node2D" parent="Parts/Visual/Items" unique_id=987006776]
+position = Vector2(5.3333335, -74)
+scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/Items/Trinket3" unique_id=1312236989]
+visible = false
+texture = ExtResource("6_f4yho")
+
 [node name="Trinket1" type="Node2D" parent="Parts/Visual/Items" unique_id=1908407866]
 position = Vector2(-31, 31)
 scale = Vector2(0.1, 0.1)
@@ -419,6 +427,14 @@ position = Vector2(-22.222221, 6.4444447)
 scale = Vector2(0.1, 0.1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/BigItems/Trinket1" unique_id=62819612]
+visible = false
+texture = ExtResource("6_f4yho")
+
+[node name="Trinket3" type="Node2D" parent="Parts/Visual/BigItems" unique_id=1495964973]
+position = Vector2(5.3333335, -74)
+scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/BigItems/Trinket3" unique_id=217126709]
 visible = false
 texture = ExtResource("6_f4yho")
 
@@ -464,6 +480,17 @@ scale = Vector2(0.1, 0.1)
 [node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/TwoHeads/Trinket1" unique_id=1757522092]
 visible = false
 texture = ExtResource("6_f4yho")
+
+[node name="Trinket3" type="Node2D" parent="Parts/Visual/TwoHeads" unique_id=2084988612]
+position = Vector2(5.3333335, -74)
+scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/TwoHeads/Trinket3" unique_id=308787589]
+visible = false
+texture = ExtResource("6_f4yho")
+
+[node name="Front" type="Node2D" parent="Parts" unique_id=1767438365]
+position = Vector2(87.333336, -50)
 
 [node name="HPBar" type="ProgressBar" parent="." unique_id=1222666271]
 offset_left = -46.6667

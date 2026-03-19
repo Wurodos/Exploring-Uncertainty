@@ -36,6 +36,7 @@ var weapon_node: ItemNode
 var hat_node: ItemNode
 var trinket1_node: ItemNode
 var trinket2_node: ItemNode
+var trinket3_node: ItemNode
 
 # name -> turns left
 var buffs : Dictionary[String, int] = {}
@@ -96,7 +97,8 @@ func remove_item(u_name: StringName) -> void:
 					held.equip(ItemPool.fetch("no_trinket"), tr_id)
 					
 					if tr_id == 1: trinket1_node.apply(held.trinket1)
-					else: trinket2_node.apply(held.trinket2)
+					elif tr_id == 2: trinket2_node.apply(held.trinket2)
+					elif tr_id == 3: trinket3_node.apply(held.trinket3)
 			return	
 
 func set_max_hp(new_val: int, is_delta: bool = true):
@@ -113,14 +115,22 @@ func set_hp(new_val: int, is_delta: bool = true):
 	
 	# Death
 	if held.hp <= 0 and held.is_alive:
-		held.is_alive = false
-		sprite.texture = Gallery.img_dead_slave
-		$HPBar.visible = false
-		item_parent.visible = false
-		$Intention.visible = false
-		arrow.visible = false
-		SignalBus.slave_death.emit(self)
+		death()
 	else: hp_changed.emit()
+
+func death(undeath: bool = false) -> void:
+	held.is_alive = undeath
+	sprite.texture = Gallery.img_dead_slave
+	$HPBar.visible = undeath
+	item_parent.visible = undeath
+	$Intention.visible = undeath
+	arrow.visible = undeath
+	
+	if undeath:
+		reapply()
+		SignalBus.slave_undeath.emit(self)
+	else:
+		SignalBus.slave_death.emit(self)
 
 func set_speed(new_val: int, is_delta: bool = true):
 	if is_delta:
@@ -205,6 +215,11 @@ func apply(slave: Slave, is_evil: bool = false) -> void:
 		item_parent.get_node("Trinket2").add_child(trinket2_node)
 	trinket2_node.apply(held.trinket2)
 	
+	if trinket3_node == null:
+		trinket3_node = item_prefab.instantiate()
+		item_parent.get_node("Trinket3").add_child(trinket3_node)
+	trinket3_node.apply(held.trinket3)
+	
 	var extra_item = held.get_extra_item()
 	if extra_item:
 		var extra_node = item_prefab.instantiate()
@@ -240,8 +255,14 @@ func toggle_ellipse(visible: bool):
 
 func attack(victim: SlaveNode):
 	#$AnimationPlayer.play("jump")
+	var old_pos := global_position
+	toggle_arrow(false)
+	if held.weapon.is_melee:
+		var tween = move_to(victim.get_node("Parts/Front").global_position)
+		await tween.finished
+	
 	if buffs.has(Action.STUN):
-		_on_end_turn()
+		_on_end_turn.call_deferred()
 		return
 		
 	if not (vigilance and tags.has(Action.TAG_VIGILANCE_KEEP_ATTACK)):
@@ -249,22 +270,27 @@ func attack(victim: SlaveNode):
 	match(held.weapon.target):
 		Item.Target.Single: 
 			held.weapon.use_item(self, victim)
-			(victim.held as Enemy).on_attacked(self)
-			attacked.emit(victim)
+			if victim:
+				if victim.held.is_alive:
+					(victim.held as Enemy).on_attacked(self)
+				attacked.emit(victim)
 		Item.Target.AllTeam: 
 			for slave in Battle.instance.evil_team.boys_nodes:
 				held.weapon.use_item(self, slave)
-				(slave.held as Enemy).on_attacked(self)
-				attacked.emit(slave)
-	
-	
-	_on_end_turn()
+				if victim:
+					if victim.held.is_alive:
+						(victim.held as Enemy).on_attacked(self)
+					attacked.emit(victim)
+	if held.weapon.is_melee:
+		var tween = move_to(old_pos)
+		await tween.finished
+	_on_end_turn.call_deferred()
 	
 func support(ally: SlaveNode):
 	#$AnimationPlayer.play("jump")
-	
+	toggle_arrow(false)
 	if buffs.has(Action.STUN):
-		_on_end_turn()
+		_on_end_turn.call_deferred()
 		return
 	
 	match(held.hat.target):
@@ -275,7 +301,13 @@ func support(ally: SlaveNode):
 		Item.Target.AllTeam: 
 			for slave in Battle.instance.good_team.boys_nodes:
 				held.hat.use_item(self, slave)
-	_on_end_turn()
+	_on_end_turn.call_deferred()
+
+func move_to(to: Vector2) -> Tween:
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "global_position", to, 0.4).set_trans(Tween.TRANS_QUAD)
+	tween.play()
+	return tween
 
 func start_turn() -> void:
 	if not held is Enemy: toggle_arrow(true)
@@ -334,10 +366,10 @@ func execute_intention():
 				for target_id in held_enemy.intention.targets:
 					var victim: SlaveNode = Battle.instance.evil_team.boys_nodes[target_id]
 					held_enemy.intention.effect.call(victim)
-	_on_end_turn()
+	
 	await get_tree().create_timer(1).timeout
-	#$AnimationPlayer.play("idle")
 	$Intention.visible = false
+	_on_end_turn()
 	SignalBus.new_turn.emit()
 
 func run() -> void:
@@ -380,10 +412,7 @@ func _on_clickable_area_button_down() -> void:
 
 func _on_end_turn() -> void:
 	turn_ended.emit()
-	toggle_arrow(false)
 	
-	#await $AnimationPlayer.animation_finished
-	#$AnimationPlayer.play("idle")
 	
 
 

@@ -1,19 +1,28 @@
 extends Item
 
 @export var harm: int = 7
+@export var health_gain: int = 1
 
 func localize():
 	super.localize()
-	desc = desc.format([harm], "{}")
+	desc = desc.format([harm,health_gain], "{}")
 
 func use_item(sender: SlaveNode, victim: SlaveNode):
 	super.use_item(sender, victim)
-	Action.deal_damage(sender, victim, harm)
+	
+	if not victim.held.is_alive and not CurrentRun.is_in_purged:
+		sender.set_max_hp(+health_gain)
+		sender.set_hp(+health_gain)
+		victim.team.cull_the_dead(false, victim)
+	else:
+		Action.deal_damage(sender, victim, harm)
+	
 	localize()
 	
 func on_level_up():
 	super.on_level_up()
-	harm += level
+	harm += 1
+	health_gain += 1
 
 func get_priority(_sender: SlaveNode, _victim: SlaveNode) -> int:
 	return 0

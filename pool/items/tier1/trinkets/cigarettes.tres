@@ -1,0 +1,19 @@
+[gd_resource type="Resource" format=3 uid="uid://lu5kq3ai55j4"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_tfyie"]
+[ext_resource type="Script" uid="uid://cxfjde33ul125" path="res://scripts/items/trinkets/cigarettes.gd" id="2_tfyie"]
+[ext_resource type="Texture2D" uid="uid://2jxpm80dfo5s" path="res://images/items/cigarettes.png" id="3_tfyie"]
+
+[resource]
+script = ExtResource("2_tfyie")
+health_loss = 1
+exp_gain = 1
+type = 2
+texture = ExtResource("3_tfyie")
+cost = 5
+craft_reqs = Dictionary[int, int]({
+2: 1,
+4: 1
+})
+possible_enemy_item = false
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

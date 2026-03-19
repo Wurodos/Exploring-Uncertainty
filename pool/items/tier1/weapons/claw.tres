@@ -1,0 +1,16 @@
+[gd_resource type="Resource" format=3 uid="uid://byame6vlwyxl5"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_ac5ti"]
+[ext_resource type="Script" uid="uid://csmysna7dueyo" path="res://scripts/items/weapons/claw.gd" id="2_ac5ti"]
+[ext_resource type="Texture2D" uid="uid://d4hiic30kcs57" path="res://images/items/crab-claw.png" id="3_ac5ti"]
+
+[resource]
+script = ExtResource("2_ac5ti")
+harm = 4
+texture = ExtResource("3_ac5ti")
+cost = 7
+craft_reqs = Dictionary[int, int]({
+0: 4,
+3: 1
+})
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

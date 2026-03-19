@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://cslr7qtbh07ww"]
+
+[ext_resource type="Texture2D" uid="uid://w3ytklewie86" path="res://images/rooms/tile.png" id="1_idp0p"]
+[ext_resource type="Script" uid="uid://beqrdwal10g8b" path="res://scripts/map/popup_regime_change.gd" id="1_inw7u"]
+[ext_resource type="Texture2D" uid="uid://d16g0ecde2caq" path="res://images/rooms/elevator.png" id="2_7jkwo"]
+[ext_resource type="Texture2D" uid="uid://efhfrf3upqg5" path="res://images/rooms/city.png" id="3_gwx07"]
+[ext_resource type="Texture2D" uid="uid://k20uxq34h120" path="res://images/rooms/comms.png" id="4_idp0p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_idp0p"]
+
+[node name="RegimeChange" type="Control" unique_id=1723596214]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_inw7u")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1483095699]
+layout_mode = 0
+offset_left = -193.0
+offset_top = -113.0
+offset_right = 1191.0
+offset_bottom = 636.0
+color = Color(0, 0, 0, 0.513726)
+
+[node name="BG" type="TextureRect" parent="." unique_id=881048199]
+self_modulate = Color(0.5931336, 0.59313357, 0.59313357, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 273.0
+offset_top = 98.0
+offset_right = 873.0
+offset_bottom = 498.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_idp0p")
+
+[node name="Elevator" type="TextureRect" parent="." unique_id=63449349]
+layout_mode = 0
+offset_left = 333.0
+offset_top = 303.0
+offset_right = 499.0
+offset_bottom = 469.0
+mouse_filter = 2
+texture = ExtResource("2_7jkwo")
+
+[node name="Button" type="Button" parent="Elevator" unique_id=1956695974]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_idp0p")
+
+[node name="City" type="TextureRect" parent="." unique_id=818265734]
+layout_mode = 0
+offset_left = 488.0
+offset_top = 127.0
+offset_right = 654.0
+offset_bottom = 293.0
+mouse_filter = 2
+texture = ExtResource("3_gwx07")
+
+[node name="Button" type="Button" parent="City" unique_id=1227674728]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_idp0p")
+
+[node name="Comms" type="TextureRect" parent="." unique_id=1147752756]
+layout_mode = 0
+offset_left = 626.0
+offset_top = 307.0
+offset_right = 792.0
+offset_bottom = 473.0
+mouse_filter = 2
+texture = ExtResource("4_idp0p")
+
+[node name="Button" type="Button" parent="Comms" unique_id=1067567291]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_idp0p")
+
+[connection signal="pressed" from="Elevator/Button" to="." method="_on_elevator_pressed"]
+[connection signal="pressed" from="City/Button" to="." method="_on_city_pressed"]
+[connection signal="pressed" from="Comms/Button" to="." method="_on_comms_pressed"]

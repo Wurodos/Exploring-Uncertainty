@@ -17,6 +17,8 @@ const img_dead_slave = preload("res://images/slaves/dead.png")
 const img_free_city = preload("res://images/rooms/free_city.png")
 const img_elevator_repaired = preload("res://images/rooms/elevator_repaired.png")
 
+const img_loaded_disk = preload("res://images/items/loaded-disk.png")
+
 const icon_static = preload("res://images/icons/static.png")
 const icon_power = preload("res://images/icons/power.svg")
 const icon_luck = preload("res://images/icons/clover.svg")

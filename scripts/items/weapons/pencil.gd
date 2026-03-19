@@ -11,10 +11,8 @@ func use_item(sender: SlaveNode, victim: SlaveNode):
 	var was_alive = victim.held.is_alive
 	Action.deal_damage(sender, victim, harm)
 	
-	if not sender.team.is_evil and not victim.held.is_alive and was_alive:
+	if not CurrentRun.is_in_purged and not sender.team.is_evil and not victim.held.is_alive and was_alive:
 		CurrentRun.put_item_in_inventory(ItemPool.fetch_random(Item.Type.Trinket))
-			
-	localize()
 	
 func on_level_up():
 	super.on_level_up()

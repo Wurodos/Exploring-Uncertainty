@@ -1,6 +1,7 @@
 [gd_resource type="Resource" format=3 uid="uid://bb350nj3is2lk"]
 
 [ext_resource type="Script" uid="uid://dvn27lmo067lc" path="res://scripts/items/weapons/winchester.gd" id="1_ib7ck"]
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_r5me1"]
 [ext_resource type="Texture2D" uid="uid://ccyc7bhfo8se2" path="res://images/items/winchester.png" id="2_yoghk"]
 
 [resource]
@@ -12,6 +13,7 @@ craft_reqs = Dictionary[int, int]({
 2: 1,
 4: 3
 })
+is_melee = false
 u_name = &"winchester"
 name = "Винчестер"
 desc = "5 ВРЕДА, 3 ВРЕДА ДРУГОЙ СЛУЧАЙНОЙ ЦЕЛИ"

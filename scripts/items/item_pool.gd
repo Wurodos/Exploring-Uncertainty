@@ -36,6 +36,14 @@ func _ready() -> void:
 				
 				print("ITEM_POOL: Loaded " + loaded.u_name + " successfully")
 
+func get_all(type: Item.Type = Item.Type.All, tier: int = 1) -> Array[Item]:
+	match(type):
+		Item.Type.Weapon: return  _tier_pools[tier].weapons.duplicate()
+		Item.Type.Hat: return  _tier_pools[tier].hats.duplicate()
+		Item.Type.Trinket: return  _tier_pools[tier].trinkets.duplicate()
+		Item.Type.All: return  _tier_pools[tier].actual_items.duplicate()
+	return []
+
 func fetch(item_name: StringName) -> Item:
 	return _pool[item_name].duplicate()
 

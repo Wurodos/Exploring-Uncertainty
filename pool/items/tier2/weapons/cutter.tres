@@ -1,0 +1,17 @@
+[gd_resource type="Resource" format=3 uid="uid://cvg2651ymhn7c"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_ks8up"]
+[ext_resource type="Resource" uid="uid://ma3vadbm6tok" path="res://pool/items/tier1/weapons/sickle.tres" id="3_dd5gg"]
+[ext_resource type="Script" uid="uid://b5qg3wvf83g2s" path="res://scripts/items/weapons/cutter.gd" id="3_huj6j"]
+[ext_resource type="Texture2D" uid="uid://cldhkdghohqwa" path="res://images/items/cutter.png" id="4_huj6j"]
+
+[resource]
+script = ExtResource("3_huj6j")
+threshold = 30
+harm = 6
+tier = 2
+target = 1
+texture = ExtResource("4_huj6j")
+cost = 12
+craft_items = Array[ExtResource("1_ks8up")]([ExtResource("3_dd5gg"), ExtResource("3_dd5gg"), ExtResource("3_dd5gg")])
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

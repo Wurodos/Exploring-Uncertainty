@@ -1,0 +1,17 @@
+[gd_resource type="Resource" format=3 uid="uid://2j2wdgu7jb2j"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_b2v5u"]
+[ext_resource type="Resource" uid="uid://cvg2651ymhn7c" path="res://pool/items/tier2/weapons/cutter.tres" id="2_b0h21"]
+[ext_resource type="Script" uid="uid://ri4b7jqjvng" path="res://scripts/items/weapons/hypercutter.gd" id="3_b0h21"]
+[ext_resource type="Texture2D" uid="uid://b27q2i7jwbdwk" path="res://images/items/hypercutter.png" id="6_b2v5u"]
+
+[resource]
+script = ExtResource("3_b0h21")
+harm = 10
+percent = 50
+tier = 3
+texture = ExtResource("6_b2v5u")
+cost = 20
+craft_items = Array[ExtResource("1_b2v5u")]([ExtResource("2_b0h21"), ExtResource("2_b0h21")])
+keywords = Array[String](["power"])
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

@@ -28,9 +28,9 @@ func _ready() -> void:
 			CurrentRun.craft_pool.append(item.duplicate())
 
 	## DEBUG -> Inventory 
-	CurrentRun.craft_recipes.append(ItemPool.fetch("magnet_accelerator"))
-	CurrentRun.inventory.append(ItemPool.fetch("generator"))
-	CurrentRun.inventory.append(ItemPool.fetch("crucifix"))
+	CurrentRun.craft_recipes.append(ItemPool.fetch("regime_change"))
+	#CurrentRun.inventory.append(ItemPool.fetch("generator"))
+	CurrentRun.inventory.append(ItemPool.fetch("regime_change"))
 	#CurrentRun.inventory.append(ItemPool.fetch("wire"))
 	#CurrentRun.inventory.append(ItemPool.fetch("bomb"))
 	#CurrentRun.inventory.back().on_level_up()

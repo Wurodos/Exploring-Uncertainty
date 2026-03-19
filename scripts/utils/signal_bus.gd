@@ -25,6 +25,7 @@ signal play_sound(track: String)
 signal advance_tutorial(specific_id: StringName)
 signal lost_item(item: Item)
 signal message_popup(string_id: StringName)
+signal regime_change
 
 # ====================
 # Change scene
@@ -66,6 +67,7 @@ signal enemy_info(slave: Slave)
 
 signal reinforcement(enemy: Enemy)
 signal slave_death(slave: SlaveNode)
+signal slave_undeath(slave: SlaveNode)
 signal slave_ran(slave: SlaveNode)
 
 signal evil_won

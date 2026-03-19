@@ -4,6 +4,7 @@ const save_path = "user://run.save"
 
 var good_boys: Array[Slave] = []
 var evil_boys: Array[Slave] = []
+var enemy_item_pool: ItemPool.TierPool
 
 # var potential_team_1: Array[Slave] = []
 # var potential_team_2: Array[Slave] = []
@@ -25,6 +26,7 @@ var scraps: Dictionary[Item.Scrap, int] = {
 	Item.Scrap.Tooth : 0,
 	Item.Scrap.Oil : 0
 }
+
 
 var discounts : int = 0
 var is_comms_repaired : bool = false
@@ -87,6 +89,7 @@ func _ready() -> void:
 	
 	randomize()
 	_prepare_good_boys.call_deferred()
+	_prepare_item_pool.call_deferred()
 	_prepare_deck_0.call_deferred()
 	_prepare_deck_1.call_deferred()
 	_prepare_deck_2.call_deferred()
@@ -171,6 +174,34 @@ func _prepare_good_boys() -> void:
 # I'll fix it
 # For now it's here and it's here to stay
 
+func fetch_enemy_item(type: Item.Type = Item.Type.All) -> Item:
+	var pool: Array[Item]
+	match(type):
+		Item.Type.Weapon: pool = enemy_item_pool.weapons
+		Item.Type.Hat: pool = enemy_item_pool.hats
+		Item.Type.Trinket: pool = enemy_item_pool.trinkets
+		Item.Type.All: pool = enemy_item_pool.actual_items
+	if pool.is_empty():
+		_prepare_item_pool()
+		return fetch_enemy_item(type)
+	return pool.pop_back().duplicate()
+
+func _prepare_item_pool() -> void:
+	enemy_item_pool = ItemPool.TierPool.new()
+	
+	enemy_item_pool.weapons = ItemPool.get_all(Item.Type.Weapon)
+	enemy_item_pool.weapons = enemy_item_pool.weapons.filter(func(it: Item): return it.is_item() and it.possible_enemy_item)
+	enemy_item_pool.weapons.shuffle()
+	
+	enemy_item_pool.hats = ItemPool.get_all(Item.Type.Hat)
+	enemy_item_pool.hats = enemy_item_pool.hats.filter(func(it: Item): return it.is_item() and it.possible_enemy_item)
+	enemy_item_pool.hats.shuffle()
+	
+	enemy_item_pool.trinkets = ItemPool.get_all(Item.Type.Trinket)
+	enemy_item_pool.trinkets = enemy_item_pool.trinkets.filter(func(it: Item): return it.is_item() and it.possible_enemy_item)
+	enemy_item_pool.trinkets.shuffle()
+	
+
 func _prepare_deck_0() -> void:
 	# items
 	
@@ -179,10 +210,10 @@ func _prepare_deck_0() -> void:
 	var trinkets = []
 	
 	for i in range(2):
-		weapons.append(ItemPool.fetch_random(Item.Type.Weapon))
-		hats.append(ItemPool.fetch_random(Item.Type.Hat))
-		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
-		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
+		weapons.append(fetch_enemy_item(Item.Type.Weapon))
+		hats.append(fetch_enemy_item(Item.Type.Hat))
+		trinkets.append(fetch_enemy_item(Item.Type.Trinket))
+		trinkets.append(fetch_enemy_item(Item.Type.Trinket))
 	
 	for i in range(4):
 		weapons.append(ItemPool.fetch("no_weapon"))
@@ -223,10 +254,10 @@ func _prepare_deck_1() -> void:
 	var trinkets = []
 	
 	for i in range(items):
-		weapons.append(ItemPool.fetch_random(Item.Type.Weapon))
-		hats.append(ItemPool.fetch_random(Item.Type.Hat))
-		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
-		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
+		weapons.append(fetch_enemy_item(Item.Type.Weapon))
+		hats.append(fetch_enemy_item(Item.Type.Hat))
+		trinkets.append(fetch_enemy_item(Item.Type.Trinket))
+		trinkets.append(fetch_enemy_item(Item.Type.Trinket))
 		
 		if i < items / 2:
 			(weapons[i] as Item).on_level_up()
@@ -286,10 +317,10 @@ func _prepare_deck_2() -> void:
 	var trinkets = []
 	
 	for i in range(items):
-		weapons.append(ItemPool.fetch_random(Item.Type.Weapon))
-		hats.append(ItemPool.fetch_random(Item.Type.Hat))
-		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
-		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
+		weapons.append(fetch_enemy_item(Item.Type.Weapon))
+		hats.append(fetch_enemy_item(Item.Type.Hat))
+		trinkets.append(fetch_enemy_item(Item.Type.Trinket))
+		trinkets.append(fetch_enemy_item(Item.Type.Trinket))
 		
 		
 		(weapons[i] as Item).on_level_up()
@@ -359,10 +390,10 @@ func _prepare_deck_3() -> void:
 	var trinkets = []
 	
 	for i in range(items):
-		weapons.append(ItemPool.fetch_random(Item.Type.Weapon))
-		hats.append(ItemPool.fetch_random(Item.Type.Hat))
-		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
-		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
+		weapons.append(fetch_enemy_item(Item.Type.Weapon))
+		hats.append(fetch_enemy_item(Item.Type.Hat))
+		trinkets.append(fetch_enemy_item(Item.Type.Trinket))
+		trinkets.append(fetch_enemy_item(Item.Type.Trinket))
 		
 		for k in range(2):
 			(weapons[i] as Item).on_level_up()
@@ -432,10 +463,10 @@ func _prepare_deck_4() -> void:
 	var trinkets = []
 	
 	for i in range(items):
-		weapons.append(ItemPool.fetch_random(Item.Type.Weapon))
-		hats.append(ItemPool.fetch_random(Item.Type.Hat))
-		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
-		trinkets.append(ItemPool.fetch_random(Item.Type.Trinket))
+		weapons.append(fetch_enemy_item(Item.Type.Weapon))
+		hats.append(fetch_enemy_item(Item.Type.Hat))
+		trinkets.append(fetch_enemy_item(Item.Type.Trinket))
+		trinkets.append(fetch_enemy_item(Item.Type.Trinket))
 		
 		
 		for k in range(3):
@@ -510,7 +541,7 @@ func arrange_evil_team(zone: int) -> Array[Slave]:
 	for i in range(draw_count):
 		var enemy = deck.pop_back()
 		if enemy != null:
-			#enemy.hp = 1
+			enemy.hp = 1
 			#enemy.equip(ItemPool.fetch("ice_bomb"))
 			team.append(enemy)
 	if deck.is_empty():
@@ -523,7 +554,7 @@ func arrange_evil_team(zone: int) -> Array[Slave]:
 	
 	
 	if CurrentRun.is_battle_tutorial and team[0]:
-		team[0].equip(ItemPool.fetch_random())
+		team[0].equip(fetch_enemy_item())
 	return team
 
 # Throws random item out if at 24

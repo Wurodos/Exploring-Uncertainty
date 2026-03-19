@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3 uid="uid://uhi47gpd63u3"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_j563t"]
+[ext_resource type="Script" uid="uid://c22yp2nosnbum" path="res://scripts/items/trinkets/sold_money.gd" id="2_j563t"]
+[ext_resource type="Texture2D" uid="uid://b3c51lkp7hopy" path="res://images/items/money-stack.png" id="3_j563t"]
+
+[resource]
+script = ExtResource("2_j563t")
+turns = 2
+type = 2
+target = 2
+texture = ExtResource("3_j563t")
+craft_reqs = Dictionary[int, int]({
+4: 1
+})
+keywords = Array[String](["blasphemy"])
+u_name = &"heart_lock"
+name = "Сердечный Замок"
+desc = "НАЧАЛО БОЯ: ЩИТ 1 ХОД"
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

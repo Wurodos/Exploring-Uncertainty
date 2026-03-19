@@ -28,6 +28,9 @@ func apply(slave: Slave, type: Type, show_hp: bool = true):
 	$Trinket1.set_instance_shader_parameter("outline_color", Constants.level_colors[slave.trinket1.level])
 	$Trinket2.texture = slave.trinket2.texture
 	$Trinket2.set_instance_shader_parameter("outline_color", Constants.level_colors[slave.trinket2.level])
+	$Trinket3.texture = slave.trinket3.texture
+	$Trinket3.set_instance_shader_parameter("outline_color", Constants.level_colors[slave.trinket2.level])
+	
 	
 	match (type):
 		Type.Brigade:
@@ -70,11 +73,16 @@ func update_healing_cost(heals_used: int, value: int, heal_price: int) -> void:
 func _on_undress_pressed() -> void:
 	var old_items : Array[Item] = []
 	
-	old_items.append(held.equip(ItemPool.fetch("no_weapon")))
+	if held.weapon.extra_hp < held.hp:
+		old_items.append(held.equip(ItemPool.fetch("no_weapon")))
+	if held.trinket3.extra_hp < held.hp:
+		old_items.append(held.equip(ItemPool.fetch("no_trinket"), 3))
 	if held.hat.extra_hp < held.hp:
 		old_items.append(held.equip(ItemPool.fetch("no_hat")))
-	old_items.append(held.equip(ItemPool.fetch("no_trinket"), 1))
-	old_items.append(held.equip(ItemPool.fetch("no_trinket"), 2))
+	if held.trinket1.extra_hp < held.hp:
+		old_items.append(held.equip(ItemPool.fetch("no_trinket"), 1))
+	if held.trinket2.extra_hp < held.hp:
+		old_items.append(held.equip(ItemPool.fetch("no_trinket"), 2))
 	apply(held, type)
 	
 	for item: Item in old_items:

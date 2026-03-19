@@ -11,6 +11,7 @@ func apply(slave: Slave):
 	$Weapon.texture = slave.weapon.texture
 	$Trinket1.texture = slave.trinket1.texture
 	$Trinket2.texture = slave.trinket2.texture
+	$Trinket3.texture = slave.trinket3.texture
 	if slave.is_evil: _color = Color.RED
 	else: _color = Color.BLUE
 	held = slave

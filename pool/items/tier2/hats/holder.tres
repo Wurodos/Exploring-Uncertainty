@@ -1,0 +1,17 @@
+[gd_resource type="Resource" format=3 uid="uid://bwrryu1yfytl0"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_1jxc1"]
+[ext_resource type="Resource" uid="uid://lm6jyyixqr11" path="res://pool/items/tier1/hats/helmet.tres" id="2_mpbxf"]
+[ext_resource type="Resource" uid="uid://byame6vlwyxl5" path="res://pool/items/tier1/weapons/claw.tres" id="3_xuo0d"]
+[ext_resource type="Texture2D" uid="uid://dgsxfssutl5vj" path="res://images/items/holder.png" id="4_1jxc1"]
+[ext_resource type="Script" uid="uid://cptelxuyc0g6c" path="res://scripts/items/hats/holder.gd" id="4_xuo0d"]
+
+[resource]
+script = ExtResource("4_xuo0d")
+tier = 2
+type = 1
+extra_hp = 10
+texture = ExtResource("4_1jxc1")
+cost = 5
+craft_items = Array[ExtResource("1_1jxc1")]([ExtResource("2_mpbxf"), ExtResource("3_xuo0d")])
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

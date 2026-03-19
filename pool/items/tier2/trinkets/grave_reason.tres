@@ -1,0 +1,16 @@
+[gd_resource type="Resource" format=3 uid="uid://0hyyy72s153p"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_j3hsd"]
+[ext_resource type="Resource" uid="uid://cdx420j5ywkw0" path="res://pool/items/tier1/trinkets/disk.tres" id="2_j3hsd"]
+[ext_resource type="Resource" uid="uid://bpoex5ppxx44a" path="res://pool/items/tier1/trinkets/sun6.tres" id="3_th0yw"]
+[ext_resource type="Script" uid="uid://ptdyu2cynput" path="res://scripts/items/trinkets/grave_reason.gd" id="4_j3hsd"]
+[ext_resource type="Texture2D" uid="uid://d0ua28me1i6no" path="res://images/items/grave-reason.png" id="5_j3hsd"]
+
+[resource]
+script = ExtResource("4_j3hsd")
+tier = 2
+type = 2
+texture = ExtResource("5_j3hsd")
+craft_items = Array[ExtResource("1_j3hsd")]([ExtResource("2_j3hsd"), ExtResource("3_th0yw")])
+possible_enemy_item = false
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

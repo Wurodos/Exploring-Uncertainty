@@ -40,7 +40,7 @@ func _update() -> void:
 		for scrap : Item.Scrap in craftable.held.craft_reqs.keys():
 			if CurrentRun.scraps[scrap] < craftable.held.craft_reqs[scrap]:
 				craftable.get_node("Craft").disabled = true
-				break
+				continue
 		
 		var needed: Array[Item] = craftable.held.craft_items.duplicate()
 		for item : Item in CurrentRun.inventory:
@@ -49,7 +49,6 @@ func _update() -> void:
 				needed.pop_at(id)
 		if not needed.is_empty():
 			craftable.get_node("Craft").disabled = true
-			break
 
 
 func _on_close_pressed() -> void:

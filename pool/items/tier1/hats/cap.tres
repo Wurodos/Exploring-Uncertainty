@@ -1,0 +1,19 @@
+[gd_resource type="Resource" format=3 uid="uid://b2pmcckumf16i"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_ynblr"]
+[ext_resource type="Script" uid="uid://olmh10wlmym7" path="res://scripts/items/hats/cap.gd" id="2_5ckfx"]
+[ext_resource type="Texture2D" uid="uid://vwwayqbtde45" path="res://images/items/billed-cap.png" id="2_ik7e5"]
+
+[resource]
+script = ExtResource("2_5ckfx")
+exp_gain = 1
+type = 1
+extra_hp = 5
+texture = ExtResource("2_ik7e5")
+cost = 9
+craft_reqs = Dictionary[int, int]({
+0: 3,
+1: 1
+})
+possible_enemy_item = false
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

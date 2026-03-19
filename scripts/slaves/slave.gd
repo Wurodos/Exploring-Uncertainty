@@ -27,9 +27,11 @@ var weapon: Item
 var hat: Item
 var trinket1 : Item
 var trinket2 : Item
+var trinket3 : Item
 
 var is_evil : bool
 var is_alive : bool
+var allow_3_trinkets: bool = false
 
 signal item_equipped(item: Item)
 signal item_unequipped(item: Item)
@@ -82,6 +84,7 @@ func _init() -> void:
 	hat = ItemPool.fetch("no_hat")
 	trinket1 = ItemPool.fetch("no_trinket")
 	trinket2 = ItemPool.fetch("no_trinket")
+	trinket3 = ItemPool.fetch("no_trinket")
 
 func get_item(item_type: Item.Type, trinket_id: int = 1) -> Item:
 	match(item_type):
@@ -89,14 +92,15 @@ func get_item(item_type: Item.Type, trinket_id: int = 1) -> Item:
 		Item.Type.Hat: return hat
 		Item.Type.Trinket:
 			if trinket_id == 1: return trinket1
-			else: return trinket2
+			elif trinket_id == 2: return trinket2
+			elif trinket_id == 3: return trinket3
 	return weapon
 
 func get_extra_item() -> Item:
 	return null	
 
 func get_all_items() -> Array[Item]:
-	return [weapon, hat, trinket1, trinket2]
+	return [weapon, hat, trinket1, trinket2, trinket3]
 
 # base_cost = 5 + base_hp/2
 # + costs of items
@@ -121,9 +125,12 @@ func equip(item: Item, trinket_id: int = 1) -> Item:
 			if trinket_id == 1:
 				old_item = trinket1
 				trinket1 = item
-			else:
+			elif trinket_id == 2:
 				old_item = trinket2
 				trinket2 = item
+			elif trinket_id == 3:
+				old_item = trinket3
+				trinket3 = item
 				
 	old_item.on_unequip(self)
 	item.on_equip(self)

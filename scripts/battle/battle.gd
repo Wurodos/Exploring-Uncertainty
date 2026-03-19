@@ -35,6 +35,7 @@ var is_line : bool = false
 var is_marauder : bool = false
 var is_first_round : bool = true
 var new_wave_on_new_round: bool = false
+var is_prudence: bool = false
 
 var tutorial_progress: int = 0
 
@@ -64,6 +65,7 @@ func _ready() -> void:
 	SignalBus.reinforcement.connect(_on_reinforcement)
 	
 	SignalBus.slave_death.connect(_on_slave_death)
+	SignalBus.slave_undeath.connect(_on_slave_undeath)
 	SignalBus.slave_ran.connect(func(slave): _on_slave_death(slave, false))
 	
 	SignalBus.evil_won.connect(_on_evil_won)
@@ -187,7 +189,10 @@ func _on_new_turn() -> void:
 		for slave_node in evil_team.boys_nodes:
 			if speed_queue[current_slave_position] == slave_node.held:
 				slave_node.start_turn()
-				slave_node.execute_intention()
+				if slave_node.held.is_alive:
+					slave_node.execute_intention()
+				else:
+					SignalBus.new_turn.emit()
 				break
 	else:
 		current_slave_position += dead
@@ -195,6 +200,11 @@ func _on_new_turn() -> void:
 			if current_slaves.has(slave_node.held):
 				slave_node.start_turn()
 	
+
+func _on_slave_undeath(slave_node: SlaveNode) -> void:
+	for item : Item in slave_node.get_all_items():
+		if item.is_item():
+			loot_node.items.erase(item)
 
 func _on_slave_death(slave_node: SlaveNode, is_loot: bool = true) -> void:
 	if slave_node.held is Enemy:
@@ -207,6 +217,7 @@ func _on_slave_death(slave_node: SlaveNode, is_loot: bool = true) -> void:
 		current_slaves.erase(slave_node.held)
 	
 	if is_loot:
+		loot_node.grab_everything = is_prudence
 		for item : Item in slave_node.get_all_items():
 			if item.is_item():
 				loot_node.items.append(item)
@@ -252,6 +263,7 @@ func _on_mouse_dragged(pos: Vector2):
 func _on_mouse_released():
 	is_line = false
 	line2d.points = []
+	
 	if selected_victim:
 		if selected_victim.team.is_evil:
 			if CurrentRun.is_battle_tutorial and tutorial_progress == 4:
@@ -266,8 +278,12 @@ func _on_mouse_released():
 		if selected_sender != null:
 			get_queue_element(speed_queue.find(selected_sender.held)).toggle_select(false)
 		
+		
 		current_slaves.erase(selected_sender.held)
-		if current_slaves.is_empty():
+		var end_turn := current_slaves.is_empty()
+		
+		await selected_sender.turn_ended
+		if end_turn:
 			SignalBus.new_turn.emit()
 		else:
 			current_slave_position += 1
@@ -337,12 +353,7 @@ func _on_good_won() -> void:
 		slave.speed = slave.base_speed
 		for item : Item in slave.get_all_items():
 			item.on_end_battle(slave)
-			if item.is_item() and item.level < 5:
-				item.experience += 1
-				if item.experience == Constants.exp_required[item.level-1]:
-					slave.unequip(item)
-					item.on_level_up()
-					slave.equip(item)
+			item.gain_exp(slave)
 	
 	loot_node.visible = true
 	loot_node.start_marauder()

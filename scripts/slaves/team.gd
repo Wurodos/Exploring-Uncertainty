@@ -17,6 +17,7 @@ var boys_nodes: Array[SlaveNode] = []
 func _ready() -> void:
 	SignalBus.start_battle.connect(_on_start_battle)
 	SignalBus.slave_death.connect(_on_slave_death)
+	SignalBus.slave_undeath.connect(_on_slave_undeath)
 	SignalBus.slave_ran.connect(_on_slave_death)
 
 func _on_start_battle() -> void:
@@ -39,12 +40,16 @@ func _on_start_battle() -> void:
 		slave_parents[i].add_child(new_slave)
 		i += 1
 
-func cull_the_dead(all: bool = true) -> void:
-	for slave_node : SlaveNode in boys_nodes:
-		if not slave_node.held.is_alive:
-			CurrentRun.evil_boys.erase(slave_node.held)
-			slave_node.free()
-			if not all: break
+func cull_the_dead(all: bool = true, specific: SlaveNode = null) -> void:
+	if not specific:
+		for slave_node : SlaveNode in boys_nodes:
+			if not slave_node.held.is_alive:
+				CurrentRun.evil_boys.erase(slave_node.held)
+				slave_node.free()
+				if not all: break
+	else:
+		CurrentRun.evil_boys.erase(specific.held)
+		specific.free()
 	
 	boys_nodes = boys_nodes.filter(func(node): return is_instance_valid(node))\
 		 as Array[SlaveNode]
@@ -68,6 +73,10 @@ func add_slave(slave: Slave) -> void:
 			return
 
 func _on_slave_death(slave_node: SlaveNode) -> void:
-	boys.erase(slave_node.held)
-	CurrentRun.evil_boys.erase(slave_node.held)
+	if slave_node.team == self:
+		boys.erase(slave_node.held)
 	
+
+func _on_slave_undeath(slave_node: SlaveNode) -> void:
+	if slave_node.team == self:
+		boys.append(slave_node.held)

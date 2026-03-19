@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://el10i67oqeed"]
 
 [ext_resource type="Script" uid="uid://kwyej8epft" path="res://scripts/map/popup_message.gd" id="1_xcw57"]
-[ext_resource type="Texture2D" uid="uid://ch6hg4b6lngkw" path="res://images/backdrops/found_item.png" id="2_tmeoe"]
+[ext_resource type="Texture2D" uid="uid://w3ytklewie86" path="res://images/rooms/tile.png" id="2_xcw57"]
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="3_7h63o"]
 [ext_resource type="Script" uid="uid://dd2yytdivaq0j" path="res://scripts/common/label_localized.gd" id="4_jvyee"]
 
@@ -35,7 +35,7 @@ offset_right = 873.0
 offset_bottom = 498.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_tmeoe")
+texture = ExtResource("2_xcw57")
 
 [node name="Close" type="Button" parent="." unique_id=78982772]
 layout_mode = 0

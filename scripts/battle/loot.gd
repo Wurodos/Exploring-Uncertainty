@@ -8,6 +8,7 @@ var scraps : Array[Item.Scrap] = []
 var right_item: ItemDraggable
 var left_item: ItemDraggable
 var extra_item: ItemDraggable
+var grab_everything: bool = false
 
 var current_item: ItemDraggable
 
@@ -40,6 +41,9 @@ func start_marauder() -> void:
 func _present_choice() -> void:
 	ItemDraggable.selected = null
 	
+	right_item.visible = true
+	left_item.visible = true
+	
 	right_item.snap()
 	left_item.snap()
 	extra_item.snap()
@@ -62,11 +66,14 @@ func _present_choice() -> void:
 
 func _on_bag_mouse_entered() -> void:
 	if ItemDraggable.selected:
+		ItemDraggable.selected.visible = false
 		CurrentRun.put_item_in_inventory(ItemDraggable.selected.held)
 		if items.is_empty():
 			visible = false
 			SignalBus.show_end_battle_screen.emit(scraps)
-		else: _present_choice()
+		else:
+			if not grab_everything or (not right_item.visible and not left_item.visible):
+				_present_choice()
 
 
 var _hide_info = false

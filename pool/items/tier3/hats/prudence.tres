@@ -1,0 +1,20 @@
+[gd_resource type="Resource" format=3 uid="uid://drw7q1xxr35a2"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_x585e"]
+[ext_resource type="Resource" uid="uid://bwrryu1yfytl0" path="res://pool/items/tier2/hats/holder.tres" id="2_wrkji"]
+[ext_resource type="Resource" uid="uid://0hyyy72s153p" path="res://pool/items/tier2/trinkets/grave_reason.tres" id="3_mn2ch"]
+[ext_resource type="Script" uid="uid://cgx50gy5wj3f0" path="res://scripts/items/hats/prudence.gd" id="4_mn2ch"]
+[ext_resource type="Texture2D" uid="uid://bkodwsufpdrar" path="res://images/items/prudence.png" id="5_mn2ch"]
+
+[resource]
+script = ExtResource("4_mn2ch")
+tier = 3
+type = 1
+target = 1
+extra_hp = 20
+texture = ExtResource("5_mn2ch")
+cost = 17
+craft_items = Array[ExtResource("1_x585e")]([ExtResource("2_wrkji"), ExtResource("3_mn2ch")])
+keywords = Array[String](["vigilance"])
+possible_enemy_item = false
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

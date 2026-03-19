@@ -1,0 +1,18 @@
+[gd_resource type="Resource" format=3 uid="uid://bugwpswfvcfbu"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_qtgxm"]
+[ext_resource type="Resource" uid="uid://do1vbb2820r22" path="res://pool/items/tier1/hats/chef.tres" id="2_s6d70"]
+[ext_resource type="Resource" uid="uid://cwcqe6ew1ogxe" path="res://pool/items/tier1/weapons/crucifix.tres" id="3_qg5da"]
+[ext_resource type="Texture2D" uid="uid://bbysbh707ywq6" path="res://images/items/pope-crown.png" id="4_qtgxm"]
+[ext_resource type="Script" uid="uid://bawscaws6opcl" path="res://scripts/items/hats/pope.gd" id="4_s6d70"]
+
+[resource]
+script = ExtResource("4_s6d70")
+tier = 2
+type = 1
+extra_hp = 14
+extra_speed = 1
+texture = ExtResource("4_qtgxm")
+cost = 13
+craft_items = Array[ExtResource("1_qtgxm")]([ExtResource("2_s6d70"), ExtResource("3_qg5da")])
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

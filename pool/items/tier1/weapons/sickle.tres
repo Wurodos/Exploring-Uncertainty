@@ -1,0 +1,21 @@
+[gd_resource type="Resource" format=3 uid="uid://ma3vadbm6tok"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_vwq6x"]
+[ext_resource type="Script" uid="uid://72re0fyj3e2p" path="res://scripts/items/weapons/sickle.gd" id="2_m86qe"]
+[ext_resource type="Texture2D" uid="uid://ckecrnnpl2nct" path="res://images/items/sickle.png" id="3_m86qe"]
+
+[resource]
+script = ExtResource("2_m86qe")
+harm = 2
+multiplier = 2
+target = 1
+texture = ExtResource("3_m86qe")
+cost = 4
+craft_reqs = Dictionary[int, int]({
+0: 2,
+3: 2
+})
+u_name = &"whistle"
+name = "Свисток"
+desc = "3 ВРЕДА"
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

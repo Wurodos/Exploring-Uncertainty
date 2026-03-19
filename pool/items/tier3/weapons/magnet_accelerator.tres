@@ -9,10 +9,12 @@
 
 [resource]
 script = ExtResource("2_e1vvl")
-harm = 20
+harm = 15
 stuns = 1
 tier = 3
 target = 1
 texture = ExtResource("2_kbisp")
 craft_items = Array[ExtResource("1_4048x")]([ExtResource("2_gugvr"), ExtResource("3_5crpd"), ExtResource("4_x4u82")])
+keywords = Array[String](["stun"])
+is_melee = false
 metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"
