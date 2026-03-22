@@ -131,50 +131,6 @@ font_size = 40
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_4thmk"]
-font = ExtResource("5_ttqg8")
-font_size = 32
-font_color = Color(1, 0, 0, 1)
-outline_size = 8
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="Animation" id="Animation_6flwy"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CritLabel:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1e-05, 1e-05)]
-}
-
-[sub_resource type="Animation" id="Animation_s5n5c"]
-resource_name = "crit"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CritLabel:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1e-05, 1e-05), Vector2(1, 1), Vector2(1, 1), Vector2(0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_8htp2"]
-_data = {
-&"RESET": SubResource("Animation_6flwy"),
-&"crit": SubResource("Animation_s5n5c")
-}
-
 [sub_resource type="Animation" id="Animation_ajk8k"]
 length = 0.001
 tracks/0/type = "value"
@@ -310,13 +266,12 @@ _data = {
 &"powerup": SubResource("Animation_r4abs")
 }
 
-[node name="Blob" type="Node2D" unique_id=1822862495 node_paths=PackedStringArray("hit_animation", "heal_animation", "powerup_animation", "crit_animation")]
+[node name="Blob" type="Node2D" unique_id=1822862495 node_paths=PackedStringArray("hit_animation", "heal_animation", "powerup_animation")]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_kr451")
 hit_animation = NodePath("AnimationSprites/Hit/HitAnimation")
 heal_animation = NodePath("AnimationSprites/Heal/HealAnimation")
 powerup_animation = NodePath("AnimationSprites/Powerup/PowerupAnimation")
-crit_animation = NodePath("CritLabel/CritAnimation")
 
 [node name="BounceAnimation" type="AnimationPlayer" parent="." unique_id=409562361]
 libraries/ = SubResource("AnimationLibrary_r6t30")
@@ -629,28 +584,6 @@ position = Vector2(70.6667, -23.3333)
 rotation = 1.16124
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("11_5t34c")
-
-[node name="CritLabel" type="Label" parent="." unique_id=162790623]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -42.0
-offset_top = -19.0
-offset_right = 42.0
-offset_bottom = 19.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1e-05, 1e-05)
-pivot_offset = Vector2(41, 18.333)
-size_flags_horizontal = 4
-text = "КРИТ!"
-label_settings = SubResource("LabelSettings_4thmk")
-
-[node name="CritAnimation" type="AnimationPlayer" parent="CritLabel" unique_id=236571716]
-root_node = NodePath("../..")
-libraries/ = SubResource("AnimationLibrary_8htp2")
 
 [node name="AnimationSprites" type="Node2D" parent="." unique_id=220614761]
 

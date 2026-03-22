@@ -26,7 +26,10 @@ func on_attacked(attacker: SlaveNode) -> void:
 	super.on_attacked(attacker)
 	if dont_change_target: return
 	if intention:
-		if intention.is_support: decide_weapon_intention()
+		if owner.get_node("Intention").visible and (intention.is_support or intention.targets.size() == 1): 
+			owner.push_label_popup(tr("narrow_mind"))
+		if intention.is_support: 
+			decide_weapon_intention()
 		if intention.targets.size() == 1:
 			intention.targets = [Battle.instance.good_team.boys_nodes.find(attacker)]
 		owner.update_intention()
@@ -68,6 +71,7 @@ func decide_weapon_intention() -> void:
 	else:
 		intention.type = Intention.Type.DamageSingular
 		intention.is_support = false
+		intention.is_melee = true
 		intention.amount = Action.calculate_damage(owner, victim, burning_road_dmg)
 		intention.effect = func(v: SlaveNode):
 			Action.deal_damage(owner, v, burning_road_dmg)

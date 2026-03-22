@@ -5,7 +5,7 @@ class_name SlaveNode
 @export var hit_animation: AnimationPlayer
 @export var heal_animation: AnimationPlayer
 @export var powerup_animation: AnimationPlayer
-@export var crit_animation: AnimationPlayer
+@export var label_animation: AnimationPlayer
 
 signal received_damage(source: SlaveNode, dmg: int)
 signal hp_changed
@@ -56,8 +56,6 @@ var viable_for_vigilance: bool = false
 var item_parent : Node2D
 
 func _ready() -> void:
-	$CritLabel.text = tr("crit")
-	
 	SignalBus.mouse_up.connect(_on_mouse_up)
 	SignalBus.mouse_right_down.connect(_on_mouse_right_down)
 	if held is Enemy:
@@ -347,7 +345,7 @@ func execute_intention():
 	var held_enemy : Enemy = held
 	var hide_intention := true
 	
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.3).timeout
 	
 	if buffs.has(Action.STUN):
 		pass
@@ -358,10 +356,22 @@ func execute_intention():
 	elif not held_enemy.intention.is_support:
 		if not tags.has(Action.TAG_VIGILANCE_KEEP_ATTACK):
 			viable_for_vigilance = false
+		
+		var old_pos: Vector2 = global_position
+		
+		if held_enemy.intention.is_melee:
+			var victim: SlaveNode = Battle.instance.good_team.boys_nodes[held_enemy.intention.targets[0]]
+			var tween = move_to(victim.get_node("Parts/Front").global_position)
+			await tween.finished
+		
 		for target_id in held_enemy.intention.targets:
 			var victim: SlaveNode = Battle.instance.good_team.boys_nodes[target_id]
 			held_enemy.intention.effect.call(victim)
 			attacked.emit(victim)
+		
+		if held_enemy.intention.is_melee:
+			var tween = move_to(old_pos)
+			await tween.finished
 	else:
 		match(held_enemy.intention.type):
 			Enemy.Intention.Type.Run:
@@ -386,7 +396,7 @@ func execute_intention():
 					var victim: SlaveNode = Battle.instance.evil_team.boys_nodes[target_id]
 					held_enemy.intention.effect.call(victim)
 	
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.3).timeout
 	$Intention.visible = not hide_intention
 	_on_end_turn()
 	SignalBus.new_turn.emit()
@@ -405,6 +415,14 @@ func add_buff(buff_name: String, turns: int):
 	if visual:
 		visual.visible = true
 		add_stat(buff_name, Gallery.icon_status[buff_name], buffs[buff_name])
+
+const label_popup = preload("res://prefabs/slaves/label_popup.tscn")
+
+func push_label_popup(text: String) -> void:
+	var popup = label_popup.instantiate()
+	popup.apply(text)
+	add_child(popup)
+
 
 func _on_clickable_area_mouse_entered() -> void:
 	SignalBus.slave_mouse_entered.emit(self)

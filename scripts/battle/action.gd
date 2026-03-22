@@ -51,11 +51,14 @@ func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, dont_proc: bool
 	
 	if not is_crit and victim.vigilance:
 		roll = randi_range(0,1)
-		if roll == 1: total_dmg = 0
+		if roll == 1:
+			victim.push_label_popup(tr("miss")) 
+			total_dmg = 0
 	victim.vigilance = false
 	
 	if is_crit:
 		total_dmg *= crit_multiplier
+		victim.push_label_popup(tr("crit"))
 		if victim.buffs.has(SHIELD): 
 			if victim.tags.has(TAG_BETTER_SHIELD):
 				total_dmg = total_dmg * 5 / 2
@@ -77,11 +80,9 @@ func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, dont_proc: bool
 			victim.set_static(-half)
 		
 	
-	
 	if not dont_proc:
 		victim.received_damage.emit(sender, total_dmg)
 	
-	if is_crit: victim.crit_animation.play("crit")
 	victim.hit_animation.play("hit")
 	victim.viable_for_vigilance = false
 	#

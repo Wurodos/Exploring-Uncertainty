@@ -12,6 +12,7 @@ class Intention:
 	var targets: Array[int] = []
 	var effect: Callable
 	var is_support: bool = false
+	var is_melee: bool = true
 	var timer: int  = 0
 	
 	@warning_ignore("shadowed_variable")
@@ -74,6 +75,7 @@ func _intention_run() -> void:
 func _intention_weapon(target: int, victim: SlaveNode) -> void:
 	intention = owner.held.weapon.get_intention(owner)
 	intention.amount = owner.held.weapon.get_displayed_harm(owner, victim)
+	intention.is_melee = owner.held.weapon.is_melee
 	if intention.targets.is_empty():
 		intention.targets = [target]
 
