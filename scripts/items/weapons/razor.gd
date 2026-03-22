@@ -10,7 +10,7 @@ func localize():
 func use_item(sender: SlaveNode, victim: SlaveNode):
 	super.use_item(sender, victim)
 	Action.deal_damage(sender, victim, harm)
-	sender.set_power(+1)
+	sender.set_power(+power)
 
 func on_level_up():
 	super.on_level_up()

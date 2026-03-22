@@ -26,8 +26,9 @@ func _on_slave_info(slave: Enemy):
 	var i = slave.info_count
 	var actual_entries = slave.info_count
 	for item : Item in slave.get_all_items():
+		if i >= $Entries.get_child_count(): break
+		
 		var entry: ItemEntry = $Entries.get_child(i)
-		if not entry: continue
 		entry.item_name.text = item.name
 		entry.item_desc.text = item.desc
 		

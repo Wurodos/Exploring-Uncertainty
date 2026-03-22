@@ -105,13 +105,13 @@ func set_max_hp(new_val: int, is_delta: bool = true):
 	if is_delta: held.maxhp += new_val
 	else: held.maxhp = new_val
 	
-	$HPBar.value = (held.hp/float(held.maxhp)*100)
+	%HPBar.value = (held.hp/float(held.maxhp)*100)
 
 func set_hp(new_val: int, is_delta: bool = true):
 	if is_delta: held.hp += new_val
 	else: held.hp = new_val
 	
-	$HPBar.value = (held.hp/float(held.maxhp)*100)
+	%HPBar.value = (held.hp/float(held.maxhp)*100)
 	
 	# Death
 	if held.hp <= 0 and held.is_alive:
@@ -121,7 +121,7 @@ func set_hp(new_val: int, is_delta: bool = true):
 func death(undeath: bool = false) -> void:
 	held.is_alive = undeath
 	sprite.texture = Gallery.img_dead_slave
-	$HPBar.visible = undeath
+	%HPBar.visible = undeath
 	item_parent.visible = undeath
 	$Intention.visible = undeath
 	arrow.visible = undeath
@@ -174,6 +174,15 @@ func set_static(new_val: int, is_delta: bool = true):
 func apply(slave: Slave, is_evil: bool = false) -> void:
 	held = slave
 	visible = true
+	if held is Reptile:
+		%HPBar.visible = false
+		%Stats.visible = false
+	
+	if held.unique_visual and $Parts/Visual.visible:
+		$Parts/Visual.visible = false
+		$Parts.add_child(held.unique_visual.instantiate())
+		return
+	
 	match(held.sprite_size):
 		Slave.SpriteSize.Normal:
 			$Parts.scale = Vector2(1, 1)
@@ -240,6 +249,7 @@ func add_stat(stat_name: String, icon: Texture2D, value: int):
 		
 
 func start_battle() -> void:
+	held.on_start_battle(self)
 	if team.is_evil:
 		var enemy: Enemy = held
 		enemy.update_stats(self)
@@ -277,10 +287,10 @@ func attack(victim: SlaveNode):
 		Item.Target.AllTeam: 
 			for slave in Battle.instance.evil_team.boys_nodes:
 				held.weapon.use_item(self, slave)
-				if victim:
-					if victim.held.is_alive:
-						(victim.held as Enemy).on_attacked(self)
-					attacked.emit(victim)
+				if slave:
+					if slave.held.is_alive:
+						(slave.held as Enemy).on_attacked(self)
+					attacked.emit(slave)
 	if held.weapon.is_melee:
 		var tween = move_to(old_pos)
 		await tween.finished
@@ -328,14 +338,23 @@ func remove_buff(buff_name: String):
 	var visual : Node2D = $Buffs.find_child(buff_name)
 	if visual: visual.visible = false
 	
+	if buffs.has(buff_name) and Gallery.icon_status.has(buff_name):
+		add_stat(buff_name, Gallery.icon_status[buff_name], 0)
 	buffs.erase(buff_name)
+	
 
 func execute_intention():
 	var held_enemy : Enemy = held
+	var hide_intention := true
 	
 	await get_tree().create_timer(1).timeout
+	
 	if buffs.has(Action.STUN):
 		pass
+	elif held_enemy.intention.timer > 0:
+		held_enemy.intention.timer -= 1
+		update_intention()
+		hide_intention = false
 	elif not held_enemy.intention.is_support:
 		if not tags.has(Action.TAG_VIGILANCE_KEEP_ATTACK):
 			viable_for_vigilance = false
@@ -368,7 +387,7 @@ func execute_intention():
 					held_enemy.intention.effect.call(victim)
 	
 	await get_tree().create_timer(1).timeout
-	$Intention.visible = false
+	$Intention.visible = not hide_intention
 	_on_end_turn()
 	SignalBus.new_turn.emit()
 
@@ -420,11 +439,11 @@ func _on_end_turn() -> void:
 # only if evil
 func _decide_intentions() -> void:
 	if not held.is_alive: return
-	
-	$Intention.visible = true
-	var held_enemy : Enemy = held
-	held_enemy.decide_intention()
-	update_intention()
+	if not $Intention.visible:
+		$Intention.visible = true
+		var held_enemy : Enemy = held
+		held_enemy.decide_intention()
+		update_intention()
 	
 
 func update_intention() -> void:
@@ -433,6 +452,12 @@ func update_intention() -> void:
 	
 	if total <= 0: $Intention/Label.text = ""
 	else: $Intention/Label.text = str(total)
+
+	if held_enemy.intention.timer > 0:
+		$Timer.visible = true
+		$Timer/Label.text = str(held_enemy.intention.timer)
+	else:
+		$Timer.visible = false
 	
 	var icon: Texture2D 
 	

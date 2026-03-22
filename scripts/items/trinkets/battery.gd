@@ -12,4 +12,4 @@ func on_start_battle(owner: SlaveNode):
 
 func on_level_up():
 	super.on_level_up()
-	static_stat += level
+	static_stat += 5

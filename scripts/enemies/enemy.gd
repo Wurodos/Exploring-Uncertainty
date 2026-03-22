@@ -12,6 +12,7 @@ class Intention:
 	var targets: Array[int] = []
 	var effect: Callable
 	var is_support: bool = false
+	var timer: int  = 0
 	
 	@warning_ignore("shadowed_variable")
 	func _init(type: Type, amount: int = -1) -> void:

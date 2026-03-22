@@ -88,6 +88,13 @@ signal hide_item_info
 # Room encounters
 # ====================
 
+# tips
+
+signal check_city(city: Room)
+signal check_comms(comms: Room)
+signal check_elevator(elevator: Room)
+
+
 # for triggers
 signal entered_room(room: Room)
 

@@ -51,7 +51,8 @@ func _on_craft_pressed() -> void:
 		if removed_item.level < min_level: min_level = removed_item.level
 	
 	var new_item = ItemPool.fetch(held.u_name)
-	for i in range(1,min_level):
-		new_item.on_level_up()
+	if not held.craft_items.is_empty():
+		for i in range(1,min_level):
+			new_item.on_level_up()
 	CurrentRun.put_item_in_inventory(new_item)
 	crafted.emit()

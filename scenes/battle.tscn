@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://dyb2np6bqygrc" path="res://images/shapes/rope.png" id="21_saiin"]
 [ext_resource type="Texture2D" uid="uid://bei3mmvex0vl3" path="res://images/icons/no_loot.png" id="24_bi5l8"]
 [ext_resource type="Script" uid="uid://bfsf7pluc6nmc" path="res://scripts/minor/no_loot.gd" id="24_jt4d8"]
+[ext_resource type="Shader" uid="uid://b0g6g6yga80n3" path="res://shaders/dark.gdshader" id="26_kl6ie"]
 
 [sub_resource type="Animation" id="Animation_dd63g"]
 length = 0.001
@@ -63,32 +64,6 @@ _data = {
 &"RESET": SubResource("Animation_dd63g"),
 &"swing": SubResource("Animation_saiin")
 }
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpir7"]
-bg_color = Color(0.301961, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6vh42"]
-bg_color = Color(1, 0, 0, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="LabelSettings" id="LabelSettings_4k1nj"]
-font = ExtResource("6_6vh42")
-font_size = 18
-outline_size = 6
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_f4pi3"]
-font = ExtResource("6_6vh42")
-font_size = 32
-outline_size = 6
-outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_22uqi"]
 length = 0.001
@@ -282,6 +257,9 @@ _data = {
 &"win": SubResource("Animation_66ngm")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1m01a"]
+shader = ExtResource("26_kl6ie")
+
 [sub_resource type="LabelSettings" id="LabelSettings_fpf3k"]
 font = ExtResource("6_6vh42")
 font_size = 36
@@ -331,6 +309,32 @@ font = ExtResource("6_6vh42")
 font_size = 14
 font_color = Color(1, 1, 0.3254902, 1)
 outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpir7"]
+bg_color = Color(0.301961, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6vh42"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_4k1nj"]
+font = ExtResource("6_6vh42")
+font_size = 18
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_f4pi3"]
+font = ExtResource("6_6vh42")
+font_size = 32
+outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Battle" type="Node2D" unique_id=1228727829]
@@ -417,7 +421,7 @@ autoplay = &"swing"
 
 [node name="GoodTeam" type="Node2D" parent="World" unique_id=2065611946]
 y_sort_enabled = true
-position = Vector2(39.999992, 64)
+position = Vector2(0, 64)
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_dn72j")
 
@@ -480,185 +484,6 @@ offset_right = 476.0
 offset_bottom = -198.0
 theme_override_constants/separation = 16
 alignment = 1
-
-[node name="SlaveInfo" type="Control" parent="UI" unique_id=1674373850]
-visible = false
-z_index = 5
-anchors_preset = 0
-offset_left = 81.0
-offset_top = -300.0
-offset_right = 121.0
-offset_bottom = -260.0
-script = ExtResource("4_a12nh")
-
-[node name="BGOutline" type="ColorRect" parent="UI/SlaveInfo" unique_id=650599348]
-layout_mode = 0
-offset_left = -26.0
-offset_top = -9.0
-offset_right = 474.0
-offset_bottom = 615.0
-color = Color(0.57205, 0.391678, 0.051943, 1)
-
-[node name="BG" type="ColorRect" parent="UI/SlaveInfo/BGOutline" unique_id=524814382]
-layout_mode = 0
-offset_left = 26.0
-offset_top = 9.0
-offset_right = 491.0
-offset_bottom = 611.0
-color = Color(0.974868, 0.699813, 0.238424, 1)
-
-[node name="Entries" type="VBoxContainer" parent="UI/SlaveInfo" unique_id=570936598]
-layout_mode = 0
-offset_left = 11.0
-offset_top = 99.0
-offset_right = 450.0
-offset_bottom = 692.0
-
-[node name="ItemEntry" parent="UI/SlaveInfo/Entries" unique_id=33801804 instance=ExtResource("5_lpir7")]
-layout_mode = 2
-
-[node name="ItemEntry2" parent="UI/SlaveInfo/Entries" unique_id=1241665346 instance=ExtResource("5_lpir7")]
-layout_mode = 2
-
-[node name="ItemEntry3" parent="UI/SlaveInfo/Entries" unique_id=1221226073 instance=ExtResource("5_lpir7")]
-layout_mode = 2
-
-[node name="ItemEntry4" parent="UI/SlaveInfo/Entries" unique_id=302634574 instance=ExtResource("5_lpir7")]
-layout_mode = 2
-
-[node name="HPBar" type="ProgressBar" parent="UI/SlaveInfo" unique_id=1140020989]
-layout_mode = 0
-offset_left = 117.0
-offset_top = 38.0
-offset_right = 350.0
-offset_bottom = 63.0
-theme_override_styles/background = SubResource("StyleBoxFlat_lpir7")
-theme_override_styles/fill = SubResource("StyleBoxFlat_6vh42")
-value = 100.0
-show_percentage = false
-
-[node name="Label" type="Label" parent="UI/SlaveInfo/HPBar" unique_id=807575294]
-layout_mode = 0
-offset_top = -12.0
-offset_right = 232.0
-offset_bottom = 35.0
-label_settings = SubResource("LabelSettings_4k1nj")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Buffs" type="VBoxContainer" parent="UI/SlaveInfo" unique_id=1784042431]
-visible = false
-layout_mode = 0
-offset_left = 9.0
-offset_top = 6.0
-offset_right = 110.0
-offset_bottom = 91.0
-
-[node name="BuffEntry" type="ColorRect" parent="UI/SlaveInfo/Buffs" unique_id=1019137586]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-color = Color(0.410615, 0.178771, 0.0531023, 1)
-
-[node name="Icon" type="TextureRect" parent="UI/SlaveInfo/Buffs/BuffEntry" unique_id=188479514]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 3.0
-offset_right = 24.0
-offset_bottom = 23.0
-texture = ExtResource("7_4k1nj")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="UI/SlaveInfo/Buffs/BuffEntry" unique_id=224047135]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 3.0
-offset_right = 154.0
-offset_bottom = 41.0
-scale = Vector2(0.5, 0.5)
-text = "3"
-label_settings = SubResource("LabelSettings_f4pi3")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="EnemyInfo" type="Control" parent="UI" unique_id=699097615]
-visible = false
-z_index = 5
-anchors_preset = 0
-offset_left = -469.0
-offset_top = -300.0
-offset_right = -429.0
-offset_bottom = -260.0
-script = ExtResource("9_fpf3k")
-
-[node name="BGOutline" type="ColorRect" parent="UI/EnemyInfo" unique_id=402934754]
-layout_mode = 0
-offset_left = -26.0
-offset_top = -9.0
-offset_right = 474.0
-offset_bottom = 615.0
-color = Color(0.57205, 0.391678, 0.051943, 1)
-
-[node name="BG" type="ColorRect" parent="UI/EnemyInfo/BGOutline" unique_id=2002012160]
-layout_mode = 0
-offset_left = 26.0
-offset_top = 9.0
-offset_right = 491.0
-offset_bottom = 611.0
-color = Color(0.974868, 0.699813, 0.238424, 1)
-
-[node name="Entries" type="VBoxContainer" parent="UI/EnemyInfo" unique_id=1654968438]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 5.762
-anchor_right = 5.762
-offset_left = -219.48001
-offset_top = 93.0
-offset_right = 219.51999
-offset_bottom = 1081.0
-grow_vertical = 2
-scale = Vector2(0.6, 0.6)
-pivot_offset = Vector2(226, -4)
-
-[node name="ItemEntry" parent="UI/EnemyInfo/Entries" unique_id=438051792 instance=ExtResource("5_lpir7")]
-layout_mode = 2
-
-[node name="ItemEntry2" parent="UI/EnemyInfo/Entries" unique_id=856029881 instance=ExtResource("5_lpir7")]
-layout_mode = 2
-
-[node name="ItemEntry3" parent="UI/EnemyInfo/Entries" unique_id=985493346 instance=ExtResource("5_lpir7")]
-layout_mode = 2
-
-[node name="ItemEntry4" parent="UI/EnemyInfo/Entries" unique_id=1680458529 instance=ExtResource("5_lpir7")]
-layout_mode = 2
-
-[node name="ItemEntry5" parent="UI/EnemyInfo/Entries" unique_id=1515740599 instance=ExtResource("5_lpir7")]
-layout_mode = 2
-
-[node name="ItemEntry6" parent="UI/EnemyInfo/Entries" unique_id=149829739 instance=ExtResource("5_lpir7")]
-layout_mode = 2
-
-[node name="ItemEntry7" parent="UI/EnemyInfo/Entries" unique_id=1673928543 instance=ExtResource("5_lpir7")]
-layout_mode = 2
-
-[node name="HPBar" type="ProgressBar" parent="UI/EnemyInfo" unique_id=1797462277]
-layout_mode = 0
-offset_left = 117.0
-offset_top = 38.0
-offset_right = 350.0
-offset_bottom = 63.0
-theme_override_styles/background = SubResource("StyleBoxFlat_lpir7")
-theme_override_styles/fill = SubResource("StyleBoxFlat_6vh42")
-value = 100.0
-show_percentage = false
-
-[node name="Label" type="Label" parent="UI/EnemyInfo/HPBar" unique_id=1769251116]
-layout_mode = 0
-offset_top = -12.0
-offset_right = 232.0
-offset_bottom = 35.0
-label_settings = SubResource("LabelSettings_4k1nj")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Loot" type="Control" parent="UI" unique_id=713131853]
 visible = false
@@ -1043,6 +868,18 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="Darkness" type="ColorRect" parent="CLayer/GUI" unique_id=1353597641]
+visible = false
+material = SubResource("ShaderMaterial_1m01a")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
 [node name="Wave" type="Control" parent="CLayer/GUI" unique_id=1812729134]
 layout_mode = 1
 anchors_preset = 5
@@ -1138,6 +975,183 @@ autowrap_mode = 3
 script = ExtResource("14_ekamt")
 string_id = &"no_loot_reminder"
 metadata/_custom_type_script = "uid://dd2yytdivaq0j"
+
+[node name="SlaveInfo" type="Control" parent="CLayer/GUI" unique_id=1674373850]
+z_index = 5
+anchors_preset = 0
+offset_left = 623.0
+offset_top = 16.0
+offset_right = 663.0
+offset_bottom = 56.0
+script = ExtResource("4_a12nh")
+
+[node name="BGOutline" type="ColorRect" parent="CLayer/GUI/SlaveInfo" unique_id=650599348]
+layout_mode = 0
+offset_left = -26.0
+offset_top = -9.0
+offset_right = 474.0
+offset_bottom = 615.0
+color = Color(0.57205, 0.391678, 0.051943, 1)
+
+[node name="BG" type="ColorRect" parent="CLayer/GUI/SlaveInfo/BGOutline" unique_id=524814382]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 9.0
+offset_right = 491.0
+offset_bottom = 611.0
+color = Color(0.974868, 0.699813, 0.238424, 1)
+
+[node name="Entries" type="VBoxContainer" parent="CLayer/GUI/SlaveInfo" unique_id=570936598]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 99.0
+offset_right = 450.0
+offset_bottom = 692.0
+
+[node name="ItemEntry" parent="CLayer/GUI/SlaveInfo/Entries" unique_id=33801804 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry2" parent="CLayer/GUI/SlaveInfo/Entries" unique_id=1241665346 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry3" parent="CLayer/GUI/SlaveInfo/Entries" unique_id=1221226073 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry4" parent="CLayer/GUI/SlaveInfo/Entries" unique_id=302634574 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="HPBar" type="ProgressBar" parent="CLayer/GUI/SlaveInfo" unique_id=1140020989]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 38.0
+offset_right = 350.0
+offset_bottom = 63.0
+theme_override_styles/background = SubResource("StyleBoxFlat_lpir7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6vh42")
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CLayer/GUI/SlaveInfo/HPBar" unique_id=807575294]
+layout_mode = 0
+offset_top = -12.0
+offset_right = 232.0
+offset_bottom = 35.0
+label_settings = SubResource("LabelSettings_4k1nj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buffs" type="VBoxContainer" parent="CLayer/GUI/SlaveInfo" unique_id=1784042431]
+visible = false
+layout_mode = 0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 110.0
+offset_bottom = 91.0
+
+[node name="BuffEntry" type="ColorRect" parent="CLayer/GUI/SlaveInfo/Buffs" unique_id=1019137586]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+color = Color(0.410615, 0.178771, 0.0531023, 1)
+
+[node name="Icon" type="TextureRect" parent="CLayer/GUI/SlaveInfo/Buffs/BuffEntry" unique_id=188479514]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 24.0
+offset_bottom = 23.0
+texture = ExtResource("7_4k1nj")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CLayer/GUI/SlaveInfo/Buffs/BuffEntry" unique_id=224047135]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 3.0
+offset_right = 154.0
+offset_bottom = 41.0
+scale = Vector2(0.5, 0.5)
+text = "3"
+label_settings = SubResource("LabelSettings_f4pi3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemyInfo" type="Control" parent="CLayer/GUI" unique_id=699097615]
+z_index = 5
+anchors_preset = 0
+offset_left = 73.0
+offset_top = 16.0
+offset_right = 113.0
+offset_bottom = 56.0
+script = ExtResource("9_fpf3k")
+
+[node name="BGOutline" type="ColorRect" parent="CLayer/GUI/EnemyInfo" unique_id=402934754]
+layout_mode = 0
+offset_left = -26.0
+offset_top = -9.0
+offset_right = 474.0
+offset_bottom = 615.0
+color = Color(0.57205, 0.391678, 0.051943, 1)
+
+[node name="BG" type="ColorRect" parent="CLayer/GUI/EnemyInfo/BGOutline" unique_id=2002012160]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 9.0
+offset_right = 491.0
+offset_bottom = 611.0
+color = Color(0.974868, 0.699813, 0.238424, 1)
+
+[node name="Entries" type="VBoxContainer" parent="CLayer/GUI/EnemyInfo" unique_id=1654968438]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 5.762
+anchor_right = 5.762
+offset_left = -219.48001
+offset_top = 93.0
+offset_right = 219.51999
+offset_bottom = 1081.0
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset = Vector2(226, -4)
+
+[node name="ItemEntry" parent="CLayer/GUI/EnemyInfo/Entries" unique_id=438051792 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry2" parent="CLayer/GUI/EnemyInfo/Entries" unique_id=856029881 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry3" parent="CLayer/GUI/EnemyInfo/Entries" unique_id=985493346 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry4" parent="CLayer/GUI/EnemyInfo/Entries" unique_id=1680458529 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry5" parent="CLayer/GUI/EnemyInfo/Entries" unique_id=1515740599 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry6" parent="CLayer/GUI/EnemyInfo/Entries" unique_id=149829739 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry7" parent="CLayer/GUI/EnemyInfo/Entries" unique_id=1673928543 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="HPBar" type="ProgressBar" parent="CLayer/GUI/EnemyInfo" unique_id=1797462277]
+layout_mode = 0
+offset_left = 117.0
+offset_top = 38.0
+offset_right = 350.0
+offset_bottom = 63.0
+theme_override_styles/background = SubResource("StyleBoxFlat_lpir7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6vh42")
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CLayer/GUI/EnemyInfo/HPBar" unique_id=1769251116]
+layout_mode = 0
+offset_top = -12.0
+offset_right = 232.0
+offset_bottom = 35.0
+label_settings = SubResource("LabelSettings_4k1nj")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="mouse_entered" from="UI/Loot/Bag" to="UI/Loot" method="_on_bag_mouse_entered"]
 [connection signal="pressed" from="UI/Debug/Newturn" to="." method="_on_newturn_pressed"]

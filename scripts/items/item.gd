@@ -94,8 +94,16 @@ func gain_exp(slave: Slave = null) -> void:
 func level_up(slave: Slave = null) -> void:
 	if slave: slave.unequip(self)
 	on_level_up()
-	if slave: slave.equip(self)
-
+	if slave: 
+		if not slave.trinket1.is_item():
+			slave.equip(self, 1)
+		elif not slave.trinket2.is_item():
+			slave.equip(self, 2)
+		elif slave.allow_3_trinkets:
+			slave.equip(self, 3)
+		else:
+			slave.equip(self)
+			
 func is_item() -> bool:
 	return u_name != "no_weapon" and u_name != "no_hat"\
 		and u_name != "no_trinket"
@@ -134,6 +142,7 @@ func on_unequip(owner: Slave):
 func on_level_up():
 	experience = 0
 	level += 1
+	cost += 3
 	localize.call_deferred()
 
 func on_start_battle(owner: SlaveNode):

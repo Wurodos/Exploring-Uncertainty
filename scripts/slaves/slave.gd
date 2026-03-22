@@ -15,6 +15,7 @@ enum SpriteSize {
 @export var base_cost: int = 0
 @export var sprite_size: SpriteSize
 @export var texture: Texture2D
+@export var unique_visual: PackedScene = null
 
 var hp : int
 var maxhp : int
@@ -146,6 +147,9 @@ func unequip(item: Item) -> void:
 		1: equip(ItemPool.fetch("no_hat"))
 		2: equip(ItemPool.fetch("no_trinket"), 1)
 		3: equip(ItemPool.fetch("no_trinket"), 2)
+
+func on_start_battle(_node: SlaveNode) -> void:
+	pass
 
 func debug() -> void:
 	print("-----")

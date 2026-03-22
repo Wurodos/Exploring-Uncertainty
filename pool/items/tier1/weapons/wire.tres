@@ -10,3 +10,7 @@ harm = 6
 harm_per_static = 1
 texture = ExtResource("3_2h0aj")
 cost = 2
+craft_reqs = Dictionary[int, int]({
+2: 2,
+3: 2
+})

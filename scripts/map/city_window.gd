@@ -17,6 +17,7 @@ func _ready() -> void:
 	$Recipies.visible = false
 	
 	SignalBus.enter_city.connect(_on_enter_city)
+	SignalBus.check_city.connect(_on_check_city)
 	SignalBus.city_heal.connect(_on_heal)
 	SignalBus.show_item_info.connect(_on_show_item_info)
 	SignalBus.hide_item_info.connect(_on_hide_item_info)
@@ -92,8 +93,35 @@ func _on_heal() -> void:
 	
 	_update_items()
 
-func _on_enter_city(city: Room) -> void:
+func _on_check_city(city: Room) -> void:
+	CurrentRun.state = Game.State.Window
+	visible = true
+	current_city = city
 	
+	$InventoryGrid.visible = false
+	$Slaves.visible = false
+	
+	while $Shop.get_child_count() > 0:
+		$Shop.get_child(0).free()
+	
+	while $Recipies.get_child_count() > 0:
+		$Recipies.get_child(0).free()
+	
+	for item in city.items:
+		var item_node: ItemShop = item_shop_prefab.instantiate()
+		item_node.apply(item, false)
+		item_node.disable()
+		$Shop.add_child(item_node)
+	
+	for recipe in city.recipies:
+		var recipe_node: ItemShop = item_shop_prefab.instantiate()
+		recipe_node.apply(recipe, false)
+		recipe_node.disable()
+		$Recipies.add_child(recipe_node)
+
+func _on_enter_city(city: Room) -> void:
+	$InventoryGrid.visible = true
+	$Slaves.visible = true
 	value = 0
 	_change_value(0)
 	
@@ -122,18 +150,24 @@ func _on_enter_city(city: Room) -> void:
 			var item : Item = ItemPool.fetch_random()
 			item.cost = j * 4
 			city.items.append(item)
-		for j in range(2):
+		var free_recipe = true
+		for j in range(4):
 			var recipe : Item = CurrentRun.craft_pool.pop_at(randi_range(0, CurrentRun.craft_pool.size()-1))
-			recipe.cost = (j)*10
+			recipe.cost = recipe.tier * 6
+			if recipe.tier == 1 and free_recipe:
+				free_recipe = false
+				recipe.cost = 0
 			recipe.is_recipe = true
 			city.recipies.append(recipe)
-			
+		
 	
 	if not current_city.flag and CurrentRun.discounts > 0:
 		CurrentRun.discounts -= 1
 		current_city.flag = true
+		current_city.heal_used = 0
 		current_city.sprite.texture = Gallery.img_free_city
 		for item in city.items: item.cost = floor(item.cost * 3/4)
+		for recipe in city.recipies: recipe.cost = floor(recipe.cost * 3/4)
 		
 	
 	for item in city.items:

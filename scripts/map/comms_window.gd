@@ -17,6 +17,7 @@ var required_any: int = 0
 func _ready() -> void:
 	visible = false
 	SignalBus.enter_comms.connect(_on_enter_comms)
+	SignalBus.check_comms.connect(_on_check_comms)
 
 func update_everything() -> void:
 	$Required/Weapons/Label.text = str(required_weapons)
@@ -53,6 +54,32 @@ func _sacrifice(item_node: ItemShop) -> void:
 	CurrentRun.inventory.erase(item_node.held)
 	item_node.queue_free()
 	update_everything()
+
+func _on_check_comms(comms: Room) -> void:
+	current_comms = comms
+	visible = true
+	CurrentRun.state = Game.State.Window
+	item_grid.clear()
+	
+	$Power.visible = false
+	$Required.visible = not comms.flag
+	hint.visible = false
+	
+	if comms.flag:
+		$Message.set_string_id("comms_"+str(current_comms.heal_used))
+		_enable_hint()
+		$Message.type()
+	else: $Message.text = ""
+	
+	required_weapons = floor(comms.data / 1000)
+	required_hats = floor((comms.data % 1000) / 100)
+	required_trinkets = floor((comms.data % 100) / 10)
+	required_any = floor(comms.data % 10)
+	
+	$Required/Weapons/Label.text = str(required_weapons)
+	$Required/Hats/Label.text = str(required_hats)
+	$Required/Trinkets/Label.text = str(required_trinkets)
+	$Required/Any/Label.text = str(required_any)
 
 func _on_enter_comms(comms: Room) -> void:
 	current_comms = comms

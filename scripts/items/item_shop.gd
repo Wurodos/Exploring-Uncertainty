@@ -12,6 +12,9 @@ var is_sell: bool
 signal sell(ItemShop)
 signal buy(ItemShop)
 
+func disable() -> void:
+	$Clickable.disabled = true
+
 @warning_ignore("shadowed_variable")
 func apply(item: Item, is_sell: bool) -> void:
 	held = item

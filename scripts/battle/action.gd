@@ -62,7 +62,7 @@ func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, dont_proc: bool
 			else: total_dmg = total_dmg * 10 / 7
 	
 	if sender.buffs.has(BLASPHEMY):
-		heal(sender, sender, floor(total_dmg*2/5))
+		heal(sender, sender, ceil(total_dmg*2/5))
 	
 	if victim.tags.has(TAG_STATIC_HEALTH):
 		var absorbed : int = min(total_dmg, victim.static_stat)

@@ -18,6 +18,26 @@ var id: int = 0
 func _ready() -> void:
 	visible = false
 	SignalBus.enter_elevator.connect(_on_enter_elevator)
+	SignalBus.check_elevator.connect(_check_elevator)
+
+func _check_elevator(elevator: Room) -> void:
+	if elevator.flag: return
+	
+	visible = true
+	CurrentRun.state = Game.State.Window
+	$ItemGrid.visible = false
+	$Power.visible = false
+	
+	required_weapons = floor((elevator.data % 10000) / 1000)
+	required_hats = floor((elevator.data % 1000) / 100)
+	required_trinkets = floor((elevator.data % 100) / 10)
+	required_any = floor(elevator.data % 10)
+	
+	$Required/Weapons/Label.text = str(required_weapons)
+	$Required/Hats/Label.text = str(required_hats)
+	$Required/Trinkets/Label.text = str(required_trinkets)
+	$Required/Any/Label.text = str(required_any)
+	
 
 func update_everything() -> void:
 	$Required/Weapons/Label.text = str(required_weapons)
@@ -71,6 +91,7 @@ func _sacrifice(item_node: ItemShop) -> void:
 
 func _on_enter_elevator(elevator: Room) -> void:
 	current_elevator = elevator
+	$ItemGrid.visible = true
 	
 	$Power.visible = not elevator.flag
 	$Required.visible = not elevator.flag

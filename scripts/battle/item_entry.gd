@@ -23,6 +23,7 @@ enum Type {Default, Craft}
 	Item.Scrap.Oil: $Craft/Scraps/Oil
 }
 
+@onready var req_items: Control = $Craft/Items
 
 func apply(item: Item, type: Type = Type.Default) -> void:
 	item_name.text = item.name
@@ -72,4 +73,11 @@ func apply(item: Item, type: Type = Type.Default) -> void:
 				req_nodes[req].get_node("Label").text = str(item.craft_reqs[req])
 				req_nodes[req].visible = true
 			else: req_nodes[req].visible = false
+		for i in range(req_items.get_child_count()):
+			var texture_rect : TextureRect = req_items.get_child(i)
+			if i >= item.craft_items.size():
+				texture_rect.visible = false
+			else:
+				texture_rect.visible = true
+				texture_rect.texture = item.craft_items[i].texture
 		$Craft.visible = true

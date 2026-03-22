@@ -25,9 +25,10 @@ func update_stats(node: SlaveNode) -> void:
 func on_attacked(attacker: SlaveNode) -> void:
 	super.on_attacked(attacker)
 	if dont_change_target: return
-	if intention and intention.targets.size() == 1:
+	if intention:
 		if intention.is_support: decide_weapon_intention()
-		intention.targets = [Battle.instance.good_team.boys_nodes.find(attacker)]
+		if intention.targets.size() == 1:
+			intention.targets = [Battle.instance.good_team.boys_nodes.find(attacker)]
 		owner.update_intention()
 
 
@@ -72,5 +73,4 @@ func decide_weapon_intention() -> void:
 			Action.deal_damage(owner, v, burning_road_dmg)
 		if intention.targets.is_empty():
 			intention.targets = [target]
-	
 	

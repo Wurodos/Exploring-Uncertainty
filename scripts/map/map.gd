@@ -18,6 +18,7 @@ extends Node2D
 class_name Map
 
 const army_prefab = preload("res://prefabs/map/liberation_army.tscn")
+const clickable_tip = preload("res://prefabs/map/clickable_tip.tscn")
 
 @onready var tutorial_box: Control = $GUI/UI/TutorialBox
 var tutorial_progress: int = 0
@@ -130,6 +131,7 @@ func _teleport(to: int) -> void:
 			party_col = elevator.col
 			party_row = elevator.row
 			player_node.global_position = elevator.global_position
+			_update_move_buttons()
 			return
 
 
@@ -146,6 +148,8 @@ func _process(_delta: float) -> void:
 		move_player(Direction.Right)
 	elif Input.is_action_just_pressed("stay"):
 		encounter(room_at(party_row, party_col))
+	elif Input.is_action_just_pressed("toggle_fog"):
+		$World/Fog.visible = not $World/Fog.visible
 
 func move_player(direction: Direction) -> void:
 	if is_encountering: return
@@ -224,6 +228,14 @@ func encounter(room: Room) -> void:
 	SignalBus.entered_room.emit(room)
 	
 	CurrentRun.is_in_purged = room.type == Room.Type.Purged	
+	
+	#CurrentRun.arrange_boss()
+	#$AnimationPlayer.play("battle_start")
+	#await $AnimationPlayer.animation_finished
+	#SignalBus.play_music.emit("roots_and_toots")
+	#SignalBus.battle_encounter.emit()
+	#return
+	
 	match(room.type):
 		Room.Type.Ruin:
 			SignalBus.found_item.emit()
@@ -245,15 +257,22 @@ func encounter(room: Room) -> void:
 				SignalBus.play_music.emit("battle")
 				SignalBus.battle_encounter.emit()
 				since_last_battle = 0
+				since_last_battle_purged = 0
 				since_last_item += 1
 			else: 
 				since_last_battle += 1
 				if since_last_item >= randi_range(4, 8*(found_items+1)):
-					found_items += 1
-					SignalBus.found_item.emit()
-					since_last_item = 0
+					pass
+					#found_items += 1
+					#SignalBus.found_item.emit()
+					#since_last_item = 0
 				else: since_last_item += 1
 		Room.Type.City:
+			if not room.visited:
+				var tip: Button = clickable_tip.instantiate()
+				$World.add_child(tip)
+				tip.global_position = room.global_position + Vector2(25,-75)
+				tip.pressed.connect(func(): SignalBus.check_city.emit(room))
 			SignalBus.enter_city.emit(room)
 		Room.Type.Govnov:
 			if CurrentRun.is_tutorial and not shown_govnov_window:
@@ -262,6 +281,7 @@ func encounter(room: Room) -> void:
 			SignalBus.enter_govnov.emit()
 		Room.Type.Cherv:
 			since_last_battle = 0
+			since_last_battle_purged = 0
 			CurrentRun.discounts += 1
 			CurrentRun.evil_boys = CurrentRun.arrange_evil_team(zone_id)
 			$AnimationPlayer.play("battle_start")
@@ -272,7 +292,7 @@ func encounter(room: Room) -> void:
 				SignalBus.advance_tutorial.emit("tutorial_cherv_won")
 				
 			SignalBus.play_music.emit("battle_difficult")
-			if zone_id < 2:
+			if zone_id < 3:
 				SignalBus.battle_encounter.emit(2)
 			else: SignalBus.battle_encounter.emit(3)
 		Room.Type.Reptile:
@@ -282,11 +302,21 @@ func encounter(room: Room) -> void:
 			SignalBus.play_music.emit("roots_and_toots")
 			SignalBus.battle_encounter.emit()
 		Room.Type.Comms:
+			if not room.visited:
+				var tip: Button = clickable_tip.instantiate()
+				$World.add_child(tip)
+				tip.global_position = room.global_position + Vector2(25,-75)
+				tip.pressed.connect(func(): SignalBus.check_comms.emit(room))
 			if CurrentRun.is_tutorial and not shown_comms_window:
 				shown_comms_window = true
 				SignalBus.advance_tutorial.emit("tutorial_comms_window")
 			SignalBus.enter_comms.emit(room)
 		Room.Type.Elevator:
+			if not room.visited:
+				var tip: Button = clickable_tip.instantiate()
+				$World.add_child(tip)
+				tip.global_position = room.global_position + Vector2(25,-75)
+				tip.pressed.connect(func(): SignalBus.check_elevator.emit(room))
 			#TODO TUTORIAL
 			#if CurrentRun.is_tutorial and not shown_comms_window:
 			#	shown_comms_window = true
@@ -467,7 +497,9 @@ func _add_structures(all_rooms: Array[Room], area_id: int) -> void:
 	var cherv_n = floor(all_rooms.size()*cherv_rate)
 	var govnov_n = floor(all_rooms.size()*govnov_rate)
 	var comms_n = floor(all_rooms.size()*comms_rate)
-	if area_id == 0: comms_n = 0
+	if area_id == 0: 
+		comms_n = 0
+		city_n = 1
 	var elevator_n = 0
 	if area_id > 0 and area_id < 4:
 		elevator_n = 3

@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://d0rkhaggbott0" path="res://images/tags/vigilance.svg" id="12_f4yho"]
 [ext_resource type="Texture2D" uid="uid://hlcx8brhdh8g" path="res://images/icons/power_up.png" id="13_4thmk"]
 [ext_resource type="Texture2D" uid="uid://q3f5thafmlge" path="res://images/buffs/stun.png" id="14_xc2og"]
+[ext_resource type="Texture2D" uid="uid://cqc7tggib3u" path="res://images/icons/timer.png" id="19_6flwy"]
 
 [sub_resource type="Animation" id="Animation_bm25f"]
 length = 0.001
@@ -493,6 +494,7 @@ texture = ExtResource("6_f4yho")
 position = Vector2(87.333336, -50)
 
 [node name="HPBar" type="ProgressBar" parent="." unique_id=1222666271]
+unique_name_in_owner = true
 offset_left = -46.6667
 offset_top = 50.0
 offset_right = 46.3333
@@ -553,13 +555,34 @@ self_modulate = Color(1, 1, 1, 0.5019608)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("14_xc2og")
 
+[node name="Timer" type="Node2D" parent="." unique_id=1921810984]
+visible = false
+position = Vector2(-62, -63.333336)
+
+[node name="TimerIcon" type="Sprite2D" parent="Timer" unique_id=790467390]
+position = Vector2(-0.66666603, -3.8146973e-06)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("19_6flwy")
+
+[node name="Label" type="Label" parent="Timer" unique_id=1473667429]
+offset_left = -17.999996
+offset_top = -12.0
+offset_right = 51.000004
+offset_bottom = 34.00003
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_eb1g8")
+horizontal_alignment = 1
+
 [node name="Intention" type="Node2D" parent="." unique_id=1283567876]
+visible = false
 z_index = 1
 position = Vector2(17.3333, -72.6667)
 
 [node name="Icon" type="Sprite2D" parent="Intention" unique_id=1938130844]
 position = Vector2(-7.33333, 0)
 scale = Vector2(0.15, 0.15)
+texture = ExtResource("11_7y33p")
 
 [node name="TargetTop" type="Sprite2D" parent="Intention" unique_id=698684019]
 visible = false
@@ -588,10 +611,12 @@ offset_top = -9.33333
 offset_right = 16.3333
 offset_bottom = 36.6667
 scale = Vector2(0.5, 0.5)
+text = "0"
 label_settings = SubResource("LabelSettings_eb1g8")
 horizontal_alignment = 1
 
 [node name="Stats" type="HBoxContainer" parent="." unique_id=1896640002]
+unique_name_in_owner = true
 offset_left = -82.6667
 offset_top = 63.3333
 offset_right = 84.3333

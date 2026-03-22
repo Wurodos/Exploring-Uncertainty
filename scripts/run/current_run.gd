@@ -541,7 +541,7 @@ func arrange_evil_team(zone: int) -> Array[Slave]:
 	for i in range(draw_count):
 		var enemy = deck.pop_back()
 		if enemy != null:
-			enemy.hp = 1
+			#enemy.hp = 1
 			#enemy.equip(ItemPool.fetch("ice_bomb"))
 			team.append(enemy)
 	if deck.is_empty():
@@ -566,5 +566,5 @@ func put_item_in_inventory(item: Item) -> void:
 	CurrentRun.inventory.append(item)
 
 func arrange_boss() -> void:
-	CurrentRun.evil_boys = [ReptilePool.fetch("roots_and_toots")]
+	CurrentRun.evil_boys = [ReptilePool.fetch("and_its_dark_again")]
 	# CurrentRun.evil_boys[0].hp = 1

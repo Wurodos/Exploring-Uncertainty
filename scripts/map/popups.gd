@@ -23,6 +23,7 @@ func _make_popup(prefab: PackedScene) -> Node:
 	if CurrentRun.state != Game.State.Popup:
 		last_state = CurrentRun.state
 	
+	CurrentRun.state = Game.State.Popup
 	popup_count += 1
 	
 	var popup = prefab.instantiate()

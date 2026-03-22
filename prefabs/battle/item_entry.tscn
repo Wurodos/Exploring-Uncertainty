@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dm6uygsqqi566" path="res://images/icons/max_hp.png" id="7_qogv1"]
 [ext_resource type="Texture2D" uid="uid://d3qpvfvers1k3" path="res://images/icons/speed.svg" id="8_bmqyk"]
 [ext_resource type="Texture2D" uid="uid://bs1oxtclo4qgp" path="res://images/icons/coin.png" id="10_xc6oh"]
+[ext_resource type="Texture2D" uid="uid://doarnkwm1j385" path="res://images/items/hammer-sickle.png" id="11_8qjts"]
 [ext_resource type="Texture2D" uid="uid://cdm857fxoms7i" path="res://images/scraps/gear.png" id="11_jej01"]
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="12_j34e8"]
 [ext_resource type="Texture2D" uid="uid://154yr4da73bn" path="res://images/scraps/shard.png" id="13_ux6cq"]
@@ -222,6 +223,30 @@ text = "0"
 label_settings = SubResource("LabelSettings_5q35t")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Items" type="HBoxContainer" parent="Craft" unique_id=283992965]
+layout_mode = 0
+offset_left = -169.0
+offset_top = 6.0
+offset_right = 632.0
+offset_bottom = 71.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Item1" type="TextureRect" parent="Craft/Items" unique_id=1970403527]
+layout_mode = 2
+texture = ExtResource("11_8qjts")
+expand_mode = 3
+
+[node name="Item2" type="TextureRect" parent="Craft/Items" unique_id=882212482]
+layout_mode = 2
+texture = ExtResource("11_8qjts")
+expand_mode = 3
+
+[node name="Item3" type="TextureRect" parent="Craft/Items" unique_id=1320408382]
+layout_mode = 2
+texture = ExtResource("11_8qjts")
+expand_mode = 3
 
 [node name="Desc" type="Label" parent="." unique_id=1067570176]
 layout_mode = 0
