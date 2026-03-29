@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Exploring Uncertainty"
-run/main_scene="uid://dyrtd13gpi41u"
+run/main_scene="uid://cbvxdwqjhf5w6"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="uid://bvt0n20v88f7o"
@@ -25,6 +25,7 @@ SlavePool="*res://scripts/slaves/slave_pool.gd"
 Action="*res://scripts/battle/action.gd"
 Gallery="*res://scripts/utils/gallery.gd"
 ReptilePool="*res://scripts/reptiles/reptile_pool.gd"
+Metaprogress="*uid://w8a25naep1d7"
 
 [debug]
 

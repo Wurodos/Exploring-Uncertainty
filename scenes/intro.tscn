@@ -1,0 +1,427 @@
+[gd_scene format=3 uid="uid://cbvxdwqjhf5w6"]
+
+[ext_resource type="Script" uid="uid://ba1qr1wxdajh8" path="res://scripts/run/intro.gd" id="1_ioskq"]
+[ext_resource type="FontFile" uid="uid://hym6fbjhhg2u" path="res://text/font/Share-Tech-CYR.otf" id="2_4bx60"]
+[ext_resource type="Script" uid="uid://dd2yytdivaq0j" path="res://scripts/common/label_localized.gd" id="2_yjqpq"]
+[ext_resource type="Texture2D" uid="uid://qccke8ymm51x" path="res://images/intro/europe.png" id="4_i2l1n"]
+[ext_resource type="Texture2D" uid="uid://dgy0pujd1t2qq" path="res://images/shapes/plain-circle.png" id="5_wfs7u"]
+[ext_resource type="Script" uid="uid://b7a2ai83umgwf" path="res://scripts/common/typewriter.gd" id="6_es01l"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4bx60"]
+line_spacing = -16.0
+font = ExtResource("2_4bx60")
+font_size = 64
+font_color = Color(1, 1, 0, 1)
+outline_size = 12
+outline_color = Color(1, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_i2l1n"]
+line_spacing = -16.0
+font = ExtResource("2_4bx60")
+font_size = 64
+font_color = Color(1, 1, 0, 1)
+
+[sub_resource type="Shader" id="Shader_4bx60"]
+code = "shader_type canvas_item;
+uniform sampler2D ST : hint_screen_texture, filter_linear_mipmap_anisotropic;
+uniform vec4 scanline_color : source_color = vec4(0, 0, 0, 1);
+uniform vec4 flicker_color : source_color = vec4(0, 0, 0, 1);
+uniform float scanlines_count = 10.0;
+uniform float scanlines_intensity = 0.05;
+uniform float flicker_speed = 30.0;
+uniform float flicker_intensity : hint_range(0.0, 1.0, 0.001) = 0.025;
+uniform float color_offset = 1.5;
+uniform float blur = 0.15;
+
+void fragment() {
+	vec2 pixel_size = 1.0 / vec2(textureSize(ST, 0));
+	float offset = color_offset * pixel_size.x;
+	
+	// chromatic aberration
+	float channel_r = textureLod(ST, SCREEN_UV + vec2(offset, 0.0), blur).r;
+	float channel_g = textureLod(ST, SCREEN_UV, blur).g;
+	float channel_b = textureLod(ST, SCREEN_UV + vec2(-offset, 0.0), blur).b;
+	vec4 aberrate = vec4(channel_r, channel_g, channel_b, 1.0);
+	
+	vec4 flicker = mix(aberrate, flicker_color, 0);
+
+	// scanlines
+	float scanlines = sin(FRAGCOORD.y * scanlines_count) * scanlines_intensity;
+	vec4 final = mix(flicker, scanline_color, scanlines);
+	
+	COLOR = final;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wfs7u"]
+shader = SubResource("Shader_4bx60")
+shader_parameter/scanline_color = Color(0, 0, 0, 1)
+shader_parameter/flicker_color = Color(0, 0, 0, 1)
+shader_parameter/scanlines_count = 20.0
+shader_parameter/scanlines_intensity = 0.1
+shader_parameter/flicker_speed = 30.0
+shader_parameter/flicker_intensity = 0.025
+shader_parameter/color_offset = 1.0
+shader_parameter/blur = 0.15
+
+[sub_resource type="Animation" id="Animation_i2l1n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bar1:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1152, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bar2:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1152, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4bx60"]
+resource_name = "hide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bar1:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1152, 0), Vector2(1152, 500)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bar2:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.99999994),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1152, 0), Vector2(1152, 500)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i2l1n"]
+_data = {
+&"RESET": SubResource("Animation_i2l1n"),
+&"hide": SubResource("Animation_4bx60")
+}
+
+[sub_resource type="Animation" id="Animation_wfs7u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RedOutline:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_es01l"]
+resource_name = "glow"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RedOutline:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(3, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0naf5"]
+_data = {
+&"RESET": SubResource("Animation_wfs7u"),
+&"glow": SubResource("Animation_es01l")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_wfs7u"]
+font = ExtResource("2_4bx60")
+font_size = 24
+font_color = Color(0.52906644, 0.5290668, 0.52906656, 1)
+outline_size = 4
+outline_color = Color(0.5294118, 0.5294118, 0.5294118, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_es01l"]
+font = ExtResource("2_4bx60")
+font_size = 24
+
+[node name="Intro" type="Control" unique_id=702402188 node_paths=PackedStringArray("hide_warning")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ioskq")
+warning_delay = 5.0
+hide_warning = NodePath("Warning/Hide")
+
+[node name="Warning" type="Control" parent="." unique_id=1307078139]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Warning" unique_id=150537864]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.16470589, 0.09803922, 0.7529412, 1)
+
+[node name="WarningTop" type="Label" parent="Warning" unique_id=2029432618]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 21.0
+offset_right = 24.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "ПРЕДУПРЕЖДЕНИЕ ОБЩЕСТВЕННОГО
+ИНСТИТУТА ПРОБЛЕМ"
+label_settings = SubResource("LabelSettings_4bx60")
+autowrap_mode = 3
+script = ExtResource("2_yjqpq")
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
+
+[node name="WarningText" type="Label" parent="Warning" unique_id=1375443480]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 197.0
+offset_right = 24.0
+offset_bottom = 197.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "данный материал запрещается каким-либо образом распространять без санкционированного разрешения. ретранслирование, демонстрация или воспроизведение данного материала рассматривается ФФЗПСиВП и карается суровыми уголовными наказаниями."
+label_settings = SubResource("LabelSettings_i2l1n")
+autowrap_mode = 3
+script = ExtResource("2_yjqpq")
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
+
+[node name="CRT" type="ColorRect" parent="Warning" unique_id=271022131]
+material = SubResource("ShaderMaterial_wfs7u")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Hide" type="AnimationPlayer" parent="Warning" unique_id=1411777807]
+libraries/ = SubResource("AnimationLibrary_i2l1n")
+
+[node name="Bar1" type="ColorRect" parent="Warning" unique_id=359030198]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Bar2" type="ColorRect" parent="Warning" unique_id=1344940357]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Story" type="Control" parent="." unique_id=1578619181]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Europe" type="TextureRect" parent="Story" unique_id=1546524857]
+self_modulate = Color(0.43134022, 0.43134025, 0.43134025, 1)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -578.0
+offset_top = -256.0
+offset_right = -66.0
+offset_bottom = 256.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("4_i2l1n")
+
+[node name="Europe2" type="TextureRect" parent="Story/Europe" unique_id=263518079]
+self_modulate = Color(0.65377337, 0.18056059, 0.69110596, 1)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 522.0
+offset_bottom = 518.0
+texture = ExtResource("4_i2l1n")
+
+[node name="Red" type="TextureRect" parent="Story/Europe" unique_id=362621949]
+self_modulate = Color(1, 0, 0, 1)
+layout_mode = 0
+offset_left = 392.0
+offset_top = 227.0
+offset_right = 408.0
+offset_bottom = 243.0
+texture = ExtResource("5_wfs7u")
+expand_mode = 1
+
+[node name="RedOutline" type="TextureRect" parent="Story/Europe" unique_id=1288815247]
+self_modulate = Color(1, 0, 0, 0.48235294)
+layout_mode = 0
+offset_left = 384.0
+offset_top = 219.0
+offset_right = 416.0
+offset_bottom = 251.0
+scale = Vector2(1e-05, 1e-05)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("5_wfs7u")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Story/Europe" unique_id=447433391]
+libraries/ = SubResource("AnimationLibrary_0naf5")
+autoplay = &"glow"
+
+[node name="CRT" type="ColorRect" parent="Story" unique_id=1433157478]
+material = SubResource("ShaderMaterial_wfs7u")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="PressToSkip" type="Label" parent="Story" unique_id=1757418268]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -65.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "(нажмите любую клавишу, чтобы пропустить)"
+label_settings = SubResource("LabelSettings_wfs7u")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_yjqpq")
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
+
+[node name="Typewriter" type="Label" parent="Story" unique_id=76624478]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 58.0
+offset_top = 35.0
+offset_right = 589.0
+offset_bottom = -41.0
+grow_vertical = 2
+text = "[ММ-4] Система инициализирована.$
+[ЦЕНТР] Соединение установлено.$
+[ЦЕНТР] Текущее состояние конфликта в Полоцких солевых шахтах:$
+СОМНИТЕЛЬНОЕ.$
+Уровень гражданского населения:$ ВЫСОКИЙ.$
+Завершенность эвакуации:$ 6%$
+Уровень числа виноватых:$ ПРЕДЕЛЬНО ВЫСОКИЙ.$
+РЕПТИЛИЙ обнаружено:$ 3$
+РЕПТИЛИЙ нейтрализовано:$ 0$
+[ЦЕНТР] Последние события:$
+<15:45 25.12.78> Конец первой фазы эвакуации.$
+Мобильные силы успешно выведены.$
+Шахты успешно герметизированы.$
+<14:05 01.01.79> Начало второй фазы эвакуации.$
+Цель номер один - ветвь РОССОНЫ-3.$
+<16:00 02.01.79> Утвержден указ о внедрении в конфликт 
+четвертой системы дистанционного управления БОЙЦАМИ
+\"МеждуМорье\" ММ-4 (кодовое название - \"Благонадежность\")"
+label_settings = SubResource("LabelSettings_es01l")
+script = ExtResource("6_es01l")
+metadata/_custom_type_script = "uid://b7a2ai83umgwf"
+
+[node name="TutorialChoice" type="Control" parent="." unique_id=1591050081]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NoTutorial" type="Button" parent="TutorialChoice" unique_id=1105049172]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = 85.0
+offset_right = 128.0
+offset_bottom = 213.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Продолжить без обучения"
+
+[node name="Tutorial" type="Button" parent="TutorialChoice" unique_id=1920355002]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -64.0
+offset_right = 128.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Пройти обучение
+(рекомендуется)"
+
+[connection signal="pressed" from="TutorialChoice/NoTutorial" to="." method="_on_no_tutorial_pressed"]
+[connection signal="pressed" from="TutorialChoice/Tutorial" to="." method="_on_tutorial_pressed"]

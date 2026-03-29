@@ -3,8 +3,8 @@ extends Node
 func _ready() -> void:
 	get_node("Language_" + TranslationServer.get_locale()).disabled = true
 
-	if not CurrentRun.has_save_file():
-		$Continue.visible = false
+	#if not CurrentRun.has_save_file():
+	# 	$Continue.visible = false
 	
 	SignalBus.locale_changed.emit()
 
