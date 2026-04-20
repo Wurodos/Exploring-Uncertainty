@@ -17,17 +17,19 @@ const TAG_LOW_PRIORITY = "tag_low_priority"
 const TAG_HIGH_PRIORITY = "tag_high_priority"
 const TAG_PERMANENT_STATIC = "tag_permanent_static"
 const TAG_STATIC_HEALTH = "tag_static_health"
+const TAG_WAS_ATTACKED_THIS_ROUND = "tag_was_attacked_this_round"
 
 func calculate_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, _dont_proc: bool = false) -> int:
 	var total_dmg = dmg
 	
-	total_dmg += sender.power
-	if sender.tags.has(TAG_STATUS_DAMAGE):
-		for turns: int in sender.buffs.values():
-			if turns > 0: total_dmg += turns 
+	if sender:
+		total_dmg += sender.power
+		if sender.tags.has(TAG_STATUS_DAMAGE):
+			for turns: int in sender.buffs.values():
+				if turns > 0: total_dmg += turns 
 	
 	total_dmg *= damage_multiplier
-	if sender.buffs.has(APPETITE):
+	if sender and sender.buffs.has(APPETITE):
 		total_dmg = ceil(float(total_dmg) * 3. / 2.)
 	if victim and victim.buffs.has(FREEZE):
 		total_dmg = ceil(float(total_dmg) * 3. / 2.)
@@ -44,9 +46,12 @@ func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, dont_proc: bool
 	var total_dmg = calculate_damage(sender, victim, dmg, dont_proc)
 	
 	var roll = randi_range(0, 99)
-	var is_crit = sender.vigilance or roll < 4 * (sender.luck+1)
+	var is_crit = false
 	
-	if not sender.tags.has(TAG_VIGILANCE_KEEP_ATTACK):
+	if sender:
+		is_crit = sender.vigilance or roll < 4 * (sender.luck+1)
+	
+	if sender and not sender.tags.has(TAG_VIGILANCE_KEEP_ATTACK):
 		sender.vigilance = false
 	
 	if not is_crit and victim.vigilance:
@@ -64,7 +69,7 @@ func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, dont_proc: bool
 				total_dmg = total_dmg * 5 / 2
 			else: total_dmg = total_dmg * 10 / 7
 	
-	if sender.buffs.has(BLASPHEMY):
+	if sender and sender.buffs.has(BLASPHEMY):
 		heal(sender, sender, ceil(total_dmg*2/5))
 	
 	if victim.tags.has(TAG_STATIC_HEALTH):
@@ -73,7 +78,7 @@ func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, dont_proc: bool
 		victim.set_static(-absorbed)
 		
 	victim.set_hp(-total_dmg)
-	if victim.held.is_alive and victim.static_stat > 0:
+	if sender and victim.held.is_alive and victim.static_stat > 0:
 		sender.set_hp(-victim.static_stat)
 		if not victim.tags.has(TAG_PERMANENT_STATIC):
 			var half : int = ceil(float(victim.static_stat) / 2.0)

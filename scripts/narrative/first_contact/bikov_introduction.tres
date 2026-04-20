@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DialogueNode" format=3 uid="uid://citkrby8o11b7"]
+
+[ext_resource type="Resource" uid="uid://qcdgn33r2lq5" path="res://scripts/narrative/first_contact/pip_correction.tres" id="1_6fbfo"]
+[ext_resource type="Texture2D" uid="uid://c02os5gympk53" path="res://images/portraits/bikov/bikov_eye.png" id="1_glaqq"]
+[ext_resource type="Script" uid="uid://da1waiviit08p" path="res://scripts/narrative/dialogue_node.gd" id="1_jjvkp"]
+
+[resource]
+script = ExtResource("1_jjvkp")
+portrait = ExtResource("1_glaqq")
+name_id = "pivil_bikov"
+text_id = "bikov_introduction"
+next_node = ExtResource("1_6fbfo")
+metadata/_custom_type_script = "uid://da1waiviit08p"

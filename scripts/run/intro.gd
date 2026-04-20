@@ -16,6 +16,7 @@ func _ready() -> void:
 		warning()
 		await hide_warning.animation_finished
 		$Warning.visible = false
+		$Numbers.stop()
 	story()
 
 func _input(event: InputEvent) -> void:
@@ -23,6 +24,7 @@ func _input(event: InputEvent) -> void:
 		if $Story/Typewriter.is_typing:
 			$Story/Typewriter.skip()
 		else:
+			$StoryMusic.stop()
 			$Story.visible = false
 			if Metaprogress.completed_tutorial:
 				_on_no_tutorial_pressed()
@@ -31,10 +33,12 @@ func _input(event: InputEvent) -> void:
 
 func warning() -> void:
 	$Warning.visible = true
+	$Numbers.play()
 	await get_tree().create_timer(warning_delay).timeout
 	hide_warning.play("hide")
 
 func story() -> void:
+	$StoryMusic.play()
 	$Story.visible = true
 	$Story/Typewriter.type()
 	phase = Phase.Story

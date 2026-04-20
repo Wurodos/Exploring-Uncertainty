@@ -1,0 +1,18 @@
+[gd_resource type="Resource" format=3 uid="uid://wqva5hmiiqgg"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_4gpeu"]
+[ext_resource type="Script" uid="uid://lq7i2tk5n8ka" path="res://scripts/items/weapons/boxing_glove.gd" id="2_4gpeu"]
+[ext_resource type="Texture2D" uid="uid://dhfxiviq4bieo" path="res://images/items/boxing-glove.png" id="3_4gpeu"]
+
+[resource]
+script = ExtResource("2_4gpeu")
+harm = 5
+multiplier = 2
+texture = ExtResource("3_4gpeu")
+cost = 7
+craft_reqs = Dictionary[int, int]({
+0: 2,
+2: 1,
+3: 2
+})
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

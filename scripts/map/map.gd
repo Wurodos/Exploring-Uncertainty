@@ -108,6 +108,9 @@ static func dist(room1: Room, room2: Room) -> int:
 	return round(sqrt((room1.row - room2.row) ** 2 + (room1.col - room2.col) ** 2))
 
 func _ready() -> void:
+	%DebugFight.visible = CurrentRun.is_debug
+	%DebugBoss.visible = CurrentRun.is_debug
+	
 	tutorial_box.visible = CurrentRun.is_tutorial
 	tutorial_box.get_node("Text").set_string_id("tutorial_map_0")
 	
@@ -416,6 +419,8 @@ func generate_from_data(data: Dictionary) -> void:
 	player_node.global_position = room_at(party_row, party_col).global_position
 
 func generate_floor() -> void:
+	if CurrentRun.is_debug:
+		seed(37)
 	
 	for i in range(size + 2):
 		space_taken.append([])
@@ -732,3 +737,23 @@ func _on_down_pressed() -> void:
 
 func _on_stay_pressed() -> void:
 	encounter(room_at(party_row, party_col))
+
+
+func _on_debug_fight_pressed() -> void:
+	CurrentRun.evil_boys = []
+	$AnimationPlayer.play("battle_start")
+	await $AnimationPlayer.animation_finished
+	SignalBus.play_music.emit("battle")
+	SignalBus.battle_encounter.emit()
+	$AnimationPlayer.play("RESET")
+	is_encountering = false
+
+
+func _on_debug_boss_pressed() -> void:
+	CurrentRun.arrange_boss()
+	$AnimationPlayer.play("battle_start")
+	await $AnimationPlayer.animation_finished
+	SignalBus.play_music.emit("roots_and_toots")
+	SignalBus.battle_encounter.emit()
+	$AnimationPlayer.play("RESET")
+	is_encountering = false

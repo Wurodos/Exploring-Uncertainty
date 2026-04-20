@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3 uid="uid://cowrp1ub834ab"]
+
+[ext_resource type="Script" uid="uid://vlcieyqaimjo" path="res://scripts/enemies/jet.gd" id="1_4quw4"]
+[ext_resource type="Texture2D" uid="uid://qjp74xom74mu" path="res://images/reptiles/jet.png" id="2_4quw4"]
+
+[resource]
+script = ExtResource("1_4quw4")
+info_count = 2
+base_maxhp = 100
+base_speed = 5
+sprite_size = 1
+texture = ExtResource("2_4quw4")
+metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

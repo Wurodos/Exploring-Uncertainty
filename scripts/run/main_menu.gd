@@ -1,8 +1,10 @@
 extends Node
 
+const game_scene = preload("res://scenes/game.tscn")
+
 func _ready() -> void:
 	get_node("Language_" + TranslationServer.get_locale()).disabled = true
-
+	Metaprogress.completed_tutorial = true
 	#if not CurrentRun.has_save_file():
 	# 	$Continue.visible = false
 	
@@ -39,4 +41,15 @@ func _on_load_pressed() -> void:
 	CurrentRun.load_save()
 	CurrentRun.is_saved_game = true
 	get_tree().change_scene_to_file("res://scenes/draft.tscn")
+	
+
+
+func _on_reset_progress_pressed() -> void:
+	Metaprogress.reset_progress()
+
+
+func _on_testing_pressed() -> void:
+	CurrentRun.is_debug = true
+	CurrentRun.evil_boys = []
+	get_tree().change_scene_to_file("res://scenes/game.tscn")
 	

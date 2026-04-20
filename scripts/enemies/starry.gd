@@ -48,6 +48,8 @@ func decide_intention() -> void:
 	if summons_left > 0 and cherv_count < 2 and not reinforced_last_turn:
 		summons_left -= 1
 		intention.type = Intention.Type.Reinforcement
+		intention.amount = 1
+		intention.extra_data = "cherv"
 		intention.is_support = true
 		reinforced_last_turn = true
 		return

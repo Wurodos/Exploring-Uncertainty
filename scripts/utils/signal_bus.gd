@@ -46,6 +46,13 @@ signal mouse_delta(delta: Vector2)
 signal mouse_right_down
 signal mouse_right_up
 
+
+# ====================
+# Dialogue
+# ====================
+
+signal new_message(id: String)
+
 # ====================
 # Battle sequencing
 # ====================
@@ -65,7 +72,7 @@ signal speed_queue_mouse_exit(slave: Slave)
 signal slave_info(slave: Slave)
 signal enemy_info(slave: Slave)
 
-signal reinforcement(enemy: Enemy)
+signal reinforcement(enemy: Enemy, u_name: String)
 signal slave_death(slave: SlaveNode)
 signal slave_undeath(slave: SlaveNode)
 signal slave_ran(slave: SlaveNode)

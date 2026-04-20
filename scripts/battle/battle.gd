@@ -44,6 +44,7 @@ func get_queue_element(id: int) -> QueueElement:
 
 func _ready() -> void:
 	instance = self
+	%Debug.visible = CurrentRun.is_debug
 
 	tutorial_box.visible = CurrentRun.is_battle_tutorial
 	tutorial_box.get_node("Text").set_string_id("tutorial_battle_0")
@@ -385,21 +386,34 @@ func _find_slave_node(slave: Slave) -> SlaveNode:
 		slave_node = evil_team.boys_nodes[id]
 	return slave_node
 
-
+var dress_up: bool = false
 # If any dead: replaces them
 # If any empty: gets there
 # Else sender runs, replaces them
-func _on_reinforcement(sender: SlaveNode) -> void:
-	var team = sender.team
+func _on_reinforcement(sender: SlaveNode, u_name: String = "cherv") -> void:
+	var team: Team = evil_team
+	
+	if sender:
+		team = sender.team
+	
 	if team.boys.size() == 5:
-		sender.run()
+		if sender:
+			sender.run()
+		else: return	
+	
 	team.cull_the_dead(false)
 	
-	var enemy = SlavePool.fetch("cherv")
-	if randi_range(0, 1): enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
-	if randi_range(0, 1): enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
-	if randi_range(0, 1): enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
-	if randi_range(0, 1): enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
+	var enemy = SlavePool.fetch(u_name)
+	if not CurrentRun.is_debug:
+		if randi_range(0, 1): enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
+		if randi_range(0, 1): enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
+		if randi_range(0, 1): enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
+		if randi_range(0, 1): enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
+	elif dress_up:
+		enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
+		enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
+		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
+		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
 	team.add_slave(enemy)
 
 # ====================
@@ -448,3 +462,39 @@ func _on_tutorial_ok_pressed() -> void:
 func _on_go_back_map_pressed() -> void:
 	CurrentRun.is_battle_tutorial = false
 	SignalBus.end_battle.emit()
+
+
+func _on_add_enemy_pressed() -> void:
+	%DebugEnemyContainer.visible = not %DebugEnemyContainer.visible
+
+func _add_enemy(u_name: String):
+	_on_reinforcement(null, u_name)
+
+
+func _on_add_status_pressed() -> void:
+	%DebugStatusContainer.visible = not %DebugStatusContainer.visible
+
+func _add_status(status: String):
+	for slave in good_team.boys_nodes:
+		slave.add_buff(status, 1)
+	for slave in evil_team.boys_nodes:
+		slave.add_buff(status, 1)
+
+
+func _on_win_battle_pressed() -> void:
+	SignalBus.good_won.emit()
+
+
+func _on_hurt_people_pressed() -> void:
+	for slave in good_team.boys_nodes:
+		Action.deal_damage(null, slave, 7)
+
+
+func _on_influenza_pressed() -> void:
+	for slave in evil_team.boys_nodes:
+		if slave.held.is_alive:
+			slave.set_hp(1, false)
+
+
+func _on_dress_up_toggled(toggled_on: bool) -> void:
+	dress_up = toggled_on

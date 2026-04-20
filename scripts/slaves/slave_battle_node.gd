@@ -322,8 +322,9 @@ func start_turn() -> void:
 	turn_started.emit()
 
 func ticker_down_buffs() -> void:
-	var to_be_erased : Array[String] = []
+	tags.erase(Action.TAG_WAS_ATTACKED_THIS_ROUND)
 	
+	var to_be_erased : Array[String] = []
 	for key: String in buffs.keys():
 		buffs[key] -= 1
 		add_stat(key, Gallery.icon_status[key], buffs[key])
@@ -367,6 +368,8 @@ func execute_intention():
 		for target_id in held_enemy.intention.targets:
 			var victim: SlaveNode = Battle.instance.good_team.boys_nodes[target_id]
 			held_enemy.intention.effect.call(victim)
+			if not victim.tags.has(Action.TAG_WAS_ATTACKED_THIS_ROUND):
+				victim.tags.append(Action.TAG_WAS_ATTACKED_THIS_ROUND)
 			attacked.emit(victim)
 		
 		if held_enemy.intention.is_melee:
@@ -387,10 +390,11 @@ func execute_intention():
 						boy.set_power(+1)
 						boy.update_intention()
 			Enemy.Intention.Type.Reinforcement:
-				SignalBus.reinforcement.emit(self)
-				if not is_instance_valid(self): 
-					SignalBus.new_turn.emit()
-					return
+				for i in range(held_enemy.intention.amount):
+					SignalBus.reinforcement.emit(self, held_enemy.intention.extra_data as String)
+					if not is_instance_valid(self): 
+						SignalBus.new_turn.emit()
+						return
 			_:
 				for target_id in held_enemy.intention.targets:
 					var victim: SlaveNode = Battle.instance.evil_team.boys_nodes[target_id]

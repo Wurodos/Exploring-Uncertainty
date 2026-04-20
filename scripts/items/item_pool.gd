@@ -47,6 +47,9 @@ func get_all(type: Item.Type = Item.Type.All, tier: int = 1) -> Array[Item]:
 func fetch(item_name: StringName) -> Item:
 	return _pool[item_name].duplicate()
 
+func has(item_name: StringName) -> bool:
+	return _pool.has(item_name)
+
 func fetch_random(type: Item.Type = Item.Type.All, tier: int = 1) -> Item:
 	match(type):
 		Item.Type.Weapon: return  _tier_pools[tier].weapons.pick_random().duplicate()

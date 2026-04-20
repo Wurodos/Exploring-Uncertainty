@@ -15,39 +15,58 @@ func _init() -> void:
 # IF GOOD SLAVE DIES, HEALS 15 HP, +1 SPEED, +2 POWER
 
 var times_summoned : int = 0
-var _extra_damage: int = 0
 
 func decide_intention() -> void:
 	super.decide_intention()
 	
-	var weak_slave_id : int = CurrentRun.good_boys.find_custom \
-		(func(slave: Slave): return slave.hp <= 10 + _extra_damage and slave.is_alive)
-	var faster_slave_id: int = CurrentRun.good_boys.find_custom \
-		(func(slave: Slave): return slave.speed > owner.held.speed and slave.is_alive)
+	
+		
+	
+	var weak_slave_id : int = Battle.instance.good_team.boys_nodes.find_custom \
+		(func(slave: SlaveNode): return slave.held.hp <= Action.calculate_damage(owner, slave, 10) and slave.held.is_alive)
+	var faster_slave_id: int = Battle.instance.good_team.boys_nodes.find_custom \
+		(func(slave: SlaveNode): return slave.held.speed > speed and slave.held.is_alive)
 	
 	
 	if owner.team.boys.size() == 1 and times_summoned < 5:
-		intention = Intention.new(Intention.Type.SummonStars, 2)
-		times_summoned += 1
+		intention.type = Intention.Type.Reinforcement
+		intention.amount = 2
+		intention.extra_data = "starry"
+		intention.is_support = true
 	elif weak_slave_id != -1:
-		intention = Intention.new(Intention.Type.DamageSingular, 10 + _extra_damage)
-		_extra_damage += 1
-		intention.target = weak_slave_id
+		intention.type = Intention.Type.DamageSingular
+		intention.is_support = false
+		intention.is_melee = true
+		intention.amount = Action.calculate_damage(owner, Battle.instance.good_team.boys_nodes[weak_slave_id], 10)
+		intention.effect = func(v: SlaveNode):
+			Action.deal_damage(owner, v, 10)
+		intention.targets = [weak_slave_id]
 	elif faster_slave_id != -1:
-		intention = Intention.new(Intention.Type.DamageSingular, 5 + _extra_damage)
-		_extra_damage += 1
-		intention.target = faster_slave_id
-		intention.extra_effect = func(): 
-			Battle.instance.good_team.boys_nodes[faster_slave_id].set_speed(-2)
+		intention.type = Intention.Type.DamageSingular
+		intention.is_support = false
+		intention.is_melee = true
+		intention.amount = Action.calculate_damage(owner, Battle.instance.good_team.boys_nodes[faster_slave_id], 4)
+		intention.effect = func(v: SlaveNode):
+			Action.deal_damage(owner, v, 4)
+			v.set_speed(-2)
+		intention.targets = [faster_slave_id]
 	else:
-		intention = Intention.new(Intention.Type.DamageTwo, 4 + _extra_damage)
-		_extra_damage += 1
-		var targets = _get_2_good_targets()
-		intention.target = targets[0]
-		if targets.size() > 1:
-			intention.target_second = targets[1]
-		else: intention.target_second = -1
-		
+		intention.type = Intention.Type.DamageTwo
+		intention.is_support = false
+		intention.is_melee = true
+		intention.amount = Action.calculate_damage(owner, null, 4)
+		intention.effect = func(v: SlaveNode):
+			Action.deal_damage(owner, v, 4)
+		intention.targets = []
+		var targets_left := 2
+		var i = 0
+		for slave in Battle.instance.good_team.boys_nodes:
+			if slave.held.is_alive:
+				intention.targets.append(i)
+				targets_left -= 1
+				if targets_left == 0:
+					break
+			i += 1
 
 
 

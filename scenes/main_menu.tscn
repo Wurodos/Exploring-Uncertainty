@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://bv5ejcc3ftpul" path="res://images/languages/russian_unselect.png" id="3_wu84c"]
 [ext_resource type="Texture2D" uid="uid://bj8rgm4anxbfv" path="res://images/languages/english_unselect.png" id="5_rtw2f"]
 [ext_resource type="Texture2D" uid="uid://b23qmkqdemon6" path="res://images/languages/english.png" id="6_oa1go"]
-[ext_resource type="Script" uid="uid://b7a2ai83umgwf" path="res://scripts/common/typewriter.gd" id="7_oa1go"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu84c"]
 bg_color = Color(0.690196, 0, 0, 1)
@@ -18,27 +17,14 @@ bg_color = Color(0.145098, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekxnf"]
 bg_color = Color(0.352941, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbmy8"]
-bg_color = Color(0.690196, 0.67451, 0, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oa1go"]
-bg_color = Color(0.403743, 0.425585, 9.62615e-08, 1)
+bg_color = Color(0.6901961, 0.40392157, 0.6666667, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtw2f"]
-bg_color = Color(0.765048, 0.747786, 3.85046e-07, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_oa1go"]
-font = ExtResource("1_l6cm7")
-font_size = 64
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lgwnu"]
-bg_color = Color(0.270588, 0.262745, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5dd4i"]
-bg_color = Color(0.123761, 0.0260562, 0.525897, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbmy8"]
+bg_color = Color(0.3457194, 0.16736346, 0.3326411, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jk1qb"]
-bg_color = Color(0.703105, 0.770696, 0.993789, 1)
+bg_color = Color(0.48044252, 0.24728116, 0.46302658, 1)
 
 [node name="MainMenu" type="Control" unique_id=1145108916]
 layout_mode = 3
@@ -50,11 +36,18 @@ grow_vertical = 2
 script = ExtResource("1_ekxnf")
 
 [node name="Button" type="Button" parent="." unique_id=180473707]
-layout_mode = 0
-offset_left = 352.0
-offset_top = 277.0
-offset_right = 867.0
-offset_bottom = 446.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -257.5
+offset_top = -84.5
+offset_right = 257.5
+offset_bottom = 84.5
+grow_horizontal = 2
+grow_vertical = 2
 focus_mode = 0
 theme_override_fonts/font = ExtResource("1_l6cm7")
 theme_override_font_sizes/font_size = 64
@@ -64,21 +57,27 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 script = ExtResource("3_tbmy8")
 string_id = &"prepare"
 
-[node name="Tutorial" type="Button" parent="." unique_id=967997204]
-visible = false
-layout_mode = 0
-offset_left = 352.0
-offset_top = 474.0
-offset_right = 867.0
-offset_bottom = 568.0
+[node name="Testing" type="Button" parent="." unique_id=995644760]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -181.0
+offset_top = -152.0
+offset_right = 181.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("1_l6cm7")
 theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = SubResource("StyleBoxFlat_tbmy8")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_oa1go")
-theme_override_styles/hover = SubResource("StyleBoxFlat_rtw2f")
+theme_override_styles/normal = SubResource("StyleBoxFlat_oa1go")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tbmy8")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jk1qb")
 script = ExtResource("3_tbmy8")
-string_id = &"tutorial"
+string_id = &"simulation"
 
 [node name="Language_en" type="TextureButton" parent="." unique_id=1280763976]
 layout_mode = 0
@@ -106,33 +105,16 @@ texture_hover = ExtResource("3_bqqt6")
 texture_disabled = ExtResource("3_bqqt6")
 stretch_mode = 0
 
-[node name="TestTypewriter" type="Label" parent="." unique_id=1121434438]
+[node name="ResetProgress" type="Button" parent="." unique_id=669801594]
 layout_mode = 0
-offset_left = 216.0
-offset_top = 53.0
-offset_right = 641.0
-offset_bottom = 130.0
-label_settings = SubResource("LabelSettings_oa1go")
-script = ExtResource("7_oa1go")
-
-[node name="Continue" type="Button" parent="." unique_id=1479430516]
-visible = false
-layout_mode = 0
-offset_left = 433.0
-offset_top = 102.0
-offset_right = 768.0
-offset_bottom = 237.0
-focus_mode = 0
-theme_override_fonts/font = ExtResource("1_l6cm7")
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxFlat_lgwnu")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_5dd4i")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jk1qb")
-script = ExtResource("3_tbmy8")
-string_id = &"continue"
+offset_left = 19.0
+offset_top = 23.0
+offset_right = 141.0
+offset_bottom = 91.0
+text = "Сбросить ВЕСЬ прогресс"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Tutorial" to="." method="_on_tutorial_pressed"]
+[connection signal="pressed" from="Testing" to="." method="_on_testing_pressed"]
 [connection signal="pressed" from="Language_en" to="." method="_on_switch_language" binds= ["en"]]
 [connection signal="pressed" from="Language_ru" to="." method="_on_switch_language" binds= ["ru"]]
-[connection signal="pressed" from="Continue" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="ResetProgress" to="." method="_on_reset_progress_pressed"]

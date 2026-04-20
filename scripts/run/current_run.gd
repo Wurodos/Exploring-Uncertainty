@@ -2,6 +2,8 @@ extends Node
 
 const save_path = "user://run.save"
 
+var is_debug: bool = false
+
 var good_boys: Array[Slave] = []
 var evil_boys: Array[Slave] = []
 var enemy_item_pool: ItemPool.TierPool
@@ -36,6 +38,8 @@ var elevators_repaired: int = 0
 
 var state: Game.State = Game.State.Map
 
+## Govnov: 3 madidididun
+#
 # deck will consist of 'cards' = enemy slaves or empty slots
 # cherv camp =  3 (2 in 1st zone) battles back to back (waves)
 # items are also in a deck, so no repeats until reshuffle
@@ -557,6 +561,19 @@ func arrange_evil_team(zone: int) -> Array[Slave]:
 		team[0].equip(fetch_enemy_item())
 	return team
 
+func arrange_govnov_team() -> Array[Slave]:
+	var team : Array[Slave] = [
+		SlavePool.fetch("madidididun"),
+		SlavePool.fetch("madidididun"),
+		SlavePool.fetch("madidididun")
+	]
+	for madi in team:
+		madi.equip(ItemPool.fetch("boxing_glove"))
+	return team
+
+
+
+
 # Throws random item out if at 24
 func put_item_in_inventory(item: Item) -> void:
 	if CurrentRun.inventory.size() == 24:
@@ -566,5 +583,5 @@ func put_item_in_inventory(item: Item) -> void:
 	CurrentRun.inventory.append(item)
 
 func arrange_boss() -> void:
-	CurrentRun.evil_boys = [ReptilePool.fetch("and_its_dark_again")]
+	CurrentRun.evil_boys = [ReptilePool.fetch("roots_and_toots")]
 	# CurrentRun.evil_boys[0].hp = 1

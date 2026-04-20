@@ -117,3 +117,5 @@ prudence_name;PRUDENCE;БЛАГОРАЗУМИЕ
 prudence_desc;END OF BATTLE: GRAB ALL ITEMS IN MARADEURING. ACTION: VIGILANCE TO ALL ALLIES;КОНЕЦ БОЯ: ЗАБИРАЙТЕ ВСЕ ПРЕДМЕТЫ ВО ВРЕМЯ МАРОДЕРСТВА. ДЕЙСТВИЕ: БДИТЕЛЬНОСТЬ ВСЕМ СОЮЗНИКАМ
 regime_change_name;REGIME CHANGE;СМЕНА РЕЖИМА
 regime_change_desc;END OF BATTLE IN CAMP: CONSTRUCT CITY, CC OR ELEVATOR;КОНЕЦ БОЯ В ЛАГЕРЕ: ВОЗВЕДИТЕ ЗДЕСЬ ГОРОД, ЦК ИЛИ ЛИФТ
+boxing_glove_name;Boxing Glove;Боксерская Перчатка
+boxing_glove_desc;INFLICTS {} HARM. x{} IF TARGET WAS ATTACKED THIS ROUND, IF TARGET;ПРИЧИНЯЕТ {} ВРЕДА. x{}, ЕСЛИ ЦЕЛЬ БЫЛА АТАКОВАНА В ЭТОМ РАУНДЕ

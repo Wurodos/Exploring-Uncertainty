@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DialogueNode" format=3 uid="uid://doj721uer8b6s"]
+
+[ext_resource type="Texture2D" uid="uid://c0s8xyw7od1ba" path="res://images/portraits/bikov/bikov_neutral.png" id="1_ucirn"]
+[ext_resource type="Script" uid="uid://da1waiviit08p" path="res://scripts/narrative/dialogue_node.gd" id="2_7n4q8"]
+
+[resource]
+script = ExtResource("2_7n4q8")
+portrait = ExtResource("1_ucirn")
+name_id = "pivil_bikov"
+text_id = "bikov_explanation_2"
+metadata/_custom_type_script = "uid://da1waiviit08p"

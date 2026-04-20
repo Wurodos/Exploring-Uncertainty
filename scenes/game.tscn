@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://dsmrrqajuq53f" path="res://audio/music/AwaitingAway.mp3" id="10_vtaks"]
 [ext_resource type="AudioStream" uid="uid://6jwkrqd1ryw8" path="res://audio/music/Roots And Toots.mp3" id="11_kvpfn"]
 [ext_resource type="Shader" uid="uid://dklolsev5g1t2" path="res://scenes/crt.gdshader" id="12_dinhu"]
+[ext_resource type="AudioStream" uid="uid://bijs8kvgi47pq" path="res://audio/music/First Mistake.mp3" id="12_kvuet"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kvuet"]
 shader = ExtResource("12_dinhu")
@@ -39,6 +40,7 @@ script = ExtResource("3_lbhrr")
 music = Dictionary[StringName, AudioStream]({
 &"battle": ExtResource("4_dinhu"),
 &"battle_difficult": ExtResource("9_0tnpc"),
+&"govnov_1": ExtResource("12_kvuet"),
 &"heal": ExtResource("8_gee14"),
 &"hurt": ExtResource("5_u5sy4"),
 &"map": ExtResource("10_vtaks"),

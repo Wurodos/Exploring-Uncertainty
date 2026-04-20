@@ -27,6 +27,8 @@ func _check_elevator(elevator: Room) -> void:
 	CurrentRun.state = Game.State.Window
 	$ItemGrid.visible = false
 	$Power.visible = false
+	$Required.visible = true
+	teleport_row.visible = false
 	
 	required_weapons = floor((elevator.data % 10000) / 1000)
 	required_hats = floor((elevator.data % 1000) / 100)

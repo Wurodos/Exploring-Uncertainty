@@ -3,9 +3,11 @@
 [ext_resource type="Script" uid="uid://ba1qr1wxdajh8" path="res://scripts/run/intro.gd" id="1_ioskq"]
 [ext_resource type="FontFile" uid="uid://hym6fbjhhg2u" path="res://text/font/Share-Tech-CYR.otf" id="2_4bx60"]
 [ext_resource type="Script" uid="uid://dd2yytdivaq0j" path="res://scripts/common/label_localized.gd" id="2_yjqpq"]
+[ext_resource type="AudioStream" uid="uid://dygk3uk2xt08d" path="res://audio/music/EndOfTheLine.mp3" id="3_bu1yb"]
 [ext_resource type="Texture2D" uid="uid://qccke8ymm51x" path="res://images/intro/europe.png" id="4_i2l1n"]
 [ext_resource type="Texture2D" uid="uid://dgy0pujd1t2qq" path="res://images/shapes/plain-circle.png" id="5_wfs7u"]
 [ext_resource type="Script" uid="uid://b7a2ai83umgwf" path="res://scripts/common/typewriter.gd" id="6_es01l"]
+[ext_resource type="AudioStream" uid="uid://c8hx2iwy2ntir" path="res://audio/music/Numbers.mp3" id="7_0naf5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4bx60"]
 line_spacing = -16.0
@@ -183,6 +185,12 @@ script = ExtResource("1_ioskq")
 warning_delay = 5.0
 hide_warning = NodePath("Warning/Hide")
 
+[node name="Numbers" type="AudioStreamPlayer" parent="." unique_id=1755410620]
+stream = ExtResource("7_0naf5")
+
+[node name="StoryMusic" type="AudioStreamPlayer" parent="." unique_id=1719773502]
+stream = ExtResource("3_bu1yb")
+
 [node name="Warning" type="Control" parent="." unique_id=1307078139]
 visible = false
 layout_mode = 1
@@ -267,7 +275,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Story" type="Control" parent="." unique_id=1578619181]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -371,12 +378,12 @@ text = "[ММ-4] Система инициализирована.$
 РЕПТИЛИЙ обнаружено:$ 3$
 РЕПТИЛИЙ нейтрализовано:$ 0$
 [ЦЕНТР] Последние события:$
-<15:45 25.12.78> Конец первой фазы эвакуации.$
+<15:45 25.12.82> Конец первой фазы эвакуации.$
 Мобильные силы успешно выведены.$
 Шахты успешно герметизированы.$
-<14:05 01.01.79> Начало второй фазы эвакуации.$
+<14:05 01.01.83> Начало второй фазы эвакуации.$
 Цель номер один - ветвь РОССОНЫ-3.$
-<16:00 02.01.79> Утвержден указ о внедрении в конфликт 
+<16:00 02.01.83> Утвержден указ о внедрении в конфликт 
 четвертой системы дистанционного управления БОЙЦАМИ
 \"МеждуМорье\" ММ-4 (кодовое название - \"Благонадежность\")"
 label_settings = SubResource("LabelSettings_es01l")

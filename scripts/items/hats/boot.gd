@@ -27,8 +27,10 @@ func _check_and_heal(room: Room):
 		sender.hp = min(sender.maxhp, sender.hp + heal)
 		SignalBus.refresh.emit()
 
+@warning_ignore("shadowed_variable")
 func use_item(sender: SlaveNode, ally: SlaveNode):
 	super.use_item(sender, ally)
+	if sender == ally: return
 	if not ally.held.is_alive: return
 	
 	if sender.held is Enemy:
@@ -51,6 +53,7 @@ func on_level_up():
 	if level == 3 or level == 5: extra_speed += 1
 	if level >= 4: harm -= 2
 
+@warning_ignore("shadowed_variable")
 func get_priority(sender: SlaveNode, ally: SlaveNode) -> int:
 	if ally.held.hp <= harm: return -3
 	if not ally.held.is_alive: return -999
@@ -58,6 +61,7 @@ func get_priority(sender: SlaveNode, ally: SlaveNode) -> int:
 		return +1 + ally.held.weapon.get_harm() / sender.held.weapon.get_harm()
 	return -1
 
+@warning_ignore("shadowed_variable")
 func get_intention(sender: SlaveNode) -> Enemy.Intention:
 	var intention = Enemy.Intention.new(Enemy.Intention.Type.Support)
 	intention.is_support = true

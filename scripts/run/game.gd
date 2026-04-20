@@ -2,7 +2,7 @@ extends Node
 
 class_name Game
 
-enum State {Map, Battle, Window, Popup}
+enum State {Map, Battle, Window, Popup, Phone}
 
 const battle_scene = preload("res://scenes/battle.tscn")
 const map_scene = preload("res://scenes/map.tscn")
@@ -29,7 +29,7 @@ func _ready() -> void:
 
 	## DEBUG -> Inventory 
 	#CurrentRun.craft_recipes.append(ItemPool.fetch("regime_change"))
-	#CurrentRun.inventory.append(ItemPool.fetch("generator"))
+	#CurrentRun.inventory.append(ItemPool.fetch("boxing_glove"))
 	#CurrentRun.inventory.append(ItemPool.fetch("regime_change"))
 	#CurrentRun.inventory.append(ItemPool.fetch("wire"))
 	#CurrentRun.inventory.append(ItemPool.fetch("bomb"))

@@ -8,6 +8,7 @@ var _hide_info : bool = false
 
 func _ready() -> void:
 	visible = false
+	$Debug.visible = CurrentRun.is_debug
 	
 	SignalBus.add_item.connect(_on_add_item)
 	SignalBus.show_item_info.connect(_on_show_item_info)
@@ -106,3 +107,35 @@ func _on_close_pressed() -> void:
 		SignalBus.advance_tutorial.emit()
 	
 	visible = false
+
+
+##
+##   DEBUG
+##
+
+var current_level: int = 1
+
+func _on_get_item_pressed() -> void:
+	if ItemPool.has($Debug/UName.text):
+		var item := ItemPool.fetch($Debug/UName.text)
+		for i in range(current_level - 1):
+			item.level_up()
+		CurrentRun.put_item_in_inventory(item)
+		refresh_inventory()
+
+func _on_get_recipe_pressed() -> void:
+	if ItemPool.has($Debug/UName.text):
+		var item := ItemPool.fetch($Debug/UName.text)
+		CurrentRun.craft_recipes.append(item)
+		refresh_inventory()
+
+func _on_plus_pressed() -> void:
+	if current_level < 5:
+		current_level += 1
+	$Debug/LevelLabel.text = "Уровень: " + str(current_level)
+
+
+func _on_minus_pressed() -> void:
+	if current_level > 1:
+		current_level -= 1
+	$Debug/LevelLabel.text = "Уровень: " + str(current_level)

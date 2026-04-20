@@ -37,10 +37,12 @@ func _update() -> void:
 	for craftable: Craftable in craftable_container.get_children():
 		if not craftable.crafted.is_connected(_update):
 			craftable.crafted.connect(_update)
+		var enough_scraps := true
 		for scrap : Item.Scrap in craftable.held.craft_reqs.keys():
 			if CurrentRun.scraps[scrap] < craftable.held.craft_reqs[scrap]:
 				craftable.get_node("Craft").disabled = true
-				continue
+				enough_scraps = false
+		if not enough_scraps: continue
 		
 		var needed: Array[Item] = craftable.held.craft_items.duplicate()
 		for item : Item in CurrentRun.inventory:
@@ -49,6 +51,8 @@ func _update() -> void:
 				needed.pop_at(id)
 		if not needed.is_empty():
 			craftable.get_node("Craft").disabled = true
+		else:
+			craftable.get_node("Craft").disabled = false
 
 
 func _on_close_pressed() -> void:

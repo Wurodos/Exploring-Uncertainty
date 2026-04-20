@@ -23,9 +23,16 @@
 [ext_resource type="Texture2D" uid="uid://py17lko5dydj" path="res://images/scraps/tooth.png" id="18_fpf3k"]
 [ext_resource type="Texture2D" uid="uid://b7h2htdmn1uad" path="res://images/scraps/oil.png" id="19_bi5l8"]
 [ext_resource type="Texture2D" uid="uid://dyb2np6bqygrc" path="res://images/shapes/rope.png" id="21_saiin"]
+[ext_resource type="Texture2D" uid="uid://brfycwyqi4ev8" path="res://images/slaves/communist.png" id="22_1m01a"]
+[ext_resource type="Texture2D" uid="uid://bmn1ru4ex8ri1" path="res://images/slaves/scarymotherfucker.png" id="23_lv4so"]
 [ext_resource type="Texture2D" uid="uid://bei3mmvex0vl3" path="res://images/icons/no_loot.png" id="24_bi5l8"]
+[ext_resource type="Texture2D" uid="uid://k66qwp0f8sop" path="res://images/slaves/swirly.png" id="24_eivww"]
 [ext_resource type="Script" uid="uid://bfsf7pluc6nmc" path="res://scripts/minor/no_loot.gd" id="24_jt4d8"]
+[ext_resource type="Texture2D" uid="uid://bn4k7m7p68p0i" path="res://images/slaves/chomper.png" id="25_rwtbh"]
+[ext_resource type="Texture2D" uid="uid://c0s374bsgkkra" path="res://images/slaves/quagmire.png" id="26_f0g0v"]
 [ext_resource type="Shader" uid="uid://b0g6g6yga80n3" path="res://shaders/dark.gdshader" id="26_kl6ie"]
+[ext_resource type="Texture2D" uid="uid://qjp74xom74mu" path="res://images/reptiles/jet.png" id="27_at2n2"]
+[ext_resource type="Texture2D" uid="uid://cu8nq4toon8uj" path="res://images/buffs/shield.png" id="28_e50ek"]
 
 [sub_resource type="Animation" id="Animation_dd63g"]
 length = 0.001
@@ -570,28 +577,6 @@ offset_top = -150.0
 offset_right = 201.0
 offset_bottom = -10.0
 
-[node name="Debug" type="Control" parent="UI" unique_id=1836781495]
-visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Newturn" type="Button" parent="UI/Debug" unique_id=1032550854]
-layout_mode = 0
-offset_left = -138.0
-offset_top = 23.0
-offset_right = 109.0
-offset_bottom = 104.0
-text = "New turn"
-
-[node name="LowerHP" type="Button" parent="UI/Debug" unique_id=596581837]
-layout_mode = 0
-offset_left = -147.0
-offset_top = -77.0
-offset_right = 156.0
-offset_bottom = -16.0
-text = "Lower HP to 1 on top/bottom enemies"
-
 [node name="BattleEnd" type="Control" parent="UI" unique_id=56380509]
 visible = false
 anchors_preset = 0
@@ -880,6 +865,189 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
+[node name="Debug" type="Control" parent="CLayer/GUI" unique_id=1836781495]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AddEnemy" type="Button" parent="CLayer/GUI/Debug" unique_id=1018916052]
+layout_mode = 1
+offset_right = 262.0
+offset_bottom = 49.0
+text = "Добавить врага"
+
+[node name="AddStatus" type="Button" parent="CLayer/GUI/Debug" unique_id=1856546502]
+layout_mode = 1
+offset_top = 53.0
+offset_right = 262.0
+offset_bottom = 102.0
+text = "Добавить статус"
+
+[node name="WinBattle" type="Button" parent="CLayer/GUI/Debug" unique_id=1385858186]
+layout_mode = 1
+offset_top = 111.0
+offset_right = 262.0
+offset_bottom = 160.0
+text = "Выиграть бой"
+
+[node name="HurtPeople" type="Button" parent="CLayer/GUI/Debug" unique_id=1028847560]
+layout_mode = 1
+offset_top = 168.0
+offset_right = 262.0
+offset_bottom = 217.0
+text = "Нанести всем 7 вреда"
+
+[node name="Influenza" type="Button" parent="CLayer/GUI/Debug" unique_id=1629340670]
+layout_mode = 1
+offset_top = 221.0
+offset_right = 262.0
+offset_bottom = 270.0
+text = "Опустить здоровье врагов до 1"
+
+[node name="DressUp" type="Button" parent="CLayer/GUI/Debug" unique_id=1685280606]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -49.0
+offset_right = 262.0
+grow_vertical = 0
+toggle_mode = true
+text = "Враги приходят с экипировкой"
+
+[node name="DebugEnemyContainer" type="HBoxContainer" parent="CLayer/GUI/Debug" unique_id=1233311621]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 133.0
+offset_bottom = 133.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="AddCherv" type="Button" parent="CLayer/GUI/Debug/DebugEnemyContainer" unique_id=1253953214]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CLayer/GUI/Debug/DebugEnemyContainer/AddCherv" unique_id=285303048]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("22_1m01a")
+expand_mode = 4
+
+[node name="AddStarry" type="Button" parent="CLayer/GUI/Debug/DebugEnemyContainer" unique_id=1955249244]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CLayer/GUI/Debug/DebugEnemyContainer/AddStarry" unique_id=739641302]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_lv4so")
+expand_mode = 4
+
+[node name="AddSwirly" type="Button" parent="CLayer/GUI/Debug/DebugEnemyContainer" unique_id=839922570]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CLayer/GUI/Debug/DebugEnemyContainer/AddSwirly" unique_id=1424672300]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("24_eivww")
+expand_mode = 4
+
+[node name="AddChomper" type="Button" parent="CLayer/GUI/Debug/DebugEnemyContainer" unique_id=1694201580]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CLayer/GUI/Debug/DebugEnemyContainer/AddChomper" unique_id=2119293756]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("25_rwtbh")
+expand_mode = 4
+
+[node name="AddQuagmire" type="Button" parent="CLayer/GUI/Debug/DebugEnemyContainer" unique_id=118201598]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CLayer/GUI/Debug/DebugEnemyContainer/AddQuagmire" unique_id=641647475]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_f0g0v")
+expand_mode = 4
+
+[node name="AddJet" type="Button" parent="CLayer/GUI/Debug/DebugEnemyContainer" unique_id=1925135474]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CLayer/GUI/Debug/DebugEnemyContainer/AddJet" unique_id=1622412172]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("27_at2n2")
+expand_mode = 4
+
+[node name="DebugStatusContainer" type="HBoxContainer" parent="CLayer/GUI/Debug" unique_id=508304092]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 175.0
+offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="AddShield" type="Button" parent="CLayer/GUI/Debug/DebugStatusContainer" unique_id=416026987]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CLayer/GUI/Debug/DebugStatusContainer/AddShield" unique_id=1251222088]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("28_e50ek")
+expand_mode = 4
+
 [node name="Wave" type="Control" parent="CLayer/GUI" unique_id=1812729134]
 layout_mode = 1
 anchors_preset = 5
@@ -977,6 +1145,7 @@ string_id = &"no_loot_reminder"
 metadata/_custom_type_script = "uid://dd2yytdivaq0j"
 
 [node name="SlaveInfo" type="Control" parent="CLayer/GUI" unique_id=1674373850]
+visible = false
 z_index = 5
 anchors_preset = 0
 offset_left = 623.0
@@ -1075,6 +1244,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EnemyInfo" type="Control" parent="CLayer/GUI" unique_id=699097615]
+visible = false
 z_index = 5
 anchors_preset = 0
 offset_left = 73.0
@@ -1154,10 +1324,21 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="mouse_entered" from="UI/Loot/Bag" to="UI/Loot" method="_on_bag_mouse_entered"]
-[connection signal="pressed" from="UI/Debug/Newturn" to="." method="_on_newturn_pressed"]
-[connection signal="pressed" from="UI/Debug/LowerHP" to="." method="_on_lower_hp_pressed"]
 [connection signal="pressed" from="UI/BattleEnd/GoBackMap" to="." method="_on_go_back_map_pressed"]
 [connection signal="pressed" from="UI/Fail/Exit" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="UI/TutorialBox/OK" to="." method="_on_tutorial_ok_pressed"]
+[connection signal="pressed" from="CLayer/GUI/Debug/AddEnemy" to="." method="_on_add_enemy_pressed"]
+[connection signal="pressed" from="CLayer/GUI/Debug/AddStatus" to="." method="_on_add_status_pressed"]
+[connection signal="pressed" from="CLayer/GUI/Debug/WinBattle" to="." method="_on_win_battle_pressed"]
+[connection signal="pressed" from="CLayer/GUI/Debug/HurtPeople" to="." method="_on_hurt_people_pressed"]
+[connection signal="pressed" from="CLayer/GUI/Debug/Influenza" to="." method="_on_influenza_pressed"]
+[connection signal="toggled" from="CLayer/GUI/Debug/DressUp" to="." method="_on_dress_up_toggled"]
+[connection signal="pressed" from="CLayer/GUI/Debug/DebugEnemyContainer/AddCherv" to="." method="_add_enemy" binds= ["cherv"]]
+[connection signal="pressed" from="CLayer/GUI/Debug/DebugEnemyContainer/AddStarry" to="." method="_add_enemy" binds= ["starry"]]
+[connection signal="pressed" from="CLayer/GUI/Debug/DebugEnemyContainer/AddSwirly" to="." method="_add_enemy" binds= ["swirly"]]
+[connection signal="pressed" from="CLayer/GUI/Debug/DebugEnemyContainer/AddChomper" to="." method="_add_enemy" binds= ["chomper"]]
+[connection signal="pressed" from="CLayer/GUI/Debug/DebugEnemyContainer/AddQuagmire" to="." method="_add_enemy" binds= ["quagmire"]]
+[connection signal="pressed" from="CLayer/GUI/Debug/DebugEnemyContainer/AddJet" to="." method="_add_enemy" binds= ["jet"]]
+[connection signal="pressed" from="CLayer/GUI/Debug/DebugStatusContainer/AddShield" to="." method="_add_status" binds= ["shield"]]
 [connection signal="mouse_entered" from="CLayer/GUI/NoLoot/TextureRect" to="CLayer/GUI/NoLoot" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CLayer/GUI/NoLoot/TextureRect" to="CLayer/GUI/NoLoot" method="_on_mouse_exited"]

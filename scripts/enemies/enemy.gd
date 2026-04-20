@@ -14,6 +14,7 @@ class Intention:
 	var is_support: bool = false
 	var is_melee: bool = true
 	var timer: int  = 0
+	var extra_data: Variant
 	
 	@warning_ignore("shadowed_variable")
 	func _init(type: Type, amount: int = -1) -> void:
@@ -57,7 +58,8 @@ static func deserialize(data: Dictionary) -> Enemy:
 	return enemy
 
 func on_attacked(_attacker: SlaveNode) -> void:
-	pass
+	if not owner.tags.has(Action.TAG_WAS_ATTACKED_THIS_ROUND):
+		owner.tags.append(Action.TAG_WAS_ATTACKED_THIS_ROUND)
 
 # Override this
 func update_stats(node: SlaveNode) -> void:
@@ -78,6 +80,20 @@ func _intention_weapon(target: int, victim: SlaveNode) -> void:
 	intention.is_melee = owner.held.weapon.is_melee
 	if intention.targets.is_empty():
 		intention.targets = [target]
+
+
+# condition returns a number
+# highest gets picked
+func _get_target(condition: Callable) -> int:
+	var i := 0
+	var id := 0
+	var highest := -INF
+	for slave : SlaveNode in Battle.instance.good_team.boys_nodes:
+		if (condition.call(slave) as int) > highest:
+			id = i
+			highest = condition.call(slave)
+		i += 1
+	return id
 
 func _get_random_good_target() -> int:
 	var possible : Array[int] = []
@@ -102,18 +118,6 @@ func _get_random_good_target() -> int:
 			possible.append(i)
 		i += 1	
 	return possible.pick_random()
-
-func _get_2_good_targets() -> Array[int]:
-	var possible : Array[int] = []
-	var i = 0
-	for slave : SlaveNode in Battle.instance.good_team.boys_nodes:
-		if slave.held.is_alive:
-			possible.append(i)
-		i += 1	
-	possible.shuffle()
-	if possible.size() > 1:
-		return [possible[0], possible[1]]
-	else: return [possible[0]]
 
 func _convert_node_to_target(node: SlaveNode, team: Array[Slave]) -> int:
 	var i = 0

@@ -14,7 +14,7 @@ func _focus_camera(pos: Vector2):
 	global_position = pos
 
 func _on_mouse_dragged(delta: Vector2):
-	if CurrentRun.state == Game.State.Map:
+	if CurrentRun.state == Game.State.Map or CurrentRun.state == Game.State.Phone:
 		delta *= drag_multiplier
 		position.x = clamp(position.x - delta.x, -bound, bound)
 		position.y = clamp(position.y - delta.y, -bound, bound)

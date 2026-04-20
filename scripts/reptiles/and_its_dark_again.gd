@@ -11,7 +11,9 @@ func on_start_battle(node: SlaveNode) -> void:
 
 func decide_intention() -> void:
 	super.decide_intention()
-
+	var target = _get_random_good_target()
+	var victim = Battle.instance.good_team.boys_nodes[target]
+	_intention_weapon(target, victim)
 
 
 #
