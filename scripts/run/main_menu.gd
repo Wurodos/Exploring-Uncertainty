@@ -27,8 +27,8 @@ func _on_switch_language(lang: String):
 func _on_tutorial_pressed() -> void:
 	CurrentRun.is_tutorial = true
 	CurrentRun.is_battle_tutorial = true
-	_on_button_pressed()
-
+	get_tree().change_scene_to_file("res://scenes/tutorial.tscn")
+	
 
 
 ## DEBUG

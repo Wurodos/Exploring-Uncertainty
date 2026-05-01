@@ -32,7 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://c02os5gympk53" path="res://images/portraits/bikov/bikov_eye.png" id="17_tf62m"]
 [ext_resource type="Script" uid="uid://da1waiviit08p" path="res://scripts/narrative/dialogue_node.gd" id="17_w5y4v"]
 [ext_resource type="Script" uid="uid://c1yalf0kclcqm" path="res://scripts/common/rich_typewriter.gd" id="18_ogd7i"]
-[ext_resource type="Resource" uid="uid://citkrby8o11b7" path="res://scripts/narrative/first_contact/bikov_introduction.tres" id="18_v7gfb"]
+[ext_resource type="Resource" uid="uid://citkrby8o11b7" path="res://dialogue/first_contact/bikov_introduction.tres" id="18_v7gfb"]
 [ext_resource type="Script" uid="uid://ctoap32euag0p" path="res://scripts/battle/slave_info.gd" id="19_mkblt"]
 [ext_resource type="Texture2D" uid="uid://cfowi84shmwbh" path="res://images/icons/power.svg" id="20_4o3w1"]
 [ext_resource type="Texture2D" uid="uid://dwfqtvo1gro0n" path="res://images/icons/rotary-phone.png" id="20_nc68e"]
@@ -59,7 +59,6 @@
 [ext_resource type="Script" uid="uid://dd2yytdivaq0j" path="res://scripts/common/label_localized.gd" id="35_cgoaf"]
 [ext_resource type="Texture2D" uid="uid://bf5hkbhmtbyi4" path="res://images/shapes/arrow_green.png" id="43_8kgjo"]
 [ext_resource type="Script" uid="uid://c8rdumvdrdg4e" path="res://scripts/map/elevator_window.gd" id="45_baix8"]
-[ext_resource type="Resource" uid="uid://qcdgn33r2lq5" path="res://scripts/narrative/first_contact/pip_correction.tres" id="55_vwuk8"]
 
 [sub_resource type="Animation" id="Animation_5u2yt"]
 length = 0.001
@@ -2049,7 +2048,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("16_tf62m")
-lines = Array[ExtResource("17_w5y4v")]([ExtResource("18_v7gfb"), ExtResource("55_vwuk8")])
+lines = Array[ExtResource("17_w5y4v")]([ExtResource("18_v7gfb")])
 
 [node name="Speaker" type="Control" parent="GUI/Dialogue" unique_id=698234315]
 visible = false

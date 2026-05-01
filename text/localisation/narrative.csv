@@ -44,12 +44,17 @@ tutorial_battle_loot_0;At the end of the battle you can pick up the enemies' ITE
 tutorial_battle_loot_1;Simply drag the desired ITEM from the two into the INVENTORY.;Просто перетяните желаемый ПРЕДМЕТ из двух в ИНВЕНТАРЬ.
 tutorial_battle_loot_2;It is worth mentioning that only Federation FIGHTERS can use ITEMS.;Стоит сказать, что только БОЙЦЫ Федерации умеют использовать ПРЕДМЕТЫ.
 tutorial_battle_loot_3;The enemies only use them to enhance their existing capabilities.;Враги же всего лишь усиляют с помощью них свои существующие возможности.
+tutorial_new_0;;Междуморье!
+tutorial_new_1;;Это изобретение, которое навсегда установит в Федерации долгожелаемый и вечноискомый порядок.\nНикакого кровопролития*.\nНикаких жертв**.
+tutorial_new_2;;В основе работы Междуморья лежат БОЙЦЫ и ПРЕДМЕТЫ.
+tutorial_new_3;;Да ты посмотри на этого красавца!\n30 ЗДОРОВЬЯ, чтобы смело принимать на себя удары врагов!\nМесто для шляпы, оружия и, с последними модификациями, -\n 2 безделушки!
+tutorial_new_4;;
 reptile_without_comms;FEDERATION: Don't even think about returning without receiving information from the Communication Center!;ФЕДЕРАЦИЯ: Даже не думайте возвращаться, не получив информацию из Центра Коммуникации!
 pivil_bikov;Pivil Bikov;Пивил Биков
 pip;Public Institute of Problems;Общественный Институт Проблем
 bikov_introduction;;Прием!$ Прием!$\nВы меня слышите?$\n[color=yellow]Оператор[/color]!$\n
-pip_correction;;Мы получили обратный ответ.$\nСистема в норме.$\nОператор [color=yellow]внимает[/color] вам.$\nКлоповник Биков, отойдите\nот камеры. 
-bikov_correction;;Да, прощу прошения.\nВаша цель на сегодня -\nполучить информацию из [color=yellow]Центра Коммуникации[/color].
+pip_correction;;Мы получили обратный ответ.$\nСистема в норме.$\nОператор [color=yellow]внимает[/color] вам.$\nКлоповник Биков, отойдите\nот камеры.
+bikov_correction;;Да, прощу прошения.\nТвоя цель на сегодня -\nполучить информацию из [color=yellow]Центра Коммуникации[/color].
 bikov_explanation_1;;Как только ты обнаружишь\nодин из них, я тут же\nсвяжусь с тобой.\nДо этого момента изучай\nнеизвестность и устраняй\nлюбые угрозы на твоем пути$\nУсек, Оператор?
 bikov_explanation_2;;А еще - не будь идиотом\nи обвесь своих [color=yellow]бойцов[/color]\n[color=red]предметами[/color]. Мне проблемники сказали,\nчто ты уже знаешь, как\nэто делается.$\nТак что вперед -\nи с песней!
 bikov_final;;ОПЕРАТОР, МАТЬ ТВОЮ, ЧЕГО СТОИМ?!\nКОГО ЖДЕМ?!\nНОГИ В РУКИ - И ВПЕРЕД ОСВОБОЖДАТЬ ШАХТЫ!

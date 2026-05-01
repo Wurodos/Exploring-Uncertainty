@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="DialogueNode" format=3 uid="uid://qcdgn33r2lq5"]
 
-[ext_resource type="Resource" uid="uid://dhq6t7rtvc5gx" path="res://scripts/narrative/first_contact/bikov_correction.tres" id="1_f074q"]
+[ext_resource type="Resource" uid="uid://dhq6t7rtvc5gx" path="res://dialogue/first_contact/bikov_correction.tres" id="1_f074q"]
 [ext_resource type="Texture2D" uid="uid://bh0iguaowf5mt" path="res://images/portraits/pip/pip_default.png" id="1_p37tp"]
 [ext_resource type="Script" uid="uid://da1waiviit08p" path="res://scripts/narrative/dialogue_node.gd" id="2_f074q"]
 

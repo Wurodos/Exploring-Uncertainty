@@ -35,15 +35,30 @@ func use_item(sender: SlaveNode, ally: SlaveNode):
 	
 	if sender.held is Enemy:
 		Action.deal_damage(sender, ally, harm)
-		var victim : SlaveNode = Battle.instance.good_team.boys_nodes.filter(func(enemy: SlaveNode): return enemy.held.is_alive).pick_random()
-		ally.held.weapon.get_intention(ally).effect.call(victim)
-		ally.attacked.emit(victim)
+		
+		if ally.held.weapon.target == Item.Target.Single:
+			var victim : SlaveNode = Battle.instance.good_team.boys_nodes.filter(func(enemy: SlaveNode): return enemy.held.is_alive).pick_random()
+			ally.held.weapon.get_intention(ally).effect.call(victim)
+			ally.attacked.emit(victim)
+		else:
+			for victim: SlaveNode in Battle.instance.good_team.boys_nodes:
+				ally.held.weapon.get_intention(ally).effect.call(victim)
+				ally.attacked.emit(victim)
+		
 		ally.turn_ended.emit()
 	else:
 		Action.deal_damage(sender, ally, harm)
-		var victim : SlaveNode = Battle.instance.evil_team.boys_nodes.filter(func(enemy: SlaveNode): return enemy.held.is_alive).pick_random()
-		ally.held.weapon.use_item(ally, victim)
-		ally.attacked.emit(victim)
+		if ally.held.weapon.target == Item.Target.Single:
+			var victim : SlaveNode = Battle.instance.evil_team.boys_nodes.filter(func(enemy: SlaveNode): return enemy.held.is_alive).pick_random()
+			ally.held.weapon.use_item(ally, victim)
+			ally.attacked.emit(victim)
+			(victim.held as Enemy).on_attacked(ally)
+		else:
+			for victim: SlaveNode in Battle.instance.evil_team.boys_nodes:
+				ally.held.weapon.use_item(ally, victim)
+				ally.attacked.emit(victim)
+				(victim.held as Enemy).on_attacked(ally)
+			
 		ally.turn_ended.emit()
 
 func on_level_up():

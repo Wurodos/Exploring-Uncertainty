@@ -6,6 +6,8 @@ const kw_box_prefab = preload("res://prefabs/items/keyword_box.tscn")
 
 enum Type {Default, Craft}
 
+@export var default_item: Item = null
+
 @onready var item_name : Label = $Name
 @onready var item_desc : Label = $Desc
 
@@ -24,6 +26,10 @@ enum Type {Default, Craft}
 }
 
 @onready var req_items: Control = $Craft/Items
+
+func _ready() -> void:
+	if default_item:
+		apply(default_item)
 
 func apply(item: Item, type: Type = Type.Default) -> void:
 	item_name.text = item.name

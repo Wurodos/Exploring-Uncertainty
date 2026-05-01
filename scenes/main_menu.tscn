@@ -113,8 +113,17 @@ offset_right = 141.0
 offset_bottom = 91.0
 text = "Сбросить ВЕСЬ прогресс"
 
+[node name="Tutorial" type="Button" parent="." unique_id=1447273922]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 108.0
+offset_right = 224.0
+offset_bottom = 176.0
+text = "Обучение"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Testing" to="." method="_on_testing_pressed"]
 [connection signal="pressed" from="Language_en" to="." method="_on_switch_language" binds= ["en"]]
 [connection signal="pressed" from="Language_ru" to="." method="_on_switch_language" binds= ["ru"]]
 [connection signal="pressed" from="ResetProgress" to="." method="_on_reset_progress_pressed"]
+[connection signal="pressed" from="Tutorial" to="." method="_on_tutorial_pressed"]
