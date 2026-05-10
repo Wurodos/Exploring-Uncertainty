@@ -17,6 +17,48 @@
 [ext_resource type="PackedScene" uid="uid://dj5w5iqx004t4" path="res://prefabs/battle/item_entry.tscn" id="11_wr8iv"]
 [ext_resource type="Resource" uid="uid://b5btplyr7g8ma" path="res://pool/items/tier1/weapons/no_weapon.tres" id="12_e13mp"]
 [ext_resource type="Resource" uid="uid://bkp4m7qyva2cb" path="res://pool/items/tier1/hats/no_hat.tres" id="13_vrdqu"]
+[ext_resource type="Script" uid="uid://bth4nhqnvlgi4" path="res://scripts/map/team_window.gd" id="14_7a100"]
+[ext_resource type="Texture2D" uid="uid://dm0w3jn5uyl80" path="res://images/backdrops/team.png" id="15_feaue"]
+[ext_resource type="PackedScene" uid="uid://c7me7xco4pqg1" path="res://prefabs/slaves/slave_team.tscn" id="16_210s6"]
+[ext_resource type="Script" uid="uid://cc8bvypcj1twk" path="res://scripts/common/grid.gd" id="17_5qvs7"]
+[ext_resource type="AudioStream" uid="uid://bfsqhtaiq1hac" path="res://audio/music/Well-rounded.mp3" id="23_7a100"]
+[ext_resource type="Script" uid="uid://tyb7waldpp30" path="res://scripts/utils/input_manager.gd" id="24_feaue"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vrdqu"]
+bg_color = Color(1.13107e-06, 0.398677, 0.417649, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmspm"]
+bg_color = Color(1.8049032e-07, 0.22578561, 0.23788574, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ikfo1"]
+bg_color = Color(2.695322e-06, 0.5539626, 0.5795091, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
 
 [sub_resource type="Animation" id="Animation_8ho6b"]
 length = 0.001
@@ -185,7 +227,7 @@ _data = {
 &"opacity": SubResource("Animation_vrdqu")
 }
 
-[node name="Tutorial" type="Control" unique_id=528420835 node_paths=PackedStringArray("slave_item_animation", "slave_opacity", "slave_detached", "slave_pos_scale")]
+[node name="Tutorial" type="Control" unique_id=528420835 node_paths=PackedStringArray("slave_item_animation", "slave_opacity", "slave_detached", "slave_pos_scale", "text_node", "timer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -193,13 +235,41 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4kmhl")
-slave_item_animation = NodePath("SlaveItemShowcase/Appear")
-slave_opacity = NodePath("SlaveItemShowcase/StatsOpacity")
-slave_detached = NodePath("SlaveItemShowcase/SlavesSpin/Slave3")
-slave_pos_scale = NodePath("SlaveItemShowcase/SlavePosScale")
+slave_item_animation = NodePath("CanvasLayer/SlaveItemShowcase/Appear")
+slave_opacity = NodePath("CanvasLayer/SlaveItemShowcase/StatsOpacity")
+slave_detached = NodePath("CanvasLayer/SlaveItemShowcase/SlavesSpin/Slave3")
+slave_pos_scale = NodePath("CanvasLayer/SlaveItemShowcase/SlavePosScale")
+text_node = NodePath("CanvasLayer/Text")
+timer = NodePath("SkipCooldown")
 
-[node name="Introduction" type="Control" parent="." unique_id=1133056330]
-layout_mode = 1
+[node name="InputManager" type="Node" parent="." unique_id=90768843]
+script = ExtResource("24_feaue")
+
+[node name="SkipCooldown" type="Timer" parent="." unique_id=1368589677]
+wait_time = 0.5
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1149929058]
+layer = 3
+
+[node name="ShowTeam" type="Button" parent="CanvasLayer" unique_id=2107534968]
+unique_name_in_owner = true
+visible = false
+offset_left = 761.0
+offset_top = 531.0
+offset_right = 1123.0
+offset_bottom = 611.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("10_0hilk")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_vrdqu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cmspm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ikfo1")
+text = "Бригада"
+metadata/_edit_use_anchors_ = true
+
+[node name="Introduction" type="Control" parent="CanvasLayer" unique_id=1133056330]
+unique_name_in_owner = true
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -207,7 +277,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Miedzymorze" type="TextureRect" parent="Introduction" unique_id=2114417537]
+[node name="Miedzymorze" type="TextureRect" parent="CanvasLayer/Introduction" unique_id=2114417537]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -219,13 +289,14 @@ grow_horizontal = 2
 mouse_filter = 2
 texture = ExtResource("1_c13y7")
 
-[node name="Bounce" type="AnimationPlayer" parent="Introduction/Miedzymorze" unique_id=1104910086]
+[node name="Bounce" type="AnimationPlayer" parent="CanvasLayer/Introduction/Miedzymorze" unique_id=1104910086]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_8ho6b")
 autoplay = &"bounce"
 
-[node name="SlaveItemShowcase" type="Control" parent="." unique_id=452412668]
-layout_mode = 1
+[node name="SlaveItemShowcase" type="Control" parent="CanvasLayer" unique_id=452412668]
+unique_name_in_owner = true
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -233,7 +304,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="SlavesSpin" type="Control" parent="SlaveItemShowcase" unique_id=546884434]
+[node name="SlavesSpin" type="Control" parent="CanvasLayer/SlaveItemShowcase" unique_id=546884434]
 layout_mode = 1
 anchors_preset = 0
 offset_left = -319.0
@@ -245,7 +316,7 @@ script = ExtResource("3_ckvwl")
 radius = 100.0
 speed = 1.0
 
-[node name="Slave" type="TextureRect" parent="SlaveItemShowcase/SlavesSpin" unique_id=1755891991]
+[node name="Slave" type="TextureRect" parent="CanvasLayer/SlaveItemShowcase/SlavesSpin" unique_id=1755891991]
 layout_mode = 0
 offset_right = 140.0
 offset_bottom = 140.0
@@ -254,7 +325,7 @@ mouse_filter = 2
 texture = ExtResource("3_gbqnl")
 expand_mode = 1
 
-[node name="Slave2" type="TextureRect" parent="SlaveItemShowcase/SlavesSpin" unique_id=1015810143]
+[node name="Slave2" type="TextureRect" parent="CanvasLayer/SlaveItemShowcase/SlavesSpin" unique_id=1015810143]
 layout_mode = 0
 offset_right = 140.0
 offset_bottom = 140.0
@@ -263,7 +334,7 @@ mouse_filter = 2
 texture = ExtResource("3_gbqnl")
 expand_mode = 1
 
-[node name="Slave3" type="TextureRect" parent="SlaveItemShowcase/SlavesSpin" unique_id=1701474495]
+[node name="Slave3" type="TextureRect" parent="CanvasLayer/SlaveItemShowcase/SlavesSpin" unique_id=1701474495]
 layout_mode = 0
 offset_right = 140.0
 offset_bottom = 140.0
@@ -272,7 +343,7 @@ mouse_filter = 2
 texture = ExtResource("3_gbqnl")
 expand_mode = 1
 
-[node name="ItemSpin" type="Control" parent="SlaveItemShowcase" unique_id=542881476]
+[node name="ItemSpin" type="Control" parent="CanvasLayer/SlaveItemShowcase" unique_id=542881476]
 layout_mode = 1
 anchors_preset = 0
 offset_left = 1549.0
@@ -284,7 +355,7 @@ script = ExtResource("3_ckvwl")
 radius = 200.0
 speed = 1.0
 
-[node name="Slave" type="TextureRect" parent="SlaveItemShowcase/ItemSpin" unique_id=657957535]
+[node name="Slave" type="TextureRect" parent="CanvasLayer/SlaveItemShowcase/ItemSpin" unique_id=657957535]
 layout_mode = 0
 offset_right = 140.0
 offset_bottom = 140.0
@@ -292,7 +363,7 @@ mouse_filter = 2
 texture = ExtResource("5_g2equ")
 expand_mode = 1
 
-[node name="Slave2" type="TextureRect" parent="SlaveItemShowcase/ItemSpin" unique_id=510696509]
+[node name="Slave2" type="TextureRect" parent="CanvasLayer/SlaveItemShowcase/ItemSpin" unique_id=510696509]
 layout_mode = 0
 offset_right = 140.0
 offset_bottom = 140.0
@@ -300,7 +371,7 @@ mouse_filter = 2
 texture = ExtResource("6_tbcdj")
 expand_mode = 1
 
-[node name="Slave3" type="TextureRect" parent="SlaveItemShowcase/ItemSpin" unique_id=1608759151]
+[node name="Slave3" type="TextureRect" parent="CanvasLayer/SlaveItemShowcase/ItemSpin" unique_id=1608759151]
 layout_mode = 0
 offset_right = 140.0
 offset_bottom = 140.0
@@ -308,7 +379,7 @@ mouse_filter = 2
 texture = ExtResource("7_ej4tf")
 expand_mode = 1
 
-[node name="Slave4" type="TextureRect" parent="SlaveItemShowcase/ItemSpin" unique_id=1097414668]
+[node name="Slave4" type="TextureRect" parent="CanvasLayer/SlaveItemShowcase/ItemSpin" unique_id=1097414668]
 layout_mode = 0
 offset_right = 140.0
 offset_bottom = 140.0
@@ -316,7 +387,7 @@ mouse_filter = 2
 texture = ExtResource("8_ej4tf")
 expand_mode = 1
 
-[node name="Slave5" type="TextureRect" parent="SlaveItemShowcase/ItemSpin" unique_id=359373618]
+[node name="Slave5" type="TextureRect" parent="CanvasLayer/SlaveItemShowcase/ItemSpin" unique_id=359373618]
 layout_mode = 0
 offset_right = 140.0
 offset_bottom = 140.0
@@ -324,7 +395,7 @@ mouse_filter = 2
 texture = ExtResource("9_0hilk")
 expand_mode = 1
 
-[node name="SlavePosScale" type="Control" parent="SlaveItemShowcase" unique_id=1945221345]
+[node name="SlavePosScale" type="Control" parent="CanvasLayer/SlaveItemShowcase" unique_id=1945221345]
 anchors_preset = 0
 offset_left = 303.0
 offset_top = 266.0
@@ -332,7 +403,7 @@ offset_right = 343.0
 offset_bottom = 306.0
 scale = Vector2(2, 2)
 
-[node name="Stats" type="Control" parent="SlaveItemShowcase" unique_id=374740947]
+[node name="Stats" type="Control" parent="CanvasLayer/SlaveItemShowcase" unique_id=374740947]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 6
@@ -346,7 +417,7 @@ offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="HPBar" type="ProgressBar" parent="SlaveItemShowcase/Stats" unique_id=387351223]
+[node name="HPBar" type="ProgressBar" parent="CanvasLayer/SlaveItemShowcase/Stats" unique_id=387351223]
 layout_mode = 0
 offset_left = -419.0
 offset_top = -126.0
@@ -358,7 +429,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_e13mp")
 value = 100.0
 show_percentage = false
 
-[node name="Label" type="Label" parent="SlaveItemShowcase/Stats/HPBar" unique_id=2005668276]
+[node name="Label" type="Label" parent="CanvasLayer/SlaveItemShowcase/Stats/HPBar" unique_id=2005668276]
 layout_mode = 0
 offset_top = -12.0
 offset_right = 232.0
@@ -368,7 +439,7 @@ label_settings = SubResource("LabelSettings_vrdqu")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemEntry" parent="SlaveItemShowcase/Stats" unique_id=1933394834 instance=ExtResource("11_wr8iv")]
+[node name="ItemEntry" parent="CanvasLayer/SlaveItemShowcase/Stats" unique_id=1933394834 instance=ExtResource("11_wr8iv")]
 layout_mode = 0
 offset_left = -544.0
 offset_top = -58.0
@@ -377,7 +448,7 @@ offset_bottom = 82.0
 scale = Vector2(0.7, 0.7)
 default_item = ExtResource("12_e13mp")
 
-[node name="ItemEntry2" parent="SlaveItemShowcase/Stats" unique_id=772821076 instance=ExtResource("11_wr8iv")]
+[node name="ItemEntry2" parent="CanvasLayer/SlaveItemShowcase/Stats" unique_id=772821076 instance=ExtResource("11_wr8iv")]
 layout_mode = 0
 offset_left = -328.00006
 offset_top = 65.0
@@ -386,14 +457,183 @@ offset_bottom = 205.0
 scale = Vector2(0.7, 0.7)
 default_item = ExtResource("13_vrdqu")
 
-[node name="Appear" type="AnimationPlayer" parent="SlaveItemShowcase" unique_id=211881250]
+[node name="Appear" type="AnimationPlayer" parent="CanvasLayer/SlaveItemShowcase" unique_id=211881250]
 libraries/ = SubResource("AnimationLibrary_0hilk")
 
-[node name="StatsOpacity" type="AnimationPlayer" parent="SlaveItemShowcase" unique_id=2041480290]
+[node name="StatsOpacity" type="AnimationPlayer" parent="CanvasLayer/SlaveItemShowcase" unique_id=2041480290]
 libraries/ = SubResource("AnimationLibrary_cmspm")
 
-[node name="LeftClick" type="TextureRect" parent="." unique_id=209657372]
+[node name="BrigadeTutorial" type="Control" parent="CanvasLayer" unique_id=1316086538]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TeamWindow" type="Control" parent="CanvasLayer/BrigadeTutorial" unique_id=923425404]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_left = 106.0
+offset_top = 57.0
+offset_right = 1006.0
+offset_bottom = 557.0
+mouse_filter = 2
+script = ExtResource("14_7a100")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/BrigadeTutorial/TeamWindow" unique_id=2029110419]
 layout_mode = 0
+offset_left = -193.0
+offset_top = -113.0
+offset_right = 1191.0
+offset_bottom = 636.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.513726)
+
+[node name="BG" type="TextureRect" parent="CanvasLayer/BrigadeTutorial/TeamWindow" unique_id=1619444737]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("15_feaue")
+
+[node name="Slaves" type="Control" parent="CanvasLayer/BrigadeTutorial/TeamWindow" unique_id=24893690]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Left" parent="CanvasLayer/BrigadeTutorial/TeamWindow/Slaves" unique_id=567666077 instance=ExtResource("16_210s6")]
+layout_mode = 1
+offset_top = 235.0
+offset_bottom = 319.0
+default_type = 4
+
+[node name="Middle" parent="CanvasLayer/BrigadeTutorial/TeamWindow/Slaves" unique_id=1040627273 instance=ExtResource("16_210s6")]
+layout_mode = 1
+offset_left = 398.0
+offset_top = 307.0
+offset_right = 491.0
+offset_bottom = 391.0
+default_type = 4
+
+[node name="Right" parent="CanvasLayer/BrigadeTutorial/TeamWindow/Slaves" unique_id=2049496749 instance=ExtResource("16_210s6")]
+layout_mode = 1
+offset_left = 670.0
+offset_top = 242.0
+offset_right = 763.0
+offset_bottom = 326.0
+default_type = 4
+
+[node name="ItemGrid" type="VBoxContainer" parent="CanvasLayer/BrigadeTutorial/TeamWindow" unique_id=8039348]
+z_index = 1
+layout_mode = 0
+offset_left = 27.0
+offset_top = 15.0
+offset_right = 762.0
+offset_bottom = 179.0
+mouse_filter = 2
+script = ExtResource("17_5qvs7")
+row_capacity = 8
+
+[node name="Row1" type="HBoxContainer" parent="CanvasLayer/BrigadeTutorial/TeamWindow/ItemGrid" unique_id=862189570]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Row2" type="HBoxContainer" parent="CanvasLayer/BrigadeTutorial/TeamWindow/ItemGrid" unique_id=387060842]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Row3" type="HBoxContainer" parent="CanvasLayer/BrigadeTutorial/TeamWindow/ItemGrid" unique_id=1958015321]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="ItemEntry" parent="CanvasLayer/BrigadeTutorial/TeamWindow" unique_id=1787027547 instance=ExtResource("11_wr8iv")]
+visible = false
+layout_mode = 0
+offset_left = 410.0
+offset_top = 167.0
+offset_right = 895.0
+offset_bottom = 287.0
+
+[node name="Close" type="Button" parent="CanvasLayer/BrigadeTutorial/TeamWindow" unique_id=1902736434]
+layout_mode = 0
+offset_left = 785.0
+offset_top = 19.0
+offset_right = 885.0
+offset_bottom = 119.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("10_0hilk")
+theme_override_font_sizes/font_size = 64
+text = "X"
+
+[node name="Debug" type="Control" parent="CanvasLayer/BrigadeTutorial/TeamWindow" unique_id=786192400]
+anchors_preset = 0
+offset_left = 632.0
+offset_top = 246.0
+offset_right = 672.0
+offset_bottom = 286.0
+
+[node name="UName" type="LineEdit" parent="CanvasLayer/BrigadeTutorial/TeamWindow/Debug" unique_id=184744577]
+layout_mode = 0
+offset_left = -292.0
+offset_top = 259.0
+offset_right = -7.0
+offset_bottom = 290.0
+placeholder_text = "Введите id предмета..."
+
+[node name="GetItem" type="Button" parent="CanvasLayer/BrigadeTutorial/TeamWindow/Debug" unique_id=1424143408]
+layout_mode = 0
+offset_left = -309.0
+offset_top = 304.0
+offset_right = -148.0
+offset_bottom = 335.0
+text = "Получить предмет"
+
+[node name="GetRecipe" type="Button" parent="CanvasLayer/BrigadeTutorial/TeamWindow/Debug" unique_id=720309898]
+layout_mode = 0
+offset_left = -140.0
+offset_top = 304.0
+offset_right = 21.0
+offset_bottom = 335.0
+text = "Получить рецепт"
+
+[node name="LevelLabel" type="Label" parent="CanvasLayer/BrigadeTutorial/TeamWindow/Debug" unique_id=1129207442]
+layout_mode = 0
+offset_left = -407.0
+offset_top = 264.0
+offset_right = -320.0
+offset_bottom = 287.0
+text = "Уровень: 1"
+
+[node name="Plus" type="Button" parent="CanvasLayer/BrigadeTutorial/TeamWindow/Debug" unique_id=1605275473]
+layout_mode = 0
+offset_left = -393.0
+offset_top = 292.0
+offset_right = -375.0
+offset_bottom = 323.0
+text = "+"
+
+[node name="Minus" type="Button" parent="CanvasLayer/BrigadeTutorial/TeamWindow/Debug" unique_id=1020527070]
+layout_mode = 0
+offset_left = -363.0
+offset_top = 292.0
+offset_right = -345.0
+offset_bottom = 323.0
+text = "-"
+
+[node name="LeftClick" type="TextureRect" parent="CanvasLayer" unique_id=209657372]
+unique_name_in_owner = true
 offset_left = 997.0
 offset_top = 503.0
 offset_right = 1119.0
@@ -401,7 +641,7 @@ offset_bottom = 625.0
 mouse_filter = 2
 texture = ExtResource("2_8ho6b")
 
-[node name="Label" type="Label" parent="LeftClick" unique_id=22467757]
+[node name="Label" type="Label" parent="CanvasLayer/LeftClick" unique_id=22467757]
 self_modulate = Color(0.35906908, 0.35906908, 0.35906908, 1)
 layout_mode = 0
 offset_left = -114.0
@@ -414,8 +654,7 @@ label_settings = ExtResource("3_ph3nu")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Text" type="RichTextLabel" parent="." unique_id=2003799069]
-layout_mode = 1
+[node name="Text" type="RichTextLabel" parent="CanvasLayer" unique_id=2003799069]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -426,6 +665,8 @@ offset_top = -219.0
 offset_right = 305.5
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/outline_size = 8
 theme_override_fonts/normal_font = ExtResource("5_6yjpi")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
@@ -436,7 +677,19 @@ vertical_alignment = 1
 script = ExtResource("5_cq4me")
 metadata/_custom_type_script = "uid://b4miwwllthxs7"
 
-[node name="SkipCooldown" type="Timer" parent="." unique_id=1368589677]
-wait_time = 1.5
+[node name="MockMap" type="Node2D" parent="." unique_id=937021611]
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=2144583309]
+stream = ExtResource("23_7a100")
+autoplay = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1332841406]
 
 [connection signal="timeout" from="SkipCooldown" to="." method="_on_skip_cooldown_timeout"]
+[connection signal="pressed" from="CanvasLayer/ShowTeam" to="." method="_on_show_team_pressed"]
+[connection signal="pressed" from="CanvasLayer/ShowTeam" to="CanvasLayer/BrigadeTutorial/TeamWindow" method="_on_show_team_pressed"]
+[connection signal="pressed" from="CanvasLayer/BrigadeTutorial/TeamWindow/Close" to="CanvasLayer/BrigadeTutorial/TeamWindow" method="_on_close_pressed"]
+[connection signal="pressed" from="CanvasLayer/BrigadeTutorial/TeamWindow/Debug/GetItem" to="CanvasLayer/BrigadeTutorial/TeamWindow" method="_on_get_item_pressed"]
+[connection signal="pressed" from="CanvasLayer/BrigadeTutorial/TeamWindow/Debug/GetRecipe" to="CanvasLayer/BrigadeTutorial/TeamWindow" method="_on_get_recipe_pressed"]
+[connection signal="pressed" from="CanvasLayer/BrigadeTutorial/TeamWindow/Debug/Plus" to="CanvasLayer/BrigadeTutorial/TeamWindow" method="_on_plus_pressed"]
+[connection signal="pressed" from="CanvasLayer/BrigadeTutorial/TeamWindow/Debug/Minus" to="CanvasLayer/BrigadeTutorial/TeamWindow" method="_on_minus_pressed"]

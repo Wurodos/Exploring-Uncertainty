@@ -2,7 +2,7 @@ extends Node2D
 
 class_name Room
 
-enum Type {Empty, Purged, City, Cherv, Govnov, Reptile, Comms, Any, Ruin, Elevator}
+enum Type {Empty, Purged, City, Cherv, Govnov, Reptile, Comms, Any, Ruin, Elevator, Exit}
 
 var row: int
 var col: int

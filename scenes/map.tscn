@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://d16g0ecde2caq" path="res://images/rooms/elevator.png" id="10_7s432"]
 [ext_resource type="Script" uid="uid://dvl21h34uashq" path="res://scripts/map/city_window.gd" id="11_c70he"]
 [ext_resource type="Texture2D" uid="uid://ctm4vajohb528" path="res://images/shapes/arrow.png" id="11_lhdcv"]
+[ext_resource type="Texture2D" uid="uid://bawrva2lptk41" path="res://images/rooms/exit.png" id="11_vwuk8"]
 [ext_resource type="Script" uid="uid://ql10jr5klb8g" path="res://scripts/map/govnov_window.gd" id="12_4b7dj"]
 [ext_resource type="Texture2D" uid="uid://dpngkq6qgoes6" path="res://images/rooms/highlight.png" id="12_7s432"]
 [ext_resource type="Texture2D" uid="uid://dhfpnnlwg86d" path="res://images/backdrops/city.png" id="12_mo32q"]
@@ -438,7 +439,8 @@ room_sprites = Dictionary[int, Texture2D]({
 5: ExtResource("7_sq6bu"),
 6: ExtResource("8_5u2yt"),
 8: ExtResource("9_la2vj"),
-9: ExtResource("10_7s432")
+9: ExtResource("10_7s432"),
+10: ExtResource("11_vwuk8")
 })
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=289759729]
@@ -654,6 +656,17 @@ script = ExtResource("12_y2ir2")
 string_id = &"craft"
 metadata/_custom_type_script = "uid://bg2spyp44xpw7"
 metadata/_edit_use_anchors_ = true
+
+[node name="DebugStopFight" type="Button" parent="GUI/UI" unique_id=165650328]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 900.0
+offset_top = 22.0
+offset_right = 1126.0
+offset_bottom = 94.0
+focus_mode = 0
+toggle_mode = true
+text = "Отключить бои"
 
 [node name="DebugFight" type="Button" parent="GUI/UI" unique_id=1203451231]
 unique_name_in_owner = true
@@ -1344,6 +1357,15 @@ text = "0"
 label_settings = SubResource("LabelSettings_leq5k")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="DebugAddOne" type="Button" parent="GUI/UI/CraftWindow" unique_id=1430646549]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 375.0
+offset_right = 389.0
+offset_bottom = 434.0
+focus_mode = 0
+text = "Получить 1 каждого"
 
 [node name="GovnovWindow" type="Control" parent="GUI/UI" unique_id=172834112]
 visible = false
@@ -2192,6 +2214,7 @@ autostart = true
 [connection signal="pressed" from="GUI/UI/ShowTeam" to="GUI/UI/TeamWindow" method="_on_show_team_pressed"]
 [connection signal="pressed" from="GUI/UI/ShowRecon" to="GUI/UI/ReconWindow" method="_on_show_recon_pressed"]
 [connection signal="pressed" from="GUI/UI/ShowCraft" to="GUI/UI/CraftWindow" method="_on_show_craft_pressed"]
+[connection signal="toggled" from="GUI/UI/DebugStopFight" to="." method="_on_debug_stop_fight_toggled"]
 [connection signal="pressed" from="GUI/UI/DebugFight" to="." method="_on_debug_fight_pressed"]
 [connection signal="pressed" from="GUI/UI/DebugBoss" to="." method="_on_debug_boss_pressed"]
 [connection signal="pressed" from="GUI/UI/Save" to="." method="_on_save_pressed"]
@@ -2202,6 +2225,7 @@ autostart = true
 [connection signal="pressed" from="GUI/UI/TeamWindow/Debug/Minus" to="GUI/UI/TeamWindow" method="_on_minus_pressed"]
 [connection signal="pressed" from="GUI/UI/ReconWindow/Close" to="GUI/UI/ReconWindow" method="_on_close_pressed"]
 [connection signal="pressed" from="GUI/UI/CraftWindow/Close" to="GUI/UI/CraftWindow" method="_on_close_pressed"]
+[connection signal="pressed" from="GUI/UI/CraftWindow/DebugAddOne" to="GUI/UI/CraftWindow" method="_on_debug_add_one_pressed"]
 [connection signal="pressed" from="GUI/UI/GovnovWindow/Close" to="GUI/UI/GovnovWindow" method="_on_close_pressed"]
 [connection signal="pressed" from="GUI/UI/CityWindow/Close" to="GUI/UI/CityWindow" method="_on_close_pressed"]
 [connection signal="item_selected" from="GUI/UI/CityWindow/ShopSelect" to="GUI/UI/CityWindow" method="_on_shop_selected"]

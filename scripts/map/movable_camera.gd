@@ -36,5 +36,5 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_released("zoom_in"):
 		zoom += Vector2(0.1,0.1)
 	elif Input.is_action_just_released("zoom_out"):
-		if zoom.x > 0.5:
+		if zoom.x > 0.2:
 			zoom -= Vector2(0.1,0.1)

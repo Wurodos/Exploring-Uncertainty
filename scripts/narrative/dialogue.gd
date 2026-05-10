@@ -51,7 +51,7 @@ func toggle(on: bool) -> void:
 
 
 func _on_start_timer_timeout() -> void:
-	if CurrentRun.is_debug: return
+	if CurrentRun.is_debug or CurrentRun.is_tutorial: return
 	on_new_message(0)
 
 

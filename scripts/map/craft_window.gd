@@ -15,6 +15,7 @@ const item_craftable = preload("res://prefabs/items/item_craftable.tscn")
 
 func _ready() -> void:
 	visible = false
+	$DebugAddOne.visible = CurrentRun.is_debug
 
 func _on_show_craft_pressed() -> void:
 	visible = true
@@ -58,3 +59,9 @@ func _update() -> void:
 func _on_close_pressed() -> void:
 	visible = false
 	CurrentRun.state = Game.State.Map
+
+
+func _on_debug_add_one_pressed() -> void:
+	for key in CurrentRun.scraps:
+		CurrentRun.scraps[key] += 1
+	_update()

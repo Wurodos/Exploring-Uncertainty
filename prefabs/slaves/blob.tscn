@@ -6,15 +6,16 @@
 [ext_resource type="Texture2D" uid="uid://bvt0n20v88f7o" path="res://images/slaves/blob.png" id="3_xc2og"]
 [ext_resource type="Texture2D" uid="uid://dcprd1kuvkwce" path="res://images/items/wizard_hat.png" id="4_ajk8k"]
 [ext_resource type="Texture2D" uid="uid://cu8nq4toon8uj" path="res://images/buffs/shield.png" id="4_lpdx8"]
+[ext_resource type="Texture2D" uid="uid://ccyc7bhfo8se2" path="res://images/items/winchester.png" id="5_8htp2"]
 [ext_resource type="Texture2D" uid="uid://18md1xgdubcr" path="res://images/buffs/blasphemy.png" id="5_gppif"]
 [ext_resource type="Texture2D" uid="uid://6225b313atq2" path="res://images/icons/top.png" id="5_lpdx8"]
 [ext_resource type="Texture2D" uid="uid://cmay462tc18ol" path="res://images/items/magnet_accelerator.png" id="5_r4abs"]
-[ext_resource type="Texture2D" uid="uid://brioik3i463qe" path="res://images/items/wire_branches.png" id="5_s5n5c"]
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="5_ttqg8"]
 [ext_resource type="Texture2D" uid="uid://dxa7wr6gumrrb" path="res://images/buffs/anvil.png" id="6_8sljb"]
 [ext_resource type="Texture2D" uid="uid://bm0hs7cpm2sfy" path="res://images/items/pocket-watch.png" id="6_f4yho"]
 [ext_resource type="Texture2D" uid="uid://dhmqbwahk027p" path="res://images/icons/middle.png" id="6_gppif"]
-[ext_resource type="Texture2D" uid="uid://dgsxfssutl5vj" path="res://images/items/holder.png" id="6_s5n5c"]
+[ext_resource type="Texture2D" uid="uid://bbpa5iu1310bb" path="res://images/items/cowboy_hat.png" id="6_pc5ow"]
+[ext_resource type="Texture2D" uid="uid://cij5n5oatk8x2" path="res://images/items/battery.png" id="7_3ojvf"]
 [ext_resource type="Texture2D" uid="uid://orgdll7utn86" path="res://images/icons/bottom.png" id="7_8sljb"]
 [ext_resource type="Texture2D" uid="uid://nknu23hrvind" path="res://images/buffs/appetite.png" id="7_erpc0"]
 [ext_resource type="Texture2D" uid="uid://8sgoeg1sj6ga" path="res://images/buffs/freeze.png" id="8_bl030"]
@@ -325,7 +326,7 @@ scale = Vector2(0.15, 0.15)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/Items/Weapon" unique_id=1805203382]
 visible = false
-texture = ExtResource("5_s5n5c")
+texture = ExtResource("5_8htp2")
 
 [node name="Hat" type="Node2D" parent="Parts/Visual/Items" unique_id=1765902243]
 position = Vector2(0, -56)
@@ -333,11 +334,15 @@ scale = Vector2(0.15, 0.15)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/Items/Hat" unique_id=1368219549]
 visible = false
-texture = ExtResource("6_s5n5c")
+texture = ExtResource("6_pc5ow")
 
 [node name="Trinket2" type="Node2D" parent="Parts/Visual/Items" unique_id=342478727]
 position = Vector2(-44, 21)
 scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/Items/Trinket2" unique_id=129529962]
+visible = false
+texture = ExtResource("7_3ojvf")
 
 [node name="Trinket3" type="Node2D" parent="Parts/Visual/Items" unique_id=987006776]
 position = Vector2(5.3333335, -74)
@@ -350,6 +355,10 @@ texture = ExtResource("6_f4yho")
 [node name="Trinket1" type="Node2D" parent="Parts/Visual/Items" unique_id=1908407866]
 position = Vector2(-31, 31)
 scale = Vector2(0.1, 0.1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parts/Visual/Items/Trinket1" unique_id=1839083508]
+visible = false
+texture = ExtResource("6_f4yho")
 
 [node name="BigItems" type="Node2D" parent="Parts/Visual" unique_id=331452924]
 position = Vector2(0, -50)

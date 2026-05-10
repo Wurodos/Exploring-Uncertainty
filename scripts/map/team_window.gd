@@ -26,7 +26,11 @@ func _ready() -> void:
 	for slave in CurrentRun.good_boys:
 		var slave_node : SlaveTeamNode = $Slaves.get_child(i)
 		slave_node.visible = true
-		slave_node.apply(slave, SlaveTeamNode.Type.Brigade)
+		
+		if CurrentRun.is_tutorial:
+			slave_node.apply(slave, SlaveTeamNode.Type.BrigadeTutorial)
+		else:
+			slave_node.apply(slave, SlaveTeamNode.Type.Brigade)
 		i += 1
 
 func refresh_inventory() -> void:
@@ -44,7 +48,10 @@ func _refresh_slaves() -> void:
 	for slave in CurrentRun.good_boys:
 		var slave_node : SlaveTeamNode = $Slaves.get_child(i)
 		slave_node.visible = true
-		slave_node.apply(slave, SlaveTeamNode.Type.Brigade)
+		if CurrentRun.is_tutorial:
+			slave_node.apply(slave, SlaveTeamNode.Type.BrigadeTutorial)
+		else:
+			slave_node.apply(slave, SlaveTeamNode.Type.Brigade)
 		i += 1
 
 func _on_battle_end() -> void:
@@ -71,7 +78,10 @@ func _on_mouse_up() -> void:
 		if old_item.is_item():
 			CurrentRun.put_item_in_inventory(old_item)
 		
-		slave_node.apply(slave_node.held, SlaveTeamNode.Type.Brigade)
+		if CurrentRun.is_tutorial:
+			slave_node.apply(slave_node.held, SlaveTeamNode.Type.BrigadeTutorial)
+		else:
+			slave_node.apply(slave_node.held, SlaveTeamNode.Type.Brigade)
 		
 		CurrentRun.inventory.erase(item_node.held)
 		refresh_inventory()
@@ -93,10 +103,7 @@ func _on_hide_item_info() -> void:
 
 func _on_show_team_pressed() -> void:
 	refresh_inventory()
-	
-	if CurrentRun.is_tutorial:
-		SignalBus.advance_tutorial.emit()
-	
+	SignalBus.open_team_window.emit()
 	CurrentRun.state = Game.State.Window
 	visible = true
 

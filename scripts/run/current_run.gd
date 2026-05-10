@@ -87,19 +87,41 @@ var config: ConfigFile
 
 func _ready() -> void:
 	_load_config()
-	
 	TranslationServer.set_locale(config.get_value("prefs", "language"))
-	
-	
+
+func reset() -> void:
 	randomize()
+	
+	inventory = []
+	good_boys = []
+	evil_boys = []
+	craft_pool = []
+	craft_recipes = []
+	scraps = {
+		Item.Scrap.Flesh : 0,
+		Item.Scrap.Gear : 0,
+		Item.Scrap.Shard : 0,
+		Item.Scrap.Tooth : 0,
+		Item.Scrap.Oil : 0
+	}
+
+	discounts = 0
+	is_comms_repaired = false
+	is_in_purged = false
+	messages_not_seen = [0,1,2,3,4,5,6,7,8,9]
+	elevators_repaired = 0
+
+	state = Game.State.Map
+	
+	
 	_prepare_good_boys.call_deferred()
 	_prepare_item_pool.call_deferred()
 	_prepare_deck_0.call_deferred()
 	_prepare_deck_1.call_deferred()
 	_prepare_deck_2.call_deferred()
 	_prepare_deck_3.call_deferred()
-	
-	
+	(func(): SignalBus.refresh.emit()).call_deferred()	
+
 func _load_config() -> void:
 	config = ConfigFile.new()
 	var err = config.load("user://prefs.cfg")
@@ -169,8 +191,10 @@ func load_save() -> void:
 			else: print(value)
 
 func _prepare_good_boys() -> void:
-	good_boys = [SlavePool.fetch("blob"), SlavePool.fetch("blob"), SlavePool.fetch("blob")]
-	#good_boys[0].hp = 1
+	if is_tutorial:
+		good_boys = [SlavePool.fetch("blob")]
+	else:
+		good_boys = [SlavePool.fetch("blob"), SlavePool.fetch("blob"), SlavePool.fetch("blob")]
 
 # FIXME pls no ugly code
 # Here goes deck preparation

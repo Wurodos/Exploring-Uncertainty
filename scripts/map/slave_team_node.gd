@@ -2,11 +2,13 @@ extends Control
 
 class_name SlaveTeamNode
 
-enum Type {Brigade, City, Govnov, OnlyItems}
+enum Type {Brigade, City, Govnov, OnlyItems, BrigadeTutorial}
 
 var held: Slave
 var type: Type
 static var selected: SlaveTeamNode
+
+@export var default_type: Type = Type.Brigade
 
 @onready var btn_sell: Button = $Sell
 
@@ -17,6 +19,7 @@ func apply(slave: Slave, type: Type, show_hp: bool = true):
 	if slave == null: 
 		visible = false
 		return
+	if not type: type = default_type
 	held = slave
 	self.type = type
 	$Body.texture = slave.texture
@@ -37,6 +40,8 @@ func apply(slave: Slave, type: Type, show_hp: bool = true):
 			$Undress.text = tr("undress")
 			if not $Undress.is_connected("pressed", _on_undress_pressed):
 				$Undress.pressed.connect(_on_undress_pressed)
+		Type.BrigadeTutorial:
+			$Undress.visible = false
 		Type.City:
 			$Undress.text = tr("heal")
 			if not $Undress.is_connected("pressed", _on_heal_pressed):

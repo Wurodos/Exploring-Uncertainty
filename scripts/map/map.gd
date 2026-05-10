@@ -98,6 +98,9 @@ var shown_reptile: int = 0
 var shown_govnov_window: bool = false
 var shown_comms_window: bool = false
 
+var battles_enabled: bool = true
+var move_enabled: bool = true
+
 #======================
 # ^ Tutorial flags ^
 #======================
@@ -110,8 +113,9 @@ static func dist(room1: Room, room2: Room) -> int:
 func _ready() -> void:
 	%DebugFight.visible = CurrentRun.is_debug
 	%DebugBoss.visible = CurrentRun.is_debug
+	%DebugStopFight.visible = CurrentRun.is_debug
 	
-	tutorial_box.visible = CurrentRun.is_tutorial
+	#tutorial_box.visible = CurrentRun.is_tutorial
 	tutorial_box.get_node("Text").set_string_id("tutorial_map_0")
 	
 	instance = self
@@ -155,7 +159,7 @@ func _process(_delta: float) -> void:
 		$World/Fog.visible = not $World/Fog.visible
 
 func move_player(direction: Direction) -> void:
-	if is_encountering: return
+	if is_encountering or not move_enabled: return
 	
 	var room: Room = room_at(party_row + _drow[direction], party_col + _dcol[direction])
 	if not room:
@@ -232,18 +236,11 @@ func encounter(room: Room) -> void:
 	
 	CurrentRun.is_in_purged = room.type == Room.Type.Purged	
 	
-	#CurrentRun.arrange_boss()
-	#$AnimationPlayer.play("battle_start")
-	#await $AnimationPlayer.animation_finished
-	#SignalBus.play_music.emit("roots_and_toots")
-	#SignalBus.battle_encounter.emit()
-	#return
-	
 	match(room.type):
 		Room.Type.Ruin:
 			SignalBus.found_item.emit()
 		Room.Type.Purged:
-			if since_last_battle_purged >= randi_range(12, 20):
+			if battles_enabled and since_last_battle_purged >= randi_range(12, 20):
 				CurrentRun.evil_boys = CurrentRun.arrange_evil_team(zone_id)
 				$AnimationPlayer.play("battle_start")
 				await $AnimationPlayer.animation_finished
@@ -253,7 +250,7 @@ func encounter(room: Room) -> void:
 				since_last_battle = 0
 			else: since_last_battle_purged += 1
 		Room.Type.Empty:
-			if since_last_battle >= randi_range(4,8):
+			if battles_enabled and since_last_battle >= randi_range(4,8):
 				CurrentRun.evil_boys = CurrentRun.arrange_evil_team(zone_id)
 				$AnimationPlayer.play("battle_start")
 				await $AnimationPlayer.animation_finished
@@ -325,6 +322,8 @@ func encounter(room: Room) -> void:
 			#	shown_comms_window = true
 			#	SignalBus.advance_tutorial.emit("tutorial_comms_window")
 			SignalBus.enter_elevator.emit(room)
+		Room.Type.Exit:
+			SignalBus.exit_the_mines.emit()
 	$AnimationPlayer.play("RESET")
 	is_encountering = false
 
@@ -417,6 +416,24 @@ func generate_from_data(data: Dictionary) -> void:
 		
 	_explore(party_row, party_col)
 	player_node.global_position = room_at(party_row, party_col).global_position
+
+func generate_empty() -> void:
+	for i in range(size + 2):
+		space_taken.append([])
+		for j in range(size + 2):
+			space_taken[i].append(false)
+	
+	var mid : int = size/2
+	
+	party_col = mid
+	party_row = mid
+	
+	# Add central room
+	add_room(mid, mid, Room.Type.Purged)
+	
+	_initialize_fog()
+	_explore(party_row, party_col)
+	_update_move_buttons()
 
 func generate_floor() -> void:
 	if CurrentRun.is_debug:
@@ -620,8 +637,8 @@ func _find_adjacent(row: int, col: int, type: Room.Type) -> Room:
 	return null
 
 func _initialize_fog() -> void:
-	for x in range(-size/2-12, size/2+12):
-		for y in range(-size/2-6, size/2+7):
+	for x in range(-size/2-22, size/2+22):
+		for y in range(-size/2-12, size/2+16):
 			$World/Fog/TileMapLayer.set_cell(Vector2i(x,y), 0, Vector2i(0,0), 0)
 
 func _explore(row: int, col: int):
@@ -664,6 +681,7 @@ func _on_save_pressed() -> void:
 
 
 func _on_tutorial_ok_pressed(specific_id: StringName = "") -> void:
+	return
 	if specific_id.length() > 0:
 		tutorial_box.visible = true
 		tutorial_box.get_node("OK").disabled = false
@@ -757,3 +775,7 @@ func _on_debug_boss_pressed() -> void:
 	SignalBus.battle_encounter.emit()
 	$AnimationPlayer.play("RESET")
 	is_encountering = false
+
+
+func _on_debug_stop_fight_toggled(toggled_on: bool) -> void:
+	battles_enabled = not toggled_on

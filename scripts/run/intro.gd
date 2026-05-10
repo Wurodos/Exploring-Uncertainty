@@ -52,4 +52,5 @@ func _on_no_tutorial_pressed() -> void:
 
 
 func _on_tutorial_pressed() -> void:
+	CurrentRun.is_tutorial = true
 	get_tree().change_scene_to_file("res://scenes/tutorial.tscn")

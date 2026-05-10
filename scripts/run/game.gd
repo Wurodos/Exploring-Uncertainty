@@ -12,6 +12,8 @@ var battle_node: Battle
 
 
 func _ready() -> void:
+	CurrentRun.reset()
+	
 	SignalBus.battle_encounter.connect(_on_battle_encounter)
 	SignalBus.end_battle.connect(_on_end_battle)
 	SignalBus.play_music.emit("map")
@@ -26,19 +28,6 @@ func _ready() -> void:
 	for item: Item in ItemPool._pool.values():
 		if item.is_item():
 			CurrentRun.craft_pool.append(item.duplicate())
-
-	## DEBUG -> Inventory 
-	#CurrentRun.craft_recipes.append(ItemPool.fetch("regime_change"))
-	#CurrentRun.inventory.append(ItemPool.fetch("boxing_glove"))
-	#CurrentRun.inventory.append(ItemPool.fetch("regime_change"))
-	#CurrentRun.inventory.append(ItemPool.fetch("wire"))
-	#CurrentRun.inventory.append(ItemPool.fetch("bomb"))
-	#CurrentRun.inventory.back().on_level_up()
-	#CurrentRun.inventory.append(ItemPool.fetch("ice_cube"))
-	#CurrentRun.inventory.back().on_level_up()
-	#CurrentRun.inventory.append(ItemPool.fetch("shot_shells"))
-	#for i in range(20):
-	#	CurrentRun.inventory.append(ItemPool.fetch_random())
 	
 
 func _on_battle_encounter(wave_count: int = 1) -> void:

@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("2_badcx")
 type = 2
+extra_speed = 1
 texture = ExtResource("3_kvtbn")
 cost = 5
 craft_reqs = Dictionary[int, int]({

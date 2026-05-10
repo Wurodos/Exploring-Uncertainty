@@ -35,7 +35,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ekxnf")
 
-[node name="Button" type="Button" parent="." unique_id=180473707]
+[node name="Preparations" type="Button" parent="." unique_id=180473707]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -121,7 +121,7 @@ offset_right = 224.0
 offset_bottom = 176.0
 text = "Обучение"
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Preparations" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Testing" to="." method="_on_testing_pressed"]
 [connection signal="pressed" from="Language_en" to="." method="_on_switch_language" binds= ["en"]]
 [connection signal="pressed" from="Language_ru" to="." method="_on_switch_language" binds= ["ru"]]

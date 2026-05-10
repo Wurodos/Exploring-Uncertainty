@@ -24,6 +24,9 @@ var wave_count: int = 1:
 			%WaveLabel.text = tr("wave") + ": {}/{}".format([wave, wave_count], "{}")
 		else: %WaveLabel.text = ""
 
+
+
+
 var speed_queue: Array[Slave] = []
 var current_slave_position : int = 0
 var current_slaves: Array[Slave] = []
@@ -39,18 +42,17 @@ var is_prudence: bool = false
 
 var tutorial_progress: int = 0
 
+# TUTORIAL
+var allow_sender: int = -1
+var allow_victim: int = -1
+var allow_ally: int = -1
+
 func get_queue_element(id: int) -> QueueElement:
 	return queue_node.get_child(speed_queue.size() - 1 - id)
 
 func _ready() -> void:
 	instance = self
 	%Debug.visible = CurrentRun.is_debug
-
-	tutorial_box.visible = CurrentRun.is_battle_tutorial
-	tutorial_box.get_node("Text").set_string_id("tutorial_battle_0")
-	
-	if CurrentRun.is_battle_tutorial:
-		SignalBus.advance_tutorial.connect(_on_tutorial_ok_pressed)
 	
 	SignalBus.start_battle.connect(_on_start_battle)
 	SignalBus.new_turn.connect(_on_new_turn)
@@ -248,6 +250,7 @@ func _on_slave_death(slave_node: SlaveNode, is_loot: bool = true) -> void:
 
 func _on_slave_selected(slave_node: SlaveNode) -> void:
 	if is_marauder: return
+	if CurrentRun.is_tutorial and good_team.boys_nodes.find(slave_node) != allow_sender: return
 	if current_slaves.has(slave_node.held) and not slave_node.team.is_evil:
 		slave_node.toggle_ellipse(true)
 		selected_sender = slave_node
@@ -284,6 +287,7 @@ func _on_mouse_released():
 		var end_turn := current_slaves.is_empty()
 		
 		await selected_sender.turn_ended
+		SignalBus.did_action.emit()
 		if end_turn:
 			SignalBus.new_turn.emit()
 		else:
@@ -291,12 +295,13 @@ func _on_mouse_released():
 
 func _on_slave_mouse_entered(slave_node: SlaveNode):
 	if is_line:
+		if CurrentRun.is_tutorial:
+			if slave_node.held is Enemy and evil_team.boys_nodes.find(slave_node) != allow_victim: return
+			elif not slave_node.held is Enemy and good_team.boys_nodes.find(slave_node) != allow_ally: return
+		
+		
 		if not slave_node.team.is_evil and slave_node != selected_sender \
 			and (selected_sender.held.hat.target == Item.Target.Self or selected_sender.buffs.has(Action.DARK)):
-			return
-		if CurrentRun.is_battle_tutorial and tutorial_progress == 4 and not slave_node.team.is_evil:
-			return
-		if CurrentRun.is_battle_tutorial and tutorial_progress == 6 and slave_node.team.is_evil:
 			return
 		
 		
@@ -358,12 +363,6 @@ func _on_good_won() -> void:
 	
 	loot_node.visible = true
 	loot_node.start_marauder()
-	
-	
-	if CurrentRun.is_battle_tutorial:
-		tutorial_progress = 0
-		tutorial_box.visible = true
-		tutorial_box.get_node("Text").set_string_id("tutorial_battle_loot_0")
 	
 	
 	

@@ -1,6 +1,8 @@
 extends Node
 @warning_ignore_start("unused_signal")
 
+signal exit_the_mines
+
 # ====================
 # Common
 # ====================
@@ -59,6 +61,7 @@ signal new_message(id: String)
 
 signal new_round
 signal new_turn
+signal did_action
 
 signal action_ended
 
@@ -86,6 +89,8 @@ signal end_battle
 # ====================
 # Team Window
 # ====================
+
+signal open_team_window
 
 signal add_item(item: Item)
 signal show_item_info(item: Item)

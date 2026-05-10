@@ -26,7 +26,10 @@ func start_marauder() -> void:
 	for scrap: Item.Scrap in scraps:
 		CurrentRun.scraps[scrap] += 1
 	
-	items = items.slice(0, items.size() / 2)
+	if CurrentRun.is_tutorial:
+		items = [ItemPool.fetch("razor")]
+	else:
+		items = items.slice(0, items.size() / 2)
 	if items.is_empty(): 
 		visible = false
 		SignalBus.show_end_battle_screen.emit(scraps) 
