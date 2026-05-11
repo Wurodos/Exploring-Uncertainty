@@ -12,8 +12,6 @@ var battle_node: Battle
 
 
 func _ready() -> void:
-	CurrentRun.reset()
-	
 	SignalBus.battle_encounter.connect(_on_battle_encounter)
 	SignalBus.end_battle.connect(_on_end_battle)
 	SignalBus.play_music.emit("map")

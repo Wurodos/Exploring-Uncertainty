@@ -4,6 +4,7 @@ var deck : Array[Item] = []
 var tutorial_progress: int = 0
 
 func _ready() -> void:
+	CurrentRun.reset()
 	if CurrentRun.is_saved_game:
 		_end_draft()
 		return
