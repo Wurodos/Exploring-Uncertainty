@@ -18,7 +18,7 @@ func on_start_battle(owner: SlaveNode):
 func on_equip(owner: Slave):
 	super.on_equip(owner)
 	if owner.hp * (100.0 / hp_threshold_percent) <= owner.maxhp:
-		owner.hp = min(owner.maxhp, owner.hp + owner.maxhp / (100.0 / hp_heal_percent))
+		owner.hp = min(owner.maxhp, owner.hp + owner.heal_receive + owner.maxhp / (100.0 / hp_heal_percent))
 		owner.unequip(self)
 
 func _on_hp_changed():

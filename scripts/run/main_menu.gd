@@ -49,6 +49,7 @@ func _on_reset_progress_pressed() -> void:
 
 
 func _on_testing_pressed() -> void:
+	CurrentRun.reset()
 	CurrentRun.is_debug = true
 	CurrentRun.evil_boys = []
 	get_tree().change_scene_to_file("res://scenes/game.tscn")

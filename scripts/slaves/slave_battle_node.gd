@@ -262,7 +262,6 @@ func toggle_ellipse(visible: bool):
 	$CircleSelect.visible = visible
 
 func attack(victim: SlaveNode):
-	#$AnimationPlayer.play("jump")
 	var old_pos := global_position
 	toggle_arrow(false)
 	if held.weapon.is_melee:
@@ -275,6 +274,13 @@ func attack(victim: SlaveNode):
 		
 	if not (vigilance and tags.has(Action.TAG_VIGILANCE_KEEP_ATTACK)):
 		viable_for_vigilance = false
+		
+	for slave in team.boys_nodes:
+		if slave == self: continue
+		if slave.held.is_alive and slave.buffs.has(Action.PATRIOTISM):
+			slave.set_power(+1)
+	
+	
 	match(held.weapon.target):
 		Item.Target.Single: 
 			held.weapon.use_item(self, victim)
@@ -295,7 +301,6 @@ func attack(victim: SlaveNode):
 	_on_end_turn.call_deferred()
 	
 func support(ally: SlaveNode):
-	#$AnimationPlayer.play("jump")
 	toggle_arrow(false)
 	if buffs.has(Action.STUN):
 		_on_end_turn.call_deferred()

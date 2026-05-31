@@ -50,6 +50,12 @@ signal mouse_right_up
 
 
 # ====================
+# Draft Pack
+# ====================
+
+signal pick_pack(pack: Pack)
+
+# ====================
 # Dialogue
 # ====================
 

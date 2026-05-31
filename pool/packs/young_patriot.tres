@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Pack" format=3 uid="uid://wdursa5bk3j5"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_1mbed"]
+[ext_resource type="Resource" uid="uid://b2u1153wl2qlg" path="res://pool/items/tier0/trinkets/flag_feds.tres" id="2_88gja"]
+[ext_resource type="Resource" uid="uid://cdp3g5tc8qfjs" path="res://pool/items/tier0/hats/tie.tres" id="3_1mbed"]
+[ext_resource type="Resource" uid="uid://b2pmcckumf16i" path="res://pool/items/tier1/hats/cap.tres" id="4_1hh5y"]
+[ext_resource type="Resource" uid="uid://dxax18f4v6svy" path="res://pool/items/tier1/weapons/whistle.tres" id="5_2qx4p"]
+[ext_resource type="Script" uid="uid://c3xirxxdvmugs" path="res://scripts/metaprogress/pack.gd" id="7_wvssx"]
+
+[resource]
+script = ExtResource("7_wvssx")
+u_name = "young_patriot"
+items = Array[ExtResource("1_1mbed")]([ExtResource("2_88gja"), ExtResource("3_1mbed"), ExtResource("2_88gja"), ExtResource("4_1hh5y"), ExtResource("5_2qx4p")])
+metadata/_custom_type_script = "uid://c3xirxxdvmugs"

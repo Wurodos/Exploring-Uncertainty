@@ -1,7 +1,6 @@
 extends Node
 
-var deck : Array[Item] = []
-var tutorial_progress: int = 0
+var picked: Pack
 
 func _ready() -> void:
 	CurrentRun.reset()
@@ -9,27 +8,29 @@ func _ready() -> void:
 		_end_draft()
 		return
 	
-	$Label.text = tr("pick_one")
-	
-	if CurrentRun.is_tutorial:
-		$TutorialBox.visible = true
-		$TutorialBox/Text.set_string_id("tutorial_intro_0")
-		tutorial_progress += 1
-	
-	for i in range(4):
-		deck.append(ItemPool.fetch_random(Item.Type.Weapon))
-		deck.append(ItemPool.fetch_random(Item.Type.Hat))
-		
-	for i in range(3):
-		$ItemRow.get_child(i).buy.connect(_buy)
-	
-	for i in range(7):
-		deck.append(ItemPool.fetch_random(Item.Type.Trinket))
-	
 	SignalBus.show_item_info.connect(_on_show_item_info)
 	SignalBus.hide_item_info.connect(_on_hide_item_info)
-	deck.shuffle()
-	_next()
+	SignalBus.pick_pack.connect(_on_pick_pack)
+
+
+func _on_pick_pack(pack: Pack) -> void:
+	picked = pack
+	$Items.visible = true
+	$PickPack.visible = false
+	$PackTitle.visible = true
+	$Start.visible = true
+	CurrentRun.inventory.assign(pack.items.map(func(it: Item): return ItemPool.fetch(it.u_name)))
+	$PackTitle.text = tr($PackTitle.string_id).format([tr("pack_" + pack.u_name + "_title")], "{}")
+	
+	var i := 0
+	for item_node: ItemShop in $Items.get_children():
+		if i < pack.items.size():
+			item_node.visible = true
+			item_node.apply(pack.items[i], false)
+		else: item_node.visible = false
+		
+		i += 1
+
 
 func _end_draft():
 	$ItemRow.visible = false
@@ -37,23 +38,8 @@ func _end_draft():
 	$Start.text = tr("purge")
 	$Start.visible = true
 
-func _next() -> void:
-	if deck.is_empty():
-		_end_draft()
-		return
-	
-	for i in range(3):
-		var item : Item = deck.pop_back()
-		var item_node : ItemShop = $ItemRow.get_child(i)
-		item_node.apply(item, false)
-		
-
-func _buy(item_node: ItemShop) -> void:
-	CurrentRun.put_item_in_inventory(item_node.held)
-	$ItemEntry.visible = false
-	_next()
-
 func _on_start_pressed() -> void:
+	picked.on_start_run()
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
 
 func _on_show_item_info(item: Item) -> void:
@@ -62,10 +48,3 @@ func _on_show_item_info(item: Item) -> void:
 
 func _on_hide_item_info() -> void:
 	$ItemEntry.visible = false
-
-
-func _on_ok_pressed() -> void:
-	$TutorialBox/Text.set_string_id("tutorial_intro_" + str(tutorial_progress))
-	tutorial_progress += 1
-	if tutorial_progress > 4:
-		$TutorialBox.visible = false

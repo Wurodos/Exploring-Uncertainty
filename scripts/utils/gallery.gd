@@ -25,6 +25,7 @@ const icon_luck = preload("res://images/icons/clover.svg")
 const icon_speed = preload("res://images/icons/speed.svg")
 
 const icon_status = {
+	Action.PATRIOTISM: preload("res://images/buffs/patriotism.png"),
 	Action.SHIELD: preload("res://images/buffs/shield.png"),
 	Action.BLASPHEMY: preload("res://images/buffs/blasphemy.png"),
 	Action.APPETITE: preload("res://images/buffs/appetite.png"),

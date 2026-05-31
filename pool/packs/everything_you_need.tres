@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Pack" format=3 uid="uid://cx6uyucnhg5o0"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_jsxtn"]
+[ext_resource type="Resource" uid="uid://p7umbdxsqm8h" path="res://pool/items/tier0/weapons/knife.tres" id="2_jsxtn"]
+[ext_resource type="Resource" uid="uid://bhc3021bu0p6t" path="res://pool/items/tier1/trinkets/bomb.tres" id="3_yqcr8"]
+[ext_resource type="Resource" uid="uid://cts1g16ioa6bp" path="res://pool/items/tier1/trinkets/heart_lock.tres" id="4_js8cd"]
+[ext_resource type="Resource" uid="uid://cl1gv2aav7c52" path="res://pool/items/tier1/trinkets/draniki.tres" id="5_2djvr"]
+[ext_resource type="Script" uid="uid://c3xirxxdvmugs" path="res://scripts/metaprogress/pack.gd" id="6_wt1h3"]
+
+[resource]
+script = ExtResource("6_wt1h3")
+u_name = "everything_you_need"
+items = Array[ExtResource("1_jsxtn")]([ExtResource("2_jsxtn"), ExtResource("3_yqcr8"), ExtResource("2_jsxtn"), ExtResource("4_js8cd"), ExtResource("5_2djvr")])
+metadata/_custom_type_script = "uid://c3xirxxdvmugs"

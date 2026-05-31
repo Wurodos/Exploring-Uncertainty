@@ -1,6 +1,6 @@
 keys;en;ru
 prepare;Preparation;Подготовка
-pick_one;Pick 1;Выберите 1
+pick_one;Pick starting PACK;Выберите стартовый НАБОР
 purge;Purge;Истребить
 brigade;Brigade;Бригада
 heal;Heal;Лечить
@@ -22,6 +22,8 @@ simulation;Simulation;Симуляция
 craft;Craft;Мастерить
 comms_repair;Repair;Восстановить
 wave;Wave;Волна
+to_unlock;TO UNLOCK:;ЧТОБЫ РАЗБЛОКИРОВАТЬ:
+pack_pick;Pack picked:\n{};Выбран набор:\n{}
 no_loot_reminder;ITEMS don't receive experience.\nNo maraudering.\n(Right-click to remove);ПРЕДМЕТЫ не получат опыта в конце боя.\nНикакого мародерства.\n(ПКМ, чтобы скрыть)
 reptile_hint;REPTILE DETECTED. POSSIBLE DIRECTION:;ОБНАРУЖЕНА РЕПТИЛИЯ. ПРИМЕРНОЕ НАПРАВЛЕНИЕ:
 kw_power_name;Power;Мощь
@@ -46,3 +48,5 @@ kw_static_name;Static;Статичность
 kw_static_desc;Deals direct damage when hit, cuts in half;Наносит прямой урон при получении урона, снижается вдвое
 kw_vigilance_name;Vigilance;Бдительность
 kw_vigilance_desc;Guarantees crit.\n50% chance to dodge;Гарантирует крит.\n50% шанс уворота
+kw_patriotism_name;Patriotism;Патриотизм
+kw_patriotism_desc;+1 POWER when ally attacks;+1 МОЩЬ когда атакует союзник

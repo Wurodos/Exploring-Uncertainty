@@ -2,8 +2,14 @@ extends Node
 
 const save_path = "user://metaprogress.save"
 
-#
+# ===========  PACKS  ============
 
+var packs: Array[String] = [
+	"field_kitchen",
+	"young_patriot"
+]
+
+# ===========  RUNS INFO  ============
 var runs_completed: int = 0
 
 
@@ -28,6 +34,10 @@ func _exit_tree() -> void:
 func reset_progress() -> void:
 	completed_tutorial = false
 	runs_completed = 0
+	packs = [
+		"field_kitchen",
+		"young_patriot"
+	]
 	get_tree().quit()
 
 func save_progress() -> void:
@@ -35,10 +45,16 @@ func save_progress() -> void:
 	
 	var save_data = {
 		"tutorial": completed_tutorial,
-		"runs": runs_completed
+		"runs": runs_completed,
+		"packs": packs
 	}
 	
 	save_file.store_line(JSON.stringify(save_data))
+
+func unlock_pack(pack_id: String) -> void:
+	if not CurrentRun.is_tutorial and not CurrentRun.is_debug:
+		if not packs.has(pack_id):
+			packs.append(pack_id)
 
 func load_progress() -> void:
 	var save_file : FileAccess = FileAccess.open(save_path, FileAccess.READ)
@@ -53,7 +69,11 @@ func load_progress() -> void:
 		
 		var data = json.data
 		
-		completed_tutorial = data["tutorial"]
-		runs_completed = data["runs"]
+		if data.has("tutorial"):
+			completed_tutorial = data["tutorial"]
+		if data.has("runs"):
+			runs_completed = data["runs"]
+		if data.has("packs"):
+			packs.assign(data["packs"])
 		
 		

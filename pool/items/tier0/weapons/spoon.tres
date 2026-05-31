@@ -1,0 +1,14 @@
+[gd_resource type="Resource" format=3 uid="uid://bjadwj4ug46mf"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_elcpq"]
+[ext_resource type="Texture2D" uid="uid://e5ddd4kkco4c" path="res://images/items/spoon.png" id="2_elcpq"]
+[ext_resource type="Script" uid="uid://41ynq3inl2m5" path="res://scripts/items/weapons/spoon.gd" id="2_f6lht"]
+
+[resource]
+script = ExtResource("2_f6lht")
+harm = 4
+heal_percent = 10
+tier = 0
+texture = ExtResource("2_elcpq")
+cost = 2
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

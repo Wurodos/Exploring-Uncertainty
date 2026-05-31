@@ -20,6 +20,8 @@ enum SpriteSize {
 var hp : int
 var maxhp : int
 
+var heal_receive: int = 0
+var heal_give: int = 0
 
 
 var speed : int

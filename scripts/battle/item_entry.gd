@@ -44,13 +44,7 @@ func apply(item: Item, type: Type = Type.Default) -> void:
 	all_targets.visible = false
 	self_target.visible = false
 	
-	match (item.type):
-		Item.Type.Weapon:
-			self_modulate = Color(1.0, 0.435, 0.498)
-		Item.Type.Hat:
-			self_modulate = Color(0.459, 0.596, 1.0)
-		Item.Type.Trinket:
-			self_modulate = Color(0.459, 1.0, 0.51)
+	self_modulate = Constants.item_colors[item.type]
 	
 	if item.extra_hp != 0:
 		$ExtraHP.visible = true

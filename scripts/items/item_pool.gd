@@ -11,8 +11,7 @@ var _pool : Dictionary[StringName, Item]
 var _tier_pools: Array[TierPool] = []
 
 func _ready() -> void:
-	_tier_pools.append(null)
-	for tier in range(1,4):
+	for tier in range(0,4):
 		_tier_pools.append(TierPool.new())
 		for subfolder in ["weapons", "trinkets", "hats"]:
 			var path = "res://pool/items/tier" + str(tier) + "/" + subfolder

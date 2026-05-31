@@ -12,7 +12,7 @@ func on_start_battle(owner: SlaveNode):
 
 func use_item(sender: SlaveNode, ally: SlaveNode):
 	super.use_item(sender, ally)
-	sender.add_buff(Action.SHIELD, turns)
+	ally.add_buff(Action.SHIELD, turns)
 
 func on_level_up():
 	super.on_level_up()

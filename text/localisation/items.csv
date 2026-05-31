@@ -119,3 +119,22 @@ regime_change_name;REGIME CHANGE;СМЕНА РЕЖИМА
 regime_change_desc;END OF BATTLE IN CAMP: CONSTRUCT CITY, CC OR ELEVATOR;КОНЕЦ БОЯ В ЛАГЕРЕ: ВОЗВЕДИТЕ ЗДЕСЬ ГОРОД, ЦК ИЛИ ЛИФТ
 boxing_glove_name;Boxing Glove;Боксерская Перчатка
 boxing_glove_desc;INFLICTS {} HARM. x{} IF TARGET WAS ATTACKED THIS ROUND, IF TARGET;ПРИЧИНЯЕТ {} ВРЕДА. x{}, ЕСЛИ ЦЕЛЬ БЫЛА АТАКОВАНА В ЭТОМ РАУНДЕ
+pack_field_kitchen_title;Field Kitchen;Полевая Кухня
+pack_field_kitchen_desc;Field Kitchen;С хорошим [color=blue]Поваром[/color] [color=green]Драники[/color] не закончатся!  
+fork_name;Fork;Вилка
+fork_desc;INFLICTS {} HARM, HEALS {} HEALTH;ПРИЧИНЯЕТ {} ВРЕДА, ЛЕЧИТ СЕБЯ НА {} ЗДОРОВЬЯ
+spoon_name;Spoon;Ложка
+spoon_desc;INFLICTS {} HARM. EXECUTION: HEAL {}% HEALTH;ПРИЧИНЯЕТ {} ВРЕДА. КАЗНЬ: ЛЕЧИТ СЕБЯ НА {}% ЗДОРОВЬЯ
+plate_name;Plate;Тарелка
+plate_desc;INCREASE ANY HEAL FROM OR TO THIS FIGHTER BY {};УВЕЛИЧИВАЕТ ЛЮБОЕ ЛЕЧЕНИЕ ОТ И ДЛЯ ЭТОГО БОЙЦА НА {}
+tie_name;Tie;Галстук
+tie_desc;SELL IN CITY TO DECREASE COSTS OF HEALING\nACTION: PATRIOTISM {} TURNS;ПРОДАЙТЕ В ГОРОДЕ, ЧТОБЫ СНИЗИТЬ ЦЕНЫ НА ЛЕЧЕНИЕ\nДЕЙСТВИЕ: ПАТРИОТИЗМ {} ХОДОВ
+flag_feds_name;EEFUB Flag;Флаг ВЕФОН
+flag_feds_desc;START OF BATTLE: PATRIOTISM {} TURNS;НАЧАЛО БОЯ: ПАТРИОТИЗМ {} ХОДОВ
+pack_young_patriot_title;Young Patriot;Юный Патриот
+pack_young_patriot_desc;Young Patriot;Живи Революция!
+knife_name;Knife;Нож
+knife_desc;INFLICTS {} HARM;ПРИЧИНЯЕТ {} ВРЕДА
+pack_everything_you_need_title;Everything YOU need!;Все необходимое!
+pack_everything_you_need_unlock;Lose 1 run;Провалите 1 забег
+pack_everything_you_need_desc;No camp will survive!;Никакой лагерь не переживет! 

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3 uid="uid://p7umbdxsqm8h"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_acglc"]
+[ext_resource type="Script" uid="uid://css8hwhj4km1g" path="res://scripts/items/weapons/sword.gd" id="2_acglc"]
+[ext_resource type="Texture2D" uid="uid://dxy01t2ssa0w1" path="res://images/items/curvy-knife.png" id="3_acglc"]
+
+[resource]
+script = ExtResource("2_acglc")
+harm = 4
+tier = 0
+texture = ExtResource("3_acglc")
+cost = 2
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

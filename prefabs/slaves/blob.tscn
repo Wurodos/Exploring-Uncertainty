@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://hlcx8brhdh8g" path="res://images/icons/power_up.png" id="13_4thmk"]
 [ext_resource type="Texture2D" uid="uid://q3f5thafmlge" path="res://images/buffs/stun.png" id="14_xc2og"]
 [ext_resource type="Texture2D" uid="uid://cqc7tggib3u" path="res://images/icons/timer.png" id="19_6flwy"]
+[ext_resource type="Texture2D" uid="uid://cpunktksuucue" path="res://images/buffs/patriotism.png" id="19_pc5ow"]
 
 [sub_resource type="Animation" id="Animation_bm25f"]
 length = 0.001
@@ -518,6 +519,12 @@ visible = false
 self_modulate = Color(1, 1, 1, 0.5019608)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("14_xc2og")
+
+[node name="patriotism" type="Sprite2D" parent="Buffs" unique_id=1602480099]
+visible = false
+self_modulate = Color(1, 1, 1, 0.7058824)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("19_pc5ow")
 
 [node name="Timer" type="Node2D" parent="." unique_id=1921810984]
 visible = false

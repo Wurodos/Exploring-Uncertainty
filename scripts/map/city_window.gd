@@ -57,6 +57,7 @@ func _sell(item_node: ItemShop) -> void:
 	sold_anything = true
 	_change_value(item_node.cost)
 	CurrentRun.inventory.erase(item_node.held)
+	item_node.held.on_sold(current_city)
 	item_node.queue_free()
 	_update_items()
 
@@ -119,7 +120,9 @@ func _on_check_city(city: Room) -> void:
 		recipe_node.disable()
 		$Recipies.add_child(recipe_node)
 
-func _on_enter_city(city: Room) -> void:
+func _on_enter_city(city: Room = null) -> void:
+	if not city: city = current_city
+	
 	$InventoryGrid.visible = true
 	$Slaves.visible = true
 	value = 0

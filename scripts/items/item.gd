@@ -131,6 +131,9 @@ func get_displayed_harm(_sender: SlaveNode, _victim: SlaveNode) -> int:
 func get_intention(_sender: SlaveNode) -> Enemy.Intention:
 	return null
 
+func on_sold(_room: Room) -> void:
+	pass
+
 func on_equip(owner: Slave):
 	owner.maxhp += extra_hp
 	owner.hp += extra_hp

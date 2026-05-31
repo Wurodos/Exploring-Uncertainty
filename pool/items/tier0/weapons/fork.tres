@@ -1,0 +1,13 @@
+[gd_resource type="Resource" format=3 uid="uid://bdk2qc3gm1y0p"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_plmkb"]
+[ext_resource type="Texture2D" uid="uid://ds2mxofaci1hg" path="res://images/items/fork.png" id="2_0xhwl"]
+[ext_resource type="Script" uid="uid://d1fxxyr6u4til" path="res://scripts/items/weapons/fork.gd" id="2_diplh"]
+
+[resource]
+script = ExtResource("2_diplh")
+harm = 4
+tier = 0
+texture = ExtResource("2_0xhwl")
+cost = 2
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

@@ -3,14 +3,102 @@
 [ext_resource type="Script" uid="uid://p1j7xa0ecl76" path="res://scripts/run/draft.gd" id="1_ndt0q"]
 [ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="2_abqjp"]
 [ext_resource type="PackedScene" uid="uid://dj5w5iqx004t4" path="res://prefabs/battle/item_entry.tscn" id="3_700tk"]
-[ext_resource type="PackedScene" uid="uid://dga0x3g1o5mo4" path="res://prefabs/items/item_shop.tscn" id="4_qgxk2"]
-[ext_resource type="Texture2D" uid="uid://dls2t3f7lvsqx" path="res://images/shapes/tutorial_box.png" id="5_5j11b"]
+[ext_resource type="Resource" uid="uid://cky3o887buulb" path="res://pool/packs/field_kitchen.tres" id="3_ne4an"]
 [ext_resource type="Script" uid="uid://dd2yytdivaq0j" path="res://scripts/common/label_localized.gd" id="5_pjfeh"]
-[ext_resource type="LabelSettings" uid="uid://dhb60ypduj2te" path="res://text/labelsettings/tutorial_box.tres" id="6_ktkuy"]
+[ext_resource type="Resource" uid="uid://wdursa5bk3j5" path="res://pool/packs/young_patriot.tres" id="7_e13b7"]
+[ext_resource type="PackedScene" uid="uid://daqsvqv3ubkf7" path="res://prefabs/items/pack.tscn" id="7_ktkuy"]
+[ext_resource type="Resource" uid="uid://cx6uyucnhg5o0" path="res://pool/packs/everything_you_need.tres" id="8_e13b7"]
+[ext_resource type="PackedScene" uid="uid://dga0x3g1o5mo4" path="res://prefabs/items/item_shop.tscn" id="9_ne4an"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_abqjp"]
 font = ExtResource("2_abqjp")
-font_size = 100
+font_size = 70
+
+[sub_resource type="ImageTexture" id="ImageTexture_ktkuy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e13b7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.4)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ne4an"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjw16"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.75, 0.75, 0.75, 0.75)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gl8e"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vq1dt"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="Theme" id="Theme_5dkf5"]
+VScrollBar/constants/padding_left = 12
+VScrollBar/constants/padding_right = 12
+VScrollBar/icons/decrement = SubResource("ImageTexture_ktkuy")
+VScrollBar/icons/decrement_highlight = SubResource("ImageTexture_ktkuy")
+VScrollBar/icons/decrement_pressed = SubResource("ImageTexture_ktkuy")
+VScrollBar/icons/increment = SubResource("ImageTexture_ktkuy")
+VScrollBar/icons/increment_highlight = SubResource("ImageTexture_ktkuy")
+VScrollBar/icons/increment_pressed = SubResource("ImageTexture_ktkuy")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_e13b7")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_ne4an")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_bjw16")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_8gl8e")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_vq1dt")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjfeh"]
 bg_color = Color(0.690196, 0, 0, 1)
@@ -30,6 +118,131 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ndt0q")
 
+[node name="PickPack" type="Label" parent="." unique_id=1382819900]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 432.0
+offset_bottom = 165.0
+grow_horizontal = 2
+text = "Выберите стартовый НАБОР"
+label_settings = SubResource("LabelSettings_abqjp")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+script = ExtResource("5_pjfeh")
+string_id = &"pick_one"
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
+
+[node name="PackTitle" type="Label" parent="." unique_id=91075617]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 432.0
+offset_bottom = 165.0
+grow_horizontal = 2
+text = "Выбран набор:
+{}"
+label_settings = SubResource("LabelSettings_abqjp")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+script = ExtResource("5_pjfeh")
+string_id = &"pack_pick"
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1103991150]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 52.0
+offset_top = 34.0
+offset_right = 401.0
+offset_bottom = -30.0
+grow_vertical = 2
+theme = SubResource("Theme_5dkf5")
+
+[node name="PackRow" type="VBoxContainer" parent="ScrollContainer" unique_id=858453599]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="FieldKitchen" parent="ScrollContainer/PackRow" unique_id=1469866611 instance=ExtResource("7_ktkuy")]
+layout_mode = 2
+pack = ExtResource("3_ne4an")
+
+[node name="YoungPatriot" parent="ScrollContainer/PackRow" unique_id=1871348800 instance=ExtResource("7_ktkuy")]
+layout_mode = 2
+pack = ExtResource("7_e13b7")
+
+[node name="EYN" parent="ScrollContainer/PackRow" unique_id=970249300 instance=ExtResource("7_ktkuy")]
+layout_mode = 2
+pack = ExtResource("8_e13b7")
+
+[node name="Start" type="Button" parent="." unique_id=360646565]
+visible = false
+layout_mode = 0
+offset_left = 595.0
+offset_top = 453.0
+offset_right = 990.0
+offset_bottom = 565.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("2_abqjp")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxFlat_pjfeh")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qgxk2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_700tk")
+text = "Истребить"
+
+[node name="Items" type="Control" parent="." unique_id=132097997]
+visible = false
+layout_mode = 1
+anchor_left = 0.367
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.7840271
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ItemShop" parent="Items" unique_id=1759796252 instance=ExtResource("9_ne4an")]
+layout_mode = 0
+offset_left = -4.0
+offset_top = 175.0
+offset_right = 96.0
+offset_bottom = 275.0
+
+[node name="ItemShop2" parent="Items" unique_id=2083998754 instance=ExtResource("9_ne4an")]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 175.0
+offset_right = 240.0
+offset_bottom = 275.0
+
+[node name="ItemShop3" parent="Items" unique_id=189651844 instance=ExtResource("9_ne4an")]
+layout_mode = 0
+offset_left = 275.0
+offset_top = 175.0
+offset_right = 375.0
+offset_bottom = 275.0
+
+[node name="ItemShop4" parent="Items" unique_id=1351765164 instance=ExtResource("9_ne4an")]
+layout_mode = 0
+offset_left = 421.0
+offset_top = 175.0
+offset_right = 521.0
+offset_bottom = 275.0
+
+[node name="ItemShop5" parent="Items" unique_id=1010564674 instance=ExtResource("9_ne4an")]
+layout_mode = 0
+offset_left = 580.0
+offset_top = 175.0
+offset_right = 680.0
+offset_bottom = 275.0
+
 [node name="ItemEntry" parent="." unique_id=1751488166 instance=ExtResource("3_700tk")]
 visible = false
 layout_mode = 0
@@ -38,82 +251,4 @@ offset_top = 453.0
 offset_right = 695.0
 offset_bottom = 593.0
 
-[node name="Label" type="Label" parent="." unique_id=1097914169]
-layout_mode = 0
-offset_left = 311.0
-offset_top = 14.0
-offset_right = 827.0
-offset_bottom = 129.0
-text = "Выберите 1"
-label_settings = SubResource("LabelSettings_abqjp")
-horizontal_alignment = 1
-
-[node name="ItemRow" type="HBoxContainer" parent="." unique_id=1939481296]
-layout_mode = 0
-offset_left = 106.0
-offset_top = 153.0
-offset_right = 1046.0
-offset_bottom = 344.0
-alignment = 1
-
-[node name="ItemShop" parent="ItemRow" unique_id=347683914 instance=ExtResource("4_qgxk2")]
-layout_mode = 2
-expand_mode = 2
-
-[node name="ItemShop2" parent="ItemRow" unique_id=1843826126 instance=ExtResource("4_qgxk2")]
-layout_mode = 2
-expand_mode = 2
-
-[node name="ItemShop3" parent="ItemRow" unique_id=386429946 instance=ExtResource("4_qgxk2")]
-layout_mode = 2
-expand_mode = 2
-
-[node name="Start" type="Button" parent="." unique_id=360646565]
-visible = false
-layout_mode = 0
-offset_left = 217.0
-offset_top = 321.0
-offset_right = 961.0
-offset_bottom = 565.0
-focus_mode = 0
-theme_override_fonts/font = ExtResource("2_abqjp")
-theme_override_font_sizes/font_size = 100
-theme_override_styles/normal = SubResource("StyleBoxFlat_pjfeh")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_qgxk2")
-theme_override_styles/hover = SubResource("StyleBoxFlat_700tk")
-text = "Истребить"
-
-[node name="TutorialBox" type="TextureRect" parent="." unique_id=2077911605]
-visible = false
-layout_mode = 0
-offset_left = 449.0
-offset_top = 249.0
-offset_right = 1060.0
-offset_bottom = 513.0
-texture = ExtResource("5_5j11b")
-
-[node name="Text" type="Label" parent="TutorialBox" unique_id=1988885441]
-layout_mode = 0
-offset_left = 37.0
-offset_top = 21.0
-offset_right = 578.0
-offset_bottom = 245.0
-label_settings = ExtResource("6_ktkuy")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-script = ExtResource("5_pjfeh")
-metadata/_custom_type_script = "uid://dd2yytdivaq0j"
-
-[node name="OK" type="Button" parent="TutorialBox" unique_id=1477535885]
-layout_mode = 0
-offset_left = 237.0
-offset_top = 269.0
-offset_right = 348.0
-offset_bottom = 324.0
-theme_override_fonts/font = ExtResource("2_abqjp")
-theme_override_font_sizes/font_size = 32
-text = "OK"
-
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="TutorialBox/OK" to="." method="_on_ok_pressed"]

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Pack" format=3 uid="uid://cky3o887buulb"]
+
+[ext_resource type="Script" uid="uid://c3xirxxdvmugs" path="res://scripts/metaprogress/pack.gd" id="1_1yybl"]
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_elf1k"]
+[ext_resource type="Resource" uid="uid://bdk2qc3gm1y0p" path="res://pool/items/tier0/weapons/fork.tres" id="2_cbqrp"]
+[ext_resource type="Resource" uid="uid://do1vbb2820r22" path="res://pool/items/tier1/hats/chef.tres" id="3_f5mpu"]
+[ext_resource type="Resource" uid="uid://blidby8sdcqlw" path="res://pool/items/tier0/trinkets/plate.tres" id="3_ng1sj"]
+[ext_resource type="Resource" uid="uid://cl1gv2aav7c52" path="res://pool/items/tier1/trinkets/draniki.tres" id="4_3pp5p"]
+[ext_resource type="Resource" uid="uid://bjadwj4ug46mf" path="res://pool/items/tier0/weapons/spoon.tres" id="4_nkm2w"]
+
+[resource]
+script = ExtResource("1_1yybl")
+u_name = "field_kitchen"
+items = Array[ExtResource("1_elf1k")]([ExtResource("2_cbqrp"), ExtResource("3_ng1sj"), ExtResource("4_nkm2w"), ExtResource("3_f5mpu"), ExtResource("4_3pp5p")])
+metadata/_custom_type_script = "uid://c3xirxxdvmugs"

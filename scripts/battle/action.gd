@@ -9,6 +9,7 @@ const BLASPHEMY = "blasphemy"
 const FREEZE = "freeze"
 const DARK = "dark"
 const STUN = "stun"
+const PATRIOTISM = "patriotism"
 
 const TAG_BETTER_SHIELD = "tag_better_shield"
 const TAG_STATUS_DAMAGE = "tag_status_damage"
@@ -90,9 +91,6 @@ func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, dont_proc: bool
 	
 	victim.hit_animation.play("hit")
 	victim.viable_for_vigilance = false
-	#
-	#await victim.animation_player.animation_finished
-	#victim.animation_player.play("idle")
 
 func execute(sender: SlaveNode, victim: SlaveNode) -> void:
 	SignalBus.play_sound.emit("hurt")
@@ -102,13 +100,16 @@ func execute(sender: SlaveNode, victim: SlaveNode) -> void:
 	victim.hit_animation.play("hit")
 	victim.viable_for_vigilance = false
 
-func heal(_sender: SlaveNode, ally: SlaveNode, amount: int):
+func heal(sender: SlaveNode, ally: SlaveNode, amount: int):
 	SignalBus.play_sound.emit("heal")
 	
 	if not ally.held.is_alive: return
 	
+	if sender == ally:
+		amount += ally.held.heal_receive
+	else:
+		amount += sender.held.heal_give + ally.held.heal_receive 
+	
 	ally.set_hp(min(ally.held.maxhp, ally.held.hp + amount), false)
 	
 	ally.heal_animation.play("heal")
-	#await ally.animation_player.animation_finished
-	#ally.animation_player.play("idle")

@@ -112,5 +112,8 @@ func decide_intention() -> void:
 			_intention_weapon(target, victim)
 		else:
 			intention.type = Intention.Type.Reinforcement
+			intention.amount = 1
+			intention.extra_data = "cherv"
 			intention.is_support = true
+			reinforced_last_turn = true
 	

@@ -429,6 +429,7 @@ func _on_lower_hp_pressed() -> void:
 
 
 func _on_restart_pressed() -> void:
+	Metaprogress.unlock_pack("everything_you_need")
 	get_tree().quit()
 
 

@@ -1,0 +1,183 @@
+[gd_scene format=3 uid="uid://daqsvqv3ubkf7"]
+
+[ext_resource type="Texture2D" uid="uid://c102ib72qlv7l" path="res://images/items/sword.png" id="1_i05qp"]
+[ext_resource type="Script" uid="uid://bsssgx4teow6x" path="res://scripts/metaprogress/pack_node.gd" id="1_s61gf"]
+[ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="2_s61gf"]
+[ext_resource type="Script" uid="uid://b4miwwllthxs7" path="res://scripts/common/rich_localized.gd" id="3_l6lgl"]
+
+[node name="Pack" type="Control" unique_id=1469866611]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_s61gf")
+
+[node name="BG" type="ColorRect" parent="." unique_id=1543861395]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28235295, 0.28235295, 0.45882353, 1)
+
+[node name="Items" type="Control" parent="." unique_id=1720821050]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Back1" type="ColorRect" parent="Items" unique_id=1758365206]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 49.0
+offset_bottom = 49.0
+color = Color(1, 0, 0, 1)
+
+[node name="Icon" type="TextureRect" parent="Items/Back1" unique_id=325159452]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_i05qp")
+expand_mode = 2
+
+[node name="Back2" type="ColorRect" parent="Items" unique_id=488273448]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 6.0
+offset_right = 140.0
+offset_bottom = 46.0
+color = Color(1, 0, 0, 1)
+
+[node name="Icon" type="TextureRect" parent="Items/Back2" unique_id=669301885]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_i05qp")
+expand_mode = 2
+
+[node name="Back3" type="ColorRect" parent="Items" unique_id=2068823516]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 14.0
+offset_right = 229.0
+offset_bottom = 54.0
+color = Color(1, 0, 0, 1)
+
+[node name="Icon" type="TextureRect" parent="Items/Back3" unique_id=891208779]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_i05qp")
+expand_mode = 2
+
+[node name="Back4" type="ColorRect" parent="Items" unique_id=115175248]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 61.0
+offset_right = 94.0
+offset_bottom = 101.0
+color = Color(1, 0, 0, 1)
+
+[node name="Icon" type="TextureRect" parent="Items/Back4" unique_id=312153933]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_i05qp")
+expand_mode = 2
+
+[node name="Back5" type="ColorRect" parent="Items" unique_id=1078318758]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 62.0
+offset_right = 176.0
+offset_bottom = 102.0
+color = Color(1, 0, 0, 1)
+
+[node name="Icon" type="TextureRect" parent="Items/Back5" unique_id=1345121466]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_i05qp")
+expand_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="." unique_id=257169407]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.58000004
+anchor_right = 1.0
+anchor_bottom = 0.68
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = ExtResource("2_s61gf")
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+text = "Набор юного патриота"
+horizontal_alignment = 1
+script = ExtResource("3_l6lgl")
+metadata/_custom_type_script = "uid://b4miwwllthxs7"
+
+[node name="Description" type="RichTextLabel" parent="." unique_id=768156588]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.68
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("2_s61gf")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Адна Федэрацыя! Три наконечника! Сім кроків за обрій! Dziewiec poczatków! Šimtas dvidešimt pergaliu!"
+horizontal_alignment = 1
+script = ExtResource("3_l6lgl")
+metadata/_custom_type_script = "uid://b4miwwllthxs7"
+
+[node name="ToUnlock" type="RichTextLabel" parent="." unique_id=1929694360]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.68
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -9.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("2_s61gf")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "ЧТОБЫ РАЗБЛОКИРОВАТЬ:"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("3_l6lgl")
+string_id = &"to_unlock"
+metadata/_custom_type_script = "uid://b4miwwllthxs7"
+
+[node name="Pick" type="Button" parent="." unique_id=631775288]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -173.0
+offset_top = -15.5
+offset_right = -83.0
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "Выбрать"
+
+[connection signal="pressed" from="Pick" to="." method="_on_pick_pressed"]
