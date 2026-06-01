@@ -389,6 +389,7 @@ text = "[ММ-4] Система инициализирована.$
 \"МеждуМорье\" ММ-4 (кодовое название - \"Благонадежность\")"
 label_settings = SubResource("LabelSettings_es01l")
 script = ExtResource("6_es01l")
+chars = 3
 metadata/_custom_type_script = "uid://b7a2ai83umgwf"
 
 [node name="TutorialChoice" type="Control" parent="." unique_id=1591050081]

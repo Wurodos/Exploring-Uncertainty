@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://c1dk5rym7aphd"]
+
+[ext_resource type="Script" uid="uid://dxnk6q6hlpu32" path="res://scripts/common/better_texture_button.gd" id="1_pmeou"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pmeou"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0bfjr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3ty3t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bvm0d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oa8ge"]
+
+[node name="BetterTextureButton" type="TextureRect" unique_id=778629868]
+offset_right = 100.0
+offset_bottom = 100.0
+expand_mode = 1
+script = ExtResource("1_pmeou")
+
+[node name="Button" type="Button" parent="." unique_id=1441494108]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pmeou")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_0bfjr")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3ty3t")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bvm0d")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_oa8ge")
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_emit"]

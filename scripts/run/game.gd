@@ -10,11 +10,13 @@ const map_scene = preload("res://scenes/map.tscn")
 var map_node : Map
 var battle_node: Battle
 
+var map_music_id: int = 1
+
 
 func _ready() -> void:
 	SignalBus.battle_encounter.connect(_on_battle_encounter)
 	SignalBus.end_battle.connect(_on_end_battle)
-	SignalBus.play_music.emit("map")
+	SignalBus.play_music.emit("map_1")
 	
 	map_node = map_scene.instantiate()
 	add_child(map_node)
@@ -43,7 +45,11 @@ func _on_end_battle() -> void:
 	map_node.visible = true
 	map_node.camera.make_current()
 	map_node.get_node("GUI").visible = true
-	SignalBus.play_music.emit("map")
+	
+	map_music_id += 1
+	if map_music_id > 3: map_music_id = 1
+	
+	SignalBus.play_music.emit("map_"+str(map_music_id))
 	
 	if CurrentRun.state != State.Popup:
 		CurrentRun.state = State.Map

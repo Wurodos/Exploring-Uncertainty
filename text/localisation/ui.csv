@@ -19,6 +19,7 @@ save;Save;Сохранить
 restart;Restart;Перезапуск
 exit;Power off;Выключить
 simulation;Simulation;Симуляция
+is_calling;is calling...;вызывает...
 craft;Craft;Мастерить
 comms_repair;Repair;Восстановить
 wave;Wave;Волна

@@ -3,41 +3,38 @@ class_name Dialogue
 
 @export var lines: Array[DialogueNode] = []
 
-@onready var portrait_rect: TextureRect = $Speaker/Portrait
-@onready var speaker_name: Label = $Speaker/Name
-@onready var typewriter: RichTypeWriter = $BG/Text 
+@onready var window: DialogueWindow = $DialogueWindow
 
 var current_line: DialogueNode
 var prev_state: Game.State
 
+
 func _ready() -> void:
 	SignalBus.new_message.connect(on_new_message)
+	SignalBus.end_battle.connect(func(): on_new_message(1), CONNECT_ONE_SHOT)
 
 func on_new_message(id: int) -> void:
+	if CurrentRun.is_debug or CurrentRun.is_tutorial: return
+	$AnimationPlayer.play("popup")
+	window.reset()
 	prev_state = CurrentRun.state
 	CurrentRun.state = Game.State.Phone
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	current_line = lines[id]
-	$RingParticle.emitting = true
-	$Show.disabled = false
 	$Ring.play()
 
 func say() -> void:
-	portrait_rect.texture = current_line.portrait
-	speaker_name.text = tr(current_line.name_id)
-	var old_text = typewriter.full_text
-	typewriter.full_text = tr(current_line.text_id)
-	if old_text != typewriter.full_text:
-		typewriter.type()
+	window.say(current_line)
 
 func return_to_gameplay() -> void:
 	CurrentRun.state = prev_state
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hide_dialogue()
 
-func show_dialogue() -> void:
-	$RingParticle.emitting = false
+func show_dialogue() -> void:	
+	$AnimationPlayer.play_backwards("popup")
 	$Ring.stop()
+	
 	toggle(true)
 	say()
 
@@ -45,24 +42,24 @@ func hide_dialogue() -> void:
 	toggle(false)
 
 func toggle(on: bool) -> void:
-	$Speaker.visible = on
-	$BG.visible = on
-	$Show.visible = not on
+	window.visible = on
 
 
 func _on_start_timer_timeout() -> void:
-	if CurrentRun.is_debug or CurrentRun.is_tutorial: return
 	on_new_message(0)
-
-
-func _on_got_it_pressed() -> void:
-	if typewriter.is_typing:
-		typewriter.skip()
-	else:
 		
+func _on_accept_pressed() -> void:
+	show_dialogue()
+
+
+func _on_continue_pressed() -> void:
+	if not window.bubble: return
+	
+	if window.bubble.get_typewriter().is_typing: 
+		window.bubble.get_typewriter().skip()
+	else:
 		if current_line.next() == null:
 			return_to_gameplay()
 		else:
 			current_line = current_line.next()
 			say()
-		

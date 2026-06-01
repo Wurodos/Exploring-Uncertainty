@@ -3,6 +3,7 @@ class_name RichTypeWriter
 
 @export var start_typing: bool = false
 @export var tw_delay: float = 0.03
+@export var chars: int = 1
 
 var full_text : String = ""
 var typed_text: String = ""
@@ -51,7 +52,9 @@ func type():
 			if is_color:
 				text += "[/color]"
 		index += 1
-		await get_tree().create_timer(delay).timeout
+		_char_pos += 1
+		if c == "$" or _char_pos % chars == 0:
+			await get_tree().create_timer(delay).timeout
 	is_typing = false
 
 func skip() -> void:

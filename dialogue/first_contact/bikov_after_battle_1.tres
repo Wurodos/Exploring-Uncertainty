@@ -7,5 +7,5 @@
 script = ExtResource("3_ko88i")
 portrait = ExtResource("2_awffw")
 name_id = "pivil_bikov"
-text_id = "bikov_after_battle"
+text_id = "bikov_after_battle_1"
 metadata/_custom_type_script = "uid://da1waiviit08p"

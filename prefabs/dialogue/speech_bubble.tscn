@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://c6cw5saywa3o0"]
+
+[ext_resource type="Script" uid="uid://l8culmqsrac0" path="res://scripts/narrative/speech_bubble.gd" id="1_2jdvo"]
+[ext_resource type="FontFile" uid="uid://hym6fbjhhg2u" path="res://text/font/Share-Tech-CYR.otf" id="2_buh51"]
+[ext_resource type="Script" uid="uid://c1yalf0kclcqm" path="res://scripts/common/rich_typewriter.gd" id="3_yttwo"]
+[ext_resource type="Texture2D" uid="uid://cu08bnmbav1aa" path="res://images/shapes/triangle.png" id="4_lqrqn"]
+
+[node name="SpeechBubble" type="Control" unique_id=671612262]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_2jdvo")
+
+[node name="Outline" type="ColorRect" parent="." unique_id=1946571379]
+layout_mode = 0
+offset_left = -20.0
+offset_top = 73.0
+offset_right = 529.0
+offset_bottom = 204.0
+color = Color(0, 0, 0, 1)
+
+[node name="Rect" type="ColorRect" parent="Outline" unique_id=75739754]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text" type="RichTextLabel" parent="Outline" unique_id=1585533337]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 14.0
+offset_right = -22.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("2_buh51")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+script = ExtResource("3_yttwo")
+chars = 2
+metadata/_custom_type_script = "uid://c1yalf0kclcqm"
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=344435345]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 80.0
+offset_bottom = 78.0
+texture = ExtResource("4_lqrqn")
+expand_mode = 1

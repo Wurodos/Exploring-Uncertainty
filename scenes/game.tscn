@@ -13,6 +13,9 @@
 [ext_resource type="AudioStream" uid="uid://6jwkrqd1ryw8" path="res://audio/music/Roots And Toots.mp3" id="11_kvpfn"]
 [ext_resource type="Shader" uid="uid://dklolsev5g1t2" path="res://scenes/crt.gdshader" id="12_dinhu"]
 [ext_resource type="AudioStream" uid="uid://bijs8kvgi47pq" path="res://audio/music/First Mistake.mp3" id="12_kvuet"]
+[ext_resource type="AudioStream" uid="uid://cxtpb12g76fwa" path="res://audio/music/Looking.mp3" id="13_ir15t"]
+[ext_resource type="AudioStream" uid="uid://cm50tesd440ra" path="res://audio/music/Finding.mp3" id="14_ca42v"]
+[ext_resource type="AudioStream" uid="uid://kipy6x8kmfkr" path="res://audio/music/Searching.mp3" id="15_ca42v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kvuet"]
 shader = ExtResource("12_dinhu")
@@ -44,6 +47,9 @@ music = Dictionary[StringName, AudioStream]({
 &"heal": ExtResource("8_gee14"),
 &"hurt": ExtResource("5_u5sy4"),
 &"map": ExtResource("10_vtaks"),
+&"map_1": ExtResource("13_ir15t"),
+&"map_2": ExtResource("15_ca42v"),
+&"map_3": ExtResource("14_ca42v"),
 &"powerup": ExtResource("7_0tnpc"),
 &"roots_and_toots": ExtResource("11_kvpfn"),
 &"shop": ExtResource("6_gee14")

@@ -4,6 +4,7 @@ class_name Typewriter
 
 @export var start_typing: bool = false
 @export var tw_delay: float = 0.03
+@export var chars: int = 1
 
 var full_text : String = ""
 
@@ -25,13 +26,15 @@ func type():
 	_char_pos = 0
 	is_typing = true
 	for char in full_text:
+		_char_pos += 1
 		if not is_typing: break
 		var delay := tw_delay
 		if char == "$":
 			delay = 1
 		else:
 			text += char
-		await get_tree().create_timer(delay).timeout
+		if char == "$" or _char_pos % chars == 0:
+			await get_tree().create_timer(delay).timeout
 	is_typing = false
 
 func skip() -> void:

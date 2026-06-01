@@ -30,18 +30,14 @@
 [ext_resource type="Texture2D" uid="uid://bs1oxtclo4qgp" path="res://images/icons/coin.png" id="14_6k6j1"]
 [ext_resource type="LabelSettings" uid="uid://34c71nyrmk01" path="res://text/labelsettings/item_name.tres" id="15_m335s"]
 [ext_resource type="Script" uid="uid://t44bv6kafv14" path="res://scripts/narrative/dialogue.gd" id="16_tf62m"]
-[ext_resource type="Texture2D" uid="uid://c02os5gympk53" path="res://images/portraits/bikov/bikov_eye.png" id="17_tf62m"]
 [ext_resource type="Script" uid="uid://da1waiviit08p" path="res://scripts/narrative/dialogue_node.gd" id="17_w5y4v"]
-[ext_resource type="Script" uid="uid://c1yalf0kclcqm" path="res://scripts/common/rich_typewriter.gd" id="18_ogd7i"]
 [ext_resource type="Resource" uid="uid://citkrby8o11b7" path="res://dialogue/first_contact/bikov_introduction.tres" id="18_v7gfb"]
 [ext_resource type="Script" uid="uid://ctoap32euag0p" path="res://scripts/battle/slave_info.gd" id="19_mkblt"]
 [ext_resource type="Texture2D" uid="uid://cfowi84shmwbh" path="res://images/icons/power.svg" id="20_4o3w1"]
-[ext_resource type="Texture2D" uid="uid://dwfqtvo1gro0n" path="res://images/icons/rotary-phone.png" id="20_nc68e"]
 [ext_resource type="Texture2D" uid="uid://cwitgcwwtiovq" path="res://images/backdrops/craft.png" id="22_cgoaf"]
 [ext_resource type="Script" uid="uid://dpnh8e5ou5u3v" path="res://scripts/map/craft_window.gd" id="22_mwr4f"]
 [ext_resource type="Texture2D" uid="uid://dbvah06l8cy1i" path="res://images/backdrops/recon.png" id="23_5cjpp"]
 [ext_resource type="Script" uid="uid://db0mfu8jn8b8j" path="res://scripts/map/popups.gd" id="23_5u2yt"]
-[ext_resource type="Texture2D" uid="uid://cuh8pkm4s4nnf" path="res://images/icons/lightning-slashes.png" id="23_v7gfb"]
 [ext_resource type="Script" uid="uid://cxnkknettgk0l" path="res://scripts/map/recon_window.gd" id="23_xcq86"]
 [ext_resource type="AudioStream" uid="uid://ussntm82bnug" path="res://audio/music/Phone.mp3" id="24_icjpl"]
 [ext_resource type="PackedScene" uid="uid://svnijeijk20h" path="res://prefabs/items/item_craftable.tscn" id="24_vqsqp"]
@@ -60,6 +56,14 @@
 [ext_resource type="Script" uid="uid://dd2yytdivaq0j" path="res://scripts/common/label_localized.gd" id="35_cgoaf"]
 [ext_resource type="Texture2D" uid="uid://bf5hkbhmtbyi4" path="res://images/shapes/arrow_green.png" id="43_8kgjo"]
 [ext_resource type="Script" uid="uid://c8rdumvdrdg4e" path="res://scripts/map/elevator_window.gd" id="45_baix8"]
+[ext_resource type="Texture2D" uid="uid://bsqunrlyvtxp" path="res://images/icons/accept_call.png" id="56_kycfx"]
+[ext_resource type="Resource" uid="uid://ddajujr3we7ms" path="res://dialogue/first_contact/bikov_after_battle_1.tres" id="56_o4st3"]
+[ext_resource type="Texture2D" uid="uid://wnfwoxtihjib" path="res://images/icons/deny_call.png" id="57_6iak1"]
+[ext_resource type="PackedScene" uid="uid://c1dk5rym7aphd" path="res://prefabs/ui/better_texture_button.tscn" id="58_o4st3"]
+[ext_resource type="Script" uid="uid://b4miwwllthxs7" path="res://scripts/common/rich_localized.gd" id="58_sp2wr"]
+[ext_resource type="Script" uid="uid://i3blifobfkdn" path="res://scripts/map/dialogue_window.gd" id="61_kycfx"]
+[ext_resource type="Texture2D" uid="uid://csxpx0eijrp6l" path="res://images/backdrops/dialogue_bg.png" id="62_6iak1"]
+[ext_resource type="Texture2D" uid="uid://bh0iguaowf5mt" path="res://images/portraits/pip/pip_default.png" id="63_sp2wr"]
 
 [sub_resource type="Animation" id="Animation_5u2yt"]
 length = 0.001
@@ -414,12 +418,45 @@ font = ExtResource("31_mniao")
 font_size = 28
 font_color = Color(0, 0.788235, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_fq3dv"]
+[sub_resource type="Animation" id="Animation_kycfx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PickUpThePhone:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(161, -268)]
+}
+
+[sub_resource type="Animation" id="Animation_vwuk8"]
+resource_name = "popup"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PickUpThePhone:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(161, -268), Vector2(161, 40)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kycfx"]
+_data = {
+&"RESET": SubResource("Animation_kycfx"),
+&"popup": SubResource("Animation_vwuk8")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_o4st3"]
 font = ExtResource("1_4xfga")
-font_size = 32
-font_color = Color(1, 1, 0, 1)
-outline_size = 8
-outline_color = Color(0, 0, 1, 1)
 
 [node name="Map" type="Node2D" unique_id=5666962]
 script = ExtResource("1_blm8a")
@@ -2062,6 +2099,7 @@ color = Color(1, 1, 1, 0)
 metadata/_edit_use_anchors_ = true
 
 [node name="Dialogue" type="Control" parent="GUI" unique_id=493367388]
+z_index = 12
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -2070,133 +2108,78 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("16_tf62m")
-lines = Array[ExtResource("17_w5y4v")]([ExtResource("18_v7gfb")])
+lines = Array[ExtResource("17_w5y4v")]([ExtResource("18_v7gfb"), ExtResource("56_o4st3")])
 
-[node name="Speaker" type="Control" parent="GUI/Dialogue" unique_id=698234315]
-visible = false
-anchors_preset = 0
-offset_right = 343.0
-offset_bottom = 183.0
-
-[node name="Portrait" type="TextureRect" parent="GUI/Dialogue/Speaker" unique_id=1871122187]
+[node name="PickUpThePhone" type="ColorRect" parent="GUI/Dialogue" unique_id=714169573]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 22.0
-offset_right = 152.0
-offset_bottom = 150.0
-texture = ExtResource("17_tf62m")
+offset_left = 161.0
+offset_top = -268.0
+offset_right = 507.0
+offset_bottom = -55.0
+color = Color(0.11858145, 0.11858136, 0.11858136, 1)
 
-[node name="Name" type="Label" parent="GUI/Dialogue/Speaker" unique_id=947683123]
+[node name="CallerName" type="RichTextLabel" parent="GUI/Dialogue/PickUpThePhone" unique_id=59068025]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -178.0
-offset_top = -69.5
-offset_right = 73.0
-offset_bottom = 56.5
-grow_horizontal = 0
-grow_vertical = 2
-text = "Общественный Институт проблем"
-label_settings = SubResource("LabelSettings_fq3dv")
+offset_left = 11.0
+offset_top = 9.0
+offset_right = -13.0
+offset_bottom = 88.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("31_mniao")
+theme_override_font_sizes/normal_font_size = 32
+text = "Пивил Биков"
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 2
+script = ExtResource("58_sp2wr")
+metadata/_custom_type_script = "uid://b4miwwllthxs7"
 
-[node name="BG" type="ColorRect" parent="GUI/Dialogue" unique_id=491881018]
-visible = false
+[node name="IsCalling" type="RichTextLabel" parent="GUI/Dialogue/PickUpThePhone" unique_id=1373656443]
 layout_mode = 1
-anchors_preset = 4
+anchors_preset = 14
 anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 17.0
-offset_top = -159.0
-offset_right = 367.0
-offset_bottom = 151.0
-grow_vertical = 2
-color = Color(1, 1, 1, 0.1764706)
-
-[node name="Text" type="RichTextLabel" parent="GUI/Dialogue/BG" unique_id=896423892]
-layout_mode = 1
-anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 7.0
-offset_top = 7.0
-offset_right = -7.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_fonts/normal_font = ExtResource("1_4xfga")
-theme_override_font_sizes/normal_font_size = 22
-bbcode_enabled = true
-scroll_following = true
-script = ExtResource("18_ogd7i")
-
-[node name="GotIt" type="Button" parent="GUI/Dialogue/BG" unique_id=163149371]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -36.0
-offset_top = -47.0
-offset_right = 36.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 0
-focus_mode = 0
-text = "ПРИНЯТО"
-
-[node name="RingParticle" type="CPUParticles2D" parent="GUI/Dialogue" unique_id=1238400376]
-position = Vector2(76, 74)
-emitting = false
-amount = 30
-texture = ExtResource("23_v7gfb")
-lifetime = 0.6
-explosiveness = 0.05
-particle_flag_align_y = true
-spread = 180.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 200.0
-initial_velocity_max = 200.0
-angle_min = -90.0
-angle_max = 90.0
-
-[node name="Show" type="TextureButton" parent="GUI/Dialogue" unique_id=771442193]
-layout_mode = 1
-offset_right = 150.0
-offset_bottom = 150.0
-focus_mode = 0
-mouse_default_cursor_shape = 2
-disabled = true
-toggle_mode = true
-texture_normal = ExtResource("20_nc68e")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Hide" type="TextureButton" parent="GUI/Dialogue" unique_id=1376092179]
-visible = false
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 429.0
-offset_top = -118.0
-offset_right = 579.0
-offset_bottom = 32.0
+offset_top = -23.5
+offset_bottom = 19.5
+grow_horizontal = 2
 grow_vertical = 2
-focus_mode = 0
-mouse_default_cursor_shape = 2
-toggle_mode = true
-texture_normal = ExtResource("20_nc68e")
-ignore_texture_size = true
-stretch_mode = 0
+theme_override_colors/font_outline_color = Color(0.57700837, 0.5770084, 0.57700837, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/normal_font = ExtResource("31_mniao")
+theme_override_font_sizes/normal_font_size = 36
+text = "вызывает..."
+horizontal_alignment = 1
+script = ExtResource("58_sp2wr")
+string_id = &"is_calling"
+metadata/_custom_type_script = "uid://b4miwwllthxs7"
+
+[node name="Accept" parent="GUI/Dialogue/PickUpThePhone" unique_id=778629868 instance=ExtResource("58_o4st3")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 23.0
+offset_top = -80.0
+offset_right = 96.0
+offset_bottom = -7.0
+grow_vertical = 0
+texture = ExtResource("56_kycfx")
+hover_modulate = Color(0.3779188, 0.37791887, 0.37791884, 1)
+
+[node name="Deny" parent="GUI/Dialogue/PickUpThePhone" unique_id=881693281 instance=ExtResource("58_o4st3")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 252.0
+offset_top = -80.0
+offset_right = 325.0
+offset_bottom = -7.0
+grow_vertical = 0
+texture = ExtResource("57_6iak1")
+hover_modulate = Color(0.3764706, 0.3764706, 0.3764706, 1)
 
 [node name="Ring" type="AudioStreamPlayer" parent="GUI/Dialogue" unique_id=1260827932]
 stream = ExtResource("24_icjpl")
@@ -2205,6 +2188,129 @@ stream = ExtResource("24_icjpl")
 wait_time = 2.0
 one_shot = true
 autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GUI/Dialogue" unique_id=268044314]
+libraries/ = SubResource("AnimationLibrary_kycfx")
+
+[node name="DialogueWindow" type="Control" parent="GUI/Dialogue" unique_id=1044215707]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("61_kycfx")
+
+[node name="ColorRect" type="ColorRect" parent="GUI/Dialogue/DialogueWindow" unique_id=956161188]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.513726)
+
+[node name="BG" type="TextureRect" parent="GUI/Dialogue/DialogueWindow" unique_id=1571293695]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 139.0
+offset_top = 66.0
+offset_right = -113.0
+offset_bottom = -82.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("62_6iak1")
+
+[node name="SpeakerRow" type="HBoxContainer" parent="GUI/Dialogue/DialogueWindow/BG" unique_id=35034286]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 25.0
+offset_bottom = 153.0
+grow_horizontal = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Speaker1" type="TextureRect" parent="GUI/Dialogue/DialogueWindow/BG/SpeakerRow" unique_id=125158124]
+layout_mode = 2
+texture = ExtResource("63_sp2wr")
+
+[node name="Name" type="Label" parent="GUI/Dialogue/DialogueWindow/BG/SpeakerRow/Speaker1" unique_id=1557761064]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 6.0
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Общественный Институт Проблем"
+label_settings = SubResource("LabelSettings_o4st3")
+horizontal_alignment = 1
+autowrap_mode = 3
+script = ExtResource("35_cgoaf")
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
+
+[node name="Speaker2" type="TextureRect" parent="GUI/Dialogue/DialogueWindow/BG/SpeakerRow" unique_id=1732634042]
+layout_mode = 2
+texture = ExtResource("63_sp2wr")
+
+[node name="Name" type="Label" parent="GUI/Dialogue/DialogueWindow/BG/SpeakerRow/Speaker2" unique_id=1369394330]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 6.0
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Общественный Институт Проблем"
+label_settings = SubResource("LabelSettings_o4st3")
+horizontal_alignment = 1
+autowrap_mode = 3
+script = ExtResource("35_cgoaf")
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
+
+[node name="Speaker3" type="TextureRect" parent="GUI/Dialogue/DialogueWindow/BG/SpeakerRow" unique_id=1993278404]
+layout_mode = 2
+texture = ExtResource("63_sp2wr")
+
+[node name="Name" type="Label" parent="GUI/Dialogue/DialogueWindow/BG/SpeakerRow/Speaker3" unique_id=567444804]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 6.0
+offset_bottom = 81.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Общественный Институт Проблем"
+label_settings = SubResource("LabelSettings_o4st3")
+horizontal_alignment = 1
+autowrap_mode = 3
+script = ExtResource("35_cgoaf")
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
+
+[node name="Continue" type="Button" parent="GUI/Dialogue/DialogueWindow/BG" unique_id=21526474]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -77.5
+offset_top = -54.0
+offset_right = 77.5
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "ПРИНЯТО"
 
 [connection signal="pressed" from="World/Player/Left" to="." method="_on_left_pressed"]
 [connection signal="pressed" from="World/Player/Right" to="." method="_on_right_pressed"]
@@ -2234,7 +2340,6 @@ autostart = true
 [connection signal="pressed" from="GUI/UI/ElevatorWindow/Close" to="GUI/UI/ElevatorWindow" method="_on_close_pressed"]
 [connection signal="pressed" from="GUI/UI/ElevatorWindow/Power" to="GUI/UI/ElevatorWindow" method="_on_power_pressed"]
 [connection signal="pressed" from="GUI/UI/TutorialBox/OK" to="." method="_on_tutorial_ok_pressed"]
-[connection signal="pressed" from="GUI/Dialogue/BG/GotIt" to="GUI/Dialogue" method="_on_got_it_pressed"]
-[connection signal="pressed" from="GUI/Dialogue/Show" to="GUI/Dialogue" method="show_dialogue"]
-[connection signal="pressed" from="GUI/Dialogue/Hide" to="GUI/Dialogue" method="hide_dialogue"]
+[connection signal="pressed" from="GUI/Dialogue/PickUpThePhone/Accept" to="GUI/Dialogue" method="_on_accept_pressed"]
 [connection signal="timeout" from="GUI/Dialogue/StartTimer" to="GUI/Dialogue" method="_on_start_timer_timeout"]
+[connection signal="pressed" from="GUI/Dialogue/DialogueWindow/BG/Continue" to="GUI/Dialogue" method="_on_continue_pressed"]
