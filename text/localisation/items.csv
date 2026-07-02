@@ -32,13 +32,13 @@ alcohol_desc;START TURN: +{} POWER, LOSE {} HEALTH;НАЧАЛО ХОДА: +{} М
 bomb_name;Bomb;Бомба
 bomb_desc;{} HARM WHEN ATTACKING IF TARGET HAS NO SHIELD. ONE-TIME USE;{} ВРЕДА ПРИ АТАКЕ ЕСЛИ У ЦЕЛИ НЕТ ЩИТА. ОДНОРАЗОВОЕ
 die_name;Die;Кубик
-die_desc;START OF BATTLE: +{} LUCK;НАЧАЛО БОЯ: +{} УДАЧА
+die_desc;+{} LUCK;+{} УДАЧА
 draniki_name;Draniki;Драники
 draniki_desc;WHEN HEALTH LOWER THAN {}%, HEALS {}%, ONE-TIME USE;КОГДА ЗДОРОВЬЕ МЕНЬШЕ {}%, ЛЕЧИТ {}%, ОДНОРАЗОВОЕ
 heart_lock_name;Heart Lock;Сердечный Замок
 heart_lock_desc;START OF BATTLE: SHIELD {} TURNS;НАЧАЛО БОЯ: ЩИТ {} ХОД.
 obsidian_name;Obsidian;Обсидиан
-obsidian_desc;START OF BATTLE: +{} POWER, +{} LUCK, +{} STATIC;НАЧАЛО БОЯ: +{} МОЩЬ, +{} УДАЧА, +{} СТАТИЧНОСТЬ
+obsidian_desc;+{} POWER, +{} LUCK, +{} STATIC;+{} МОЩЬ, +{} УДАЧА, +{} СТАТИЧНОСТЬ
 pocket_watch_name;Pocket Watch;Карманные Часы
 pocket_watch_desc;END OF {} TURN: +{} POWER, SHIELD {} TURNS, HEAL {}% HEALTH;КОНЕЦ {} ХОД: +{} МОЩИ, ЩИТ {} ХОДА, ВОССТАНОВИТЬ {}% ЗДРАВИЯ
 teapot_name;Teapot;Чайник

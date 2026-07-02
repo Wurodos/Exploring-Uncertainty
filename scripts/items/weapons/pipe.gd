@@ -15,7 +15,16 @@ func localize():
 func on_start_battle(owner: SlaveNode):
 	super.on_start_battle(owner)
 	counter = 0
-	owner.turn_ended.connect(func(): _on_turn_end())
+	owner.turn_ended.connect(_on_turn_end)
+
+func on_unequip_battle(owner: SlaveNode):
+	super.on_unequip_battle(owner)
+	owner.turn_ended.disconnect(_on_turn_end)
+
+func on_equip_battle(owner: SlaveNode):
+	super.on_equip_battle(owner)
+	counter = 0
+	owner.turn_ended.connect(_on_turn_end)
 
 func _on_turn_end() -> void:
 	if is_reset_counter: 

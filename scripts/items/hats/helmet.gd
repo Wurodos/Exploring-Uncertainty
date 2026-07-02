@@ -10,6 +10,15 @@ func on_start_battle(owner: SlaveNode):
 	super.on_start_battle(owner)
 	owner.tags.append(Action.TAG_BETTER_SHIELD)
 
+func on_unequip_battle(owner: SlaveNode):
+	super.on_unequip_battle(owner)
+	owner.tags.erase(Action.TAG_BETTER_SHIELD)
+
+func on_equip_battle(owner: SlaveNode):
+	super.on_equip_battle(owner)
+	owner.tags.append(Action.TAG_BETTER_SHIELD)
+
+
 func use_item(sender: SlaveNode, ally: SlaveNode):
 	super.use_item(sender, ally)
 	ally.add_buff(Action.SHIELD, turns)

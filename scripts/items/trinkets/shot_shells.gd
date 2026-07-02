@@ -1,20 +1,35 @@
 extends Item
 
 var sender: SlaveNode
+var used: bool = false
 
 func localize():
 	super.localize()
 
 func on_start_battle(owner: SlaveNode):
 	super.on_start_battle(owner)
+	used = false
 	owner.attacked.connect(_hit_everyone)
 	owner.turn_ended.connect(func(): sender.remove_buff("shells_used"))
 	sender = owner
 
+func on_unequip_battle(owner: SlaveNode):
+	super.on_unequip_battle(owner)
+	
+	if owner.attacked.is_connected(_hit_everyone):
+		owner.attacked.disconnect(_hit_everyone)
+
+func on_equip_battle(owner: SlaveNode):
+	super.on_equip_battle(owner)
+	sender = owner
+	owner.attacked.connect(_hit_everyone)
+	owner.turn_ended.connect(func(): sender.remove_buff("shells_used"))
+
 func _hit_everyone(victim: SlaveNode):
-	if sender.buffs.has("shells_used"): return
+	if used or sender.buffs.has("shells_used"): return
 	
 	sender.add_buff("shells_used", 1)
+	used = true
 	var weapon: Item = sender.held.weapon
 	
 	if weapon.target == Item.Target.Single:

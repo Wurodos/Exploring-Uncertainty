@@ -11,6 +11,15 @@ func _fastest_gun(victim: SlaveNode) -> void:
 	if victim.held.speed >= owner.held.speed:
 		owner.set_speed(+1)
 
+func on_unequip_battle(owner: SlaveNode):
+	super.on_unequip_battle(owner)
+	owner.attacked.disconnect(_fastest_gun)
+
+func on_equip_battle(owner: SlaveNode):
+	super.on_equip_battle(owner)
+	owner.attacked.connect(_fastest_gun)
+	self.owner = owner
+
 func use_item(sender: SlaveNode, ally: SlaveNode):
 	super.use_item(sender, ally)
 	ally.add_buff(Action.SHIELD, 1)

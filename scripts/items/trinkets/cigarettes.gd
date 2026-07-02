@@ -13,6 +13,14 @@ func on_start_battle(owner: SlaveNode):
 	sender = owner
 	owner.turn_started.connect(_on_turn_started)
 
+func on_unequip_battle(owner: SlaveNode):
+	super.on_unequip_battle(owner)
+	owner.turn_started.disconnect(_on_turn_started)
+
+func on_equip_battle(owner: SlaveNode):
+	super.on_equip_battle(owner)
+	owner.turn_started.connect(_on_turn_started)
+
 func on_end_battle(owner: Slave):
 	for i in range(exp_gain):
 		owner.weapon.gain_exp(owner)

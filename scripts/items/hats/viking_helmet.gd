@@ -15,6 +15,14 @@ func use_item(sender: SlaveNode, ally: SlaveNode):
 func on_start_battle(owner: SlaveNode):
 	owner.tags.append(Action.TAG_VIGILANCE_KEEP_ATTACK)
 
+func on_unequip_battle(owner: SlaveNode):
+	super.on_unequip_battle(owner)
+	owner.tags.erase(Action.TAG_VIGILANCE_KEEP_ATTACK)
+
+func on_equip_battle(owner: SlaveNode):
+	super.on_equip_battle(owner)
+	owner.tags.append(Action.TAG_VIGILANCE_KEEP_ATTACK)
+
 func on_level_up():
 	super.on_level_up()
 	extra_hp += 3

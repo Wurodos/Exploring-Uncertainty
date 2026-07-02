@@ -14,6 +14,7 @@ stuns = 1
 tier = 3
 target = 1
 texture = ExtResource("2_kbisp")
+cost = 30
 craft_items = Array[ExtResource("1_4048x")]([ExtResource("2_gugvr"), ExtResource("3_5crpd"), ExtResource("4_x4u82")])
 keywords = Array[String](["stun"])
 is_melee = false

@@ -1,7 +1,5 @@
 extends Item
 
-var owner: SlaveNode
-
 func on_start_battle(sender: SlaveNode):
 	super.on_start_battle(sender)
 	Battle.instance.is_prudence = true

@@ -142,6 +142,14 @@ func on_unequip(owner: Slave):
 	owner.maxhp -= extra_hp
 	owner.hp -= extra_hp
 
+func on_equip_battle(owner: SlaveNode):
+	owner.set_speed(extra_speed)
+	
+
+func on_unequip_battle(owner: SlaveNode):
+	owner.set_speed(-extra_speed)
+
+
 func on_level_up():
 	experience = 0
 	level += 1

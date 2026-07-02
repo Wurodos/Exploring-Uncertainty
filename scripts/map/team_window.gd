@@ -27,7 +27,7 @@ func _ready() -> void:
 		var slave_node : SlaveTeamNode = $Slaves.get_child(i)
 		slave_node.visible = true
 		
-		if CurrentRun.is_tutorial:
+		if CurrentRun.is_tutorial and i == 0:
 			slave_node.apply(slave, SlaveTeamNode.Type.BrigadeTutorial)
 		else:
 			slave_node.apply(slave, SlaveTeamNode.Type.Brigade)
@@ -48,7 +48,7 @@ func _refresh_slaves() -> void:
 	for slave in CurrentRun.good_boys:
 		var slave_node : SlaveTeamNode = $Slaves.get_child(i)
 		slave_node.visible = true
-		if CurrentRun.is_tutorial:
+		if CurrentRun.is_tutorial and i == 0:
 			slave_node.apply(slave, SlaveTeamNode.Type.BrigadeTutorial)
 		else:
 			slave_node.apply(slave, SlaveTeamNode.Type.Brigade)
@@ -78,7 +78,7 @@ func _on_mouse_up() -> void:
 		if old_item.is_item():
 			CurrentRun.put_item_in_inventory(old_item)
 		
-		if CurrentRun.is_tutorial:
+		if CurrentRun.is_tutorial and CurrentRun.good_boys.find(slave_node.held) == 0:
 			slave_node.apply(slave_node.held, SlaveTeamNode.Type.BrigadeTutorial)
 		else:
 			slave_node.apply(slave_node.held, SlaveTeamNode.Type.Brigade)

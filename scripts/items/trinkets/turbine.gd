@@ -13,6 +13,15 @@ func on_start_battle(owner: SlaveNode):
 	sender = owner
 	owner.turn_ended.connect(_on_turn_ended)
 
+func on_unequip_battle(owner: SlaveNode):
+	super.on_unequip_battle(owner)
+	owner.turn_ended.disconnect(_on_turn_ended)
+
+func on_equip_battle(owner: SlaveNode):
+	super.on_equip_battle(owner)
+	sender = owner
+	owner.turn_ended.connect(_on_turn_ended)
+
 func _on_turn_ended():
 	sender.set_speed(+speed_per_turn)
 

@@ -10,6 +10,14 @@ func on_start_battle(owner: SlaveNode):
 	super.on_start_battle(owner)
 	owner.tags.append(Action.TAG_STATIC_HEALTH)
 
+func on_unequip_battle(owner: SlaveNode):
+	super.on_unequip_battle(owner)
+	owner.tags.erase(Action.TAG_STATIC_HEALTH)
+
+func on_equip_battle(owner: SlaveNode):
+	super.on_equip_battle(owner)
+	owner.tags.append(Action.TAG_STATIC_HEALTH)
+
 func use_item(sender: SlaveNode, ally: SlaveNode):
 	super.use_item(sender, ally)
 	ally.set_power(sender.static_stat / static_per_power)

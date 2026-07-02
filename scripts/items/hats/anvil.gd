@@ -27,6 +27,16 @@ func _on_received_damage(_source: SlaveNode, dmg: int):
 	user.set_power(+power_gain*(total_received / required_harm))
 	total_received %= required_harm
 
+func on_unequip_battle(owner: SlaveNode):
+	super.on_unequip_battle(owner)
+	owner.received_damage.disconnect(_on_received_damage)
+
+func on_equip_battle(owner: SlaveNode):
+	super.on_equip_battle(owner)
+	owner.received_damage.connect(_on_received_damage)
+	total_received = 0
+	user = owner
+
 func on_level_up():
 	super.on_level_up()
 	extra_hp += 3

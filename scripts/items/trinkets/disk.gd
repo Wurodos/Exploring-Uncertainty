@@ -28,6 +28,9 @@ func on_start_battle(owner: SlaveNode):
 			sender.add_buff(buff, saved_buffs[buff])
 		consume(owner)
 
+func on_equip_battle(owner: SlaveNode):
+	sender = owner
+
 func on_end_battle(owner: Slave):
 	super.on_end_battle(owner)
 	if not is_loaded:

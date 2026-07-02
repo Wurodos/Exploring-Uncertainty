@@ -13,7 +13,19 @@ func on_start_battle(owner: SlaveNode):
 	owner.set_power(+power_gain)
 	owner.set_luck(+luck_gain)
 	owner.set_static(+static_gain)
-	
+
+func on_unequip_battle(owner: SlaveNode):
+	super.on_unequip_battle(owner)
+	owner.set_power(-power_gain)
+	owner.set_luck(-luck_gain)
+	owner.set_static(-static_gain)
+
+func on_equip_battle(owner: SlaveNode):
+	super.on_equip_battle(owner)
+	owner.set_power(+power_gain)
+	owner.set_luck(+luck_gain)
+	owner.set_static(+static_gain)
+
 func on_level_up():
 	super.on_level_up()
 	extra_hp += 1

@@ -6,5 +6,5 @@ func say(dialogue_node: DialogueNode) -> void:
 	%Text.full_text = tr(dialogue_node.text_id)
 	%Text.type()
 
-func get_typewriter() -> Typewriter:
+func get_typewriter() -> RichTypeWriter:
 	return %Text

@@ -25,12 +25,16 @@ func use_item(sender: SlaveNode, ally: SlaveNode):
 		_swap(sender, ally)
 
 func _swap(sender: SlaveNode, ally: SlaveNode):
-	sender.remove_item(u_name)
-	sender.held.equip(ally.held.hat)
-	sender.reapply()
-	ally.remove_item(ally.held.hat.u_name)
+	var ally_hat: Item = ally.held.hat
+	
+	ally.remove_item(ally_hat.u_name)
 	ally.held.equip(self)
 	ally.reapply()
+	
+	sender.remove_item(u_name)
+	sender.held.equip(ally_hat)
+	sender.reapply()
+	
 
 func on_level_up():
 	super.on_level_up()

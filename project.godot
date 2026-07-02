@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Exploring Uncertainty"
 run/main_scene="uid://cbvxdwqjhf5w6"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="uid://bvt0n20v88f7o"
 
@@ -33,6 +33,7 @@ gdscript/warnings/integer_division=0
 
 [display]
 
+window/size/resizable=false
 window/stretch/mode="canvas_items"
 
 [input]

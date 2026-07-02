@@ -68,11 +68,12 @@ func load_progress() -> void:
 			continue
 		
 		var data = json.data
+		print(json.data)
 		
 		if data.has("tutorial"):
 			completed_tutorial = data["tutorial"]
 		if data.has("runs"):
-			runs_completed = data["runs"]
+			runs_completed = int(data["runs"])
 		if data.has("packs"):
 			packs.assign(data["packs"])
 		

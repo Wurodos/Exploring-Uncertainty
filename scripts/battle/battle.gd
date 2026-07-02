@@ -331,13 +331,13 @@ func _on_slave_mouse_exited(slave_node: SlaveNode):
 func _on_speed_queue_mouse_entered(slave: Slave):
 	if current_slaves.has(slave): return
 	
-	var slave_node = _find_slave_node(slave)
+	var slave_node = find_slave_node(slave)
 	slave_node.arrow.visible = true
 	slave_node.arrow_animation.play("bounce")
 
 func _on_speed_queue_mouse_exited(slave: Slave):
 	if current_slaves.has(slave): return
-	var slave_node = _find_slave_node(slave)
+	var slave_node = find_slave_node(slave)
 		
 	slave_node.arrow.visible = false
 	slave_node.arrow_animation.play("RESET")
@@ -374,7 +374,7 @@ func _on_evil_won() -> void:
 	SignalBus.new_turn.disconnect(_on_new_turn)
 	$AnimationPlayer.play("fail")
 
-func _find_slave_node(slave: Slave) -> SlaveNode:
+func find_slave_node(slave: Slave) -> SlaveNode:
 	var slave_node: SlaveNode = null
 	var id = good_team.boys_nodes.find_custom(func(node): return node.held == slave)
 	
@@ -382,6 +382,8 @@ func _find_slave_node(slave: Slave) -> SlaveNode:
 		slave_node = good_team.boys_nodes[id]
 	else:
 		id = evil_team.boys_nodes.find_custom(func(node): return node.held == slave)
+		if id == -1: return null
+		
 		slave_node = evil_team.boys_nodes[id]
 	return slave_node
 
@@ -403,6 +405,7 @@ func _on_reinforcement(sender: SlaveNode, u_name: String = "cherv") -> void:
 	team.cull_the_dead(false)
 	
 	var enemy = SlavePool.fetch(u_name)
+	
 	if not CurrentRun.is_debug:
 		if randi_range(0, 1): enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
 		if randi_range(0, 1): enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
@@ -413,8 +416,9 @@ func _on_reinforcement(sender: SlaveNode, u_name: String = "cherv") -> void:
 		enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
 		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
 		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
+	
 	team.add_slave(enemy)
-
+	
 # ====================
 # Debug panel
 # ====================

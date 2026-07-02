@@ -14,6 +14,15 @@ func on_start_battle(owner: SlaveNode):
 	sender = owner
 	owner.turn_started.connect(_on_turn_started)
 
+func on_unequip_battle(owner: SlaveNode):
+	super.on_unequip_battle(owner)
+	owner.turn_started.disconnect(_on_turn_started)
+
+func on_equip_battle(owner: SlaveNode):
+	super.on_equip_battle(owner)
+	sender = owner
+	owner.turn_started.connect(_on_turn_started)
+
 func _on_turn_started():
 	sender.set_power(+power_gain)
 	sender.set_hp(-health_loss)		

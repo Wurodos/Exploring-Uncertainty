@@ -13,6 +13,14 @@ func on_start_battle(owner: SlaveNode):
 	owner.attacked.connect(_explode)
 	sender = owner
 
+func on_unequip_battle(owner: SlaveNode):
+	super.on_unequip_battle(owner)
+	owner.attacked.disconnect(_explode)
+
+func on_equip_battle(owner: SlaveNode):
+	super.on_equip_battle(owner)
+	owner.attacked.connect(_explode)
+
 func _explode(victim: SlaveNode):
 	if not victim.buffs.has(Action.SHIELD):
 		Action.deal_damage(sender, victim, harm)

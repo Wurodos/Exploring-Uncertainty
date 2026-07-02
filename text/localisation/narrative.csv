@@ -44,19 +44,19 @@ tutorial_battle_loot_0;At the end of the battle you can pick up the enemies' ITE
 tutorial_battle_loot_1;Simply drag the desired ITEM from the two into the INVENTORY.;Просто перетяните желаемый ПРЕДМЕТ из двух в ИНВЕНТАРЬ.
 tutorial_battle_loot_2;It is worth mentioning that only Federation FIGHTERS can use ITEMS.;Стоит сказать, что только БОЙЦЫ Федерации умеют использовать ПРЕДМЕТЫ.
 tutorial_battle_loot_3;The enemies only use them to enhance their existing capabilities.;Враги же всего лишь усиляют с помощью них свои существующие возможности.
-tutorial_new_0;;Междуморье!
-tutorial_new_1;;Это изобретение, которое навсегда установит в Федерации долгожелаемый и вечноискомый порядок.\nНикакого кровопролития*.\nНикаких жертв**.
-tutorial_new_2;;В основе работы Междуморья лежат БОЙЦЫ и ПРЕДМЕТЫ.
-tutorial_new_3;;Да ты посмотри на этого красавца!\n30 ЗДОРОВЬЯ, чтобы смело принимать на себя удары врагов!\nМесто для шляпы, оружия и, с последними модификациями, -\n 2 безделушки!
-tutorial_new_4;;Но истинная сила БОЙЦА раскрывается только при использовании специализированных ПРЕДМЕТОВ. Сейчас же одень БОЙЦА в окне БРИГАДЫ.
-tutorial_new_5;;Вверху окна Бригады находятся твои ПРЕДМЕТЫ. На них можно наводить курсор мыши, чтобы просмотреть их эффект\nПРЕДМЕТЫ бывают трёх типов: [color=red]ОРУЖИЕ[/color], [color=blue]ШЛЯПЫ[/color] и [color=green]БЕЗДЕЛУШКИ[/color]
-tutorial_new_6;;[color=red]ОРУЖИЕ[/color] необходимо для нейтрализации врагов. Каждое [color=red]ОРУЖИЕ[/color] обладает одним атакующим ДЕЙСТВИЕМ. У бойца может быть надето только одно [color=red]ОРУЖИЕ[/color].\nУ тебя сейчас есть Меч, это [color=red]ОРУЖИЕ[/color], его ДЕЙСТВИЕ позволяет нанести 7 вреда одному врагу.
-tutorial_new_7;;Надень Меч на БОЙЦА. Для этого перетащи его левой кнопкой мыши до портрета БОЙЦА и отпусти кнопку мыши.
+tutorial_new_0;Miedzymorze!;Междуморье!
+tutorial_new_1;This is an invention that will forever establish the long-desired and eternally sought order in the Federation.\nNo bloodshed*.\nNo casualties**.;Это изобретение, которое навсегда установит в Федерации долгожелаемый и вечноискомый порядок.\nНикакого кровопролития*.\nНикаких жертв**.
+tutorial_new_2;Miedzymorze works on the basis of FIGHTERS and ITEMS.;В основе работы Междуморья лежат БОЙЦЫ и ПРЕДМЕТЫ.
+tutorial_new_3;Just look at this handsome guy!\n30 HEALTH to bravely take enemy hits!\nRoom for a hat, weapons, and, with the latest modifications, -\n2 trinkets!;Да ты посмотри на этого красавца!\n30 ЗДОРОВЬЯ, чтобы смело принимать на себя удары врагов!\nМесто для шляпы, оружия и, с последними модификациями, -\n 2 безделушки!
+tutorial_new_4;But a FIGHTER's true power is only revealed through the use of specialized ITEMS. Dress the FIGHTER in the Brigade window now.;Но истинная сила БОЙЦА раскрывается только при использовании специализированных ПРЕДМЕТОВ. Сейчас же одень БОЙЦА в окне БРИГАДЫ.
+tutorial_new_5;At the top of the Brigade window are your ITEMS. You can hover over them to see their effects. There are three types of ITEMS: [color=red]WEAPONS[/color], [color=blue]HATS[/color], and [color=green]TRINKETS[/color];Вверху окна Бригады находятся твои ПРЕДМЕТЫ. На них можно наводить курсор мыши, чтобы просмотреть их эффект\nПРЕДМЕТЫ бывают трёх типов: [color=red]ОРУЖИЕ[/color], [color=blue]ШЛЯПЫ[/color] и [color=green]БЕЗДЕЛУШКИ[/color]
+tutorial_new_6;[color=red]WEAPONS[/color] are essential for neutralizing enemies. Each [color=red]WEAPON[/color] has one attack ACTION. A fighter can only have one [color=red]WEAPON[/color] equipped.\nYou currently have a Sword, a [color=red]WEAPON[/color], its ACTION allows you to inflict 7 harm on one enemy.;[color=red]ОРУЖИЕ[/color] необходимо для нейтрализации врагов. Каждое [color=red]ОРУЖИЕ[/color] обладает одним атакующим ДЕЙСТВИЕМ. У бойца может быть надето только одно [color=red]ОРУЖИЕ[/color].\nУ тебя сейчас есть Меч, это [color=red]ОРУЖИЕ[/color], его ДЕЙСТВИЕ позволяет нанести 7 вреда одному врагу.
+tutorial_new_7;Equip the Sword to the FIGHTER. To do this, drag it with the left mouse button to the FIGHTER's portrait and release the mouse button.;Надень Меч на БОЙЦА. Для этого перетащи его левой кнопкой мыши до портрета БОЙЦА и отпусти кнопку мыши.
 tutorial_new_8;;[color=blue]ШЛЯПЫ[/color] обладают некоторым ИНЕРТНЫМ свойством и некоторым командным ДЕЙСТВИЕМ. У БОЙЦА может быть надета только одна [color=blue]ШЛЯПА[/color].
 tutorial_new_9;;Помимо этого, [color=blue]ШЛЯПЫ[/color] повышают максимальное здоровье и СКОРОСТЬ БОЙЦА.
 tutorial_new_10;;Например, сейчас в инвентаре у тебя лежит [color=blue]ШЛЯПА[/color] Повара. Ее ИНЕРТНОЕ свойство позволяет сохранять одноразовые ПРЕДМЕТЫ после их использования, вроде Бомб или Драников. ДЕЙСТВИЕ Повара восстанавливает здоровье союзнику.
-tutorial_new_11;;Надень на своего БОЙЦА [color=blue]ШЛЯПУ[/color] Повара. Для этого перетащи его левой кнопкой мыши до портрета БОЙЦА и отпусти кнопку мыши.
-tutorial_new_12;;[color=green]БЕЗДЕЛУШКИ[/color] обладают только ИНЕРТНЫМ свойством, но их каждый БОЕЦ может носить целых две штуки.
+tutorial_new_11;Put the Chef's [color=blue]HAT[/color] on your FIGHTER. To do this, left-click and drag it to the FIGHTER's portrait and release.;Надень на своего БОЙЦА [color=blue]ШЛЯПУ[/color] Повара. Для этого перетащи его левой кнопкой мыши до портрета БОЙЦА и отпусти кнопку мыши.
+tutorial_new_12;[color=green]TRINKETS[/color] have only an INERT property, but each FIGHTER can carry as many as two of them.;[color=green]БЕЗДЕЛУШКИ[/color] обладают только ИНЕРТНЫМ свойством, но их каждый БОЕЦ может носить целых две штуки.
 tutorial_new_13;;Надень на своего БОЙЦА Сердечный Замок и Бомбу. Не забудь прочитать их ИНЕРТНЫЕ свойства.
 tutorial_new_14;1)DON'T LET THEM BREATHE;1)НЕ ПОЗВОЛЯЙТЕ ИМ ДЫШАТЬ
 tutorial_new_15;;Теперь к изучению шахт. Для удобства мы создали дубликат заворота Худобкина в Солоникском рукаве.

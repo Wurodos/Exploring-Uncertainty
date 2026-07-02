@@ -12,7 +12,16 @@ func on_start_battle(owner: SlaveNode):
 	super.on_start_battle(owner)
 	sender = owner
 	owner.received_damage.connect(_revenge)
-	
+
+func on_unequip_battle(owner: SlaveNode):
+	super.on_unequip_battle(owner)
+	owner.received_damage.disconnect(_revenge)
+
+func on_equip_battle(owner: SlaveNode):
+	super.on_equip_battle(owner)
+	sender = owner
+	owner.received_damage.connect(_revenge)
+
 func _revenge(source: SlaveNode, _dmg: int):
 	Action.deal_damage(sender, source, harm, true)
 

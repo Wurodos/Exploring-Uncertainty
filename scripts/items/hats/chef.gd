@@ -21,6 +21,12 @@ func on_end_battle(owner: Slave):
 	for item in stored:
 		CurrentRun.put_item_in_inventory(item)
 
+func on_unequip_battle(owner: SlaveNode):
+	super.on_unequip_battle(owner)
+
+func on_equip_battle(owner: SlaveNode):
+	super.on_equip_battle(owner)
+
 func use_item(sender: SlaveNode, victim: SlaveNode):
 	super.use_item(sender, victim)
 	Action.heal(sender, victim, heal)

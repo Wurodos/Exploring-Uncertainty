@@ -15,6 +15,15 @@ func on_start_battle(owner: SlaveNode):
 	owner.attacked.connect(_explode)
 	sender = owner
 
+func on_unequip_battle(owner: SlaveNode):
+	super.on_unequip_battle(owner)
+	owner.attacked.disconnect(_explode)
+
+func on_equip_battle(owner: SlaveNode):
+	super.on_equip_battle(owner)
+	sender = owner
+	owner.attacked.connect(_explode)
+
 func _explode(victim: SlaveNode):
 	Action.deal_damage(sender, victim, harm)
 	victim.add_buff(Action.FREEZE, freeze)

@@ -14,6 +14,15 @@ func on_start_battle(owner: SlaveNode):
 	sender = owner
 	owner.turn_started.connect(_on_turn_started)
 
+func on_unequip_battle(owner: SlaveNode):
+	super.on_unequip_battle(owner)
+	owner.turn_started.disconnect(_on_turn_started)
+
+func on_equip_battle(owner: SlaveNode):
+	super.on_equip_battle(owner)
+	sender = owner
+	owner.turn_started.connect(_on_turn_started)
+
 func _on_turn_started():
 	for slave in Battle.instance.good_team.boys_nodes:
 		if slave.held.is_alive and slave != sender:

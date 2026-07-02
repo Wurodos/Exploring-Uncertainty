@@ -15,7 +15,9 @@ func use_item(sender: SlaveNode, victim: SlaveNode):
 		for i in range(victim.held.hat.level-2):
 			lower_level_hat.level_up()
 	victim.remove_item(victim.held.hat.u_name)
+	
 	victim.held.equip(lower_level_hat)
+	
 	victim.reapply()
 	
 	if victim.held is Enemy and victim.get_node("Intention").visible:

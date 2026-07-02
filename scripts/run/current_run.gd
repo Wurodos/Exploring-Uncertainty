@@ -120,6 +120,7 @@ func reset() -> void:
 	_prepare_deck_1.call_deferred()
 	_prepare_deck_2.call_deferred()
 	_prepare_deck_3.call_deferred()
+	_prepare_deck_4.call_deferred()
 	(func(): SignalBus.refresh.emit()).call_deferred()	
 
 func _load_config() -> void:
@@ -607,5 +608,5 @@ func put_item_in_inventory(item: Item) -> void:
 	CurrentRun.inventory.append(item)
 
 func arrange_boss() -> void:
-	CurrentRun.evil_boys = [ReptilePool.fetch("roots_and_toots")]
+	CurrentRun.evil_boys = [ReptilePool.fetch("and_its_dark_again")]
 	# CurrentRun.evil_boys[0].hp = 1

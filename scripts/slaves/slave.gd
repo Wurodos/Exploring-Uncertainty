@@ -136,7 +136,11 @@ func equip(item: Item, trinket_id: int = 1) -> Item:
 				trinket3 = item
 				
 	old_item.on_unequip(self)
+	var slave_node: SlaveNode = null
+	if Battle.instance: slave_node = Battle.instance.find_slave_node(self)
+	if slave_node: old_item.on_unequip_battle(slave_node)
 	item.on_equip(self)
+	if slave_node: item.on_equip_battle(Battle.instance.find_slave_node(self))
 	item_equipped.emit(item)
 	item_unequipped.emit(old_item)
 	
