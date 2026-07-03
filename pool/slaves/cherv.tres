@@ -1,13 +1,15 @@
 [gd_resource type="Resource" script_class="Cherv" format=3 uid="uid://yequhwhuma5a"]
 
+[ext_resource type="Script" uid="uid://cadc7va1y3ish" path="res://scripts/slaves/quirk.gd" id="1_fu17m"]
 [ext_resource type="Script" uid="uid://m2j12xfq61od" path="res://scripts/enemies/cherv.gd" id="1_ph071"]
+[ext_resource type="Resource" uid="uid://di5oqm7d4wsx1" path="res://pool/quirks/narrow_mind.tres" id="2_bbian"]
 [ext_resource type="Texture2D" uid="uid://brfycwyqi4ev8" path="res://images/slaves/communist.png" id="2_lp2vr"]
 
 [resource]
 script = ExtResource("1_ph071")
 harm_lower = 3
-info_count = 2
 u_name = &"cherv"
 base_maxhp = 10
 texture = ExtResource("2_lp2vr")
+quirks = Array[ExtResource("1_fu17m")]([ExtResource("2_bbian")])
 metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

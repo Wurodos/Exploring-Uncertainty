@@ -20,7 +20,7 @@ cowboy_hat_desc;+1 SPEED WHEN ATTACKING NON-SLOWER TARGETS\nACTION: SHIELD 1 TUR
 crown_name;Crown;Корона
 crown_desc;DOUBLE EXTRA HP FROM TRINKETS\nACTION: -{} INITIATIVE;УДВОЙТЕ ЗДРАВИЕ ОТ БЕЗДЕЛУШЕК\nДЕЙСТВИЕ: -{} ИНИЦИАТИВЫ
 helmet_name;Helmet;Каска
-helmet_desc;SHIELD ABSORBS 60% DAMAGE\nACTION: SHIELD {} TURNS;ЩИТ ПОГЛОЩАЕТ 60% УРОНА\nДЕЙСТВИЕ: ЩИТ {} ХОД.
+helmet_desc;SHIELD ABSORBS 60% DAMAGE\nACTION: SHIELD {} TURNS TO SELF;ЩИТ ПОГЛОЩАЕТ 60% УРОНА\nДЕЙСТВИЕ: ЩИТ {} ХОД. СЕБЕ
 jester_hat_name;Jester;Шут
 jester_hat_desc;EVERY TURN OF EVERY STATUS INCREASES HARM\nACTION: BLASPHEMY {} TURNS;КАЖДЫЙ ХОД КАЖДОГО СТАТУСА УВЕЛИЧИВАЕТ ВРЕД\nДЕЙСТВИЕ: КОЩУНСТВО {} ХОД.
 no_hat_name;Head Empty;Пустоголовие

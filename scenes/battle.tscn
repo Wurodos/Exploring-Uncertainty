@@ -116,12 +116,6 @@ font_size = 32
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_jt4d8"]
-font = ExtResource("6_6vh42")
-font_size = 32
-outline_size = 16
-outline_color = Color(0, 0, 0, 1)
-
 [sub_resource type="LabelSettings" id="LabelSettings_v7i3o"]
 font = ExtResource("6_6vh42")
 font_size = 50
@@ -334,7 +328,7 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_4k1nj"]
 font = ExtResource("6_6vh42")
-font_size = 18
+font_size = 30
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
@@ -342,6 +336,18 @@ outline_color = Color(0, 0, 0, 1)
 font = ExtResource("6_6vh42")
 font_size = 32
 outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e50ek"]
+font = ExtResource("6_6vh42")
+font_size = 30
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jt4d8"]
+font = ExtResource("6_6vh42")
+font_size = 32
+outline_size = 16
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Battle" type="Node2D" unique_id=1228727829]
@@ -483,12 +489,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SpeedQueue" type="HBoxContainer" parent="UI" unique_id=953840471]
-layout_direction = 3
 layout_mode = 0
 offset_left = -474.0
 offset_top = -280.0
 offset_right = 476.0
 offset_bottom = -198.0
+layout_direction = 3
 theme_override_constants/separation = 16
 alignment = 1
 
@@ -576,165 +582,6 @@ offset_left = -299.0
 offset_top = -150.0
 offset_right = 201.0
 offset_bottom = -10.0
-
-[node name="BattleEnd" type="Control" parent="UI" unique_id=56380509]
-visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("11_vceff")
-
-[node name="Dark" type="ColorRect" parent="UI/BattleEnd" unique_id=1496099450]
-layout_mode = 0
-offset_left = -610.0
-offset_top = -335.0
-offset_right = 607.0
-offset_bottom = 448.0
-color = Color(0, 0, 0, 0.7764706)
-
-[node name="Label" type="Label" parent="UI/BattleEnd" unique_id=639722641]
-layout_mode = 0
-offset_left = -240.0
-offset_top = -112.0
-offset_right = 264.0
-label_settings = ExtResource("13_vceff")
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("14_ekamt")
-string_id = &"battle_over"
-metadata/_custom_type_script = "uid://dd2yytdivaq0j"
-
-[node name="GoBackMap" type="Button" parent="UI/BattleEnd" unique_id=358563084]
-layout_mode = 0
-offset_left = -88.0
-offset_top = 80.0
-offset_right = 104.0
-offset_bottom = 144.0
-theme_override_fonts/font = ExtResource("6_6vh42")
-theme_override_font_sizes/font_size = 16
-script = ExtResource("11_66ngm")
-string_id = &"back_to_map"
-metadata/_custom_type_script = "uid://bg2spyp44xpw7"
-
-[node name="Scraps" type="Control" parent="UI/BattleEnd" unique_id=1864972117]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 204.0
-offset_top = -36.0
-offset_right = 244.0
-offset_bottom = 3.9999962
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.5, 1.5)
-
-[node name="Gear" type="TextureRect" parent="UI/BattleEnd/Scraps" unique_id=1897817921]
-layout_mode = 0
-offset_left = -1.0
-offset_top = 2.0
-offset_right = 39.0
-offset_bottom = 42.0
-texture = ExtResource("15_61i1y")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Gear" unique_id=757831652]
-layout_mode = 0
-offset_left = -16.0
-offset_top = 16.0
-offset_right = 16.0
-offset_bottom = 54.0
-scale = Vector2(0.5, 0.5)
-text = "0"
-label_settings = SubResource("LabelSettings_jt4d8")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Flesh" type="TextureRect" parent="UI/BattleEnd/Scraps" unique_id=1512208944]
-layout_mode = 0
-offset_left = 55.0
-offset_top = 2.0
-offset_right = 95.0
-offset_bottom = 42.0
-texture = ExtResource("16_saiin")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Flesh" unique_id=1974948753]
-layout_mode = 0
-offset_left = -16.0
-offset_top = 16.0
-offset_right = 16.0
-offset_bottom = 54.0
-scale = Vector2(0.5, 0.5)
-text = "0"
-label_settings = SubResource("LabelSettings_jt4d8")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Shard" type="TextureRect" parent="UI/BattleEnd/Scraps" unique_id=444988513]
-layout_mode = 0
-offset_left = -1.0
-offset_top = 34.0
-offset_right = 39.0
-offset_bottom = 74.0
-texture = ExtResource("17_dd63g")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Shard" unique_id=1085635517]
-layout_mode = 0
-offset_left = -16.0
-offset_top = 16.0
-offset_right = 16.0
-offset_bottom = 54.0
-scale = Vector2(0.5, 0.5)
-text = "0"
-label_settings = SubResource("LabelSettings_jt4d8")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Tooth" type="TextureRect" parent="UI/BattleEnd/Scraps" unique_id=1750822362]
-layout_mode = 0
-offset_left = 55.0
-offset_top = 34.0
-offset_right = 95.0
-offset_bottom = 74.0
-texture = ExtResource("18_fpf3k")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Tooth" unique_id=247377200]
-layout_mode = 0
-offset_left = -16.0
-offset_top = 16.0
-offset_right = 16.0
-offset_bottom = 54.0
-scale = Vector2(0.5, 0.5)
-text = "0"
-label_settings = SubResource("LabelSettings_jt4d8")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Oil" type="TextureRect" parent="UI/BattleEnd/Scraps" unique_id=989853960]
-layout_mode = 0
-offset_left = 23.0
-offset_top = 66.0
-offset_right = 63.0
-offset_bottom = 106.0
-texture = ExtResource("19_bi5l8")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="UI/BattleEnd/Scraps/Oil" unique_id=1386499527]
-layout_mode = 0
-offset_left = -16.0
-offset_top = 16.0
-offset_right = 16.0
-offset_bottom = 54.0
-scale = Vector2(0.5, 0.5)
-text = "0"
-label_settings = SubResource("LabelSettings_jt4d8")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Fail" type="Control" parent="UI" unique_id=1233732149]
 z_index = 999
@@ -867,6 +714,7 @@ color = Color(1, 1, 1, 0)
 
 [node name="Debug" type="Control" parent="CLayer/GUI" unique_id=1836781495]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1078,6 +926,7 @@ metadata/_custom_type_script = "uid://dd2yytdivaq0j"
 
 [node name="NoLoot" type="Control" parent="CLayer/GUI" unique_id=837586115 node_paths=PackedStringArray("animation")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1173,9 +1022,10 @@ color = Color(0.974868, 0.699813, 0.238424, 1)
 [node name="Entries" type="VBoxContainer" parent="CLayer/GUI/SlaveInfo" unique_id=570936598]
 layout_mode = 0
 offset_left = 11.0
-offset_top = 99.0
+offset_top = 56.0
 offset_right = 450.0
-offset_bottom = 692.0
+offset_bottom = 649.0
+theme_override_constants/separation = 12
 
 [node name="ItemEntry" parent="CLayer/GUI/SlaveInfo/Entries" unique_id=33801804 instance=ExtResource("5_lpir7")]
 layout_mode = 2
@@ -1192,9 +1042,9 @@ layout_mode = 2
 [node name="HPBar" type="ProgressBar" parent="CLayer/GUI/SlaveInfo" unique_id=1140020989]
 layout_mode = 0
 offset_left = 117.0
-offset_top = 38.0
+offset_top = 13.0
 offset_right = 350.0
-offset_bottom = 63.0
+offset_bottom = 38.0
 theme_override_styles/background = SubResource("StyleBoxFlat_lpir7")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6vh42")
 value = 100.0
@@ -1243,44 +1093,43 @@ label_settings = SubResource("LabelSettings_f4pi3")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EnemyInfo" type="Control" parent="CLayer/GUI" unique_id=699097615]
+[node name="EnemyInfo" type="Control" parent="CLayer/GUI" unique_id=699097615 node_paths=PackedStringArray("enemy_image")]
 visible = false
 z_index = 5
-anchors_preset = 0
-offset_left = 73.0
-offset_top = 16.0
-offset_right = 113.0
-offset_bottom = 56.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("9_fpf3k")
+enemy_image = NodePath("EnemyImage")
 
-[node name="BGOutline" type="ColorRect" parent="CLayer/GUI/EnemyInfo" unique_id=402934754]
-layout_mode = 0
-offset_left = -26.0
-offset_top = -9.0
-offset_right = 474.0
-offset_bottom = 615.0
-color = Color(0.57205, 0.391678, 0.051943, 1)
-
-[node name="BG" type="ColorRect" parent="CLayer/GUI/EnemyInfo/BGOutline" unique_id=2002012160]
-layout_mode = 0
-offset_left = 26.0
-offset_top = 9.0
-offset_right = 491.0
-offset_bottom = 611.0
-color = Color(0.974868, 0.699813, 0.238424, 1)
+[node name="BG" type="ColorRect" parent="CLayer/GUI/EnemyInfo" unique_id=402934754]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.42745098)
 
 [node name="Entries" type="VBoxContainer" parent="CLayer/GUI/EnemyInfo" unique_id=1654968438]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 5.762
-anchor_right = 5.762
-offset_left = -219.48001
-offset_top = 93.0
-offset_right = 219.51999
-offset_bottom = 1081.0
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -439.0
+offset_top = -294.0
+offset_bottom = 354.0
+grow_horizontal = 0
 grow_vertical = 2
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.9, 0.9)
 pivot_offset = Vector2(226, -4)
+theme_override_constants/separation = 12
+alignment = 1
 
 [node name="ItemEntry" parent="CLayer/GUI/EnemyInfo/Entries" unique_id=438051792 instance=ExtResource("5_lpir7")]
 layout_mode = 2
@@ -1294,37 +1143,289 @@ layout_mode = 2
 [node name="ItemEntry4" parent="CLayer/GUI/EnemyInfo/Entries" unique_id=1680458529 instance=ExtResource("5_lpir7")]
 layout_mode = 2
 
-[node name="ItemEntry5" parent="CLayer/GUI/EnemyInfo/Entries" unique_id=1515740599 instance=ExtResource("5_lpir7")]
+[node name="ItemEntry5" parent="CLayer/GUI/EnemyInfo/Entries" unique_id=1933394834 instance=ExtResource("5_lpir7")]
 layout_mode = 2
 
-[node name="ItemEntry6" parent="CLayer/GUI/EnemyInfo/Entries" unique_id=149829739 instance=ExtResource("5_lpir7")]
+[node name="Quirks" type="VBoxContainer" parent="CLayer/GUI/EnemyInfo" unique_id=1883549436]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -301.0
+offset_right = 439.0
+offset_bottom = 451.25
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(226, -4)
+alignment = 1
+
+[node name="ItemEntry" parent="CLayer/GUI/EnemyInfo/Quirks" unique_id=1616930553 instance=ExtResource("5_lpir7")]
 layout_mode = 2
 
-[node name="ItemEntry7" parent="CLayer/GUI/EnemyInfo/Entries" unique_id=1673928543 instance=ExtResource("5_lpir7")]
+[node name="ItemEntry2" parent="CLayer/GUI/EnemyInfo/Quirks" unique_id=1912249149 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry3" parent="CLayer/GUI/EnemyInfo/Quirks" unique_id=1837616726 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry4" parent="CLayer/GUI/EnemyInfo/Quirks" unique_id=1765454680 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry5" parent="CLayer/GUI/EnemyInfo/Quirks" unique_id=614654232 instance=ExtResource("5_lpir7")]
+layout_mode = 2
+
+[node name="ItemEntry6" parent="CLayer/GUI/EnemyInfo/Quirks" unique_id=762016135 instance=ExtResource("5_lpir7")]
 layout_mode = 2
 
 [node name="HPBar" type="ProgressBar" parent="CLayer/GUI/EnemyInfo" unique_id=1797462277]
 layout_mode = 0
-offset_left = 117.0
-offset_top = 38.0
-offset_right = 350.0
-offset_bottom = 63.0
+offset_left = 442.0
+offset_top = 128.0
+offset_right = 709.0
+offset_bottom = 176.0
 theme_override_styles/background = SubResource("StyleBoxFlat_lpir7")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6vh42")
 value = 100.0
 show_percentage = false
 
 [node name="Label" type="Label" parent="CLayer/GUI/EnemyInfo/HPBar" unique_id=1769251116]
-layout_mode = 0
-offset_top = -12.0
-offset_right = 232.0
-offset_bottom = 35.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 label_settings = SubResource("LabelSettings_4k1nj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="EnemyImage" type="TextureRect" parent="CLayer/GUI/EnemyInfo" unique_id=809515767]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.5
+offset_top = -113.5
+offset_right = 113.5
+offset_bottom = 113.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("25_rwtbh")
+expand_mode = 1
+
+[node name="Name" type="Label" parent="CLayer/GUI/EnemyInfo" unique_id=1014321744]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = 121.0
+offset_right = 133.0
+offset_bottom = 285.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_e50ek")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="BattleEnd" type="Control" parent="CLayer/GUI" unique_id=56380509 node_paths=PackedStringArray("experience_container")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_vceff")
+experience_container = NodePath("Experience/VBoxContainer")
+
+[node name="Dark" type="ColorRect" parent="CLayer/GUI/BattleEnd" unique_id=1496099450]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7764706)
+
+[node name="Label" type="Label" parent="CLayer/GUI/BattleEnd" unique_id=639722641]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -257.0
+offset_right = 154.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = ExtResource("13_vceff")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+script = ExtResource("14_ekamt")
+string_id = &"battle_over"
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
+
+[node name="GoBackMap" type="Button" parent="CLayer/GUI/BattleEnd" unique_id=358563084]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = 73.0
+offset_right = 96.0
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_6vh42")
+theme_override_font_sizes/font_size = 16
+script = ExtResource("11_66ngm")
+string_id = &"back_to_map"
+metadata/_custom_type_script = "uid://bg2spyp44xpw7"
+
+[node name="Scraps" type="Control" parent="CLayer/GUI/BattleEnd" unique_id=1864972117]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 204.0
+offset_top = -36.0
+offset_right = 244.0
+offset_bottom = 3.9999962
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+
+[node name="Gear" type="TextureRect" parent="CLayer/GUI/BattleEnd/Scraps" unique_id=1897817921]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 2.0
+offset_right = 39.0
+offset_bottom = 42.0
+texture = ExtResource("15_61i1y")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CLayer/GUI/BattleEnd/Scraps/Gear" unique_id=757831652]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_jt4d8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Flesh" type="TextureRect" parent="CLayer/GUI/BattleEnd/Scraps" unique_id=1512208944]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 2.0
+offset_right = 95.0
+offset_bottom = 42.0
+texture = ExtResource("16_saiin")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CLayer/GUI/BattleEnd/Scraps/Flesh" unique_id=1974948753]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_jt4d8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shard" type="TextureRect" parent="CLayer/GUI/BattleEnd/Scraps" unique_id=444988513]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 34.0
+offset_right = 39.0
+offset_bottom = 74.0
+texture = ExtResource("17_dd63g")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CLayer/GUI/BattleEnd/Scraps/Shard" unique_id=1085635517]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_jt4d8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tooth" type="TextureRect" parent="CLayer/GUI/BattleEnd/Scraps" unique_id=1750822362]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 34.0
+offset_right = 95.0
+offset_bottom = 74.0
+texture = ExtResource("18_fpf3k")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CLayer/GUI/BattleEnd/Scraps/Tooth" unique_id=247377200]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_jt4d8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Oil" type="TextureRect" parent="CLayer/GUI/BattleEnd/Scraps" unique_id=989853960]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 66.0
+offset_right = 63.0
+offset_bottom = 106.0
+texture = ExtResource("19_bi5l8")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CLayer/GUI/BattleEnd/Scraps/Oil" unique_id=1386499527]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+text = "0"
+label_settings = SubResource("LabelSettings_jt4d8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Experience" type="ScrollContainer" parent="CLayer/GUI/BattleEnd" unique_id=999510402]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = 35.0
+offset_right = 449.0
+offset_bottom = -28.0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CLayer/GUI/BattleEnd/Experience" unique_id=1834205652]
+custom_minimum_size = Vector2(384, 0)
+layout_mode = 2
+
 [connection signal="mouse_entered" from="UI/Loot/Bag" to="UI/Loot" method="_on_bag_mouse_entered"]
-[connection signal="pressed" from="UI/BattleEnd/GoBackMap" to="." method="_on_go_back_map_pressed"]
 [connection signal="pressed" from="UI/Fail/Exit" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="UI/TutorialBox/OK" to="." method="_on_tutorial_ok_pressed"]
 [connection signal="pressed" from="CLayer/GUI/Debug/AddEnemy" to="." method="_on_add_enemy_pressed"]
@@ -1342,3 +1443,4 @@ vertical_alignment = 1
 [connection signal="pressed" from="CLayer/GUI/Debug/DebugStatusContainer/AddShield" to="." method="_add_status" binds= ["shield"]]
 [connection signal="mouse_entered" from="CLayer/GUI/NoLoot/TextureRect" to="CLayer/GUI/NoLoot" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="CLayer/GUI/NoLoot/TextureRect" to="CLayer/GUI/NoLoot" method="_on_mouse_exited"]
+[connection signal="pressed" from="CLayer/GUI/BattleEnd/GoBackMap" to="." method="_on_go_back_map_pressed"]

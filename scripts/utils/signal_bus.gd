@@ -14,7 +14,6 @@ signal exit_game
 
 # Stops existing music, plays new
 signal play_music(track: String)
-
 signal stop_music
 
 # Doesn't stop other sounds
@@ -90,6 +89,7 @@ signal evil_won
 signal good_won
 
 signal show_end_battle_screen(scraps: Array[Item.Scrap])
+signal item_gained_experience(item: Item)
 signal end_battle
 
 # ====================

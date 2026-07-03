@@ -1,23 +1,24 @@
 keys;en;ru
-cherv_title_0;Towards communism!;К коммунизму!
-cherv_info_0;INFLICTS {}-{} HARM;ПРИЧИНЯЕТ {}-{} ВРЕДА
-cherv_title_1;Narrow Mind;Узколобие
-cherv_info_1;SWITCHES TARGET WHEN HIT;МЕНЯЕТ ЦЕЛЬ ПРИ ПОЛУЧЕНИИ УРОНА
-chomper_title_0;Teeth Underfoot;Зубы под ногами
-chomper_info_0;INFLICTS {} HARM TO ALL;ПРИЧИНЯЕТ {} ВРЕДА ВСЕМ
-starry_title_0;Reinforcements;Подкрепления
-starry_title_1;Order;Приказ
-starry_title_2;Offensive;Наступление
-starry_info_0;CALLS FOR CHERVS (MAX. 3 TIMES);ПРИЗЫВАЕТ ЧЕРВОВ (НЕ БОЛЬШЕ 3-Х РАЗ)
-starry_info_1;CHERV ATTACKS WHEN HAT IS USED ON IT;ЧЕРВ АТАКУЕТ ПРИ ПРИМЕНЕНИИ НА НЕГО ШЛЯПЫ
-starry_info_2;ACTION: EMPOWER CHERVS, THEY FOCUS ON ONE TARGET;ДЕЙСТВИЕ: УСИЛЯЕТ ЧЕРВОВ, КАЖДЫЙ ФОКУСИРУЕТСЯ НА ОДНОЙ ЦЕЛИ
-swirly_title_0;Slippery type;Скользкий тип
-swirly_info_0;END OF TURN: +1 SPEED;КОНЕЦ ХОДА: +1 СКОРОСТИ
-swirly_title_1;Hit and Run;Бей и беги
-swirly_info_1;RUNS WHEN IN DANGER;БЕЖИТ ОТ ОПАСНОСТИ
-quagmire_title_0;Two-faced;Двуличие
-quagmire_info_0;WEARS 2 HATS;НОСИТ ДВЕ ШЛЯПЫ
-quagmire_title_1;Weapon Surplus;Оружейный Остаток
-quagmire_info_1;ACTION: TRANSFER WEAPON TO ALLY;ДЕЙСТВИЕ: ПЕРЕДАТЬ ОРУЖИЕ СОЮЗНИКУ
-madidididun_info_0;ATTACKS ENEMY WITH LEAST HEALTH;АТАКУЕТ САМОГО ХИЛОГО ПРОТИВНИКА
-madidididun_title_0;Beat to a pulp;Избить до смерти
+cherv;Cherv;Черв
+starry;Starry;Звезданутый
+swirly;Swirly;Скрученыш
+chomper;Chomper;Откусатель
+quagmire;Quagmire;Затруднения
+quirk_narrow_mind_title;Narrow Mind;Узколобие
+quirk_narrow_mind_desc;SWITCHES TARGET WHEN HIT;МЕНЯЕТ ЦЕЛЬ ПРИ ПОЛУЧЕНИИ УРОНА
+quirk_reinforcement_title;Reinforcements;Подкрепления
+quirk_reinforcement_desc;CALLS FOR CHERVS (MAX. 3 TIMES);ПРИЗЫВАЕТ ЧЕРВОВ (НЕ БОЛЬШЕ 3-Х РАЗ)
+quirk_order_title;Order;Приказ
+quirk_order_desc;CHERV ATTACKS WHEN HAT IS USED ON IT;ЧЕРВ АТАКУЕТ ПРИ ПРИМЕНЕНИИ НА НЕГО ШЛЯПЫ
+quirk_offensive_title;Offensive;Наступление
+quirk_offensive_desc;ACTION: +1 POWER TO CHERVS, THEY FOCUS ON ONE TARGET;ДЕЙСТВИЕ: +1 МОЩЬ ЧЕРВАМ, КАЖДЫЙ ФОКУСИРУЕТСЯ НА ОДНОЙ ЦЕЛИ
+quirk_slippery_title;Slippery type;Скользкий тип
+quirk_slippery_desc;END OF TURN: +1 SPEED;КОНЕЦ ХОДА: +1 СКОРОСТИ
+quirk_hit_and_run_title;Hit and Run;Бей и беги
+quirk_hit_and_run_desc;RUNS WHEN IN DANGER;БЕЖИТ ОТ ОПАСНОСТИ
+quirk_two_faced_title;Two-faced;Двуличие
+quirk_two_faced_desc;WEARS 2 HATS;НОСИТ ДВЕ ШЛЯПЫ
+quirk_weapon_surplus_title;Weapon Surplus;Оружейный Остаток
+quirk_weapon_surplus_desc;ACTION: TRANSFER WEAPON TO ALLY;ДЕЙСТВИЕ: ПЕРЕДАТЬ ОРУЖИЕ СОЮЗНИКУ
+quirk_beat_up_title;Beat up;Избить до смерти
+quirk_beat_up_desc;ATTACKS ENEMY WITH LEAST HEALTH;АТАКУЕТ САМОГО ХИЛОГО ПРОТИВНИКА

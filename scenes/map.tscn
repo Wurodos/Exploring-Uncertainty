@@ -55,6 +55,7 @@
 [ext_resource type="LabelSettings" uid="uid://dhb60ypduj2te" path="res://text/labelsettings/tutorial_box.tres" id="34_lhdcv"]
 [ext_resource type="Script" uid="uid://dd2yytdivaq0j" path="res://scripts/common/label_localized.gd" id="35_cgoaf"]
 [ext_resource type="Texture2D" uid="uid://bf5hkbhmtbyi4" path="res://images/shapes/arrow_green.png" id="43_8kgjo"]
+[ext_resource type="Texture2D" uid="uid://b8y17c7l0v77e" path="res://images/ui/button.png" id="43_f4upa"]
 [ext_resource type="Script" uid="uid://c8rdumvdrdg4e" path="res://scripts/map/elevator_window.gd" id="45_baix8"]
 [ext_resource type="Texture2D" uid="uid://bsqunrlyvtxp" path="res://images/icons/accept_call.png" id="56_kycfx"]
 [ext_resource type="Resource" uid="uid://ddajujr3we7ms" path="res://dialogue/first_contact/bikov_after_battle_1.tres" id="56_o4st3"]
@@ -399,6 +400,11 @@ outline_color = Color(0, 0, 0, 1)
 font = ExtResource("1_4xfga")
 font_size = 32
 outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_pqwvj"]
+font = ExtResource("1_4xfga")
+outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_8kgjo"]
@@ -1529,7 +1535,6 @@ offset_right = 526.0
 offset_bottom = 364.0
 
 [node name="CityWindow" type="Control" parent="GUI/UI" unique_id=86512069]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -1660,19 +1665,53 @@ offset_top = 244.0
 offset_right = 526.0
 offset_bottom = 364.0
 
-[node name="ShopSelect" type="OptionButton" parent="GUI/UI/CityWindow" unique_id=265119026]
+[node name="ItemShop" parent="GUI/UI/CityWindow" unique_id=778629868 instance=ExtResource("58_o4st3")]
 layout_mode = 0
-offset_left = 771.0
-offset_top = 78.0
-offset_right = 892.0
-offset_bottom = 117.0
-focus_mode = 0
-selected = 0
-item_count = 2
-popup/item_0/text = "ПРЕДМЕТЫ"
-popup/item_0/id = 0
-popup/item_1/text = "РЕЦЕПТЫ"
-popup/item_1/id = 1
+offset_left = 775.0
+offset_top = 87.0
+offset_right = 875.0
+offset_bottom = 137.0
+texture = ExtResource("43_f4upa")
+hover_modulate = Color(1.753, 1.753, 1.753, 1)
+
+[node name="LabelLocalized" type="Label" parent="GUI/UI/CityWindow/ItemShop" unique_id=1046762733]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Предметы"
+label_settings = SubResource("LabelSettings_pqwvj")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("35_cgoaf")
+string_id = &"ui_items"
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
+
+[node name="RecipiesShop" parent="GUI/UI/CityWindow" unique_id=517123242 instance=ExtResource("58_o4st3")]
+layout_mode = 0
+offset_left = 775.0
+offset_top = 144.0
+offset_right = 875.0
+offset_bottom = 194.0
+texture = ExtResource("43_f4upa")
+hover_modulate = Color(1.7529143, 1.7529143, 1.7529143, 1)
+
+[node name="LabelLocalized" type="Label" parent="GUI/UI/CityWindow/RecipiesShop" unique_id=983196804]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Рецепты"
+label_settings = SubResource("LabelSettings_pqwvj")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("35_cgoaf")
+string_id = &"ui_recipies"
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
 
 [node name="CommsWindow" type="Control" parent="GUI/UI" unique_id=1289302294]
 visible = false
@@ -2155,7 +2194,7 @@ script = ExtResource("58_sp2wr")
 string_id = &"is_calling"
 metadata/_custom_type_script = "uid://b4miwwllthxs7"
 
-[node name="Accept" parent="GUI/Dialogue/PickUpThePhone" unique_id=778629868 instance=ExtResource("58_o4st3")]
+[node name="Accept" parent="GUI/Dialogue/PickUpThePhone" unique_id=1882658444 instance=ExtResource("58_o4st3")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -2335,7 +2374,8 @@ text = "ПРИНЯТО"
 [connection signal="pressed" from="GUI/UI/CraftWindow/DebugAddOne" to="GUI/UI/CraftWindow" method="_on_debug_add_one_pressed"]
 [connection signal="pressed" from="GUI/UI/GovnovWindow/Close" to="GUI/UI/GovnovWindow" method="_on_close_pressed"]
 [connection signal="pressed" from="GUI/UI/CityWindow/Close" to="GUI/UI/CityWindow" method="_on_close_pressed"]
-[connection signal="item_selected" from="GUI/UI/CityWindow/ShopSelect" to="GUI/UI/CityWindow" method="_on_shop_selected"]
+[connection signal="pressed" from="GUI/UI/CityWindow/ItemShop" to="GUI/UI/CityWindow" method="_on_shop_selected" binds= [0]]
+[connection signal="pressed" from="GUI/UI/CityWindow/RecipiesShop" to="GUI/UI/CityWindow" method="_on_shop_selected" binds= [1]]
 [connection signal="pressed" from="GUI/UI/CommsWindow/Close" to="GUI/UI/CommsWindow" method="_on_close_pressed"]
 [connection signal="pressed" from="GUI/UI/CommsWindow/Power" to="GUI/UI/CommsWindow" method="_on_power_pressed"]
 [connection signal="pressed" from="GUI/UI/ElevatorWindow/Close" to="GUI/UI/ElevatorWindow" method="_on_close_pressed"]
@@ -2344,3 +2384,6 @@ text = "ПРИНЯТО"
 [connection signal="pressed" from="GUI/Dialogue/PickUpThePhone/Accept" to="GUI/Dialogue" method="_on_accept_pressed"]
 [connection signal="timeout" from="GUI/Dialogue/StartTimer" to="GUI/Dialogue" method="_on_start_timer_timeout"]
 [connection signal="pressed" from="GUI/Dialogue/DialogueWindow/BG/Continue" to="GUI/Dialogue" method="_on_continue_pressed"]
+
+[editable path="GUI/UI/CityWindow/ItemShop"]
+[editable path="GUI/UI/CityWindow/RecipiesShop"]

@@ -7,7 +7,6 @@ func _init() -> void:
 	
 func localize() -> void:
 	super.localize()
-	info[0] = info[0].format([harm], "{}")
 
 func update_stats(node: SlaveNode) -> void:
 	super.update_stats(node)

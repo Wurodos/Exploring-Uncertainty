@@ -155,6 +155,8 @@ func _on_enter_city(city: Room = null) -> void:
 			city.items.append(item)
 		var free_recipe = true
 		for j in range(4):
+			if CurrentRun.craft_pool.is_empty(): break
+			
 			var recipe : Item = CurrentRun.craft_pool.pop_at(randi_range(0, CurrentRun.craft_pool.size()-1))
 			recipe.cost = recipe.tier * 6
 			if recipe.tier == 1 and free_recipe:

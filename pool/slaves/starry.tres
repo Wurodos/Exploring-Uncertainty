@@ -1,12 +1,16 @@
-[gd_resource type="Resource" format=3 uid="uid://8ckxbas4afyj"]
+[gd_resource type="Resource" script_class="Starry" format=3 uid="uid://8ckxbas4afyj"]
 
 [ext_resource type="Script" uid="uid://buvug0bvrw5e1" path="res://scripts/enemies/starry.gd" id="1_ry55x"]
+[ext_resource type="Script" uid="uid://cadc7va1y3ish" path="res://scripts/slaves/quirk.gd" id="1_sejn3"]
+[ext_resource type="Resource" uid="uid://b4a55ti7t6q68" path="res://pool/quirks/reinforcement.tres" id="2_12mxh"]
 [ext_resource type="Texture2D" uid="uid://bmn1ru4ex8ri1" path="res://images/slaves/scarymotherfucker.png" id="2_a3iwr"]
+[ext_resource type="Resource" uid="uid://ll57o3ll6uip" path="res://pool/quirks/order.tres" id="3_0itpv"]
+[ext_resource type="Resource" uid="uid://bl55i3vmbbj2w" path="res://pool/quirks/offensive.tres" id="4_0835f"]
 
 [resource]
 script = ExtResource("1_ry55x")
-info_count = 3
 u_name = &"starry"
 base_maxhp = 20
 texture = ExtResource("2_a3iwr")
+quirks = Array[ExtResource("1_sejn3")]([ExtResource("2_12mxh"), ExtResource("3_0itpv"), ExtResource("4_0835f")])
 metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

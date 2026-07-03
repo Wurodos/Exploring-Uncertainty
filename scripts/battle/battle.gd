@@ -349,8 +349,7 @@ func _on_good_won() -> void:
 	
 	if CurrentRun.is_in_purged:
 		%NoLoot.visible = false
-		var fake : Array[Item.Scrap] = []
-		SignalBus.show_end_battle_screen.emit(fake) 
+		SignalBus.show_end_battle_screen.emit() 
 		return
 	
 	# Level up items
@@ -358,7 +357,10 @@ func _on_good_won() -> void:
 	for slave : Slave in CurrentRun.good_boys:
 		slave.speed = slave.base_speed
 		for item : Item in slave.get_all_items():
+			if not item.is_item(): continue
+			
 			item.on_end_battle(slave)
+			SignalBus.item_gained_experience.emit(item)
 			item.gain_exp(slave)
 	
 	loot_node.visible = true

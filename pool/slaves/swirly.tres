@@ -1,14 +1,17 @@
 [gd_resource type="Resource" format=3 uid="uid://dq1qufb3ny66s"]
 
+[ext_resource type="Script" uid="uid://cadc7va1y3ish" path="res://scripts/slaves/quirk.gd" id="1_jbi5m"]
 [ext_resource type="Script" uid="uid://b8opkj07sbgjm" path="res://scripts/enemies/swirly.gd" id="1_x217g"]
 [ext_resource type="Texture2D" uid="uid://k66qwp0f8sop" path="res://images/slaves/swirly.png" id="2_8mv2p"]
+[ext_resource type="Resource" uid="uid://c0intg574kkqu" path="res://pool/quirks/slippery.tres" id="2_dtehs"]
+[ext_resource type="Resource" uid="uid://c85ix6ngeljlg" path="res://pool/quirks/hit_and_run.tres" id="3_hd28s"]
 
 [resource]
 script = ExtResource("1_x217g")
 harm = 8
-info_count = 2
 u_name = &"swirly"
 base_maxhp = 10
 base_speed = 2
 texture = ExtResource("2_8mv2p")
+quirks = Array[ExtResource("1_jbi5m")]([ExtResource("2_dtehs"), ExtResource("3_hd28s")])
 metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

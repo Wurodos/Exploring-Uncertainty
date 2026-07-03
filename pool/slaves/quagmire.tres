@@ -1,14 +1,17 @@
 [gd_resource type="Resource" format=3 uid="uid://21s0nm12ysr7"]
 
 [ext_resource type="Script" uid="uid://c38khpsdryqs" path="res://scripts/enemies/quagmire.gd" id="1_6irpt"]
+[ext_resource type="Script" uid="uid://cadc7va1y3ish" path="res://scripts/slaves/quirk.gd" id="1_q74vv"]
+[ext_resource type="Resource" uid="uid://crqak7aexhpaq" path="res://pool/quirks/two_faced.tres" id="2_3aafv"]
 [ext_resource type="Texture2D" uid="uid://c0s374bsgkkra" path="res://images/slaves/quagmire.png" id="2_gfinq"]
+[ext_resource type="Resource" uid="uid://dou3i2m2ya066" path="res://pool/quirks/weapon_surplus.tres" id="3_101up"]
 
 [resource]
 script = ExtResource("1_6irpt")
-info_count = 2
 u_name = &"quagmire"
 base_maxhp = 15
 base_speed = 1
 sprite_size = 3
 texture = ExtResource("2_gfinq")
+quirks = Array[ExtResource("1_q74vv")]([ExtResource("2_3aafv"), ExtResource("3_101up")])
 metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

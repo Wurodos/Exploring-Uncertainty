@@ -16,6 +16,7 @@ enum SpriteSize {
 @export var sprite_size: SpriteSize
 @export var texture: Texture2D
 @export var unique_visual: PackedScene = null
+@export var quirks: Array[Quirk]
 
 var hp : int
 var maxhp : int
@@ -25,10 +26,10 @@ var heal_give: int = 0
 
 
 var speed : int
-
 var weapon: Item
 var hat: Item
 var trinket1 : Item
+
 var trinket2 : Item
 var trinket3 : Item
 

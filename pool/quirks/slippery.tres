@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Quirk" format=3 uid="uid://c0intg574kkqu"]
+
+[ext_resource type="Script" uid="uid://cadc7va1y3ish" path="res://scripts/slaves/quirk.gd" id="1_u1ysh"]
+
+[resource]
+script = ExtResource("1_u1ysh")
+id = "slippery"
+metadata/_custom_type_script = "uid://cadc7va1y3ish"

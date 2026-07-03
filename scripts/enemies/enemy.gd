@@ -21,11 +21,7 @@ class Intention:
 		self.type = type
 		self.amount = amount
 		self.effect = func(_victim) : return
-	
-@export var info_count: int = 0
 
-var info_title: Array[String] = []
-var info: Array[String] = []
 var intention: Intention
 var is_final_boss: bool = false
 
@@ -35,14 +31,9 @@ func _init() -> void:
 	super._init()
 	intention = Intention.new(Intention.Type.None)
 	is_evil = true
-	info = []
 
 func localize() -> void:
 	super.localize()
-	info = []
-	for i in range(info_count):
-		info_title.append(tr(u_name + "_title_" + str(i)))
-		info.append(tr(u_name + "_info_" + str(i)))
 
 static func deserialize(data: Dictionary) -> Enemy:
 	var enemy : Enemy = SlavePool.fetch(data["u_name"])

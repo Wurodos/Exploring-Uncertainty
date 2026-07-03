@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://cy0fn8h53r2ny"]
+
+[ext_resource type="Script" uid="uid://ceqt6uttb8hhx" path="res://scripts/battle/experience_entry.gd" id="1_7yj5c"]
+[ext_resource type="Texture2D" uid="uid://cene4c4upsxun" path="res://images/shapes/item_info.png" id="1_b76rg"]
+[ext_resource type="LabelSettings" uid="uid://34c71nyrmk01" path="res://text/labelsettings/item_name.tres" id="2_7yj5c"]
+[ext_resource type="Texture2D" uid="uid://c102ib72qlv7l" path="res://images/items/sword.png" id="3_juk7e"]
+[ext_resource type="FontFile" uid="uid://bfebu5mjrc5yc" path="res://text/font/mainfont.ttf" id="4_fhurf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4u087"]
+bg_color = Color(0.30473056, 0.12411267, 9.62615e-08, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqtyt"]
+bg_color = Color(1, 0.50980395, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_4u087"]
+font = ExtResource("4_fhurf")
+font_size = 20
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[node name="ExperienceEntry" type="Control" unique_id=919713531]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_7yj5c")
+
+[node name="LevelBorder" type="ColorRect" parent="." unique_id=242046042]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.43134022, 0.43134025, 0.43134025, 1)
+
+[node name="BG" type="TextureRect" parent="." unique_id=2053996325]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = 121.0
+grow_horizontal = 2
+texture = ExtResource("1_b76rg")
+expand_mode = 2
+stretch_mode = 1
+
+[node name="ItemName" type="Label" parent="." unique_id=2091258137]
+layout_mode = 1
+offset_left = 13.0
+offset_top = 14.0
+offset_right = 269.0
+offset_bottom = 91.0
+text = "Меч"
+label_settings = ExtResource("2_7yj5c")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ItemBG" type="ColorRect" parent="." unique_id=1034838318]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -106.0
+offset_top = 17.0
+offset_right = -6.0
+offset_bottom = 117.0
+grow_horizontal = 0
+color = Color(0, 0, 0, 0.56078434)
+
+[node name="Item" type="TextureRect" parent="ItemBG" unique_id=1570722039]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_juk7e")
+expand_mode = 1
+
+[node name="ExpBar" type="ProgressBar" parent="." unique_id=1067273222]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 94.0
+offset_right = 271.0
+offset_bottom = 118.0
+theme_override_styles/background = SubResource("StyleBoxFlat_4u087")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fqtyt")
+max_value = 4.0
+value = 1.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="ExpBar" unique_id=1671691384]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1/10"
+label_settings = SubResource("LabelSettings_4u087")
+horizontal_alignment = 1
+vertical_alignment = 1

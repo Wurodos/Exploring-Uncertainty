@@ -153,6 +153,7 @@ autoplay = &"idle"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=221710740]
 layer = 2
+visible = false
 
 [node name="Darkness" type="ColorRect" parent="CanvasLayer" unique_id=2106539104]
 material = SubResource("ShaderMaterial_c1pv7")
