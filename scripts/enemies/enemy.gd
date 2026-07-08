@@ -5,7 +5,7 @@ class_name Enemy
 class Intention:
 	enum Type { DamageSingular, DamageMultiple, DamageTwo,
 	 PowerUp, HealSingle, HealMultiple, Run, SummonStars,
-	 Reinforcement, OrderChervs, Support, None }
+	 Reinforcement, OrderChervs, Support, Execution, None }
 		
 	var type: Type
 	var amount: int = -1
@@ -14,6 +14,8 @@ class Intention:
 	var is_support: bool = false
 	var is_melee: bool = true
 	var timer: int  = 0
+	var timer_damage_max: int = 0
+	var timer_damage_remain: int = 0
 	var extra_data: Variant
 	
 	@warning_ignore("shadowed_variable")

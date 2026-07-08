@@ -30,7 +30,6 @@
 [ext_resource type="Texture2D" uid="uid://bs1oxtclo4qgp" path="res://images/icons/coin.png" id="14_6k6j1"]
 [ext_resource type="LabelSettings" uid="uid://34c71nyrmk01" path="res://text/labelsettings/item_name.tres" id="15_m335s"]
 [ext_resource type="Script" uid="uid://t44bv6kafv14" path="res://scripts/narrative/dialogue.gd" id="16_tf62m"]
-[ext_resource type="Script" uid="uid://da1waiviit08p" path="res://scripts/narrative/dialogue_node.gd" id="17_w5y4v"]
 [ext_resource type="Resource" uid="uid://citkrby8o11b7" path="res://dialogue/first_contact/bikov_introduction.tres" id="18_v7gfb"]
 [ext_resource type="Script" uid="uid://ctoap32euag0p" path="res://scripts/battle/slave_info.gd" id="19_mkblt"]
 [ext_resource type="Texture2D" uid="uid://cfowi84shmwbh" path="res://images/icons/power.svg" id="20_4o3w1"]
@@ -858,6 +857,30 @@ layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
+[node name="Swap01" type="Button" parent="GUI/UI/TeamWindow" unique_id=1235031933]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 310.0
+offset_right = 362.0
+offset_bottom = 356.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_4xfga")
+theme_override_font_sizes/font_size = 16
+text = "->
+<-"
+
+[node name="Swap12" type="Button" parent="GUI/UI/TeamWindow" unique_id=1889296030]
+layout_mode = 0
+offset_left = 587.0
+offset_top = 311.0
+offset_right = 634.0
+offset_bottom = 357.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_4xfga")
+theme_override_font_sizes/font_size = 16
+text = "->
+<-"
+
 [node name="ItemEntry" parent="GUI/UI/TeamWindow" unique_id=1475928500 instance=ExtResource("7_nakos")]
 visible = false
 layout_mode = 0
@@ -1535,6 +1558,7 @@ offset_right = 526.0
 offset_bottom = 364.0
 
 [node name="CityWindow" type="Control" parent="GUI/UI" unique_id=86512069]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -2147,7 +2171,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("16_tf62m")
-lines = Array[ExtResource("17_w5y4v")]([ExtResource("18_v7gfb"), ExtResource("56_o4st3")])
+first_contact = ExtResource("18_v7gfb")
+first_battle_victory = ExtResource("56_o4st3")
 
 [node name="PickUpThePhone" type="ColorRect" parent="GUI/Dialogue" unique_id=714169573]
 layout_mode = 0
@@ -2364,6 +2389,8 @@ text = "ПРИНЯТО"
 [connection signal="pressed" from="GUI/UI/DebugFight" to="." method="_on_debug_fight_pressed"]
 [connection signal="pressed" from="GUI/UI/DebugBoss" to="." method="_on_debug_boss_pressed"]
 [connection signal="pressed" from="GUI/UI/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="GUI/UI/TeamWindow/Swap01" to="GUI/UI/TeamWindow" method="swap_items" binds= [0, 1]]
+[connection signal="pressed" from="GUI/UI/TeamWindow/Swap12" to="GUI/UI/TeamWindow" method="swap_items" binds= [1, 2]]
 [connection signal="pressed" from="GUI/UI/TeamWindow/Close" to="GUI/UI/TeamWindow" method="_on_close_pressed"]
 [connection signal="pressed" from="GUI/UI/TeamWindow/Debug/GetItem" to="GUI/UI/TeamWindow" method="_on_get_item_pressed"]
 [connection signal="pressed" from="GUI/UI/TeamWindow/Debug/GetRecipe" to="GUI/UI/TeamWindow" method="_on_get_recipe_pressed"]

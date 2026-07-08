@@ -9,7 +9,7 @@ func localize():
 
 func use_item(sender: SlaveNode, victim: SlaveNode):
 	super.use_item(sender, victim)
-	if victim.held.hp <= ceil(victim.held.maxhp * threshold / 100.0):
+	if not victim.held is Reptile and victim.held.hp <= ceil(victim.held.maxhp * threshold / 100.0):
 		Action.execute(sender, victim)
 	else:
 		Action.deal_damage(sender, victim, harm)

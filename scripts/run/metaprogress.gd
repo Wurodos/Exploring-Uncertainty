@@ -11,6 +11,7 @@ var packs: Array[String] = [
 
 # ===========  RUNS INFO  ============
 var runs_completed: int = 0
+var victories: int = 0
 
 
 # ===========  FLAGS  ============

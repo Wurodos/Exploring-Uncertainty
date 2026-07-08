@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cr7a131ha12lj"]
+
+[ext_resource type="Texture2D" uid="uid://qjp74xom74mu" path="res://images/reptiles/jet.png" id="1_kvhi2"]
+
+[node name="Jet" type="Node2D" unique_id=1112355778]
+
+[node name="Body" type="Sprite2D" parent="." unique_id=1889869050]
+position = Vector2(0, -100)
+scale = Vector2(0.7, 0.49)
+texture = ExtResource("1_kvhi2")

@@ -142,6 +142,9 @@ func _teleport(to: int) -> void:
 			return
 
 
+func party_room() -> Room:
+	return room_at(party_row, party_col)
+
 func _process(_delta: float) -> void:
 	if CurrentRun.state != Game.State.Map: return
 	
@@ -173,6 +176,8 @@ func move_player(direction: Direction) -> void:
 	party_row += _drow[direction]
 	_update_move_buttons()
 	player_node.global_position = room.global_position
+	CurrentRun.reptile.on_player_moved()
+	
 	
 	zone_id = room.area_level
 	_explore(party_row, party_col)
@@ -183,10 +188,11 @@ func move_player(direction: Direction) -> void:
 		$GUI/UI/Steps.text = str(steps)
 	else:
 		for slave: Slave in CurrentRun.good_boys:
-			slave.hp -= 1
+			slave.hp -= 5
 		CurrentRun.good_boys = CurrentRun.good_boys.filter(func(slave): return slave.hp > 0)
 		SignalBus.refresh.emit()
 		if CurrentRun.good_boys.size() == 0:
+			Metaprogress.unlock_pack("everything_you_need")
 			get_tree().quit()
 	
 	
@@ -581,6 +587,7 @@ func _add_boss() -> void:
 	var coords : Vector2i = all_coords.pick_random()
 	var room = add_room(coords.x, coords.y)
 	room.type = Room.Type.Reptile
+	CurrentRun.reptile.room = room
 	room.sprite.texture = room_sprites[room.type]
 	
 	reptile = room
@@ -645,9 +652,9 @@ func _explore(row: int, col: int):
 	var x = col - size/2
 	var y = row - size/2
 	
-	for i in range(-2, 3):
-		for j in range(-2, 3):
-			if not (abs(i) == 2 and abs(j) == 2):
+	for i in range(-CurrentRun.explore_radius, CurrentRun.explore_radius+1):
+		for j in range(-CurrentRun.explore_radius, CurrentRun.explore_radius+1):
+			if not (abs(i) == CurrentRun.explore_radius and abs(j) == CurrentRun.explore_radius):
 				var room : Room = room_at(row+i, col+j)
 				
 				if room and CurrentRun.is_tutorial:
@@ -771,7 +778,6 @@ func _on_debug_boss_pressed() -> void:
 	CurrentRun.arrange_boss()
 	$AnimationPlayer.play("battle_start")
 	await $AnimationPlayer.animation_finished
-	SignalBus.play_music.emit("roots_and_toots")
 	SignalBus.battle_encounter.emit()
 	$AnimationPlayer.play("RESET")
 	is_encountering = false

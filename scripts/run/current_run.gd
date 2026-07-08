@@ -8,6 +8,8 @@ var good_boys: Array[Slave] = []
 var evil_boys: Array[Slave] = []
 var enemy_item_pool: ItemPool.TierPool
 
+var reptile: Reptile = null
+
 # var potential_team_1: Array[Slave] = []
 # var potential_team_2: Array[Slave] = []
 
@@ -29,7 +31,7 @@ var scraps: Dictionary[Item.Scrap, int] = {
 	Item.Scrap.Oil : 0
 }
 
-
+var explore_radius: int = 2
 var discounts : int = 0
 var is_comms_repaired : bool = false
 var is_in_purged: bool = false
@@ -38,7 +40,7 @@ var elevators_repaired: int = 0
 
 var state: Game.State = Game.State.Map
 
-## Govnov: 3 madidididun
+## Govnov: 3 madididundun
 #
 # deck will consist of 'cards' = enemy slaves or empty slots
 # cherv camp =  3 (2 in 1st zone) battles back to back (waves)
@@ -588,9 +590,9 @@ func arrange_evil_team(zone: int) -> Array[Slave]:
 
 func arrange_govnov_team() -> Array[Slave]:
 	var team : Array[Slave] = [
-		SlavePool.fetch("madidididun"),
-		SlavePool.fetch("madidididun"),
-		SlavePool.fetch("madidididun")
+		SlavePool.fetch("madididundun"),
+		SlavePool.fetch("madididundun"),
+		SlavePool.fetch("madididundun")
 	]
 	for madi in team:
 		madi.equip(ItemPool.fetch("boxing_glove"))
@@ -608,5 +610,4 @@ func put_item_in_inventory(item: Item) -> void:
 	CurrentRun.inventory.append(item)
 
 func arrange_boss() -> void:
-	CurrentRun.evil_boys = [ReptilePool.fetch("and_its_dark_again")]
-	# CurrentRun.evil_boys[0].hp = 1
+	CurrentRun.evil_boys = [reptile]

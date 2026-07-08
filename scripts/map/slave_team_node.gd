@@ -76,18 +76,7 @@ func update_healing_cost(heals_used: int, value: int, heal_price: int) -> void:
 		$Undress.text += "\n(" + str(heals_used*heal_price) + ")"
 
 func _on_undress_pressed() -> void:
-	var old_items : Array[Item] = []
-	
-	if held.weapon.extra_hp < held.hp:
-		old_items.append(held.equip(ItemPool.fetch("no_weapon")))
-	if held.trinket3.extra_hp < held.hp:
-		old_items.append(held.equip(ItemPool.fetch("no_trinket"), 3))
-	if held.hat.extra_hp < held.hp:
-		old_items.append(held.equip(ItemPool.fetch("no_hat")))
-	if held.trinket1.extra_hp < held.hp:
-		old_items.append(held.equip(ItemPool.fetch("no_trinket"), 1))
-	if held.trinket2.extra_hp < held.hp:
-		old_items.append(held.equip(ItemPool.fetch("no_trinket"), 2))
+	var old_items: Array[Item] = held.undress()
 	apply(held, type)
 	
 	for item: Item in old_items:
@@ -110,6 +99,8 @@ func _on_govnov_heal_pressed() -> void:
 
 func _on_mouse_entered() -> void:
 	selected = self
+	if ItemDraggable.selected:
+		pass
 
 
 func _on_mouse_exited() -> void:

@@ -44,7 +44,10 @@ func _on_slave_info(slave: Enemy):
 		entry.item_name.text = tr("quirk_"+quirk.id+"_title")
 		entry.item_desc.text = tr("quirk_"+quirk.id+"_desc")
 		i += 1
-	
+	$TimerBar.visible = slave.intention.timer > 0
+	$TimerBar.max_value = slave.intention.timer_damage_max
+	$TimerBar.value = slave.intention.timer_damage_remain
+	$TimerBar/Label.text = str(slave.intention.timer_damage_remain) + "/" + str(slave.intention.timer_damage_max)
 	$HPBar.value = (slave.hp/float(slave.maxhp)*100)
 	$HPBar/Label.text = str(slave.hp) + "/" + str(slave.maxhp)
 	

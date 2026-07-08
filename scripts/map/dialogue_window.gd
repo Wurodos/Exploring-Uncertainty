@@ -16,6 +16,7 @@ func _ready() -> void:
 
 func reset() -> void:
 	speakers = []
+	speaker_count = 0
 	for speaker: Control in speaker_row.get_children():
 		speaker.visible = false
 

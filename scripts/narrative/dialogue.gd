@@ -1,7 +1,10 @@
 extends Control
 class_name Dialogue
 
-@export var lines: Array[DialogueNode] = []
+@export var first_contact: DialogueNode
+@export var first_battle_victory: DialogueNode
+
+@export var enable_dialogue_in_debug: bool = false
 
 @onready var window: DialogueWindow = $DialogueWindow
 
@@ -11,16 +14,17 @@ var prev_state: Game.State
 
 func _ready() -> void:
 	SignalBus.new_message.connect(on_new_message)
-	SignalBus.end_battle.connect(func(): on_new_message(1), CONNECT_ONE_SHOT)
+	SignalBus.end_battle.connect(func(): on_new_message(first_battle_victory), CONNECT_ONE_SHOT)
 
-func on_new_message(id: int) -> void:
-	if CurrentRun.is_debug or CurrentRun.is_tutorial: return
+func on_new_message(line: DialogueNode) -> void:
+	if CurrentRun.is_debug and not enable_dialogue_in_debug: return 
+	if CurrentRun.is_tutorial: return
 	$AnimationPlayer.play("popup")
 	window.reset()
 	prev_state = CurrentRun.state
 	CurrentRun.state = Game.State.Phone
 	mouse_filter = Control.MOUSE_FILTER_STOP
-	current_line = lines[id]
+	current_line = line
 	$Ring.play()
 
 func say() -> void:
@@ -46,7 +50,7 @@ func toggle(on: bool) -> void:
 
 
 func _on_start_timer_timeout() -> void:
-	on_new_message(0)
+	on_new_message(first_contact)
 		
 func _on_accept_pressed() -> void:
 	show_dialogue()

@@ -11,6 +11,7 @@ const icon_summon_stars = preload("res://images/icons/summon.png")
 const icon_order = preload("res://images/icons/order.png")
 const icon_summon_cherv = preload("res://images/icons/summon_cherv.png")
 const icon_support = preload("res://images/icons/support.png")
+const icon_execution = preload("res://images/icons/execution.png")
 
 const img_dead_slave = preload("res://images/slaves/dead.png")
 

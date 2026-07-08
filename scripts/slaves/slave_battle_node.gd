@@ -18,6 +18,7 @@ signal attacked(victim: SlaveNode)
 @onready var line_end: Vector2 = $CircleSelect/LineEnd.global_position
 @onready var ellipse: Sprite2D = $CircleSelect
 @onready var stat_parent: Control = $Stats
+@onready var dotted_lines: DottedLines = $DottedLines
 
 @onready var arrow: Sprite2D = $Arrow
 @onready var arrow_animation: AnimationPlayer = $ArrowAnimation
@@ -118,16 +119,20 @@ func set_hp(new_val: int, is_delta: bool = true):
 
 func death(undeath: bool = false) -> void:
 	held.is_alive = undeath
-	sprite.texture = Gallery.img_dead_slave
+	if sprite: sprite.texture = Gallery.img_dead_slave
 	%HPBar.visible = undeath
-	item_parent.visible = undeath
+	if item_parent: item_parent.visible = undeath
 	$Intention.visible = undeath
 	arrow.visible = undeath
+	dotted_lines.visible = false
 	
+	if held.unique_visual:
+		visible = false
 	if undeath:
 		reapply()
 		SignalBus.slave_undeath.emit(self)
 	else:
+		held.on_death()
 		SignalBus.slave_death.emit(self)
 
 func set_speed(new_val: int, is_delta: bool = true):
@@ -179,6 +184,9 @@ func apply(slave: Slave, is_evil: bool = false) -> void:
 	if held.unique_visual and $Parts/Visual.visible:
 		$Parts/Visual.visible = false
 		$Parts.add_child(held.unique_visual.instantiate())
+		if is_evil:
+			$Parts.scale.x *= -1
+			$AnimationSprites.scale = Vector2(-1, 1)
 		return
 	
 	match(held.sprite_size):
@@ -196,11 +204,8 @@ func apply(slave: Slave, is_evil: bool = false) -> void:
 	sprite.texture = slave.texture
 	
 	if is_evil:
-		#sprite.flip_h = true
 		$Parts.scale.x *= -1
 		$AnimationSprites.scale = Vector2(-1, 1)
-		#for offset_node: Node2D in item_parent.get_children():
-		#	offset_node.position.x *= -1
 		
 	if weapon_node == null:
 		weapon_node = item_prefab.instantiate()
@@ -306,14 +311,17 @@ func support(ally: SlaveNode):
 		_on_end_turn.call_deferred()
 		return
 	
-	match(held.hat.target):
-		Item.Target.Self:
-			held.hat.use_item(self, self)
-		Item.Target.Single: 
-			held.hat.use_item(self, ally)
-		Item.Target.AllTeam: 
-			for slave in Battle.instance.good_team.boys_nodes:
-				held.hat.use_item(self, slave)
+	if buffs.has(Action.DARK):
+		held.hat.use_item(self, self)
+	else:
+		match(held.hat.target):
+			Item.Target.Self:
+				held.hat.use_item(self, self)
+			Item.Target.Single: 
+				held.hat.use_item(self, ally)
+			Item.Target.AllTeam: 
+				for slave in Battle.instance.good_team.boys_nodes:
+					held.hat.use_item(self, slave)
 	_on_end_turn.call_deferred()
 
 func move_to(to: Vector2) -> Tween:
@@ -348,6 +356,7 @@ func remove_buff(buff_name: String):
 	
 
 func execute_intention():
+	dotted_lines.visible = false
 	var held_enemy : Enemy = held
 	var hide_intention := true
 	
@@ -473,6 +482,7 @@ func _decide_intentions() -> void:
 		update_intention()
 	
 
+
 func update_intention() -> void:
 	var held_enemy : Enemy = held
 	var total = held_enemy.intention.amount
@@ -482,9 +492,13 @@ func update_intention() -> void:
 
 	if held_enemy.intention.timer > 0:
 		$Timer.visible = true
+		$TimerBar.visible = true
+		$TimerBar.max_value = held_enemy.intention.timer_damage_max
+		$TimerBar.value = held_enemy.intention.timer_damage_remain
 		$Timer/Label.text = str(held_enemy.intention.timer)
 	else:
 		$Timer.visible = false
+		$TimerBar.visible = false
 	
 	var icon: Texture2D 
 	
@@ -503,6 +517,8 @@ func update_intention() -> void:
 			icon = Gallery.icon_heal_multiple
 		Enemy.Intention.Type.PowerUp:
 			icon = Gallery.icon_powerup
+		Enemy.Intention.Type.Execution:
+			icon = Gallery.icon_execution
 		Enemy.Intention.Type.Run:
 			icon = Gallery.icon_run
 		Enemy.Intention.Type.SummonStars:
@@ -516,11 +532,28 @@ func update_intention() -> void:
 	$Intention/TargetMiddle.visible = false
 	$Intention/TargetBottom.visible = false
 	
-	for target in held_enemy.intention.targets:
-		match(target):
-			0: $Intention/TargetMiddle.visible = true
-			1: $Intention/TargetBottom.visible = true
-			2: $Intention/TargetTop.visible = true
+	#for target in held_enemy.intention.targets:
+	#	match(target):
+	#		0: $Intention/TargetMiddle.visible = true
+	#		1: $Intention/TargetBottom.visible = true
+	#		2: $Intention/TargetTop.visible = true
 	
 	
 	$Intention/Icon.texture = icon
+	dotted_lines.visible = true
+	
+	var targets_pos: Array[Vector2] = [] 
+	if (held as Enemy).intention.is_support:
+		targets_pos.assign((held as Enemy).intention.targets.map(func(t: int):
+			return Battle.instance.evil_team.boys_nodes[t].get_parent().global_position))
+		dotted_lines.redraw_line(targets_pos, Color(0,0,1,0.5))
+	else: 
+		targets_pos.assign((held as Enemy).intention.targets.map(func(t: int):
+			return Battle.instance.good_team.boys_nodes[t].get_parent().global_position))
+		dotted_lines.redraw_line(targets_pos, Color(1,0,0,0.5))
+	
+	
+	
+	
+	
+	

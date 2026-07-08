@@ -100,7 +100,7 @@ disk_loaded_desc;ONE-TIME USE. START OF BATTLE: GAIN {} POWER, {} SPEED, {} LUCK
 ideology_name;IDEOLOGY;ИДЕОЛОГИЯ
 ideology_desc;INFLICTS {} HARM. EXECUTES CHERVS, x2 DAMAGE TO ZORTS;ПРИЧИНЯЕТ {} ВРЕДА. КАЗНИТ ЧЕРВОВ, x2 УРОН ПО ЗОРЦАМ
 obsidian_knife_name;Obsidian Knife;Обсидиановый Нож
-obsidian_knife_desc;INFLICTS 16 HARM. END OF BATTLE: DESTROYS ITSELF, RECEIVE OBSIDIAN OF SAME LEVEL;ПРИЧИНЯЕТ 16 ВРЕДА. КОНЕЦ БОЯ: УНИЧТОЖАЕТСЯ, ПОЛУЧИТЕ ОБСИДИАН ТОГО ЖЕ УРОВНЯ
+obsidian_knife_desc;INFLICTS {} HARM. END OF BATTLE: RECEIVE OBSIDIAN OF SAME LEVEL;ПРИЧИНЯЕТ {} ВРЕДА. КОНЕЦ БОЯ: ПОЛУЧИТЕ ОБСИДИАН ТОГО ЖЕ УРОВНЯ
 pope_name;Pope;Папа Римский
 pope_desc;START OF TURN: ABSORB {} HEALTH FROM ALL FIGHTERS\nACTION: RESURRECT FIGHTER WITH {}% HEALTH;НАЧАЛО ХОДА: ПОГЛОЩАЕТ {} ЗДОРОВЬЕ СО ВСЕХ БОЙЦОВ\nДЕЙСТВИЕ: ВОСКРЕСИТЕ БОЙЦА С {}% ЗДОРОВЬЕМ
 cutter_name;Cutter;Коситель
@@ -138,3 +138,9 @@ knife_desc;INFLICTS {} HARM;ПРИЧИНЯЕТ {} ВРЕДА
 pack_everything_you_need_title;Everything YOU need!;Все необходимое!
 pack_everything_you_need_unlock;Lose 1 run;Провалите 1 забег
 pack_everything_you_need_desc;No camp will survive!;Никакой лагерь не переживет! 
+democracy_arsenal_name;Arsenal of Democracy;Арсенал Демократии
+democracy_arsenal_desc;INFLICTS {} HARM TO ALL TARGETS, THEN CRUSHES ALL SHIELDS AND ERASES HALF OF THEIR POWER;ПРИЧИНЯЕТ {} ВРЕДА ВСЕМ ЦЕЛЯМ, ЗАТЕМ РАЗРУШАЕТ ВСЕ ИХ ЩИТЫ И СТИРАЕТ ПОЛОВИНУ МОЩИ
+forward_name;Forward!;Вперед!
+forward_desc;EXECUTES THE TARGET;КАЗНИТ ЦЕЛЬ
+truman_doctrine_name;Truman Doctrine;Доктрина Трумана
+truman_doctrine_desc;ACTION: TARGET'S TIMER IS REDUCED BY 1.\nACTION: +{} SPEED, SHIELD {} TURNS;ДЕЙСТВИЕ: ЗАДЕРЖКА ЦЕЛИ СНИЖАЕТСЯ НА 1.\nДЕЙСТВИЕ: +{} ИНИЦИАТИВЫ, ЩИТ {} ХОДОВ

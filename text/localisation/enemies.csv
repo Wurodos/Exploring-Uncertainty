@@ -1,9 +1,20 @@
 keys;en;ru
 cherv;Cherv;Черв
-starry;Starry;Звезданутый
+starry;Starry;Зорец
 swirly;Swirly;Скрученыш
 chomper;Chomper;Откусатель
 quagmire;Quagmire;Затруднения
+madididundun;Madididundun;Мадидидундун
+jet;Jet;Бомбардировщик
+tractor;Tractor;Трактор
+truman;Truman;Труман
+and_its_dark_again;And It's Dark Again;И Снова Темно
+quirk_momentary_light_title;For a moment, a light flashed;На мгновенье вспыхнул свет
+quirk_momentary_light_desc;ON DEATH: LIGHTS UP THE DARK;ПРИ СМЕРТИ: РАЗВЕИВАЕТ ТЬМУ
+quirk_timer_title;Timer;Задержка
+quirk_timer_desc;EXECUTES ACTIONS WITH A DELAY. DELAY CAN BE INCREASED BY DEALING DAMAGE;СОВЕРШАЕТ ДЕЙСТВИЯ С ЗАДЕРЖКОЙ. ЗАДЕРЖКА УВЕЛИЧИВАЕТСЯ С ПОЛУЧЕНИЕМ УРОНА
+quirk_shapeless_title;Shapeless;Бесформенное
+quirk_shapeless_desc;RECEIVES NO DAMAGE FROM FIGHTERS IN THE DARK;НЕ ПОЛУЧАЕТ УРОН ОТ БОЙЦОВ ВО ТЬМЕ
 quirk_narrow_mind_title;Narrow Mind;Узколобие
 quirk_narrow_mind_desc;SWITCHES TARGET WHEN HIT;МЕНЯЕТ ЦЕЛЬ ПРИ ПОЛУЧЕНИИ УРОНА
 quirk_reinforcement_title;Reinforcements;Подкрепления

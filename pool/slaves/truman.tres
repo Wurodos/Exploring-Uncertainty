@@ -1,0 +1,21 @@
+[gd_resource type="Resource" format=3 uid="uid://dokae328aw5uo"]
+
+[ext_resource type="Script" uid="uid://cadc7va1y3ish" path="res://scripts/slaves/quirk.gd" id="1_kmyjf"]
+[ext_resource type="Script" uid="uid://bkk4dhmc2wuqj" path="res://scripts/enemies/truman.gd" id="2_ifdya"]
+[ext_resource type="Resource" uid="uid://d3g778bxff1x8" path="res://pool/quirks/timer.tres" id="2_kmyjf"]
+[ext_resource type="Texture2D" uid="uid://buhb0ixyb03t7" path="res://images/reptiles/truman.png" id="4_kmyjf"]
+[ext_resource type="PackedScene" uid="uid://blcujoswi832g" path="res://prefabs/reptiles/truman.tscn" id="4_ln6lx"]
+
+[resource]
+script = ExtResource("2_ifdya")
+timer_turns = 1
+timer_damage = 5
+timer_increase = 5
+base_maxhp = 150
+base_speed = 1
+texture = ExtResource("4_kmyjf")
+unique_visual = ExtResource("4_ln6lx")
+quirks = Array[ExtResource("1_kmyjf")]([ExtResource("2_kmyjf")])
+default_weapon = "truman_doctrine"
+item_rate_if_reinforced = 0.0
+metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

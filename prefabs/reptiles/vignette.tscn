@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dql3nrorp1ats"]
+
+[ext_resource type="Texture2D" uid="uid://b1icyii21gnth" path="res://images/shapes/vignette.png" id="1_oua0f"]
+
+[node name="Vignette" type="CanvasLayer" unique_id=1416935103]
+
+[node name="Vignette" type="TextureRect" parent="." unique_id=830681876]
+self_modulate = Color(0, 0, 0, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_oua0f")
+expand_mode = 1

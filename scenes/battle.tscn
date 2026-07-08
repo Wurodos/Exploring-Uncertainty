@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://bg2spyp44xpw7" path="res://scripts/common/btn_localized.gd" id="11_66ngm"]
 [ext_resource type="Script" uid="uid://4de2lnmk4fvw" path="res://scripts/battle/battle_end.gd" id="11_vceff"]
 [ext_resource type="Texture2D" uid="uid://dls2t3f7lvsqx" path="res://images/shapes/tutorial_box.png" id="12_6ni85"]
+[ext_resource type="Script" uid="uid://cbyeocodg6kat" path="res://scripts/battle/ending_screen.gd" id="12_mpb26"]
 [ext_resource type="LabelSettings" uid="uid://dhb60ypduj2te" path="res://text/labelsettings/tutorial_box.tres" id="13_vceff"]
 [ext_resource type="Script" uid="uid://dd2yytdivaq0j" path="res://scripts/common/label_localized.gd" id="14_ekamt"]
 [ext_resource type="Texture2D" uid="uid://cdm857fxoms7i" path="res://images/scraps/gear.png" id="15_61i1y"]
@@ -120,6 +121,12 @@ outline_color = Color(0, 0, 0, 1)
 font = ExtResource("6_6vh42")
 font_size = 50
 
+[sub_resource type="LabelSettings" id="LabelSettings_4u087"]
+font = ExtResource("6_6vh42")
+font_size = 50
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="Animation" id="Animation_v7i3o"]
 length = 0.001
 tracks/0/type = "value"
@@ -177,6 +184,42 @@ tracks/4/path = NodePath("UI/Fail/Exit:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("World/EvilTeam:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("UI/SpeedQueue:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("UI/Win/Exit:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -246,6 +289,42 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("World/EvilTeam:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UI/SpeedQueue:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.06666667, 3.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UI/Win/Exit:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.06666667, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -338,6 +417,26 @@ font_size = 32
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e50ek"]
+bg_color = Color(0.26099586, 0.26099578, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mpb26"]
+bg_color = Color(1, 1, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_mpb26"]
+font = ExtResource("6_6vh42")
+font_size = 24
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_e50ek"]
 font = ExtResource("6_6vh42")
 font_size = 30
@@ -354,6 +453,7 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_th188")
 
 [node name="BG" type="TextureRect" parent="." unique_id=954905245]
+z_index = -10
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -457,8 +557,8 @@ position = Vector2(-489.41174, -131.7647)
 
 [node name="EvilTeam" type="Node2D" parent="World" unique_id=1453637202 node_paths=PackedStringArray("ropes")]
 y_sort_enabled = true
-position = Vector2(-96.00001, 64)
-scale = Vector2(0.8, 0.8)
+position = Vector2(-96, 64)
+scale = Vector2(0.79999995, 0.79999995)
 script = ExtResource("1_dn72j")
 ropes = [NodePath("../Extra/Ropes/MiddleRope/Bottom"), NodePath("../Extra/Ropes/BottomRope/Bottom"), NodePath("../Extra/Ropes/TopRope/Bottom")]
 is_evil = true
@@ -626,6 +726,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
+script = ExtResource("12_mpb26")
 
 [node name="ColorRect" type="ColorRect" parent="UI/Win" unique_id=1337844483]
 layout_mode = 0
@@ -636,7 +737,19 @@ offset_bottom = 492.0
 mouse_filter = 2
 color = Color(0.227451, 0.403922, 0, 0)
 
-[node name="Label" type="Label" parent="UI/Win" unique_id=1808683545]
+[node name="Exit" type="Button" parent="UI/Win" unique_id=2138183759]
+visible = false
+layout_mode = 0
+offset_left = 277.0
+offset_top = 92.0
+offset_right = 481.0
+offset_bottom = 146.0
+theme_override_fonts/font = ExtResource("6_6vh42")
+theme_override_font_sizes/font_size = 24
+script = ExtResource("11_66ngm")
+string_id = &"exit"
+
+[node name="Label" type="Label" parent="UI/Win" unique_id=1404350590]
 visible = false
 layout_mode = 0
 offset_left = -461.0
@@ -646,9 +759,12 @@ offset_bottom = 165.0
 text = "Рептилия
 \"Вершки и Корешки\" 
 нейтрализована"
-label_settings = SubResource("LabelSettings_v7i3o")
+label_settings = SubResource("LabelSettings_4u087")
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("14_ekamt")
+string_id = &"reptile_neutralized"
+metadata/_custom_type_script = "uid://dd2yytdivaq0j"
 
 [node name="TutorialBox" type="TextureRect" parent="UI" unique_id=117890652]
 visible = false
@@ -1094,7 +1210,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EnemyInfo" type="Control" parent="CLayer/GUI" unique_id=699097615 node_paths=PackedStringArray("enemy_image")]
-visible = false
 z_index = 5
 layout_mode = 1
 anchors_preset = 15
@@ -1196,6 +1311,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 label_settings = SubResource("LabelSettings_4k1nj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimerBar" type="ProgressBar" parent="CLayer/GUI/EnemyInfo" unique_id=1768924164]
+layout_mode = 0
+offset_left = 442.0
+offset_top = 91.0
+offset_right = 709.0
+offset_bottom = 114.0
+theme_override_styles/background = SubResource("StyleBoxFlat_e50ek")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mpb26")
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CLayer/GUI/EnemyInfo/TimerBar" unique_id=432223149]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_mpb26")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1427,6 +1564,7 @@ layout_mode = 2
 
 [connection signal="mouse_entered" from="UI/Loot/Bag" to="UI/Loot" method="_on_bag_mouse_entered"]
 [connection signal="pressed" from="UI/Fail/Exit" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="UI/Win/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="UI/TutorialBox/OK" to="." method="_on_tutorial_ok_pressed"]
 [connection signal="pressed" from="CLayer/GUI/Debug/AddEnemy" to="." method="_on_add_enemy_pressed"]
 [connection signal="pressed" from="CLayer/GUI/Debug/AddStatus" to="." method="_on_add_status_pressed"]

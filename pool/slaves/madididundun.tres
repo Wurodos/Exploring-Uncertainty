@@ -1,9 +1,9 @@
 [gd_resource type="Resource" format=3 uid="uid://sri2cjmim8mi"]
 
 [ext_resource type="Script" uid="uid://cadc7va1y3ish" path="res://scripts/slaves/quirk.gd" id="1_nte7c"]
-[ext_resource type="Script" uid="uid://bqc2xg7jca5np" path="res://scripts/enemies/madidididun.gd" id="1_q8a1j"]
+[ext_resource type="Script" uid="uid://bqc2xg7jca5np" path="res://scripts/enemies/madididundun.gd" id="1_q8a1j"]
 [ext_resource type="Resource" uid="uid://m3jja8q212ng" path="res://pool/quirks/beat_up.tres" id="2_lec2e"]
-[ext_resource type="Texture2D" uid="uid://2y3stiyxludo" path="res://images/slaves/madidididun.png" id="2_q8a1j"]
+[ext_resource type="Texture2D" uid="uid://2y3stiyxludo" path="res://images/slaves/madididundun.png" id="2_q8a1j"]
 
 [resource]
 script = ExtResource("1_q8a1j")

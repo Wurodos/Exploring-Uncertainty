@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ot7y20rg1fqo"]
 
 [ext_resource type="Script" uid="uid://de24o14tl4lyy" path="res://scripts/slaves/slave_battle_node.gd" id="1_kr451"]
+[ext_resource type="Script" uid="uid://by6wjtdgutgc4" path="res://scripts/utils/dotted_lines.gd" id="2_3ojvf"]
 [ext_resource type="Texture2D" uid="uid://csw6m50jq853n" path="res://images/shapes/ellipse.png" id="3_m7i15"]
 [ext_resource type="Texture2D" uid="uid://c102ib72qlv7l" path="res://images/items/sword.png" id="3_r6t30"]
 [ext_resource type="Texture2D" uid="uid://bvt0n20v88f7o" path="res://images/slaves/blob.png" id="3_xc2og"]
@@ -28,6 +29,20 @@
 [ext_resource type="Texture2D" uid="uid://q3f5thafmlge" path="res://images/buffs/stun.png" id="14_xc2og"]
 [ext_resource type="Texture2D" uid="uid://cqc7tggib3u" path="res://images/icons/timer.png" id="19_6flwy"]
 [ext_resource type="Texture2D" uid="uid://cpunktksuucue" path="res://images/buffs/patriotism.png" id="19_pc5ow"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ojvf"]
+bg_color = Color(0.36453977, 0.3645399, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i766k"]
+bg_color = Color(1, 1, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="Animation" id="Animation_bm25f"]
 length = 0.001
@@ -275,6 +290,23 @@ hit_animation = NodePath("AnimationSprites/Hit/HitAnimation")
 heal_animation = NodePath("AnimationSprites/Heal/HealAnimation")
 powerup_animation = NodePath("AnimationSprites/Powerup/PowerupAnimation")
 
+[node name="DottedLines" type="Node2D" parent="." unique_id=1388556464]
+z_index = -1
+script = ExtResource("2_3ojvf")
+
+[node name="TimerBar" type="ProgressBar" parent="." unique_id=2141810191]
+unique_name_in_owner = true
+visible = false
+offset_left = -96.0
+offset_top = -48.000008
+offset_right = -86.00001
+offset_bottom = 40.666664
+theme_override_styles/background = SubResource("StyleBoxFlat_3ojvf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_i766k")
+value = 100.0
+fill_mode = 3
+show_percentage = false
+
 [node name="BounceAnimation" type="AnimationPlayer" parent="." unique_id=409562361]
 libraries/ = SubResource("AnimationLibrary_r6t30")
 autoplay = &"idle"
@@ -309,14 +341,6 @@ gizmo_extents = 66.5
 position = Vector2(0, -50)
 scale = Vector2(0.20000002, 0.20000002)
 texture = ExtResource("3_xc2og")
-
-[node name="Vigilance" type="Sprite2D" parent="Parts/Visual" unique_id=746944608]
-unique_name_in_owner = true
-visible = false
-self_modulate = Color(1, 1, 1, 0.80784315)
-position = Vector2(-41.999996, -80)
-scale = Vector2(0.08, 0.08)
-texture = ExtResource("12_f4yho")
 
 [node name="Items" type="Node2D" parent="Parts/Visual" unique_id=792972197]
 position = Vector2(0, -50)
@@ -458,6 +482,15 @@ texture = ExtResource("6_f4yho")
 [node name="Front" type="Node2D" parent="Parts" unique_id=1767438365]
 position = Vector2(87.333336, -50)
 
+[node name="Vigilance" type="Sprite2D" parent="Parts" unique_id=746944608]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(1, 1, 1, 0.80784315)
+z_index = 1
+position = Vector2(-41.999996, -80)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("12_f4yho")
+
 [node name="HPBar" type="ProgressBar" parent="." unique_id=1222666271]
 unique_name_in_owner = true
 offset_left = -46.6667
@@ -475,6 +508,7 @@ offset_left = -42.0
 offset_top = -28.0
 offset_right = 39.0
 offset_bottom = 43.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
 
 [node name="Buffs" type="Node2D" parent="." unique_id=1563957371]
 

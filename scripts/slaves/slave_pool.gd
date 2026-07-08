@@ -14,6 +14,7 @@ func _ready() -> void:
 		loaded.reinit()
 		_pool[loaded.u_name] = loaded
 		print("SLAVE_POOL: Loaded " + loaded.u_name + " successfully")
+		print("Default weapon: " + loaded.default_weapon)
 
 func fetch(slave_name: StringName) -> Slave:
 	var new_slave: Slave = _pool[slave_name].duplicate()

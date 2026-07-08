@@ -2,6 +2,10 @@ extends Node
 
 class_name Game
 
+static var instance: Game = null
+
+@export var reptiles: Array[Reptile] = []
+
 enum State {Map, Battle, Window, Popup, Phone}
 
 const battle_scene = preload("res://scenes/battle.tscn")
@@ -14,7 +18,11 @@ var map_music_id: int = 1
 
 
 func _ready() -> void:
+	instance = self
+	
 	Metaprogress.runs_completed += 1
+	CurrentRun.reptile = reptiles[Metaprogress.victories]
+	CurrentRun.reptile.connect_events()
 	
 	SignalBus.battle_encounter.connect(_on_battle_encounter)
 	SignalBus.end_battle.connect(_on_end_battle)

@@ -17,6 +17,8 @@ enum SpriteSize {
 @export var texture: Texture2D
 @export var unique_visual: PackedScene = null
 @export var quirks: Array[Quirk]
+@export var default_weapon: String = "no_weapon"
+@export var item_rate_if_reinforced: float = 0.5
 
 var hp : int
 var maxhp : int
@@ -47,6 +49,12 @@ func reinit() -> void:
 	hp = base_maxhp
 	maxhp = base_maxhp
 	speed = base_speed
+	
+	weapon = get_default_weapon()
+	hat = ItemPool.fetch("no_hat")
+	trinket1 = ItemPool.fetch("no_trinket")
+	trinket2 = ItemPool.fetch("no_trinket")
+	trinket3 = ItemPool.fetch("no_trinket")
 	localize()
 
 func serialize() -> Dictionary:
@@ -84,11 +92,27 @@ func _init() -> void:
 	
 	speed = base_speed
 	
-	weapon = ItemPool.fetch("no_weapon")
+	weapon = get_default_weapon()
 	hat = ItemPool.fetch("no_hat")
 	trinket1 = ItemPool.fetch("no_trinket")
 	trinket2 = ItemPool.fetch("no_trinket")
 	trinket3 = ItemPool.fetch("no_trinket")
+
+func undress() -> Array[Item]:
+	var old_items : Array[Item] = []
+	
+	if weapon.extra_hp < hp:
+		old_items.append(equip(get_default_weapon()))
+	if trinket3.extra_hp < hp:
+		old_items.append(equip(ItemPool.fetch("no_trinket"), 3))
+	if hat.extra_hp < hp:
+		old_items.append(equip(ItemPool.fetch("no_hat")))
+	if trinket1.extra_hp < hp:
+		old_items.append(equip(ItemPool.fetch("no_trinket"), 1))
+	if trinket2.extra_hp < hp:
+		old_items.append(equip(ItemPool.fetch("no_trinket"), 2))
+	
+	return old_items
 
 func get_item(item_type: Item.Type, trinket_id: int = 1) -> Item:
 	match(item_type):
@@ -116,7 +140,7 @@ func get_cost() -> int:
 		total += item.cost	
 	return floor(total * lerp(0.7, 1.0, (hp / float(maxhp))))
 
-func equip(item: Item, trinket_id: int = 1) -> Item:
+func equip(item: Item, trinket_id: int = -1) -> Item:
 	var old_item: Item
 	match(item.type):
 		Item.Type.Weapon:
@@ -126,6 +150,12 @@ func equip(item: Item, trinket_id: int = 1) -> Item:
 			old_item = hat
 			hat = item
 		Item.Type.Trinket:
+			if trinket_id == -1:
+				trinket_id = 1
+				if trinket1.is_item(): trinket_id += 1
+				if trinket2.is_item(): trinket_id += 1
+				if trinket_id == 3 and (trinket3.is_item() or not allow_3_trinkets): trinket_id = 1
+			
 			if trinket_id == 1:
 				old_item = trinket1
 				trinket1 = item
@@ -147,10 +177,22 @@ func equip(item: Item, trinket_id: int = 1) -> Item:
 	
 	return old_item
 
+func add_received_damage(source: SlaveNode, harm: int) -> int:
+	return harm
+
+func multiply_received_damage(source: SlaveNode, harm: int) -> int:
+	return harm
+
+func on_death() -> void:
+	pass
+
+func get_default_weapon() -> Item:
+	return ItemPool.fetch(default_weapon)
+
 func unequip(item: Item) -> void:
 	var id = get_all_items().find(item)
 	match(id):
-		0: equip(ItemPool.fetch("no_weapon"))
+		0: equip(get_default_weapon())
 		1: equip(ItemPool.fetch("no_hat"))
 		2: equip(ItemPool.fetch("no_trinket"), 1)
 		3: equip(ItemPool.fetch("no_trinket"), 2)

@@ -24,7 +24,7 @@ var wave_count: int = 1:
 			%WaveLabel.text = tr("wave") + ": {}/{}".format([wave, wave_count], "{}")
 		else: %WaveLabel.text = ""
 
-
+var round: int = 0
 
 
 var speed_queue: Array[Slave] = []
@@ -90,6 +90,7 @@ func _on_start_battle():
 
 # Create speed queueasass
 func _on_new_round():
+	round += 1
 	if new_wave_on_new_round:
 		wave += 1
 		CurrentRun.evil_boys = CurrentRun.arrange_evil_team(Map.instance.zone_id)
@@ -408,12 +409,12 @@ func _on_reinforcement(sender: SlaveNode, u_name: String = "cherv") -> void:
 	
 	var enemy = SlavePool.fetch(u_name)
 	
-	if not CurrentRun.is_debug:
-		if randi_range(0, 1): enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
-		if randi_range(0, 1): enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
-		if randi_range(0, 1): enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
-		if randi_range(0, 1): enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
-	elif dress_up:
+	if not dress_up:
+		if randf() < enemy.item_rate_if_reinforced: enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
+		if randf() < enemy.item_rate_if_reinforced: enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
+		if randf() < enemy.item_rate_if_reinforced: enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
+		if randf() < enemy.item_rate_if_reinforced: enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
+	else:
 		enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
 		enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
 		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
@@ -504,3 +505,7 @@ func _on_influenza_pressed() -> void:
 
 func _on_dress_up_toggled(toggled_on: bool) -> void:
 	dress_up = toggled_on
+
+
+func _on_exit_pressed() -> void:
+	get_tree().quit()

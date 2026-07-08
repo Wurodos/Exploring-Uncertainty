@@ -15,9 +15,11 @@ func apply(item: Item) -> void:
 	item_icon.texture = item.texture
 	bg.self_modulate = Constants.item_colors[item.type]
 	level_border.color = Constants.level_colors[item.level]
-	experience_label.text = str(item.experience) + "/" + str(Constants.exp_required[item.level-1])
-	experience_bar.max_value = Constants.exp_required[item.level-1]
-	experience_bar.value = item.experience
+	if item.level == 5: experience_bar.visible = false
+	else:
+		experience_label.text = str(item.experience) + "/" + str(Constants.exp_required[item.level-1])
+		experience_bar.max_value = Constants.exp_required[item.level-1]
+		experience_bar.value = item.experience
 	held = item
 
 func gain_one_exp() -> void:

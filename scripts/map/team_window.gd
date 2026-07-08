@@ -85,7 +85,7 @@ func _on_mouse_up() -> void:
 		
 		CurrentRun.inventory.erase(item_node.held)
 		refresh_inventory()
-		
+
 func _on_add_item(item: Item) -> void:
 	CurrentRun.put_item_in_inventory(item)
 	refresh_inventory()
@@ -105,6 +105,10 @@ func _on_show_team_pressed() -> void:
 	refresh_inventory()
 	SignalBus.open_team_window.emit()
 	CurrentRun.state = Game.State.Window
+	
+	if CurrentRun.is_tutorial:
+		$Swap01.visible = false
+		$Swap12.visible = false
 	visible = true
 
 func _on_close_pressed() -> void:
@@ -115,6 +119,25 @@ func _on_close_pressed() -> void:
 	
 	visible = false
 
+func swap_items(id1: int, id2: int) -> void:
+	if max(id1, id2) >= CurrentRun.good_boys.size(): return
+	
+	var items1: Array[Item] = CurrentRun.good_boys[id1].undress()
+	var items2: Array[Item] = CurrentRun.good_boys[id2].undress()
+	var remaining_items: Array[Item] = []
+	
+	
+	for item in items1:
+		remaining_items.append(CurrentRun.good_boys[id2].equip(item))
+	for item in items2:
+		remaining_items.append(CurrentRun.good_boys[id1].equip(item))
+	
+	for item in remaining_items:
+		if item.is_item():
+			_on_add_item(item)
+	
+	_refresh_slaves()
+			
 
 ##
 ##   DEBUG

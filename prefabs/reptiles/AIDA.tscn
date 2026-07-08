@@ -69,7 +69,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-5.000002, -164), Vector2(-122, -164)]
+"values": [Vector2(-5.000002, -164), Vector2(-40, -164)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -81,7 +81,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1, 2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(40, -30), Vector2(-110, -13), Vector2(40, -30)]
+"values": [Vector2(40, -30), Vector2(-50, -13), Vector2(40, -30)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -118,33 +118,35 @@ _data = {
 shader = ExtResource("3_yovu6")
 
 [node name="Aida" type="Node2D" unique_id=1545641801]
+position = Vector2(-100, 0)
+scale = Vector2(-1, 1)
 
 [node name="Body3" type="Sprite2D" parent="." unique_id=668217660]
 position = Vector2(101.3, -213.79999)
-scale = Vector2(0.7277344, 0.8781251)
+scale = Vector2(0.415, 0.5)
 texture = ExtResource("3_1a1vb")
 
 [node name="Body2" type="Sprite2D" parent="." unique_id=2005115947]
 position = Vector2(103.38189, -177.04393)
-scale = Vector2(0.79532063, 0.76392144)
+scale = Vector2(0.415, 0.5)
 skew = 0.37524578
 texture = ExtResource("3_1a1vb")
 
 [node name="Head" type="Sprite2D" parent="." unique_id=787184691]
 position = Vector2(-5.000002, -164)
 rotation = 0.37368074
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.415, 0.5)
 texture = ExtResource("3_3w4si")
 
 [node name="Body" type="Sprite2D" parent="." unique_id=1423287039]
 position = Vector2(99.80762, -1.1923981)
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.415, 0.5)
 texture = ExtResource("3_1a1vb")
 
 [node name="Head2" type="Sprite2D" parent="." unique_id=1651595571]
 position = Vector2(40, -30)
 rotation = 0.59807277
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.415, 0.5)
 texture = ExtResource("3_3w4si")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=941495869]

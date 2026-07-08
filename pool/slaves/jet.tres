@@ -1,13 +1,21 @@
 [gd_resource type="Resource" format=3 uid="uid://cowrp1ub834ab"]
 
 [ext_resource type="Script" uid="uid://vlcieyqaimjo" path="res://scripts/enemies/jet.gd" id="1_4quw4"]
+[ext_resource type="Script" uid="uid://cadc7va1y3ish" path="res://scripts/slaves/quirk.gd" id="1_rbycq"]
 [ext_resource type="Texture2D" uid="uid://qjp74xom74mu" path="res://images/reptiles/jet.png" id="2_4quw4"]
+[ext_resource type="Resource" uid="uid://d3g778bxff1x8" path="res://pool/quirks/timer.tres" id="2_xj0yc"]
+[ext_resource type="Resource" uid="uid://bv068l04ou7gx" path="res://pool/quirks/momentary_light.tres" id="3_kjm67"]
+[ext_resource type="PackedScene" uid="uid://cr7a131ha12lj" path="res://prefabs/reptiles/jet.tscn" id="4_lfun3"]
 
 [resource]
 script = ExtResource("1_4quw4")
-info_count = 2
+timer_increase = 5
 base_maxhp = 100
-base_speed = 5
+base_speed = 10
 sprite_size = 1
 texture = ExtResource("2_4quw4")
+unique_visual = ExtResource("4_lfun3")
+quirks = Array[ExtResource("1_rbycq")]([ExtResource("2_xj0yc"), ExtResource("3_kjm67")])
+default_weapon = "democracy_arsenal"
+item_rate_if_reinforced = 0.0
 metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

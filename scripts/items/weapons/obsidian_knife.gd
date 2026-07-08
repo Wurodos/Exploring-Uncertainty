@@ -10,11 +10,7 @@ func use_item(sender: SlaveNode, victim: SlaveNode):
 	super.use_item(sender, victim)
 	Action.deal_damage(sender, victim, harm)
 
-func on_end_battle(owner: Slave):
-	owner.unequip(self)
-	if owner.hp <= 0:
-		CurrentRun.good_boys.erase(owner)
-	
+func on_end_battle(_owner: Slave):
 	var obsidian: Item = ItemPool.fetch("obsidian")
 	for i in range(level-1):
 		obsidian.level_up()

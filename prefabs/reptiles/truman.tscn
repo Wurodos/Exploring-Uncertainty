@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://blcujoswi832g"]
+
+[ext_resource type="Texture2D" uid="uid://buhb0ixyb03t7" path="res://images/reptiles/truman.png" id="1_cna4w"]
+
+[node name="Truman" type="Node2D" unique_id=1112355778]
+
+[node name="Body" type="Sprite2D" parent="." unique_id=1889869050]
+position = Vector2(0, -100)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_cna4w")
+flip_h = true

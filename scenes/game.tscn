@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://cgylw3j3sk4da"]
 
 [ext_resource type="Script" uid="uid://cfsw4hc8sq20x" path="res://scripts/run/game.gd" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://dxrukvogmbgn0" path="res://scripts/reptiles/reptile.gd" id="2_ssvqc"]
 [ext_resource type="Script" uid="uid://tyb7waldpp30" path="res://scripts/utils/input_manager.gd" id="2_yqjtg"]
+[ext_resource type="Resource" uid="uid://dypnn2dauu6xk" path="res://pool/reptiles/and_its_dark_again.tres" id="3_264po"]
 [ext_resource type="Script" uid="uid://uotbjopre7ad" path="res://scripts/utils/audio_manager.gd" id="3_lbhrr"]
 [ext_resource type="AudioStream" uid="uid://cva36ucmiyxwf" path="res://audio/music/LETS ROLL.mp3" id="4_dinhu"]
 [ext_resource type="AudioStream" uid="uid://fi6vie705cx5" path="res://audio/sfx/hurt.wav" id="5_u5sy4"]
@@ -30,6 +32,7 @@ shader_parameter/blur = 0.05
 
 [node name="Game" type="Node2D" unique_id=981450694]
 script = ExtResource("1_uwrxv")
+reptiles = Array[ExtResource("2_ssvqc")]([ExtResource("3_264po")])
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1296959382]
 
@@ -64,6 +67,7 @@ music = Dictionary[StringName, AudioStream]({
 [node name="Sound3" type="AudioStreamPlayer" parent="AudioManager" unique_id=1736346295]
 
 [node name="CRT" type="CanvasLayer" parent="." unique_id=1486155350]
+layer = 3
 
 [node name="CRT" type="ColorRect" parent="CRT" unique_id=1845891787]
 material = SubResource("ShaderMaterial_kvuet")

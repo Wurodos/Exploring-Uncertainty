@@ -29,6 +29,9 @@ func calculate_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, _dont_proc
 			for turns: int in sender.buffs.values():
 				if turns > 0: total_dmg += turns 
 	
+	if victim:
+		total_dmg = victim.held.add_received_damage(sender, total_dmg)
+	
 	total_dmg *= damage_multiplier
 	if sender and sender.buffs.has(APPETITE):
 		total_dmg = ceil(float(total_dmg) * 3. / 2.)
@@ -38,6 +41,9 @@ func calculate_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, _dont_proc
 		if victim.tags.has(TAG_BETTER_SHIELD):
 			total_dmg = ceil(float(total_dmg) * 2. / 5.)
 		else: total_dmg = ceil(float(total_dmg) * 7. / 10.)
+	
+	if victim:
+		total_dmg = victim.held.multiply_received_damage(sender, total_dmg)
 	
 	return total_dmg
 
@@ -50,14 +56,14 @@ func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, dont_proc: bool
 	var is_crit = false
 	
 	if sender:
-		is_crit = sender.vigilance or roll < 4 * (sender.luck+1)
+		is_crit = sender.vigilance or roll < 4 * (max(sender.luck - victim.luck, 0)+1)
 	
 	if sender and not sender.tags.has(TAG_VIGILANCE_KEEP_ATTACK):
 		sender.vigilance = false
 	
 	if not is_crit and victim.vigilance:
-		roll = randi_range(0,1)
-		if roll == 1:
+		roll = randi_range(0,99)
+		if roll > 49 + (sender.luck - victim.luck):
 			victim.push_label_popup(tr("miss")) 
 			total_dmg = 0
 	victim.vigilance = false

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://6va7p1cr5um"]
+
+[ext_resource type="Texture2D" uid="uid://bnkhbx7hcggfa" path="res://images/reptiles/tractor.png" id="1_24ulg"]
+
+[node name="Tractor" type="Node2D" unique_id=1112355778]
+
+[node name="Body" type="Sprite2D" parent="." unique_id=1889869050]
+position = Vector2(0, -61)
+scale = Vector2(0.7, 0.5)
+texture = ExtResource("1_24ulg")

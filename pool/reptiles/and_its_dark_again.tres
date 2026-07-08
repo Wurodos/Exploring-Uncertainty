@@ -1,15 +1,23 @@
 [gd_resource type="Resource" format=3 uid="uid://dypnn2dauu6xk"]
 
 [ext_resource type="PackedScene" uid="uid://dk4rgku7xvpsj" path="res://prefabs/reptiles/AIDA.tscn" id="1_7bu8c"]
+[ext_resource type="Script" uid="uid://cadc7va1y3ish" path="res://scripts/slaves/quirk.gd" id="1_668vd"]
 [ext_resource type="Script" uid="uid://brm5cnm64o6fs" path="res://scripts/reptiles/and_its_dark_again.gd" id="1_alj8o"]
+[ext_resource type="Resource" uid="uid://1r4g64brytii" path="res://dialogue/and_its_dark_again/aida_darkness.tres" id="1_s8asp"]
 [ext_resource type="Texture2D" uid="uid://ca4cwsk3fw2pd" path="res://images/reptiles/AIDA_head.png" id="2_7bu8c"]
+[ext_resource type="Resource" uid="uid://du23cbwanrqht" path="res://pool/quirks/shapeless.tres" id="3_cebny"]
+[ext_resource type="Resource" uid="uid://d3g778bxff1x8" path="res://pool/quirks/timer.tres" id="4_72vu4"]
+[ext_resource type="PackedScene" uid="uid://dql3nrorp1ats" path="res://prefabs/reptiles/vignette.tscn" id="5_s8asp"]
 
 [resource]
 script = ExtResource("1_alj8o")
-info_count = 2
+vignette = ExtResource("5_s8asp")
+dlg_darkness = ExtResource("1_s8asp")
+timer_turns = 1
 u_name = &"and_its_dark_again"
 base_maxhp = 400
 base_speed = 3
 texture = ExtResource("2_7bu8c")
 unique_visual = ExtResource("1_7bu8c")
+quirks = Array[ExtResource("1_668vd")]([ExtResource("3_cebny"), ExtResource("4_72vu4")])
 metadata/_custom_type_script = "uid://c0sh4m5lw5k33"

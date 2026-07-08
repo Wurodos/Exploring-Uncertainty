@@ -1,0 +1,11 @@
+[gd_resource type="Resource" format=3 uid="uid://b03yefhicqy6y"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_rq87o"]
+[ext_resource type="Script" uid="uid://crl0bn13pdq06" path="res://scripts/items/special/truman_doctrine.gd" id="2_2p7ma"]
+
+[resource]
+script = ExtResource("2_2p7ma")
+tier = 0
+type = 1
+target = 1
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

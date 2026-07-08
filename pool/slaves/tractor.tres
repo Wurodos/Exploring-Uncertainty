@@ -1,0 +1,22 @@
+[gd_resource type="Resource" format=3 uid="uid://c0j7ev0w0tlvg"]
+
+[ext_resource type="Script" uid="uid://cadc7va1y3ish" path="res://scripts/slaves/quirk.gd" id="1_fnatm"]
+[ext_resource type="Resource" uid="uid://d3g778bxff1x8" path="res://pool/quirks/timer.tres" id="2_g47dq"]
+[ext_resource type="Script" uid="uid://besw55onj8l6q" path="res://scripts/enemies/tractor.gd" id="3_fnatm"]
+[ext_resource type="Resource" uid="uid://bv068l04ou7gx" path="res://pool/quirks/momentary_light.tres" id="3_g47dq"]
+[ext_resource type="Texture2D" uid="uid://bnkhbx7hcggfa" path="res://images/reptiles/tractor.png" id="4_fnatm"]
+[ext_resource type="PackedScene" uid="uid://6va7p1cr5um" path="res://prefabs/reptiles/tractor.tscn" id="5_fnatm"]
+
+[resource]
+script = ExtResource("3_fnatm")
+timer_damage = 5
+timer_increase = 5
+base_maxhp = 200
+base_speed = 3
+sprite_size = 1
+texture = ExtResource("4_fnatm")
+unique_visual = ExtResource("5_fnatm")
+quirks = Array[ExtResource("1_fnatm")]([ExtResource("2_g47dq"), ExtResource("3_g47dq")])
+default_weapon = "forward"
+item_rate_if_reinforced = 0.0
+metadata/_custom_type_script = "uid://c0sh4m5lw5k33"
