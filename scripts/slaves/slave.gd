@@ -20,7 +20,11 @@ enum SpriteSize {
 @export var default_weapon: String = "no_weapon"
 @export var item_rate_if_reinforced: float = 0.5
 
-var hp : int
+var hp : int:
+	set(value): 
+		hp = value
+		on_hp_changed()
+
 var maxhp : int
 
 var heal_receive: int = 0
@@ -97,6 +101,9 @@ func _init() -> void:
 	trinket1 = ItemPool.fetch("no_trinket")
 	trinket2 = ItemPool.fetch("no_trinket")
 	trinket3 = ItemPool.fetch("no_trinket")
+
+func on_hp_changed() -> void:
+	pass
 
 func undress() -> Array[Item]:
 	var old_items : Array[Item] = []
@@ -198,6 +205,9 @@ func unequip(item: Item) -> void:
 		3: equip(ItemPool.fetch("no_trinket"), 2)
 
 func on_start_battle(_node: SlaveNode) -> void:
+	pass
+
+func on_start_turn(_node: SlaveNode) -> void:
 	pass
 
 func debug() -> void:

@@ -12,3 +12,4 @@ func apply(item: Item, is_flipped: bool = false):
 	sprite.flip_h = is_flipped
 	sprite.texture = item.texture
 	sprite.set_instance_shader_parameter("outline_color", Constants.level_colors[item.level])
+	sprite.scale = item.scale

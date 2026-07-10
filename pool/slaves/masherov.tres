@@ -1,0 +1,15 @@
+[gd_resource type="Resource" format=3 uid="uid://vw5r142l6inv"]
+
+[ext_resource type="Script" uid="uid://cadc7va1y3ish" path="res://scripts/slaves/quirk.gd" id="1_xylqv"]
+[ext_resource type="Resource" uid="uid://c85ix6ngeljlg" path="res://pool/quirks/hit_and_run.tres" id="2_vsit7"]
+[ext_resource type="Script" uid="uid://clwk8r453c1s" path="res://scripts/slaves/masherov.gd" id="2_xylqv"]
+[ext_resource type="Texture2D" uid="uid://b6f0v7b2jblep" path="res://images/slaves/masherov.png" id="3_xylqv"]
+
+[resource]
+script = ExtResource("2_xylqv")
+u_name = &"masherov"
+base_maxhp = 24
+base_speed = 2
+texture = ExtResource("3_xylqv")
+quirks = Array[ExtResource("1_xylqv")]([ExtResource("2_vsit7")])
+metadata/_custom_type_script = "uid://b3tnir3t1e6op"

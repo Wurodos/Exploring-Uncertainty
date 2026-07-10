@@ -1,0 +1,17 @@
+[gd_resource type="Resource" format=3 uid="uid://dp467sa8e5ww0"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_hih8v"]
+[ext_resource type="Script" uid="uid://bvowbhjt8ac8c" path="res://scripts/items/trinkets/miniature_castle.gd" id="2_hih8v"]
+[ext_resource type="Texture2D" uid="uid://0schy4qioebi" path="res://images/items/castle.png" id="3_re1wm"]
+
+[resource]
+script = ExtResource("2_hih8v")
+type = 2
+extra_hp = 5
+texture = ExtResource("3_re1wm")
+cost = 4
+craft_reqs = Dictionary[int, int]({
+2: 2,
+3: 1
+})
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"

@@ -17,8 +17,9 @@ const TAG_VIGILANCE_KEEP_ATTACK = "tag_vigilance_keep_attack"
 const TAG_LOW_PRIORITY = "tag_low_priority"
 const TAG_HIGH_PRIORITY = "tag_high_priority"
 const TAG_PERMANENT_STATIC = "tag_permanent_static"
-const TAG_STATIC_HEALTH = "tag_static_health"
+const TAG_STATIC_HEALTH = "tag_static_heal12th"
 const TAG_WAS_ATTACKED_THIS_ROUND = "tag_was_attacked_this_round"
+const TAG_CRIT_IMMUNITY = "tag_crit_immunity"
 
 func calculate_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, _dont_proc: bool = false) -> int:
 	var total_dmg = dmg
@@ -55,17 +56,19 @@ func deal_damage(sender: SlaveNode, victim: SlaveNode, dmg: int, dont_proc: bool
 	var roll = randi_range(0, 99)
 	var is_crit = false
 	
-	if sender:
+	if sender and not victim.tags.has(TAG_CRIT_IMMUNITY) and not victim.vigilance:
 		is_crit = sender.vigilance or roll < 4 * (max(sender.luck - victim.luck, 0)+1)
+	
+	if not is_crit and (not sender or not sender.vigilance) and victim.vigilance:
+		roll = randi_range(0,99)
+		var sender_luck = 0
+		if sender: sender_luck = sender.luck
+		if roll > 49 + (sender_luck - victim.luck):
+			victim.push_label_popup(tr("miss")) 
+			total_dmg = 0
 	
 	if sender and not sender.tags.has(TAG_VIGILANCE_KEEP_ATTACK):
 		sender.vigilance = false
-	
-	if not is_crit and victim.vigilance:
-		roll = randi_range(0,99)
-		if roll > 49 + (sender.luck - victim.luck):
-			victim.push_label_popup(tr("miss")) 
-			total_dmg = 0
 	victim.vigilance = false
 	
 	if is_crit:

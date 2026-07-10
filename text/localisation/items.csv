@@ -144,3 +144,7 @@ forward_name;Forward!;Вперед!
 forward_desc;EXECUTES THE TARGET;КАЗНИТ ЦЕЛЬ
 truman_doctrine_name;Truman Doctrine;Доктрина Трумана
 truman_doctrine_desc;ACTION: TARGET'S TIMER IS REDUCED BY 1.\nACTION: +{} SPEED, SHIELD {} TURNS;ДЕЙСТВИЕ: ЗАДЕРЖКА ЦЕЛИ СНИЖАЕТСЯ НА 1.\nДЕЙСТВИЕ: +{} ИНИЦИАТИВЫ, ЩИТ {} ХОДОВ
+miniature_castle_name;Miniature Castle;Маленький Замок
+miniature_castle_desc;IMMUNITY TO CRITICAL HITS;ИММУНИТЕТ К КРИТИЧЕСКИМ УДАРАМ
+sniper_rifle_name;Sniper Rifle;Снайперская Винтовка
+sniper_rifle_desc;INFLICTS {} HARM. ALWAYS CRITS. NEVER MISSES;ПРИЧИНЯЕТ {} ВРЕДА. ВСЕГДА НАНОСИТ КРИТИЧЕСКИЙ УДАР. НИКОГДА НЕ ПРОМАХИВАЕТСЯ

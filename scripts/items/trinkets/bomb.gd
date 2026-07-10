@@ -15,7 +15,9 @@ func on_start_battle(owner: SlaveNode):
 
 func on_unequip_battle(owner: SlaveNode):
 	super.on_unequip_battle(owner)
-	owner.attacked.disconnect(_explode)
+	
+	if owner.attacked.is_connected(_explode):
+		owner.attacked.disconnect(_explode)
 
 func on_equip_battle(owner: SlaveNode):
 	super.on_equip_battle(owner)

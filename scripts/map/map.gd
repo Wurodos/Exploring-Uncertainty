@@ -217,7 +217,7 @@ func move_player(direction: Direction) -> void:
 			purge(room)
 	else:
 		encounter(room)
-		if room.type != Room.Type.City and room.type != Room.Type.Comms and room.type != Room.Type.Elevator:
+		if room.type != Room.Type.City and room.type != Room.Type.Special and room.type != Room.Type.Comms and room.type != Room.Type.Elevator:
 			purge(room)
 	
 	end_turn_upkeep()
@@ -525,12 +525,15 @@ func _add_structures(all_rooms: Array[Room], area_id: int) -> void:
 	var cherv_n = floor(all_rooms.size()*cherv_rate)
 	var govnov_n = floor(all_rooms.size()*govnov_rate)
 	var comms_n = floor(all_rooms.size()*comms_rate)
+	var special_n = 0
 	if area_id == 0: 
 		comms_n = 0
 		city_n = 1
 	var elevator_n = 0
 	if area_id > 0 and area_id < 4:
 		elevator_n = 3
+	if area_id == 1:
+		special_n = 1
 	
 	var cherv_i = 1
 	var start_room: Room = room_at(party_row, party_col)
@@ -571,6 +574,9 @@ func _add_structures(all_rooms: Array[Room], area_id: int) -> void:
 				room.type = Room.Type.Elevator
 				elevators.append(room)
 				elevator_n -= 1
+		elif special_n > 0:
+			room.type = Room.Type.Special
+			special_n -= 1
 		
 		room.sprite.texture = room_sprites[room.type]
 

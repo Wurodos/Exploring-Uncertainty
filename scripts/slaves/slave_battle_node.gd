@@ -332,6 +332,7 @@ func move_to(to: Vector2) -> Tween:
 
 func start_turn() -> void:
 	if not held is Enemy: toggle_arrow(true)
+	held.on_start_turn(self)
 	turn_started.emit()
 
 func ticker_down_buffs() -> void:

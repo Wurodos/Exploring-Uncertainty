@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://bawrva2lptk41" path="res://images/rooms/exit.png" id="11_vwuk8"]
 [ext_resource type="Script" uid="uid://ql10jr5klb8g" path="res://scripts/map/govnov_window.gd" id="12_4b7dj"]
 [ext_resource type="Texture2D" uid="uid://dpngkq6qgoes6" path="res://images/rooms/highlight.png" id="12_7s432"]
+[ext_resource type="Texture2D" uid="uid://bagvm04uc813k" path="res://images/rooms/special.png" id="12_f4upa"]
 [ext_resource type="Texture2D" uid="uid://dhfpnnlwg86d" path="res://images/backdrops/city.png" id="12_mo32q"]
 [ext_resource type="Texture2D" uid="uid://bdkbuhwojnmqq" path="res://images/rooms/fog.png" id="12_s2dh3"]
 [ext_resource type="Script" uid="uid://bg2spyp44xpw7" path="res://scripts/common/btn_localized.gd" id="12_y2ir2"]
@@ -482,7 +483,8 @@ room_sprites = Dictionary[int, Texture2D]({
 6: ExtResource("8_5u2yt"),
 8: ExtResource("9_la2vj"),
 9: ExtResource("10_7s432"),
-10: ExtResource("11_vwuk8")
+10: ExtResource("11_vwuk8"),
+11: ExtResource("12_f4upa")
 })
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=289759729]

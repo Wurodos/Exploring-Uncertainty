@@ -20,6 +20,9 @@ enum Enchant { None, Red, Blue, Green, Yellow }
 @export var craft_items: Array[Item] = []
 @export var keywords: Array[String] = []
 
+@export_category("Visual")
+@export var scale = Vector2(1,1)
+
 @export_category("Flags")
 @export var is_melee: bool = true
 @export var possible_enemy_item: bool = true

@@ -410,15 +410,15 @@ func _on_reinforcement(sender: SlaveNode, u_name: String = "cherv") -> void:
 	var enemy = SlavePool.fetch(u_name)
 	
 	if not dress_up:
-		if randf() < enemy.item_rate_if_reinforced: enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
-		if randf() < enemy.item_rate_if_reinforced: enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
-		if randf() < enemy.item_rate_if_reinforced: enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
-		if randf() < enemy.item_rate_if_reinforced: enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
+		if randf() < enemy.item_rate_if_reinforced: enemy.equip(CurrentRun.fetch_enemy_item(Item.Type.Weapon))
+		if randf() < enemy.item_rate_if_reinforced: enemy.equip(CurrentRun.fetch_enemy_item(Item.Type.Hat))
+		if randf() < enemy.item_rate_if_reinforced: enemy.equip(CurrentRun.fetch_enemy_item(Item.Type.Trinket), 1)
+		if randf() < enemy.item_rate_if_reinforced: enemy.equip(CurrentRun.fetch_enemy_item(Item.Type.Trinket), 2)
 	else:
-		enemy.equip(ItemPool.fetch_random(Item.Type.Weapon))
-		enemy.equip(ItemPool.fetch_random(Item.Type.Hat))
-		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 1)
-		enemy.equip(ItemPool.fetch_random(Item.Type.Trinket), 2)
+		enemy.equip(CurrentRun.fetch_enemy_item(Item.Type.Weapon))
+		enemy.equip(CurrentRun.fetch_enemy_item(Item.Type.Hat))
+		enemy.equip(CurrentRun.fetch_enemy_item(Item.Type.Trinket), 1)
+		enemy.equip(CurrentRun.fetch_enemy_item(Item.Type.Trinket), 2)
 	
 	team.add_slave(enemy)
 	

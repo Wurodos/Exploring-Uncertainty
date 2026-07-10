@@ -23,9 +23,9 @@ func connect_events() -> void:
 func on_player_moved() -> void:
 	super.on_player_moved()
 	if Map.dist(Map.instance.party_room(), room) < 5:
-		old_radius = CurrentRun.explore_radius
-		CurrentRun.explore_radius = 1
 		if not current_vignette:
+			old_radius = CurrentRun.explore_radius
+			CurrentRun.explore_radius = 1
 			current_vignette = vignette.instantiate()
 			Game.instance.add_child(current_vignette)
 		
@@ -33,8 +33,8 @@ func on_player_moved() -> void:
 			SignalBus.new_message.emit(dlg_darkness)
 			dlg_darkness = null
 	else: 
-		CurrentRun.explore_radius = old_radius
 		if current_vignette:
+			CurrentRun.explore_radius = old_radius
 			current_vignette.queue_free()
 
 

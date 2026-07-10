@@ -1,0 +1,16 @@
+[gd_resource type="Resource" format=3 uid="uid://b3lqvj46ylr6k"]
+
+[ext_resource type="Script" uid="uid://bc1rcdt6o0cc1" path="res://scripts/items/item.gd" id="1_p6ued"]
+[ext_resource type="Script" uid="uid://l40yrfa3pvy7" path="res://scripts/items/weapons/sniper_rifle.gd" id="2_p6ued"]
+[ext_resource type="Texture2D" uid="uid://du30mv50h5wd6" path="res://images/items/sniper-rifle.png" id="3_p6ued"]
+
+[resource]
+script = ExtResource("2_p6ued")
+harm = 5
+tier = 0
+texture = ExtResource("3_p6ued")
+cost = 2
+scale = Vector2(2, 2)
+is_melee = false
+possible_enemy_item = false
+metadata/_custom_type_script = "uid://bc1rcdt6o0cc1"
